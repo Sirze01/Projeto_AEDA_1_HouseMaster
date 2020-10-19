@@ -2,7 +2,8 @@
 
 #include <string>
 #include <vector>
-#include "service.h"
+#include "Service.h"
+
 
 class Individual{
 public:
@@ -10,10 +11,12 @@ public:
     unsigned int getId();
     std::string getName();
     bool operator== (const Individual& right);
+    static void setIdSeq();
 
 protected:
     std::string _name;
+    static unsigned int _idSeq;
     unsigned int _id;
-    std::vector<Interventions>* _associatedInterventions;
+    std::vector<Interventions*> _associatedInterventions;
 
 };
