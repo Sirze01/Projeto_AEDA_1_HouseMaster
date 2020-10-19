@@ -32,8 +32,8 @@ private:
     servicesType _type;
     bool _forcePro;
     Collaborator* _assigned;
-    processState state;
-    float price;
+    processState _state;
+    float _price;
 
 
 public:
