@@ -33,11 +33,11 @@
      unsigned int minutes
  }
 
-class houseMaster{
-    - vector<servicesType>* availableServices
-    - vector<individuals>* collaborators
-    - vector<individuals>* clients
-    - vector<intervention>* interventions
+class HouseMaster{
+    - vector<servicesType*> availableServices
+    - vector<individuals*> collaborators
+    - vector<individuals*> clients
+    - vector<intervention*> interventions
     ----
     + void houseMaster()
     
@@ -46,7 +46,7 @@ class houseMaster{
     - int removeAvailableServices(string service)
     
     + int getCollaborators()
-    - int addCollaborator(string name, vector<servicesType>* functions, Availability)
+    - int addCollaborator(string name, vector<servicesType*> functions, Availability)
     - int removeCollaborator(unsigned int id)
     
     + int getClients()
@@ -62,7 +62,7 @@ class houseMaster{
 }
 
 
-class intervention{
+class Intervention{
     - unsigned int id
     - date appointment
     - servicesType type
@@ -78,36 +78,35 @@ class intervention{
 }
 
 
-class individual{
+class Individual{
     # string name
     # unsigned int id
-    # vector<interventions>* associatedInterventions
+    # vector<interventions*> associatedInterventions
     ----
-    + void individual(string name)
-    + int individual(string name, vector<individual>* individuals)
-    + int getId()
-    + int getName()
-    + int findIndividual(string name, unsigned int id=0)
+    + individual(string name)
+    + unsigned int getId()
+    + string getName()
+    + bool operator== (const individual& right)
 }
 
-class collaborator{
-    - vector<servicesType>* functions
+class Collaborator{
+    - vector<servicesType*> functions
     - classification score
     - Availability
     ----
-    + void collaborator(vector<servicesType>* functions)
+    + void collaborator(vector<servicesType*> functions)
     + int getFunctions()
     + int getScore()
     + int getAvailability()
 }
 
-class client{
-    - string nif
+class Client{
+    - unsigned int nif
     ----
     + void client(string nif)
-    + int getNif()
+    + unsigned int getNif()
     + int requestIntervention(date appointment, servicesType type, bool forcePro)
 }
-individual <|-- collaborator
-individual <|-- client
+Individual <|-- Collaborator
+Individual <|-- Client
 @enduml
