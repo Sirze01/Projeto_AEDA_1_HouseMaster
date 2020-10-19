@@ -9,7 +9,7 @@ public:
     explicit individual(std::string name);
     unsigned int getId();
     std::string getName();
-    std::vector<interventions>::iterator findIndividual(std::string name, unsigned int id=0);
+    bool operator== (const individual& right);
 
 protected:
     std::string _name;

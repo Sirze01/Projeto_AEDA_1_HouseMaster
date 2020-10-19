@@ -10,6 +10,8 @@ unsigned int individual::getId() {
     return _id;
 }
 
-std::vector<interventions>::iterator individual::findIndividual(std::string name, unsigned int id) {
-
+bool individual::operator==(const individual& right) {
+    if(_name == right._name || _id == right._id)
+        return true;
+    return false;
 }
