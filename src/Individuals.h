@@ -1,8 +1,8 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include "Service.h"
+#include<string>
+#include<vector>
+#include"Services.h"
 
 
 class Individual{
@@ -17,6 +17,6 @@ protected:
     std::string _name;
     static unsigned int _idSeq;
     unsigned int _id;
-    std::vector<Interventions*> _associatedInterventions;
+    std::vector<Intervention*> _associatedInterventions;
 
 };
