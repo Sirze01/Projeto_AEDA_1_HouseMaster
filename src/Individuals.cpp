@@ -1,6 +1,6 @@
 #include "Individuals.h"
 
-void Individual::setIdSeq() {
+void Individual::iddSeqSetter() {
     _idSeq = 0;
 }
 

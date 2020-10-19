@@ -11,7 +11,7 @@ public:
     unsigned int getId();
     std::string getName();
     bool operator== (const Individual& right);
-    static void setIdSeq();
+    static void idSeqSetter();
 
 protected:
     std::string _name;
