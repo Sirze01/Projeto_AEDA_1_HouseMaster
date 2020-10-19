@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="565px" preserveAspectRatio="none" style="width:1086px;height:565px;" version="1.1" viewBox="0 0 1086 565" width="1086px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ag0g10nm0izd" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[d694de1a4d3eb4abf36fc4a4dacd5966]
+class processState--><rect fill="#CCCCCC" filter="url(#f1ag0g10nm0izd)" height="94.7996" id="processState" style="stroke: #AAAAAA; stroke-width: 1.5;" width="91" x="17" y="20"/><ellipse cx="29" cy="33" fill="#EB937F" rx="8" ry="8" style="stroke: #AAAAAA; stroke-width: 1.0;"/><path d="M27.5156,33.5469 L31.3594,33.5469 L31.3594,32.1719 L27.5156,32.1719 L27.5156,30.3594 L31.6719,30.3594 L31.6719,28.9844 L25.875,28.9844 L25.875,37 L31.8594,37 L31.8594,35.625 L27.5156,35.625 L27.5156,33.5469 Z "/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="65" x="40" y="36.619">processState</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="18" x2="107" y1="46" y2="46"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="78" x="23" y="60.2189">WaitingPayment</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="43" x="23" y="73.4188">Agended</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="54" x="23" y="86.6187">InProgress</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="52" x="23" y="99.8186">Concluded</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="18" x2="107" y1="106.7996" y2="106.7996"/><!--MD5=[090baa0da4ff03e6b68a244d81271cc4]
+class classification--><rect fill="#CCCCCC" filter="url(#f1ag0g10nm0izd)" height="121.1994" id="classification" style="stroke: #AAAAAA; stroke-width: 1.5;" width="88" x="143.5" y="7"/><ellipse cx="155.5" cy="20" fill="#EB937F" rx="8" ry="8" style="stroke: #AAAAAA; stroke-width: 1.0;"/><path d="M154.0156,20.5469 L157.8594,20.5469 L157.8594,19.1719 L154.0156,19.1719 L154.0156,17.3594 L158.1719,17.3594 L158.1719,15.9844 L152.375,15.9844 L152.375,24 L158.3594,24 L158.3594,22.625 L154.0156,22.625 L154.0156,20.5469 Z "/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="62" x="166.5" y="23.619">classification</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="144.5" x2="230.5" y1="33" y2="33"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="149.5" y="47.2189">Unreliable</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="37" x="149.5" y="60.4188">Clumsy</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="56" x="149.5" y="73.6187">GetsItDone</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="60" x="149.5" y="86.8186">HardWorker</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="42" x="149.5" y="100.0185">Attentive</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="31" x="149.5" y="113.2184">Savior</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="144.5" x2="230.5" y1="120.1994" y2="120.1994"/><!--MD5=[44666af3f6bf3a5c82a83a4f4ee59e64]
+class servicesType--><rect fill="#CCCCCC" filter="url(#f1ag0g10nm0izd)" height="68.3998" id="servicesType" style="stroke: #AAAAAA; stroke-width: 1.5;" width="93" x="267" y="33.5"/><ellipse cx="279" cy="46.5" fill="#FF8800" rx="8" ry="8" style="stroke: #AAAAAA; stroke-width: 1.0;"/><path d="M277.5156,47.0469 L281.3594,47.0469 L281.3594,45.6719 L277.5156,45.6719 L277.5156,43.8594 L281.6719,43.8594 L281.6719,42.4844 L275.875,42.4844 L275.875,50.5 L281.8594,50.5 L281.8594,49.125 L277.5156,49.125 L277.5156,47.0469 Z "/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="67" x="290" y="50.119">servicesType</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="268" x2="359" y1="59.5" y2="59.5"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="39" x="273" y="73.7189">bool pro</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="66" x="273" y="86.9188">string service</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="268" x2="359" y1="93.8998" y2="93.8998"/><!--MD5=[795a4aacf1bde433470b0e5b01d3050a]
+class date--><rect fill="#CCCCCC" filter="url(#f1ag0g10nm0izd)" height="107.9995" id="date" style="stroke: #AAAAAA; stroke-width: 1.5;" width="111" x="7" y="313.5"/><ellipse cx="48.5" cy="326.5" fill="#FF8800" rx="8" ry="8" style="stroke: #AAAAAA; stroke-width: 1.0;"/><path d="M47.0156,327.0469 L50.8594,327.0469 L50.8594,325.6719 L47.0156,325.6719 L47.0156,323.8594 L51.1719,323.8594 L51.1719,322.4844 L45.375,322.4844 L45.375,330.5 L51.3594,330.5 L51.3594,329.125 L47.0156,329.125 L47.0156,327.0469 Z "/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="21" x="64.5" y="330.119">date</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="8" x2="117" y1="339.5" y2="339.5"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="79" x="13" y="353.7189">unsigned int day</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="91" x="13" y="366.9188">unsigned int month</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="83" x="13" y="380.1187">unsigned int year</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="89" x="13" y="393.3186">unsigned int hours</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="99" x="13" y="406.5185">unsigned int minutes</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="8" x2="117" y1="413.4995" y2="413.4995"/><!--MD5=[1d9813c44ddce7c61b3724bcbdc24041]
+class houseMaster--><rect fill="#CCCCCC" filter="url(#f1ag0g10nm0izd)" height="358.7976" id="houseMaster" style="stroke: #AAAAAA; stroke-width: 1.5;" width="391" x="153" y="188"/><ellipse cx="313" cy="201" fill="#FF8800" rx="8" ry="8" style="stroke: #AAAAAA; stroke-width: 1.0;"/><path d="M316.5,199.7031 C316.4531,199 316.2969,198.5625 315.9688,198.1094 C315.3438,197.2969 314.3594,196.8438 313.1563,196.8438 C310.8906,196.8438 309.4844,198.4688 309.4844,201.0625 C309.4844,203.6406 310.875,205.25 313.1094,205.25 C315.1094,205.25 316.4375,204.0938 316.5313,202.2656 L314.9219,202.2656 C314.8125,203.2813 314.1875,203.8594 313.1563,203.8594 C311.875,203.8594 311.1406,202.8281 311.1406,201.0781 C311.1406,199.3125 311.9219,198.25 313.2188,198.25 C314.1719,198.25 314.7031,198.7188 314.9219,199.7031 L316.5,199.7031 Z "/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="64" x="329" y="204.619">houseMaster</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="154" x2="543" y1="214" y2="214"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="202" x="159" y="228.2189">vector&lt;servicesType&gt;* availableServices</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="163" x="159" y="241.4188">vector&lt;individuals&gt;* collaborators</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="131" x="159" y="254.6187">vector&lt;individuals&gt;* clients</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="168" x="159" y="267.8186">vector&lt;intervention&gt;* interventions</text><line style="stroke: #AAAAAA; stroke-width: 1.0;" x1="154" x2="543" y1="274.7996" y2="274.7996"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="95" x="159" y="289.0185">void houseMaster()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="162" y="302.2184"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="123" x="159" y="315.4183">int getAvailableServices()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="237" x="159" y="328.6182">int addAvailableServices(bool pro, string service)</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="211" x="159" y="341.8181">int removeAvailableServices(string service)</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="162" y="355.018"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="102" x="159" y="368.2179">int getCollaborators()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="379" x="159" y="381.4178">int addCollaborator(string name, vector&lt;servicesType&gt;* functions, Availability)</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="187" x="159" y="394.6177">int removeCollaborator(unsigned int id)</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="162" y="407.8176"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="70" x="159" y="421.0175">int getClients()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="124" x="159" y="434.2174">int addClient(string name)</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="155" x="159" y="447.4173">int removeClient(unsigned int id)</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="162" y="460.6173"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="159" y="473.8172">int getInterventions()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="277" x="159" y="487.0171">int addIntervention(servicesType type, date appointment)</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="185" x="159" y="500.217">int removeIntervention(unsigned int id)</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="162" y="513.4169"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="227" x="159" y="526.6168">int assignCollaborator(intervention toAssignTo)</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="227" x="159" y="539.8167">int calculateCost(intervention toCalculateFrom)</text><!--MD5=[6da31fdff1fdb71a6c9456cb748cc98d]
+class intervention--><rect fill="#CCCCCC" filter="url(#f1ag0g10nm0izd)" height="173.999" id="intervention" style="stroke: #AAAAAA; stroke-width: 1.5;" width="116" x="579.5" y="280.5"/><ellipse cx="606.8" cy="293.5" fill="#FF8800" rx="8" ry="8" style="stroke: #AAAAAA; stroke-width: 1.0;"/><path d="M610.3,292.2031 C610.2531,291.5 610.0969,291.0625 609.7688,290.6094 C609.1438,289.7969 608.1594,289.3438 606.9563,289.3438 C604.6906,289.3438 603.2844,290.9688 603.2844,293.5625 C603.2844,296.1406 604.675,297.75 606.9094,297.75 C608.9094,297.75 610.2375,296.5938 610.3313,294.7656 L608.7219,294.7656 C608.6125,295.7813 607.9875,296.3594 606.9563,296.3594 C605.675,296.3594 604.9406,295.3281 604.9406,293.5781 C604.9406,291.8125 605.7219,290.75 607.0188,290.75 C607.9719,290.75 608.5031,291.2188 608.7219,292.2031 L610.3,292.2031 Z "/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="56" x="621.2" y="297.119">intervention</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="580.5" x2="694.5" y1="306.5" y2="306.5"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="69" x="585.5" y="320.7189">unsigned int id</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="83" x="585.5" y="333.9188">date appointment</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="91" x="585.5" y="347.1187">servicesType type</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="104" x="585.5" y="360.3186">collaborator assigned</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="92" x="585.5" y="373.5185">processState state</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="47" x="585.5" y="386.7184">float price</text><line style="stroke: #AAAAAA; stroke-width: 1.0;" x1="580.5" x2="694.5" y1="393.6994" y2="393.6994"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="87" x="585.5" y="407.9183">void intervention()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="62" x="585.5" y="421.1182">int getType()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="103" x="585.5" y="434.3181">int getProcessState()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="62" x="585.5" y="447.518">int getPrice()</text><!--MD5=[5302afe737c4073d2935af9567d5c3ca]
+class individual--><rect fill="#CCCCCC" filter="url(#f1ag0g10nm0izd)" height="121.1994" id="individual" style="stroke: #AAAAAA; stroke-width: 1.5;" width="240" x="790.5" y="7"/><ellipse cx="885" cy="20" fill="#FF8800" rx="8" ry="8" style="stroke: #AAAAAA; stroke-width: 1.0;"/><path d="M888.5,18.7031 C888.4531,18 888.2969,17.5625 887.9688,17.1094 C887.3438,16.2969 886.3594,15.8438 885.1563,15.8438 C882.8906,15.8438 881.4844,17.4688 881.4844,20.0625 C881.4844,22.6406 882.875,24.25 885.1094,24.25 C887.1094,24.25 888.4375,23.0938 888.5313,21.2656 L886.9219,21.2656 C886.8125,22.2813 886.1875,22.8594 885.1563,22.8594 C883.875,22.8594 883.1406,21.8281 883.1406,20.0781 C883.1406,18.3125 883.9219,17.25 885.2188,17.25 C886.1719,17.25 886.7031,17.7188 886.9219,18.7031 L888.5,18.7031 Z "/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="44" x="901" y="23.619">individual</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="791.5" x2="1029.5" y1="33" y2="33"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="57" x="796.5" y="47.2189">string name</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="69" x="796.5" y="60.4188">unsigned int id</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="228" x="796.5" y="73.6187">vector&lt;interventions&gt;* associatedInterventions</text><line style="stroke: #AAAAAA; stroke-width: 1.0;" x1="791.5" x2="1029.5" y1="80.5997" y2="80.5997"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="75" x="796.5" y="94.8186">void individual()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="46" x="796.5" y="108.0185">int getId()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="66" x="796.5" y="121.2184">int getName()</text><!--MD5=[c52ac89f308f63139a743561fd6e7700]
+class collaborator--><rect fill="#CCCCCC" filter="url(#f1ag0g10nm0izd)" height="134.3993" id="collaborator" style="stroke: #AAAAAA; stroke-width: 1.5;" width="173" x="731" y="300.5"/><ellipse cx="785.5" cy="313.5" fill="#FF8800" rx="8" ry="8" style="stroke: #AAAAAA; stroke-width: 1.0;"/><path d="M789,312.2031 C788.9531,311.5 788.7969,311.0625 788.4688,310.6094 C787.8438,309.7969 786.8594,309.3438 785.6563,309.3438 C783.3906,309.3438 781.9844,310.9688 781.9844,313.5625 C781.9844,316.1406 783.375,317.75 785.6094,317.75 C787.6094,317.75 788.9375,316.5938 789.0313,314.7656 L787.4219,314.7656 C787.3125,315.7813 786.6875,316.3594 785.6563,316.3594 C784.375,316.3594 783.6406,315.3281 783.6406,313.5781 C783.6406,311.8125 784.4219,310.75 785.7188,310.75 C786.6719,310.75 787.2031,311.2188 787.4219,312.2031 L789,312.2031 Z "/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="57" x="801.5" y="317.119">collaborator</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="732" x2="903" y1="326.5" y2="326.5"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="161" x="737" y="340.7189">vector&lt;servicesType&gt;* functions</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="93" x="737" y="353.9188">classification score</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="50" x="737" y="367.1187">Availability</text><line style="stroke: #AAAAAA; stroke-width: 1.0;" x1="732" x2="903" y1="374.0997" y2="374.0997"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="88" x="737" y="388.3186">void collaborator()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="85" x="737" y="401.5185">int getFunctions()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="66" x="737" y="414.7184">int getScore()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="87" x="737" y="427.9183">int getAvailability()</text><!--MD5=[e3f72718913f1e037c5bc72e44de49f6]
+class client--><rect fill="#CCCCCC" filter="url(#f1ag0g10nm0izd)" height="81.5997" id="client" style="stroke: #AAAAAA; stroke-width: 1.5;" width="128" x="939.5" y="326.5"/><ellipse cx="987.5" cy="339.5" fill="#FF8800" rx="8" ry="8" style="stroke: #AAAAAA; stroke-width: 1.0;"/><path d="M991,338.2031 C990.9531,337.5 990.7969,337.0625 990.4688,336.6094 C989.8438,335.7969 988.8594,335.3438 987.6563,335.3438 C985.3906,335.3438 983.9844,336.9688 983.9844,339.5625 C983.9844,342.1406 985.375,343.75 987.6094,343.75 C989.6094,343.75 990.9375,342.5938 991.0313,340.7656 L989.4219,340.7656 C989.3125,341.7813 988.6875,342.3594 987.6563,342.3594 C986.375,342.3594 985.6406,341.3281 985.6406,339.5781 C985.6406,337.8125 986.4219,336.75 987.7188,336.75 C988.6719,336.75 989.2031,337.2188 989.4219,338.2031 L991,338.2031 Z "/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="25" x="1003.5" y="343.119">client</text><line style="stroke: #AAAAAA; stroke-width: 1.5;" x1="940.5" x2="1066.5" y1="352.5" y2="352.5"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="945.5" y="366.7189">string NIF</text><line style="stroke: #AAAAAA; stroke-width: 1.0;" x1="940.5" x2="1066.5" y1="373.6999" y2="373.6999"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="56" x="945.5" y="387.9188">void client()</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="116" x="945.5" y="401.1187">int requestIntervention()</text><!--MD5=[ff7e79bfcddd8df144b2d4a659572487]
+reverse link individual to collaborator--><path d="M885.89,147.34 C871.02,195.01 852.27,255.08 838.17,300.27 " fill="none" id="individual&lt;-collaborator" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="none" points="879.26,145.1,891.9,128.09,892.63,149.27,879.26,145.1" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[d826f5a02a1fa98a5523a2499ebed671]
+reverse link individual to client--><path d="M935.06,147.21 C953.01,204.72 976.62,280.36 990.89,326.1 " fill="none" id="individual&lt;-client" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="none" points="928.37,149.27,929.1,128.09,941.74,145.1,928.37,149.27" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[0b28f555f6085418fa031ce8cebd84de]
+link processState to classification--><!--MD5=[fd7d9cf011b9bab246e03f751f944078]
+link classification to servicesType--><!--MD5=[2e88bc4f1b79698071829a5fe469358e]
+link processState to date--><!--MD5=[d1c3c7ba99d1282519aee55258a385bb]
+link date to houseMaster--><!--MD5=[940ab5c9e676c5663b7229b89262202b]
+link houseMaster to intervention--><!--MD5=[ce1fc92e4f55fe460b49c2a8d87d0713]
+@startuml
+!define LIGHTORANGE
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+
+ enum processState{
+     WaitingPayment
+     Agended
+     InProgress
+     Concluded
+ }
+
+
+ enum classification{
+     Unreliable
+     Clumsy
+     GetsItDone
+     HardWorker
+     Attentive
+     Savior
+ }
+
+
+ entity servicesType{
+     bool pro
+     string service
+ }
+
+ entity date{
+     unsigned int day
+     unsigned int month
+     unsigned int year
+     unsigned int hours
+     unsigned int minutes
+ }
+
+class houseMaster{
+    vector<servicesType>* availableServices
+    vector<individuals>* collaborators
+    vector<individuals>* clients
+    vector<intervention>* interventions
+    - - - -
+    void houseMaster()
+    
+    int getAvailableServices()
+    int addAvailableServices(bool pro, string service)
+    int removeAvailableServices(string service)
+    
+    int getCollaborators()
+    int addCollaborator(string name, vector<servicesType>* functions, Availability)
+    int removeCollaborator(unsigned int id)
+    
+    int getClients()
+    int addClient(string name)
+    int removeClient(unsigned int id)
+
+    int getInterventions()
+    int addIntervention(servicesType type, date appointment)
+    int removeIntervention(unsigned int id)
+    
+    int assignCollaborator(intervention toAssignTo)
+    int calculateCost(intervention toCalculateFrom)
+}
+
+
+class intervention{
+    unsigned int id
+    date appointment
+    servicesType type
+    collaborator assigned
+    processState state
+    float price
+    - - - -
+    void intervention()
+    int getType()
+    int getProcessState()
+    int getPrice()
+}
+
+
+class individual{
+    string name
+    unsigned int id
+    vector<interventions>* associatedInterventions
+    - - - -
+    void individual()
+    int getId()
+    int getName()
+}
+
+class collaborator{
+    vector<servicesType>* functions
+    classification score
+    Availability
+    - - - -
+    void collaborator()
+    int getFunctions()
+    int getScore()
+    int getAvailability()
+}
+
+class client{
+    string NIF
+    - - - -
+    void client()
+    int requestIntervention()
+}
+
+individual <|- - collaborator
+individual <|- - client
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+
+
+
+skinparam stereotypeCBackgroundColor FF8800
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam actor {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor cccccc
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor FF8800
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor FF8800
+  endColor BB6600
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+ enum processState{
+     WaitingPayment
+     Agended
+     InProgress
+     Concluded
+ }
+
+
+ enum classification{
+     Unreliable
+     Clumsy
+     GetsItDone
+     HardWorker
+     Attentive
+     Savior
+ }
+
+
+ entity servicesType{
+     bool pro
+     string service
+ }
+
+ entity date{
+     unsigned int day
+     unsigned int month
+     unsigned int year
+     unsigned int hours
+     unsigned int minutes
+ }
+
+class houseMaster{
+    vector<servicesType>* availableServices
+    vector<individuals>* collaborators
+    vector<individuals>* clients
+    vector<intervention>* interventions
+    - - - -
+    void houseMaster()
+    
+    int getAvailableServices()
+    int addAvailableServices(bool pro, string service)
+    int removeAvailableServices(string service)
+    
+    int getCollaborators()
+    int addCollaborator(string name, vector<servicesType>* functions, Availability)
+    int removeCollaborator(unsigned int id)
+    
+    int getClients()
+    int addClient(string name)
+    int removeClient(unsigned int id)
+
+    int getInterventions()
+    int addIntervention(servicesType type, date appointment)
+    int removeIntervention(unsigned int id)
+    
+    int assignCollaborator(intervention toAssignTo)
+    int calculateCost(intervention toCalculateFrom)
+}
+
+
+class intervention{
+    unsigned int id
+    date appointment
+    servicesType type
+    collaborator assigned
+    processState state
+    float price
+    - - - -
+    void intervention()
+    int getType()
+    int getProcessState()
+    int getPrice()
+}
+
+
+class individual{
+    string name
+    unsigned int id
+    vector<interventions>* associatedInterventions
+    - - - -
+    void individual()
+    int getId()
+    int getName()
+}
+
+class collaborator{
+    vector<servicesType>* functions
+    classification score
+    Availability
+    - - - -
+    void collaborator()
+    int getFunctions()
+    int getScore()
+    int getAvailability()
+}
+
+class client{
+    string NIF
+    - - - -
+    void client()
+    int requestIntervention()
+}
+
+individual <|- - collaborator
+individual <|- - client
+@enduml
+
+PlantUML version 1.2020.15(Sun Jun 28 12:39:45 WEST 2020)
+(MIT source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>
