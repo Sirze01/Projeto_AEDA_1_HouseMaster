@@ -3,4 +3,4 @@ project(src)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(src main.cpp individuals.h individuals.cpp)
+add_executable(src main.cpp individuals.h individuals.cpp HouseMaster.cpp HouseMaster.h)
