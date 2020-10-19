@@ -37,6 +37,7 @@ private:
 
 
 public:
+    static void idSeqSetter();
     Intervention(date appointment, servicesType type, bool forcePro);
     servicesType getType();
     processState getProcessState();
