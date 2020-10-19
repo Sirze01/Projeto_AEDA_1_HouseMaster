@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include "service.h"
+#include "Service.h"
 
 
 class Individual{
@@ -17,6 +17,6 @@ protected:
     static unsigned int _idSeq;
     unsigned int _id;
     std::vector<Interventions*> _associatedInterventions;
-    void setIdSeq();
+    static void setIdSeq();
 
 };
