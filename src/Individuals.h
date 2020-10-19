@@ -4,16 +4,16 @@
 #include <vector>
 #include "service.h"
 
-class individual{
+class Individual{
 public:
-    explicit individual(std::string name);
+    explicit Individual(std::string name);
     unsigned int getId();
     std::string getName();
-    bool operator== (const individual& right);
+    bool operator== (const Individual& right);
 
 protected:
     std::string _name;
     unsigned int _id;
-    std::vector<interventions>* _associatedInterventions;
+    std::vector<Interventions>* _associatedInterventions;
 
 };
