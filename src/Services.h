@@ -26,6 +26,7 @@ enum processState{
 
 class Intervention{
 private:
+    static unsigned int _idSeq;
     unsigned int _id;
     date _appointment;
     servicesType _type;
@@ -34,8 +35,9 @@ private:
     processState state;
     float price;
 
+
 public:
-    void Intervention(date appointment, servicesType type, bool forcePro);
+    Intervention(date appointment, servicesType type, bool forcePro);
     servicesType getType();
     processState getProcessState();
     float getPrice();
