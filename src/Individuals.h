@@ -4,6 +4,7 @@
 #include <vector>
 #include "service.h"
 
+
 class Individual{
 public:
     explicit Individual(std::string name);
@@ -13,7 +14,9 @@ public:
 
 protected:
     std::string _name;
+    static unsigned int _idSeq;
     unsigned int _id;
-    std::vector<Interventions>* _associatedInterventions;
+    std::vector<Interventions*> _associatedInterventions;
+    void setIdSeq();
 
 };
