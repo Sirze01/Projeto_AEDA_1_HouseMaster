@@ -1,8 +1,43 @@
-//
-// Created by sirze on 19/10/20.
-//
+#pragma once
 
-#ifndef SRC_SERVICES_H
-#define SRC_SERVICES_H
+#include<string>
+#include"Individuals.h"
 
-#endif //SRC_SERVICES_H
+struct date{
+    unsigned int day;
+    unsigned int month;
+    unsigned int year;
+    unsigned int hour;
+    unsigned int minute;
+};
+
+struct servicesType{
+    bool pro;
+    std::string type;
+};
+
+enum processState{
+    WaitingPayment,
+    Agended,
+    InProgress,
+    Concluded
+};
+
+
+class Intervention{
+private:
+    unsigned int _id;
+    date _appointment;
+    servicesType _type;
+    bool _forcePro;
+    Collaborator* _assigned;
+    processState state;
+    float price;
+
+public:
+    void Intervention(date appointment, servicesType type, bool forcePro);
+    servicesType getType();
+    processState getProcessState();
+    float getPrice();
+
+};
