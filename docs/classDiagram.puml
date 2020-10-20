@@ -20,9 +20,9 @@
  }
 
 
- entity servicesType{
+ entity service{
      bool pro
-     string service
+     string name
  }
 
  entity date{
@@ -42,8 +42,8 @@ class HouseMaster{
     + void houseMaster()
     
     + int getAvailableServices()
-    - int addAvailableServices(bool pro, string service)
-    - int removeAvailableServices(string service)
+    - int addAvailableServices(service toAdd)
+    - int removeAvailableServices(service toRemove)
     
     + int getCollaborators()
     - int addCollaborator(string name, vector<servicesType*> functions, Availability)
