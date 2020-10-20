@@ -1,5 +1,5 @@
 #include "Services.h"
-#include "Individuals.h"
+#include "Individual.h"
 
 class Client: public Individual
 {
