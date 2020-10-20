@@ -6,7 +6,17 @@
 HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
 
     for (std::string line; std::getline(collaborators, line); ) {
-        auto collaborator = new Individual(line);
+        std::istringstream lss(line);
+        std::string name{}, service{};
+        std::vector<servicesType *> services{};
+        std::getline(lss, name, ',');
+        while (std::getline(lss, service, ',')) {
+            auto *s = new servicesType;
+            s->type = service;
+            s->pro = false;
+            services.push_back(s);
+        }
+        auto collaborator = new Collaborator(services, name);
         this->_collaborators.push_back(collaborator);
     }
 
@@ -17,7 +27,7 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
 
 }
 
-const std::vector<Individual *> &HouseMaster::getCollaborators() const {
+const std::vector<Collaborator *> &HouseMaster::getCollaborators() const {
     return _collaborators;
 }
 
