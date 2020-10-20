@@ -1,7 +1,6 @@
 #pragma once
 
 #include<string>
-#include"Individuals.h"
 
 struct date{
     unsigned int day;
@@ -23,21 +22,17 @@ enum processState{
     Concluded
 };
 
-
 class Intervention{
 private:
-    static unsigned int _idSeq;
     unsigned int _id;
     date _appointment;
     servicesType _type;
     bool _forcePro;
-    Collaborator* _assigned;
     processState _state;
     float _price;
 
-
 public:
-    static void idSeqSetter();
+    static unsigned int _idSeq;
     Intervention(date appointment, servicesType type, bool forcePro);
     servicesType getType();
     processState getProcessState();

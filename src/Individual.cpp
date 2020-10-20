@@ -1,8 +1,6 @@
-#include "Individuals.h"
+#include "Individual.h"
 
-void Individual::idSeqSetter() {
-    _idSeq = 0;
-}
+unsigned Individual::_idSeq = 0;
 
 Individual::Individual(std::string name) : _name(name), _id(++_idSeq) {
 }
@@ -11,7 +9,7 @@ std::string Individual::getName() {
     return _name;
 }
 
-unsigned int Individual::getId() {
+unsigned int Individual::getId() const {
     return _id;
 }
 

@@ -8,15 +8,14 @@
 class Individual{
 public:
     explicit Individual(std::string name);
-    unsigned int getId();
+    unsigned int getId() const;
     std::string getName();
     bool operator== (const Individual& right);
-    static void idSeqSetter();
+    static unsigned int _idSeq;
 
 protected:
     std::string _name;
-    static unsigned int _idSeq;
     unsigned int _id;
-    std::vector<Intervention*> _associatedInterventions;
+    std::vector<Intervention* > _associatedInterventions;
 
 };
