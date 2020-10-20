@@ -4,8 +4,11 @@
 
 #include <vector>
 #include <fstream>
+#include <sstream>
 #include "Individual.h"
 #include "Services.h"
+#include "Collaborator.h"
+
 
 class HouseMaster {
 public:
@@ -13,7 +16,7 @@ public:
 
     HouseMaster(std::ifstream collaborators, std::ifstream clients);
 
-    const std::vector<Individual *> &getCollaborators() const;
+    const std::vector<Collaborator *> &getCollaborators() const;
 
     const std::vector<Individual *> &getClients() const;
 
@@ -26,7 +29,7 @@ public:
     void removeAvailableService(std::string service);
 
 private:
-    std::vector<Individual* > _collaborators;
+    std::vector<Collaborator* > _collaborators;
     std::vector<Individual* > _clients;
     std::vector<servicesType* > _availableServices;
     std::vector<Intervention* > _interventions;

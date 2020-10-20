@@ -8,9 +8,20 @@ int main() {
 
     HouseMaster houseMaster(std::ifstream("data/collabs.txt"), std::ifstream("data/clients.txt"));
 
+    std::cout << "Collaborators:\n";
+
+    for (const auto& collab : houseMaster.getCollaborators()) {
+        std::cout << "Name: " << collab->getName() << "\n";
+        std::cout << "Services: ";
+        for (const auto& service : collab->getFunctions()) {
+            std::cout << service->type << ", ";
+        }
+        std::cout << "\n";
+    }
+
     std::cout << "Clients:\n";
-    for (const auto &i : houseMaster.getClients()) {
-        std::cout << i->getId() << ": " << i->getName() << "\n";
+    for (const auto& client : houseMaster.getClients()) {
+        std::cout << client->getId() << ": " << client->getName() << "\n";
     }
 
     // temos que impedir pessoas com nome vazio ok
