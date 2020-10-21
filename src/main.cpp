@@ -4,6 +4,9 @@
 #include "Services.h"
 
 int main() {
+
+    // testing houseMaster constructor
+    /*
     std::cout << "Hello, World!" << std::endl;
 
     HouseMaster houseMaster(std::ifstream("data/collabs.txt"), std::ifstream("data/clients.txt"));
@@ -21,8 +24,9 @@ int main() {
 
     std::cout << "Clients:\n";
     for (const auto& client : houseMaster.getClients()) {
-        std::cout << client->getId() << ": " << client->getName() << "\n";
+        std::cout << client->getId() << ": " << client->getName() << " NIF: " << client->getNif() << "\n";
     }
+     */
 
     // temos que impedir pessoas com nome vazio ok
 

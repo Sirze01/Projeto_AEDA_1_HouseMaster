@@ -21,7 +21,12 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
     }
 
     for (std::string line; std::getline(clients, line); ) {
-        auto client = new Individual(line);
+        std::stringstream lss(line);
+        std::string name;
+        unsigned int nif;
+        std::getline(lss, name, ',');
+        lss >> nif;
+        auto client = new Client(nif, name);
         this->_clients.push_back(client);
     }
 
@@ -31,7 +36,7 @@ const std::vector<Collaborator *> &HouseMaster::getCollaborators() const {
     return _collaborators;
 }
 
-const std::vector<Individual *> &HouseMaster::getClients() const {
+const std::vector<Client *> &HouseMaster::getClients() const {
     return _clients;
 }
 
