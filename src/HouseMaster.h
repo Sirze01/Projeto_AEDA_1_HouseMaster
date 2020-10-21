@@ -5,9 +5,11 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include "Individual.h"
 #include "Services.h"
 #include "Collaborator.h"
+#include "Client.h"
 
 
 class HouseMaster {
@@ -18,19 +20,19 @@ public:
 
     const std::vector<Collaborator *> &getCollaborators() const;
 
-    const std::vector<Individual *> &getClients() const;
+    const std::vector<Client *> &getClients() const;
 
     const std::vector<servicesType *> &getAvailableServices() const;
 
     const std::vector<Intervention *> &getInterventions() const;
 
-    void addAvailableService(std::string service, bool pro=false);
+    void addAvailableService(servicesType *service);
 
-    void removeAvailableService(std::string service);
+    void removeAvailableService(servicesType *service);
 
 private:
     std::vector<Collaborator* > _collaborators;
-    std::vector<Individual* > _clients;
+    std::vector<Client* > _clients;
     std::vector<servicesType* > _availableServices;
     std::vector<Intervention* > _interventions;
 };
