@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SRC_INDIVIDUAL_H
+#define SRC_INDIVIDUAL_H
 
 #include<string>
 #include<vector>
@@ -64,3 +65,5 @@ private:
     unsigned int _nif;
     std::vector<Intervention* > _requestedInterventions;
 };
+
+#endif

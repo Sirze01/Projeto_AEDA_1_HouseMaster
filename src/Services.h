@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SRC_SERVICES_H
+#define SRC_SERVICES_H
 
 #include<string>
 
@@ -47,3 +48,5 @@ public:
     float getPrice() const;
 
 };
+
+#endif

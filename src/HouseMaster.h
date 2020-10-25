@@ -1,4 +1,3 @@
-
 #ifndef SRC_HOUSEMASTER_H
 #define SRC_HOUSEMASTER_H
 
