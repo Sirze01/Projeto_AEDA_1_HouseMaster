@@ -1,7 +1,6 @@
 
 #include "HouseMaster.h"
 
-#include <utility>
 
 HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
 
@@ -44,7 +43,7 @@ const std::vector<servicesType *> &HouseMaster::getAvailableServices() const {
     return _availableServices;
 }
 
-const std::vector<Intervention *> &HouseMaster::getInterventions() const {
+const std::set<Intervention *> &HouseMaster::getInterventions() const {
     return _interventions;
 }
 
@@ -59,6 +58,14 @@ void HouseMaster::removeAvailableService(servicesType *service) {
         it = _availableServices.erase(it);
     } else {
         // throw error
+    }
+}
+
+void HouseMaster::updateInterventions() {
+    for (const auto &client : _clients) {
+        for (const auto &intervention : client->getRequestedInterventions()) {
+            _interventions.insert(intervention);
+        }
     }
 }
 

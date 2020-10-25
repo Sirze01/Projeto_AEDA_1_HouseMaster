@@ -2,27 +2,29 @@
 
 #include<string>
 
-struct date{
+struct date {
     unsigned int day;
     unsigned int month;
     unsigned int year;
     unsigned int hour;
     unsigned int minute;
+
 };
 
-struct servicesType{
+struct servicesType {
     bool pro;
     std::string type;
 };
 
-enum processState{
+enum processState {
     WaitingPayment,
-    Agended,
+    Scheduled,
     InProgress,
     Concluded
 };
 
-class Intervention{
+class Intervention {
+
 private:
     unsigned int _id;
     date _appointment;
@@ -33,9 +35,16 @@ private:
 
 public:
     static unsigned int _idSeq;
-    Intervention(date appointment, servicesType type, bool forcePro);
+
+    Intervention(date appointment, servicesType type, bool forcePro, float price);
+    // o price aqui é temporário tenho que perguntar aos amgs se faz sentido cada serviço ter um preço base e caso
+    // sim meter o preço dentro do servicesType, podendo depois fazer o custo total contabilizar de forma
+    // diferente dependendo das condições
+
     servicesType getType();
+
     processState getProcessState();
-    float getPrice();
+
+    float getPrice() const;
 
 };

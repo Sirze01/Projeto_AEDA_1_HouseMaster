@@ -7,50 +7,21 @@ int main() {
 
     HouseMaster houseMaster(std::ifstream("data/collabs.txt"), std::ifstream("data/clients.txt"));
 
-    // testing houseMaster constructor
-    /*
-    std::cout << "Hello, World!" << std::endl;
+    Client* c1 = houseMaster.getClients().front();
+    date d1{};
+    d1.day = 24; d1.hour = 1; d1.minute = 3; d1.month = 10; d1.year = 2020;
 
+    servicesType* service1 = houseMaster.getCollaborators().front()->getFunctions().front();
+    servicesType* service2 = houseMaster.getCollaborators().back()->getFunctions().back();
 
-    std::cout << "Collaborators:\n";
+    c1->requestIntervention(d1, *service1, false, 3);
+    c1->requestIntervention(d1, *service2, false, 1);
+    houseMaster.updateInterventions();
 
-    for (const auto& collab : houseMaster.getCollaborators()) {
-        std::cout << "Name: " << collab->getName() << "\n";
-        std::cout << "Services: ";
-        for (const auto& service : collab->getFunctions()) {
-            std::cout << service->type << ", ";
-        }
-        std::cout << "\n";
+    std::cout << "REGISTERED INTERVENTIONS:\n";
+
+    for (const auto &i : houseMaster.getInterventions()) {
+        std::cout << i->getType().type << "\n";
     }
-
-    std::cout << "Clients:\n";
-    for (const auto& client : houseMaster.getClients()) {
-        std::cout << client->getId() << ": " << client->getName() << " NIF: " << client->getNif() << "\n";
-    }
-     */
-
-    // temos que impedir pessoas com nome vazio ok
-
-    auto s1 = new servicesType;
-    s1->type = "cortar a relva", s1->pro = false;
-    houseMaster.addAvailableService(s1);
-
-    auto s2 = new servicesType;
-    s2->type = "passear a máquina de lavar loiça pela casa", s1->pro = true;
-    houseMaster.addAvailableService(s2);
-
-    std::cout << "Found " << houseMaster.getAvailableServices().size() << " services!\n";
-    for (const auto &i : houseMaster.getAvailableServices()) {
-        std::cout << i->type << "\n";
-    }
-
-    std::cout << "Removing first..\n";
-    houseMaster.removeAvailableService(s2);
-    std::cout << "Found " << houseMaster.getAvailableServices().size() << " services!\n";
-    for (const auto &i : houseMaster.getAvailableServices()) {
-        std::cout << i->type << "\n";
-    }
-
-
     return 0;
 }
