@@ -4,7 +4,7 @@
 
  enum processState{
      WaitingPayment
-     Agended
+     Scheduled
      InProgress
      Concluded
  }
@@ -20,9 +20,10 @@
  }
 
 
- entity service{
+ entity Service{
      bool pro
      string name
+     float price
  }
 
  entity date{
@@ -72,7 +73,7 @@ class Intervention{
     - float price
     ----
     + void intervention(date appointment, servicesType type, bool forcePro)
-    + int getType()
+    + int getService()
     + int getProcessState()
     + int getPrice()
 }
@@ -109,4 +110,12 @@ class Client{
 }
 Individual <|-- Collaborator
 Individual <|-- Client
+HouseMaster o-- Client
+HouseMaster *-- Collaborator
+HouseMaster *-- Intervention
+Collaborator *-- classification
+Intervention *-- Service
+Intervention *-- processState
+Intervention *-- date
+
 @enduml

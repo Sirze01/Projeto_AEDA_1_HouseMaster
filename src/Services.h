@@ -11,9 +11,10 @@ struct date {
 
 };
 
-struct servicesType {
+struct Service {
     bool pro;
-    std::string type;
+    std::string name;
+    float basePrice;
 };
 
 enum processState {
@@ -28,7 +29,7 @@ class Intervention {
 private:
     unsigned int _id;
     date _appointment;
-    servicesType _type;
+    Service _type;
     bool _forcePro;
     processState _state;
     float _price;
@@ -36,12 +37,10 @@ private:
 public:
     static unsigned int _idSeq;
 
-    Intervention(date appointment, servicesType type, bool forcePro, float price);
-    // o price aqui é temporário tenho que perguntar aos amgs se faz sentido cada serviço ter um preço base e caso
-    // sim meter o preço dentro do servicesType, podendo depois fazer o custo total contabilizar de forma
-    // diferente dependendo das condições
+    Intervention(date appointment, Service type, bool forcePro);
 
-    servicesType getType();
+
+    Service getService();
 
     processState getProcessState();
 

@@ -2,9 +2,8 @@
 
 #include <utility>
 
-unsigned Individual::_idSeq = 0;
 
-Individual::Individual(std::string name) : _name(std::move(name)), _id(++_idSeq) {
+Individual::Individual(std::string name) : _name(std::move(name)) {
 }
 
 std::string Individual::getName() {
@@ -20,3 +19,54 @@ bool Individual::operator==(const Individual& right) {
         return true;
     return false;
 }
+
+
+
+
+// Collaborator associated methods
+unsigned Collaborator::_idSeq = 0;
+
+std::vector<Service*> Collaborator::getFunctions()
+{
+    return functions;
+}
+
+int Collaborator::getScore()
+{
+    return score;
+}
+
+int Collaborator::getAvailability()
+{
+    return availability;
+}
+
+Collaborator::Collaborator(const std::vector<Service *>& functions, const std::string& name) : Individual(name),
+                                                                                                    functions(functions), availability(true), score(newHere) {
+
+}
+
+
+
+
+// Client associated methods
+unsigned Client::_idSeq = 0;
+
+Client::Client(unsigned int nif, const std::string &name) : Individual(name), _nif(nif), _requestedInterventions() {}
+
+unsigned int Client::getNif()
+{
+    return(_nif);
+}
+
+int Client::requestIntervention(date appointment, Service type, bool forcePro)
+{
+    auto intervention = new Intervention(appointment, type, forcePro);
+    _requestedInterventions.push_back(intervention);
+    return 0;
+}
+
+const std::vector<Intervention *> &Client::getRequestedInterventions() const {
+    return _requestedInterventions;
+}
+

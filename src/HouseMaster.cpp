@@ -7,11 +7,11 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
     for (std::string line; std::getline(collaborators, line); ) {
         std::istringstream lss(line);
         std::string name{}, service{};
-        std::vector<servicesType *> services{};
+        std::vector<Service *> services{};
         std::getline(lss, name, ',');
         while (std::getline(lss, service, ',')) {
-            auto *s = new servicesType;
-            s->type = service;
+            auto *s = new Service;
+            s->name = service;
             s->pro = false;
             services.push_back(s);
         }
@@ -39,7 +39,7 @@ const std::vector<Client *> &HouseMaster::getClients() const {
     return _clients;
 }
 
-const std::vector<servicesType *> &HouseMaster::getAvailableServices() const {
+const std::vector<Service *> &HouseMaster::getAvailableServices() const {
     return _availableServices;
 }
 
@@ -47,11 +47,11 @@ const std::set<Intervention *> &HouseMaster::getInterventions() const {
     return _interventions;
 }
 
-void HouseMaster::addAvailableService(servicesType *service) {
+void HouseMaster::addAvailableService(Service *service) {
     _availableServices.push_back(service);
 }
 
-void HouseMaster::removeAvailableService(servicesType *service) {
+void HouseMaster::removeAvailableService(Service *service) {
     auto it = std::find(_availableServices.begin(), _availableServices.end(), service);
     if (it != _availableServices.end()) {
         delete *it;

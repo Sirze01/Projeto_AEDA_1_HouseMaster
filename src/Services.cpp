@@ -1,13 +1,14 @@
 #include"Services.h"
 
+// Despite the static variables being already 0 initialized
 unsigned Intervention::_idSeq = 0;
 
-Intervention::Intervention(date appointment, servicesType type, bool forcePro, float price): _appointment(appointment), _type(type),
-    _forcePro(forcePro), _id(++_idSeq), _price(price), _state(Scheduled) {
+Intervention::Intervention(date appointment, Service type, bool forcePro): _appointment(appointment), _type(type),
+    _forcePro(forcePro), _id(++_idSeq), _state(Scheduled) {
 
 }
 
-servicesType Intervention::getType() {
+Service Intervention::getService() {
     return _type;
 }
 

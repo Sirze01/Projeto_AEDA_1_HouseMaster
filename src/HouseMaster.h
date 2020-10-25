@@ -9,8 +9,8 @@
 #include <set>
 #include "Individual.h"
 #include "Services.h"
-#include "Collaborator.h"
-#include "Client.h"
+
+
 
 
 class HouseMaster {
@@ -23,20 +23,20 @@ public:
 
     const std::vector<Client *> &getClients() const;
 
-    const std::vector<servicesType *> &getAvailableServices() const;
+    const std::vector<Service *> &getAvailableServices() const;
 
     const std::set<Intervention *> &getInterventions() const;
 
-    void addAvailableService(servicesType *service);
+    void addAvailableService(Service *service);
 
-    void removeAvailableService(servicesType *service);
+    void removeAvailableService(Service *service);
 
     void updateInterventions();
 
 private:
     std::vector<Collaborator* > _collaborators;
     std::vector<Client* > _clients;
-    std::vector<servicesType* > _availableServices;
+    std::vector<Service* > _availableServices;
     std::set<Intervention* > _interventions;
 };
 
