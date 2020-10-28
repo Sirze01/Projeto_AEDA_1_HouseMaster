@@ -4,12 +4,15 @@
 #include<string>
 
 struct date {
+    date();
+    date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
     unsigned int day;
     unsigned int month;
     unsigned int year;
-    unsigned int hour;
-    unsigned int minute;
+    unsigned int hours;
+    unsigned int minutes;
     int getDaysInMonth();
+    int setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
     date operator+(date& d1);
 };
 

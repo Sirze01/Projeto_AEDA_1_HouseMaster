@@ -30,12 +30,45 @@ int date::getDaysInMonth()
     else return -1;     // exception
 }
 
+date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
+    if(setDate(day, month, year, hour, minutes)){
+       this -> day = 0;
+       this -> month = 0;
+       this -> year = 0;
+       this -> hours = 0;
+       this -> minutes = 0;
+    }
+}
+
+int date::setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
+    if(month > 0 && month < 12){
+        this -> month = month;
+        if(day > 0 && day < getDaysInMonth()){
+            this -> day = day;
+        }
+        else
+            return 1;
+    }
+    else
+        return 1;
+    this -> year = year;
+    if(hours < 24){
+        this -> hours = hours;
+        if (minutes < 60)
+            this -> minutes = minutes;
+        else
+            return 1;
+    }
+    else
+        return 1;
+}
+
 date date::operator+(date& d1)
 {
     date service_date;
-    service_date.minute = (this->minute + d1.minute) % 60;
-    service_date.hour = (this->hour + d1.hour + ((this->minute + d1.minute) / 60)) % 24;
-    if (((this->hour + d1.hour + ((this->minute + d1.minute) / 60)) / 24) != 0)
+    service_date.minutes = (this->minutes + d1.minutes) % 60;
+    service_date.hours = (this->hours + d1.hours + ((this->minutes + d1.minutes) / 60)) % 24;
+    if (((this->hours + d1.hours + ((this->minutes + d1.minutes) / 60)) / 24) != 0)
     {
         service_date.month = d1.month;
         service_date.year = d1.year;
