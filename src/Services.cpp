@@ -1,5 +1,6 @@
 #include"Services.h"
 
+date::InvalidDate::InvalidDate(const std::string& error_msg): std::invalid_argument(error_msg) {}
 
 int date::getDaysInMonth()
 {
@@ -34,15 +35,13 @@ date::date(){}
 
 date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes, int valid) {
     if(valid){
-       if(setDate(day, month, year, hours, minutes)){
-
-           // Should throw exception
-           this -> day = 0;
-           this -> month = 0;
-           this -> year = 0;
-           this -> hours = 0;
-           this -> minutes = 0;
+       try{
+           setDate(day, month, year, hours, minutes);
        }
+       catch (InvalidDate &e) {
+           std::cerr << e.what();
+       }
+
     }
     else{
         this -> day = day;
@@ -53,28 +52,25 @@ date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int
     }
 }
 
-int date::setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
-    if(month > 0 && month < 13){
-        this -> month = month;
-        if(day > 0 && day < getDaysInMonth() + 1){
-            this -> day = day;
-        }
-        else
-            return 1;
-    }
-    else
-        return 1;
+void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
+    this -> day = day;
+    this -> month = month;
     this -> year = year;
-    if(hours < 24){
-        this -> hours = hours;
-        if (minutes < 60)
-            this -> minutes = minutes;
-        else
-            return 1;
-    }
-    else
-        return 1;
-    return 0;
+    this -> hours = hours;
+    this -> minutes = minutes;
+
+    if(day < 1 || day > getDaysInMonth() + 1)
+        throw InvalidDate(dateToStr() + " isn't a valid date!");
+
+    else if(month < 1 || month > 12)
+        throw InvalidDate(dateToStr() + " isn't a valid date!");
+
+    else if(hours > 23)
+        throw InvalidDate(dateToStr() + " isn't a valid date!");
+
+    else if (minutes > 59)
+        throw InvalidDate(dateToStr() + " isn't a valid date!");
+
 }
 
 date date::operator+(date& d1)
@@ -105,6 +101,12 @@ date date::operator+(date& d1)
     }
 
     return service_date;
+}
+
+std::string date::dateToStr() {
+    std::ostringstream stream;
+    stream << day << '/' << month << '/' << year << "  " << hours << ':' << minutes;
+    return stream.str();
 }
 
 

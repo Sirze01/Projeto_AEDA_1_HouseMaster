@@ -1,7 +1,10 @@
 #ifndef SRC_SERVICES_H
 #define SRC_SERVICES_H
 
+#include<stdexcept>
 #include<string>
+#include<sstream>
+#include<iostream>
 
 struct date {
     date();
@@ -12,8 +15,15 @@ struct date {
     unsigned int hours;
     unsigned int minutes;
     int getDaysInMonth();
-    int setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
+    void setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
     date operator+(date& d1);
+    std::string dateToStr();
+    class InvalidDate;
+};
+
+class date::InvalidDate : public std::invalid_argument{
+public:
+    InvalidDate(const std::string & error_msg);
 };
 
 struct Service {

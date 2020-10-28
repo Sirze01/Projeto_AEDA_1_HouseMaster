@@ -197,19 +197,15 @@ int main() {
 */
 
 
-/*
+
 // add 15 min to end of the day and month in february
-    date first_date(28,2,2019,23,50);
+    date first_date(28,2,2019,23,1);
+
 
     std::cout << "Date 1: " << first_date.day << "-" <<  first_date.month << "-" << first_date.year << "  -  " <<
         first_date.hours << "h" << first_date.minutes << "min" << std::endl;
 
-    date second_date;
-    second_date.day = 28;
-    second_date.month = 2;
-    second_date.year = 2019;
-    second_date.hours = 00;
-    second_date.minutes = 15;
+    date second_date(27,2,2019,00,15);
 
     std::cout << "Date 2: " << second_date.day << "-" <<  second_date.month << "-" << second_date.year << "  -  " <<
         second_date.hours << "h" << second_date.minutes << "min" << std::endl;
@@ -218,7 +214,7 @@ int main() {
     date final_date = first_date + second_date;
     std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " <<
         final_date.hours << "h" << final_date.minutes << "min" << std::endl;
-*/
+
 
     return 0;
 }
