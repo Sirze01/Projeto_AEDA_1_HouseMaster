@@ -43,7 +43,7 @@ const std::vector<Service *> &HouseMaster::getAvailableServices() const {
     return _availableServices;
 }
 
-const std::set<Intervention *> &HouseMaster::getInterventions() const {
+const std::set<std::pair<Client*, Intervention* > > &HouseMaster::getInterventions() const {
     return _interventions;
 }
 
@@ -64,8 +64,11 @@ void HouseMaster::removeAvailableService(Service *service) {
 void HouseMaster::updateInterventions() {
     for (const auto &client : _clients) {
         for (const auto &intervention : client->getRequestedInterventions()) {
-            _interventions.insert(intervention);
+            Intervention* inter = intervention;
+            auto registry = std::make_pair(client, inter);
+            _interventions.insert(registry);
         }
     }
 }
+
 

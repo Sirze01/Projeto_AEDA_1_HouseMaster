@@ -1,6 +1,7 @@
 #include "Individual.h"
 
 #include <utility>
+#include <algorithm>
 
 
 Individual::Individual(std::string name) : _name(std::move(name)) {
@@ -26,27 +27,34 @@ bool Individual::operator==(const Individual& right) {
 // Collaborator associated methods
 unsigned Collaborator::_idSeq = 0;
 
-std::vector<Service*> Collaborator::getFunctions()
+std::vector<Service*> Collaborator::getServices()
 {
-    return functions;
+    return _services;
 }
 
 int Collaborator::getScore()
 {
-    return score;
+    return _score;
 }
 
 int Collaborator::getAvailability()
 {
-    return availability;
+    return _availability;
 }
 
 Collaborator::Collaborator(const std::vector<Service *>& functions, const std::string& name) : Individual(name),
-                                                                                                    functions(functions), availability(true), score(newHere) {
+                                                                                               _services(functions), _availability(true), _score(newHere) {
 
 }
 
-
+bool Collaborator::canPreform(Service* service) {
+    auto found = std::find_if(_services.begin(), _services.end(), [&service](Service* service1) {
+        Service s1 = *service;
+        Service s2 = *service1;
+        return s1.name == s2.name;
+    });
+    return found != _services.end();
+}
 
 
 // Client associated methods

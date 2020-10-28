@@ -37,15 +37,16 @@ class Collaborator: public Individual
 {
 public:
     Collaborator(const std::vector<Service*>& functions, const std::string& name);
-    std::vector<Service*> getFunctions();
+    std::vector<Service*> getServices();
+    bool canPreform(Service* service);
     int getScore();
     int getAvailability();
     static unsigned int _idSeq;
 
 private:
-    std::vector<Service*> functions;
-    Classification score;
-    bool availability;
+    std::vector<Service*> _services;
+    Classification _score;
+    bool _availability;
 };
 
 

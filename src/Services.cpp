@@ -19,3 +19,4 @@ processState Intervention::getProcessState() {
 float Intervention::getPrice() const {
     return _price;
 }
+

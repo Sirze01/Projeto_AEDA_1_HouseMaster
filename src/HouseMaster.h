@@ -8,7 +8,7 @@
 #include <set>
 #include "Individual.h"
 #include "Services.h"
-
+#include <utility>
 
 
 
@@ -24,7 +24,7 @@ public:
 
     const std::vector<Service *> &getAvailableServices() const;
 
-    const std::set<Intervention *> &getInterventions() const;
+    const std::set<std::pair<Client*, Intervention* > > &getInterventions() const;
 
     void addAvailableService(Service *service);
 
@@ -36,7 +36,7 @@ private:
     std::vector<Collaborator* > _collaborators;
     std::vector<Client* > _clients;
     std::vector<Service* > _availableServices;
-    std::set<Intervention* > _interventions;
+    std::set<std::pair<Client*, Intervention* > > _interventions;
 };
 
 

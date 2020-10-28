@@ -13,10 +13,12 @@ struct date {
 };
 
 struct Service {
+
     bool pro;
     std::string name;
     float basePrice;
 };
+
 
 enum processState {
     WaitingPayment,
