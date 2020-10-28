@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/src.dir/main.cpp.o CMakeFiles/src.dir/Individual.cpp.o CMakeFiles/src.dir/Services.cpp.o CMakeFiles/src.dir/HouseMaster.cpp.o  -o src 

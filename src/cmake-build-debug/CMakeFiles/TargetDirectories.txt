@@ -1,0 +1,4 @@
+/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/src/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/src/cmake-build-debug/CMakeFiles/Projeto_AEDA_1_HouseMaster.dir
+/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/src/cmake-build-debug/CMakeFiles/Projeto_AEDA_1_HouseMasterlib.dir
