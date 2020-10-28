@@ -35,13 +35,7 @@ date::date(){}
 
 date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes, int valid) {
     if(valid){
-       try{
-           setDate(day, month, year, hours, minutes);
-       }
-       catch (InvalidDate &e) {
-           std::cerr << e.what();
-       }
-
+       setDate(day, month, year, hours, minutes);
     }
     else{
         this -> day = day;

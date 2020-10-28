@@ -37,9 +37,11 @@ int main() {
     }*/
 
 
-
+/*
     // TESTING DATE
     std::cout << "____DATE____" << std::endl;
+*/
+
 
 /*
     // Leap year
@@ -197,7 +199,7 @@ int main() {
 */
 
 
-
+/*
 // add 15 min to end of the day and month in february
     date first_date(28,2,2019,23,1);
 
@@ -214,7 +216,7 @@ int main() {
     date final_date = first_date + second_date;
     std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " <<
         final_date.hours << "h" << final_date.minutes << "min" << std::endl;
-
+*/
 
     return 0;
 }

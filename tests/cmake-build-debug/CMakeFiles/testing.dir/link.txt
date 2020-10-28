@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/testing.dir/date_test.cpp.o  -o testing  lib/libgtest_maind.a -lProjeto_AEDA_1_HouseMasterlib lib/libgtestd.a -lpthread 

@@ -4,8 +4,7 @@
 #include <algorithm>
 
 
-Individual::Individual(std::string name) : _name(std::move(name)) {
-}
+Individual::Individual(std::string name) : _name(std::move(name)) {}
 
 std::string Individual::getName() {
     return _name;
@@ -22,30 +21,23 @@ bool Individual::operator==(const Individual& right) {
 }
 
 
-
-
 // Collaborator associated methods
 unsigned Collaborator::_idSeq = 0;
 
-std::vector<Service*> Collaborator::getServices()
-{
+std::vector<Service*> Collaborator::getServices() {
     return _services;
 }
 
-int Collaborator::getScore()
-{
+int Collaborator::getScore() {
     return _score;
 }
 
-int Collaborator::getAvailability()
-{
+int Collaborator::getAvailability() {
     return _availability;
 }
 
 Collaborator::Collaborator(const std::vector<Service *>& functions, const std::string& name) : Individual(name),
-                                                                                               _services(functions), _availability(true), _score(newHere) {
-
-}
+    _services(functions), _availability(true), _score(newHere) {}
 
 bool Collaborator::canPreform(Service* service) {
     auto found = std::find_if(_services.begin(), _services.end(), [&service](Service* service1) {

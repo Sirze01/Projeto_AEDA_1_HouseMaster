@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/src/Services.cpp
+Services.h
+/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/src/Services.h
+
+/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/src/Services.h
+stdexcept
+-
+string
+-
+sstream
+-
+iostream
+-
+
