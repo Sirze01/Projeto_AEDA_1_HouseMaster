@@ -66,6 +66,12 @@ void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsi
         throw InvalidDate(dateToStr() + " isn't a valid date!");
 }
 
+bool date::operator==(const date &d2) const{
+    if (day != d2.day || month != d2.month || year != d2.year || hours != d2.hours || minutes != d2.minutes)
+        return 0;
+    return 1;
+}
+
 date date::operator+(date& d1)
 {
     date service_date;

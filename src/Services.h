@@ -17,6 +17,7 @@ struct date {
     int getDaysInMonth();
     void setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
     date operator+(date& d1);
+    bool operator==(const date &d2) const;
     std::string dateToStr();
     class InvalidDate;
 };
