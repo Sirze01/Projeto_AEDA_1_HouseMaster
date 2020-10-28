@@ -1,4 +1,0 @@
-/home/sirze/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.7660.37/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/src"
--- Configuring done
--- Generating done
--- Build files have been written to: /home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/src/cmake-build-debug
