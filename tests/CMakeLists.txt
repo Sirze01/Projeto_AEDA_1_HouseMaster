@@ -1,5 +1,5 @@
 project(Projeto_AEDA_1_HouseMaster)
-cmake_minimum_required(VERSION 3.10.2)
+cmake_minimum_required(VERSION 3.12.4)
 
 SET(CMAKE_CXX_STANDARD 14)
 
