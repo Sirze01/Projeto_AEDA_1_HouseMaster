@@ -5,7 +5,7 @@
 
 struct date {
     date();
-    date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
+    date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes, int valid  = 1);
     unsigned int day;
     unsigned int month;
     unsigned int year;
