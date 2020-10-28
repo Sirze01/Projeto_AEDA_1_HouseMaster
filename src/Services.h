@@ -27,7 +27,6 @@ public:
 };
 
 struct Service {
-
     bool pro;
     std::string name;
     float basePrice;
@@ -42,7 +41,6 @@ enum processState {
 };
 
 class Intervention {
-
 private:
     unsigned int _id;
     date _appointment;
@@ -62,7 +60,6 @@ public:
     processState getProcessState();
 
     float getPrice() const;
-
 };
 
 #endif

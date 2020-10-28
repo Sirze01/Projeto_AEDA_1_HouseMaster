@@ -64,7 +64,6 @@ void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsi
 
     else if (minutes > 59)
         throw InvalidDate(dateToStr() + " isn't a valid date!");
-
 }
 
 date date::operator+(date& d1)
@@ -108,9 +107,7 @@ std::string date::dateToStr() {
 unsigned Intervention::_idSeq = 0;
 
 Intervention::Intervention(date appointment, Service type, bool forcePro): _appointment(appointment), _type(type),
-    _forcePro(forcePro), _id(++_idSeq), _state(Scheduled) {
-
-}
+    _forcePro(forcePro), _id(++_idSeq), _state(Scheduled) {}
 
 Service Intervention::getService() {
     return _type;

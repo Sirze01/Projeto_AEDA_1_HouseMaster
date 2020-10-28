@@ -9,8 +9,8 @@
 #include "Individual.h"
 #include "Services.h"
 #include <utility>
-#include<stdexcept>
-#include<iostream>
+#include <stdexcept>
+#include <iostream>
 
 
 

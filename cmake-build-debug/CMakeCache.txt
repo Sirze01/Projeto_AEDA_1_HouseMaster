@@ -312,6 +312,12 @@ Projeto_AEDA_1_HouseMaster_BINARY_DIR:STATIC=/home/sirze/Área de Trabalho/Unive
 Projeto_AEDA_1_HouseMaster_SOURCE_DIR:STATIC=/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/tests
 
 //Value Computed by CMake
+ScrabbleJunior_BINARY_DIR:STATIC=/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/cmake-build-debug/src
+
+//Value Computed by CMake
+ScrabbleJunior_SOURCE_DIR:STATIC=/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/src
+
+//Value Computed by CMake
 gmock_BINARY_DIR:STATIC=/home/sirze/Área de Trabalho/Universidade/1º Semestre/AEDA/Projeto_AEDA_1_HouseMaster/cmake-build-debug/tests/googletest-build/googlemock
 
 //Dependencies for the target

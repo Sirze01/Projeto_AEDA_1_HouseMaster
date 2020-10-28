@@ -1,9 +1,8 @@
-
 #include "HouseMaster.h"
 
+HouseMaster::InexistentService::InexistentService(const std::string &error_msg): std::out_of_range(error_msg) {}
 
 HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
-
     for (std::string line; std::getline(collaborators, line); ) {
         std::istringstream lss(line);
         std::string name{}, service{};
@@ -28,7 +27,6 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
         auto client = new Client(nif, name);
         this->_clients.push_back(client);
     }
-
 }
 
 const std::vector<Collaborator *> &HouseMaster::getCollaborators() const {
@@ -58,7 +56,7 @@ void HouseMaster::removeAvailableService(Service *service) {
             delete *it;
             it = _availableServices.erase(it);
         } else {
-            InexistentService("There's no such service!");
+            throw InexistentService("There's no such service!");
         }
     }
     catch (InexistentService &error) {

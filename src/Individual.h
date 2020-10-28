@@ -17,7 +17,6 @@ protected:
     std::string _name;
     unsigned int _id;
     std::vector<Intervention*> _associatedInterventions;
-
 };
 
 

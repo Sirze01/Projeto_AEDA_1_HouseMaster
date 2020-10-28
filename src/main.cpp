@@ -43,7 +43,7 @@ int main() {
 */
 
 
-/*
+
     // Leap year
     date first_date;
     first_date.day = 2;
@@ -61,7 +61,7 @@ int main() {
     second_date.hours = 00;
     second_date.minutes = 15;
     std::cout << "Days in February 2025: " << second_date.getDaysInMonth() << std::endl;
-*/
+
 
 
 /*
