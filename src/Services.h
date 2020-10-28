@@ -9,7 +9,8 @@ struct date {
     unsigned int year;
     unsigned int hour;
     unsigned int minute;
-
+    int getDaysInMonth();
+    date operator+(date& d1);
 };
 
 struct Service {
