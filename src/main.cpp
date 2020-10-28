@@ -4,12 +4,12 @@
 #include "Services.h"
 
 int main() {
-    HouseMaster houseMaster(std::ifstream("data/collabs.txt"), std::ifstream("data/clients.txt"));
+    /*HouseMaster houseMaster(std::ifstream("data/collabs.txt"), std::ifstream("data/clients.txt"));
 
     Client* c1 = houseMaster.getClients().front();
     Client* c2 = houseMaster.getClients().back();
     date d1{};
-    d1.day = 24; d1.hour = 1; d1.minute = 3; d1.month = 10; d1.year = 2020;
+    d1.day = 24; d1.hours = 1; d1.minutes = 3; d1.month = 10; d1.year = 2020;
 
     Service* service1 = houseMaster.getCollaborators().front()->getServices().front();
     Service* service2 = houseMaster.getCollaborators().back()->getServices().back();
@@ -34,10 +34,10 @@ int main() {
             std::cout << collab->getName() << " Can Preform ? " << collab->canPreform(service) << "\n";
         }
         std::cout << "\n";
-    }
+    }*/
 
 
-    /*
+
     // TESTING DATE
     std::cout << "____DATE____" << std::endl;
 
@@ -47,8 +47,8 @@ int main() {
     first_date.day = 2;
     first_date.month = 2;
     first_date.year = 2020;
-    first_date.hour = 20;
-    first_date.minute = 30;
+    first_date.hours = 20;
+    first_date.minutes = 30;
     std::cout << "Days in February 2020: " << first_date.getDaysInMonth() << std::endl;
 
     //Non leap year
@@ -56,13 +56,13 @@ int main() {
     second_date.day = 1;
     second_date.month = 2;
     second_date.year = 2018;
-    second_date.hour = 00;
-    second_date.minute = 15;
+    second_date.hours = 00;
+    second_date.minutes = 15;
     std::cout << "Days in February 2018: " << second_date.getDaysInMonth() << std::endl;
 
 
 
-    // add 15 min to date
+    /*// add 15 min to date
     date first_date;
     first_date.day = 1;
     first_date.month = 10;
@@ -85,8 +85,8 @@ int main() {
     date final_date = first_date + second_date;
     std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " << final_date.hour << "h" << final_date.minute << "min" << std::endl;
 
-
-
+*/
+/*
     // add 15 min to end of hours
     date first_date;
     first_date.day = 1;
@@ -111,7 +111,8 @@ int main() {
     std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " << final_date.hour << "h" << final_date.minute << "min" << std::endl;
 
 
-
+*/
+/*
 
     // add 15 min to end of the day
     date first_date;
@@ -135,8 +136,8 @@ int main() {
 
     date final_date = first_date + second_date;
     std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " << final_date.hour << "h" << final_date.minute << "min" << std::endl;
-
-
+*/
+/*
     // add 15 min to end of the day and month
     date first_date;
     first_date.day = 31;
@@ -159,7 +160,8 @@ int main() {
 
     date final_date = first_date + second_date;
     std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " << final_date.hour << "h" << final_date.minute << "min" << std::endl;
-
+*/
+/*
 
 // add 15 min to end of the day, month and year
     date first_date;
@@ -183,7 +185,8 @@ int main() {
 
     date final_date = first_date + second_date;
     std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " << final_date.hour << "h" << final_date.minute << "min" << std::endl;
-
+*/
+/*
 
 // add 15 min to end of the day and month in february
     date first_date;
@@ -207,8 +210,8 @@ int main() {
 
     date final_date = first_date + second_date;
     std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " << final_date.hour << "h" << final_date.minute << "min" << std::endl;
-
 */
+
 
 
     return 0;

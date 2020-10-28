@@ -30,8 +30,10 @@ int date::getDaysInMonth()
     else return -1;     // exception
 }
 
+date::date(){}
+
 date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
-    if(setDate(day, month, year, hour, minutes)){
+    if(setDate(day, month, year, hours, minutes)){
        this -> day = 0;
        this -> month = 0;
        this -> year = 0;
@@ -39,6 +41,9 @@ date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int
        this -> minutes = 0;
     }
 }
+
+
+
 
 int date::setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
     if(month > 0 && month < 12){
@@ -61,6 +66,7 @@ int date::setDate(unsigned int day, unsigned int month, unsigned int year, unsig
     }
     else
         return 1;
+    return 0;
 }
 
 date date::operator+(date& d1)
