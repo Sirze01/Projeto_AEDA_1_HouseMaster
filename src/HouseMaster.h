@@ -9,6 +9,8 @@
 #include "Individual.h"
 #include "Services.h"
 #include <utility>
+#include<stdexcept>
+#include<iostream>
 
 
 
@@ -32,11 +34,19 @@ public:
 
     void updateInterventions();
 
+    class InexistentService;
+
 private:
     std::vector<Collaborator* > _collaborators;
     std::vector<Client* > _clients;
     std::vector<Service* > _availableServices;
     std::set<std::pair<Client*, Intervention* > > _interventions;
+};
+
+
+class HouseMaster::InexistentService : public std::out_of_range{
+public:
+    InexistentService(const std::string &error_msg);
 };
 
 

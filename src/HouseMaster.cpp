@@ -52,12 +52,17 @@ void HouseMaster::addAvailableService(Service *service) {
 }
 
 void HouseMaster::removeAvailableService(Service *service) {
-    auto it = std::find(_availableServices.begin(), _availableServices.end(), service);
-    if (it != _availableServices.end()) {
-        delete *it;
-        it = _availableServices.erase(it);
-    } else {
-        // throw error
+    try {
+        auto it = std::find(_availableServices.begin(), _availableServices.end(), service);
+        if (it != _availableServices.end()) {
+            delete *it;
+            it = _availableServices.erase(it);
+        } else {
+            InexistentService("There's no such service!");
+        }
+    }
+    catch (InexistentService &error) {
+        std::cerr << error.what();
     }
 }
 
