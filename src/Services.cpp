@@ -53,7 +53,7 @@ void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsi
     this -> hours = hours;
     this -> minutes = minutes;
 
-    if(day < 1 || day > getDaysInMonth() + 1)
+    if(day < 1 || day > getDaysInMonth())
         throw InvalidDate(dateToStr() + " isn't a valid date!");
 
     else if(month < 1 || month > 12)

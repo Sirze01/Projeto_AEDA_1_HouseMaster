@@ -1,2 +1,0 @@
-/usr/bin/ar qc libProjeto_AEDA_1_HouseMasterlib.a  CMakeFiles/Projeto_AEDA_1_HouseMasterlib.dir/main.cpp.o CMakeFiles/Projeto_AEDA_1_HouseMasterlib.dir/Individual.cpp.o CMakeFiles/Projeto_AEDA_1_HouseMasterlib.dir/Services.cpp.o CMakeFiles/Projeto_AEDA_1_HouseMasterlib.dir/HouseMaster.cpp.o
-/usr/bin/ranlib libProjeto_AEDA_1_HouseMasterlib.a

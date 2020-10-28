@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/Projeto_AEDA_1_HouseMaster.dir/main.cpp.o CMakeFiles/Projeto_AEDA_1_HouseMaster.dir/Individual.cpp.o CMakeFiles/Projeto_AEDA_1_HouseMaster.dir/Services.cpp.o CMakeFiles/Projeto_AEDA_1_HouseMaster.dir/HouseMaster.cpp.o  -o Projeto_AEDA_1_HouseMaster  ../lib/libgtest_maind.a ../lib/libgtestd.a -lpthread 
