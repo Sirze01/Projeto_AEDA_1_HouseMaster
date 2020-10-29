@@ -74,7 +74,6 @@ date date::operator+(const date &d1) const {
         service_date.month = d1.month;
         service_date.year = d1.year;
     }
-
     return service_date;
 }
 
@@ -84,6 +83,60 @@ bool date::operator==(const date &d2) const{
     return 1;
 }
 
+bool date::operator<(const date &d2) const
+{
+    if (year < d2.year) {return true;}
+    else if (year > d2.year) {return false;}
+    else            //same year
+    {if (month < d2.month) {return true;}
+        else if (month > d2.month) {return false;}
+        else        //same month
+        {
+            if (day < d2.day) {return true;}
+            else if (day > d2.day) {return false;}
+            else    //same day
+            {
+                if (hours < d2.hours) {return true;}
+                else if (hours > d2.hours) {return false;}
+                else        //same hour
+                {
+                    if (minutes < d2.minutes) {return true;}
+                    else    //if (minutes >= d2.minutes)
+                    {return false;}
+                }
+            }
+        }
+    }
+}
+
+bool date::operator>(const date &d2) const
+{
+    if (year > d2.year)
+    {return true;}
+    else if (year < d2.year)
+    {return false;}
+    else            //same year
+    {
+        if (month > d2.month) {return true;}
+        else if (month < d2.month) {return false;}
+        else        //same month
+        {
+            if (day > d2.day) {return true;}
+            else if (day < d2.day) {return false;}
+            else    //same day
+            {
+                if (hours > d2.hours) {return true;}
+                else if (hours < d2.hours) {return false;}
+                else        //same hour
+                {
+                    if (minutes > d2.minutes) {return true;}
+                    else    //if (minutes <= d2.minutes)
+                    {return false;}
+                }
+            }
+        }
+    }
+}
 
 
 std::string date::dateToStr() const {

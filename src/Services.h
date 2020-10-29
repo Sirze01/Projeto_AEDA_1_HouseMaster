@@ -30,6 +30,10 @@ struct date {
 
     bool operator==(const date &d2) const;
 
+    bool operator<(const date &d2) const;
+
+    bool operator>(const date &d2) const;
+
     class InvalidDate;
 };
 

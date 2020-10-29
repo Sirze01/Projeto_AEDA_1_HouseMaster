@@ -72,3 +72,32 @@ TEST(Date, valid_date){
 TEST(DATE, print_date){
     EXPECT_EQ(date(12, 12, 2012, 12, 51).dateToStr(), "12/12/2012  12:51");
 }
+
+TEST(Date, date_operators){
+    EXPECT_EQ(date(1,1,2020,00,00) == date(1,1,2020,00,00), true);
+    EXPECT_EQ(date(1,1,2020,00,00) == date(1,1,2020,00,05), false);
+
+    EXPECT_EQ(date(1,1,2020,00,00) < date(1,1,2020,00,00), false);
+    EXPECT_EQ(date(1,1,2020,00,01) < date(1,1,2020,00,00), false);
+    EXPECT_EQ(date(1,1,2020,01,00) < date(1,1,2020,00,00), false);
+    EXPECT_EQ(date(2,1,2020,00,00) < date(1,1,2020,00,00), false);
+    EXPECT_EQ(date(1,2,2020,00,00) < date(1,1,2020,00,00), false);
+    EXPECT_EQ(date(1,1,2021,00,00) < date(1,1,2020,00,00), false);
+    EXPECT_EQ(date(1,1,2020,00,00) < date(1,1,2020,00,01), true);
+    EXPECT_EQ(date(1,1,2020,00,00) < date(1,1,2020,01,00), true);
+    EXPECT_EQ(date(1,1,2020,00,00) < date(2,1,2020,00,00), true);
+    EXPECT_EQ(date(1,1,2020,00,00) < date(1,2,2020,00,01), true);
+    EXPECT_EQ(date(1,1,2020,00,00) < date(1,1,2021,00,01), true);
+
+    EXPECT_EQ(date(1,1,2020,00,00) > date(1,1,2020,00,00), false);
+    EXPECT_EQ(date(1,1,2020,00,01) > date(1,1,2020,00,00), true);
+    EXPECT_EQ(date(1,1,2020,01,00) > date(1,1,2020,00,00), true);
+    EXPECT_EQ(date(2,1,2020,00,00) > date(1,1,2020,00,00), true);
+    EXPECT_EQ(date(1,2,2020,00,00) > date(1,1,2020,00,00), true);
+    EXPECT_EQ(date(1,1,2021,00,00) > date(1,1,2020,00,00), true);
+    EXPECT_EQ(date(1,1,2020,00,00) > date(1,1,2020,00,01), false);
+    EXPECT_EQ(date(1,1,2020,00,00) > date(1,1,2020,01,00), false);
+    EXPECT_EQ(date(1,1,2020,00,00) > date(2,1,2020,00,00), false);
+    EXPECT_EQ(date(1,1,2020,00,00) > date(1,2,2020,00,01), false);
+    EXPECT_EQ(date(1,1,2020,00,00) > date(1,1,2021,00,01), false);
+}
