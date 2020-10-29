@@ -16,9 +16,12 @@ int main() {
    std::cout << "Worker 2\nName : " << w2->getName() << "\nStarting Score : " << w2->getScore() << "\n\n";
 
    w1->addClassification(clumsy);
-   w1->addClassification(savior);
-   w2->addClassification(attentive);
-   w2->addClassification(unreliable);
+    w1->addClassification(clumsy);
+    w1->addClassification(clumsy);
+    w1->addClassification(clumsy);
+    w1->addClassification(clumsy);
+
+
 
    w1->updateScore();
    w2->updateScore();

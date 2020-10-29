@@ -78,9 +78,7 @@ void Collaborator::updateScore() {
             sum += n;
         });
         average = sum / static_cast<double>(_classifications.size());
-        if (average > savior) _score = savior;
-        else if (average < unreliable) _score = unreliable;
-        else _score = static_cast<Classification>(round(average));
+        _score = static_cast<Classification>(round(average));
     }
 }
 
