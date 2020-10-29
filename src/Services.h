@@ -7,34 +7,34 @@
 #include<iostream>
 
 struct date {
-    date();
-
-    date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
-         int valid = 1);
-
     unsigned int day{};
     unsigned int month{};
     unsigned int year{};
     unsigned int hours{};
     unsigned int minutes{};
 
+    date();
+
+    date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
+         int valid = 1);
+
+    void setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
+
     int getDaysInMonth() const;
 
     bool isValidDate();
 
-    void setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
-
-    date operator+(const date &d1) const;
+    class InvalidDate;
 
     std::string dateToStr() const;
+
+    date operator+(const date &d1) const;
 
     bool operator==(const date &d2) const;
 
     bool operator<(const date &d2) const;
 
     bool operator>(const date &d2) const;
-
-    class InvalidDate;
 };
 
 class date::InvalidDate : public std::invalid_argument {

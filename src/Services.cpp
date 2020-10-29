@@ -2,7 +2,32 @@
 
 #include <utility>
 
-date::InvalidDate::InvalidDate(const std::string &error_msg) : std::invalid_argument(error_msg) {}
+date::date() = default;
+
+date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
+           int valid) {
+    if (valid) {
+        setDate(day, month, year, hours, minutes);
+    } else {
+        this->day = day;
+        this->month = month;
+        this->year = year;
+        this->hours = hours;
+        this->minutes = minutes;
+    }
+}
+
+void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
+    this->day = day;
+    this->month = month;
+    this->year = year;
+    this->hours = hours;
+    this->minutes = minutes;
+
+    if (!isValidDate())
+        throw InvalidDate(dateToStr() + " isn't a valid date!");
+
+}
 
 int date::getDaysInMonth() const {
     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
@@ -20,20 +45,7 @@ int date::getDaysInMonth() const {
     } else return -1;     // exception
 }
 
-date::date() = default;
 
-date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
-           int valid) {
-    if (valid) {
-        setDate(day, month, year, hours, minutes);
-    } else {
-        this->day = day;
-        this->month = month;
-        this->year = year;
-        this->hours = hours;
-        this->minutes = minutes;
-    }
-}
 
 bool date::isValidDate() {
     if (day < 1 || day > getDaysInMonth() || month < 1 || month > 12 || hours > 23 || minutes > 59)
@@ -41,16 +53,12 @@ bool date::isValidDate() {
     return 1;
 }
 
-void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
-    this->day = day;
-    this->month = month;
-    this->year = year;
-    this->hours = hours;
-    this->minutes = minutes;
+date::InvalidDate::InvalidDate(const std::string &error_msg) : std::invalid_argument(error_msg) {}
 
-    if (!isValidDate())
-        throw InvalidDate(dateToStr() + " isn't a valid date!");
-
+std::string date::dateToStr() const {
+    std::ostringstream stream;
+    stream << day << '/' << month << '/' << year << "  " << hours << ':' << minutes;
+    return stream.str();
 }
 
 date date::operator+(const date &d1) const {
@@ -138,12 +146,6 @@ bool date::operator>(const date &d2) const
     }
 }
 
-
-std::string date::dateToStr() const {
-    std::ostringstream stream;
-    stream << day << '/' << month << '/' << year << "  " << hours << ':' << minutes;
-    return stream.str();
-}
 
 
 // Despite the static variables being already 0 initialized
