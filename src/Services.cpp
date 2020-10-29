@@ -44,6 +44,7 @@ void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsi
 
     if (day < 1 || day > getDaysInMonth() + 1 || month < 1 || month > 12 || hours > 23 || minutes > 59)
         throw InvalidDate(dateToStr() + " isn't a valid date!");
+    // TODO substitute by a boolean funtion - more readable
 }
 
 date date::operator+(const date &d1) const {
@@ -70,6 +71,14 @@ date date::operator+(const date &d1) const {
 
     return service_date;
 }
+
+bool date::operator==(const date &d2) const{
+    if (day != d2.day || month != d2.month || year != d2.year || hours != d2.hours || minutes != d2.minutes)
+        return 0;
+    return 1;
+}
+
+
 
 std::string date::dateToStr() const {
     std::ostringstream stream;

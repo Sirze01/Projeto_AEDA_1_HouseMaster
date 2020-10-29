@@ -26,6 +26,8 @@ struct date {
 
     std::string dateToStr() const;
 
+    bool operator==(const date &d2) const;
+
     class InvalidDate;
 };
 
