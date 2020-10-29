@@ -5,11 +5,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Don't use e.g. GNU extension (like -std=gnu++11) for portability
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+cmake_minimum_required(VERSION 3.17)
+
 if (WIN32)
     link_libraries(wsock32 ws2_32)
     set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32")
     SET(CMAKE_CXX_FLAGS -Wcpp)
 endif (WIN32)
+
+project(Projeto_AEDA_1_HouseMaster)
 
 include_directories(.)
 
@@ -19,4 +23,4 @@ add_executable(application main.cpp HouseMaster.cpp HouseMaster.h Individual.cpp
 
 target_include_directories(Projeto_AEDA_1_HouseMaster PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(Projeto_AEDA_1_HouseMasterlib PUBLIC gtest_main coverage_config)
+target_link_libraries(Projeto_AEDA_1_HouseMaster PUBLIC gtest_main coverage_config)

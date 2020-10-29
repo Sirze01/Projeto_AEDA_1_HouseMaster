@@ -8,28 +8,37 @@
 
 struct date {
     date();
-    date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes, int valid  = 1);
-    unsigned int day;
-    unsigned int month;
-    unsigned int year;
-    unsigned int hours;
-    unsigned int minutes;
-    int getDaysInMonth();
+
+    date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
+         int valid = 1);
+
+    unsigned int day{};
+    unsigned int month{};
+    unsigned int year{};
+    unsigned int hours{};
+    unsigned int minutes{};
+
+    int getDaysInMonth() const;
+
     void setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
-    date operator+(date& d1);
-    std::string dateToStr();
+
+    date operator+(const date &d1) const;
+
+    std::string dateToStr() const;
+
     class InvalidDate;
 };
 
-class date::InvalidDate : public std::invalid_argument{
+class date::InvalidDate : public std::invalid_argument {
 public:
-    InvalidDate(const std::string & error_msg);
+    explicit InvalidDate(const std::string &error_msg);
 };
 
 struct Service {
     bool pro;
     std::string name;
     float basePrice;
+    date duration;
 };
 
 
@@ -43,7 +52,7 @@ enum processState {
 class Intervention {
 private:
     unsigned int _id;
-    date _appointment;
+    date _startingTime;
     Service _type;
     bool _forcePro;
     processState _state;
@@ -54,6 +63,7 @@ public:
 
     Intervention(date appointment, Service type, bool forcePro);
 
+    const date &getStartingTime() const;
 
     Service getService();
 

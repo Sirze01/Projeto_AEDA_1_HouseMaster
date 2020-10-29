@@ -1,40 +1,26 @@
 #include <iostream>
 #include "HouseMaster.h"
 #include "Individual.h"
-#include "Services.h"
+
 
 int main() {
-    /*HouseMaster houseMaster(std::ifstream("data/collabs.txt"), std::ifstream("data/clients.txt"));
-
-    Client* c1 = houseMaster.getClients().front();
-    Client* c2 = houseMaster.getClients().back();
-    date d1{};
-    d1.day = 24; d1.hours = 1; d1.minutes = 3; d1.month = 10; d1.year = 2020;
-
-    Service* service1 = houseMaster.getCollaborators().front()->getServices().front();
-    Service* service2 = houseMaster.getCollaborators().back()->getServices().back();
-
-    c1->requestIntervention(d1, *service1, false);
-    c1->requestIntervention(d1, *service2, false);
-    c2->requestIntervention(d1, *service2, false);
-    houseMaster.updateInterventions();
-
-    for(const auto & service: houseMaster.getAvailableServices()){
-        std::cout << "\t" << service->name << "\n";
-    }
-
-    std::cout << "REGISTERED INTERVENTIONS:\n";
 
 
 
-    for (const auto &i : houseMaster.getInterventions()) {
-        std::cout << i.first->getName() << " requested " << i.second->getService().name << "\n";
-        for (const auto &collab : houseMaster.getCollaborators()) {
-            auto *service = new Service(i.second->getService());
-            std::cout << collab->getName() << " Can Preform ? " << collab->canPreform(service) << "\n";
-        }
-        std::cout << "\n";
-    }*/
+    HouseMaster houseMaster(std::ifstream("data/collabs.txt"), std::ifstream("data/clients.txt"));
+
+    Collaborator* w1 = houseMaster.getCollaborators().front();
+    Collaborator* w2 = houseMaster.getCollaborators().back();
+
+   std::cout << "Worker 1\nName : " << w1->getName() << "\nStarting Score : " << w1->getAverageClassification() << "\n\n";
+   std::cout << "Worker 2\nName : " << w2->getName() << "\nStarting Score : " << w2->getAverageClassification() << "\n\n";
+
+   w1->addClassification(clumsy);
+   w2->addClassification(attentive);
+   w2->addClassification(attentive);
+
+    std::cout << "Worker 1\nName : " << w1->getName() << "\nEnding Score : " << w1->getAverageClassification() << "\n\n";
+    std::cout << "Worker 2\nName : " << w2->getName() << "\nEnding Score : " << w2->getAverageClassification() << "\n\n";
 
 
 /*
@@ -43,7 +29,7 @@ int main() {
 */
 
 
-
+    /*
     // Leap year
     date first_date;
     first_date.day = 2;
@@ -62,7 +48,7 @@ int main() {
     second_date.minutes = 15;
     std::cout << "Days in February 2025: " << second_date.getDaysInMonth() << std::endl;
 
-
+    */
 
 /*
     // add 15 min to date

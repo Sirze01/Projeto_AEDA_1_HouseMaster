@@ -3,67 +3,82 @@
 
 #include<string>
 #include<vector>
+#include <cmath>
 #include"Services.h"
 
 
-class Individual{
+class Individual {
 public:
     explicit Individual(std::string name);
+
     unsigned int getId() const;
+
     std::string getName();
-    bool operator== (const Individual& right);
+
+    bool operator==(const Individual &right);
+
+    const std::vector<Intervention *> &getAssociatedInterventions() const;
 
 protected:
     std::string _name;
     unsigned int _id;
-    std::vector<Intervention*> _associatedInterventions;
+    std::vector<Intervention *> _associatedInterventions;
 };
 
 
 // Collaborator associated code
 enum Classification {
-    unreliable,
-    clumsy,
-    newHere,
-    getsItDone,
-    hardWorker,
-    attentive,
-    savior
+    unreliable = -2,
+    clumsy = -1,
+    newHere = 0,
+    getsItDone = 1,
+    hardWorker = 2,
+    attentive = 3,
+    savior = 4
 };
 
 
-class Collaborator: public Individual
-{
+class Collaborator : public Individual {
 public:
-    Collaborator(const std::vector<Service*>& functions, const std::string& name);
-    std::vector<Service*> getServices();
-    bool canPreform(Service* service);
+    Collaborator(std::vector<Service *> functions, const std::string &name);
+
+    std::vector<Service *> getServices();
+
+    bool canPreform(Service *service);
+
+    bool isAvailable(date start, date duration);
+
     int getScore();
-    int getAvailability();
+
+    void addClassification(Classification classification);
+
+    Classification getAverageClassification();
+
     static unsigned int _idSeq;
 
 private:
-    std::vector<Service*> _services;
+    std::vector<Classification> _classifications;
+    std::vector<Service *> _services;
     Classification _score;
-    bool _availability;
 };
 
 
-
-
-class Client: public Individual
-{
+class Client : public Individual {
 public:
     Client(unsigned int nif, const std::string &name);
+
     unsigned int getNif();
+
     int requestIntervention(date appointment, Service type, bool forcePro);
+
     static unsigned int _idSeq;
 
     const std::vector<Intervention *> &getRequestedInterventions() const;
 
+
 private:
     unsigned int _nif;
-    std::vector<Intervention* > _requestedInterventions;
+    std::vector<Intervention *> _requestedInterventions;
 };
 
 #endif

@@ -13,7 +13,6 @@
 #include <iostream>
 
 
-
 class HouseMaster {
 public:
     HouseMaster() = default;
@@ -26,7 +25,7 @@ public:
 
     const std::vector<Service *> &getAvailableServices() const;
 
-    const std::set<std::pair<Client*, Intervention* > > &getInterventions() const;
+    const std::set<std::pair<Client *, Intervention *> > &getInterventions() const;
 
     void addAvailableService(Service *service);
 
@@ -37,16 +36,16 @@ public:
     class InexistentService;
 
 private:
-    std::vector<Collaborator* > _collaborators;
-    std::vector<Client* > _clients;
-    std::vector<Service* > _availableServices;
-    std::set<std::pair<Client*, Intervention* > > _interventions;
+    std::vector<Collaborator *> _collaborators;
+    std::vector<Client *> _clients;
+    std::vector<Service *> _availableServices;
+    std::set<std::pair<Client *, Intervention *> > _interventions;
 };
 
 
-class HouseMaster::InexistentService : public std::out_of_range{
+class HouseMaster::InexistentService : public std::out_of_range {
 public:
-    InexistentService(const std::string &error_msg);
+    explicit InexistentService(const std::string &error_msg);
 };
 
 

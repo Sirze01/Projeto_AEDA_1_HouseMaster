@@ -1,9 +1,9 @@
 #include "HouseMaster.h"
 
-HouseMaster::InexistentService::InexistentService(const std::string &error_msg): std::out_of_range(error_msg) {}
+HouseMaster::InexistentService::InexistentService(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
 HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
-    for (std::string line; std::getline(collaborators, line); ) {
+    for (std::string line; std::getline(collaborators, line);) {
         std::istringstream lss(line);
         std::string name{}, service{};
         std::vector<Service *> services{};
@@ -18,10 +18,10 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
         this->_collaborators.push_back(collaborator);
     }
 
-    for (std::string line; std::getline(clients, line); ) {
+    for (std::string line; std::getline(clients, line);) {
         std::stringstream lss(line);
         std::string name;
-        unsigned int nif;
+        unsigned int nif{};
         std::getline(lss, name, ',');
         lss >> nif;
         auto client = new Client(nif, name);
@@ -41,7 +41,7 @@ const std::vector<Service *> &HouseMaster::getAvailableServices() const {
     return _availableServices;
 }
 
-const std::set<std::pair<Client*, Intervention* > > &HouseMaster::getInterventions() const {
+const std::set<std::pair<Client *, Intervention *> > &HouseMaster::getInterventions() const {
     return _interventions;
 }
 
@@ -54,7 +54,6 @@ void HouseMaster::removeAvailableService(Service *service) {
         auto it = std::find(_availableServices.begin(), _availableServices.end(), service);
         if (it != _availableServices.end()) {
             delete *it;
-            it = _availableServices.erase(it);
         } else {
             throw InexistentService("There's no such service!");
         }
@@ -67,7 +66,7 @@ void HouseMaster::removeAvailableService(Service *service) {
 void HouseMaster::updateInterventions() {
     for (const auto &client : _clients) {
         for (const auto &intervention : client->getRequestedInterventions()) {
-            Intervention* inter = intervention;
+            Intervention *inter = intervention;
             auto registry = std::make_pair(client, inter);
             _interventions.insert(registry);
         }
