@@ -13,7 +13,7 @@ endif (WIN32)
 
 include_directories(.)
 
-add_library(Projeto_AEDA_1_HouseMaster main.cpp HouseMaster.cpp HouseMaster.h Individual.cpp Individual.h Services.cpp Services.h)
+add_library(Projeto_AEDA_1_HouseMasterlib main.cpp HouseMaster.cpp HouseMaster.h Individual.cpp Individual.h Services.cpp Services.h)
 
 add_executable(application main.cpp HouseMaster.cpp HouseMaster.h Individual.cpp Individual.h Services.cpp Services.h)
 
