@@ -35,6 +35,12 @@ date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int
     }
 }
 
+bool date::isValidDate() {
+    if (day < 1 || day > getDaysInMonth() || month < 1 || month > 12 || hours > 23 || minutes > 59)
+        return 0;
+    return 1;
+}
+
 void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
     this->day = day;
     this->month = month;
@@ -42,9 +48,9 @@ void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsi
     this->hours = hours;
     this->minutes = minutes;
 
-    if (day < 1 || day > getDaysInMonth() || month < 1 || month > 12 || hours > 23 || minutes > 59)
+    if (!isValidDate())
         throw InvalidDate(dateToStr() + " isn't a valid date!");
-    // TODO substitute by a boolean funtion - more readable
+
 }
 
 date date::operator+(const date &d1) const {

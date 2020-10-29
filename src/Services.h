@@ -20,6 +20,8 @@ struct date {
 
     int getDaysInMonth() const;
 
+    bool isValidDate();
+
     void setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
 
     date operator+(const date &d1) const;
