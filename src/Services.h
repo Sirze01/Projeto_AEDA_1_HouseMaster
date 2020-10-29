@@ -55,8 +55,9 @@ public:
 
     Intervention(date appointment, Service type, bool forcePro);
 
+    date* getAppointment();
 
-    Service getService();
+    Service* getService();
 
     processState getProcessState();
 

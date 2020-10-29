@@ -14,8 +14,8 @@ unsigned int Individual::getId() const {
     return _id;
 }
 
-bool Individual::operator==(const Individual& right) {
-    if(_name == right._name || _id == right._id)
+bool Individual::operator==(const Individual& ind2) {
+    if(_name == ind2._name || _id == ind2._id)
         return true;
     return false;
 }
@@ -32,12 +32,17 @@ int Collaborator::getScore() {
     return _score;
 }
 
-int Collaborator::getAvailability() {
-    return _availability;
+bool Collaborator::isAvailable(date* appointment) {
+    for(const auto &occupied : _avaiability){
+        if(*appointment == *occupied){
+            return false;
+        }
+    }
+    return true;
 }
 
 Collaborator::Collaborator(const std::vector<Service *>& functions, const std::string& name) : Individual(name),
-    _services(functions), _availability(true), _score(newHere) {}
+    _services(functions), _score(newHere) {}
 
 bool Collaborator::canPreform(Service* service) {
     auto found = std::find_if(_services.begin(), _services.end(), [&service](Service* service1) {
@@ -48,6 +53,9 @@ bool Collaborator::canPreform(Service* service) {
     return found != _services.end();
 }
 
+void Collaborator::addAppointment(date *date) {
+    _avaiability.push_back(date);
+}
 
 // Client associated methods
 unsigned Client::_idSeq = 0;

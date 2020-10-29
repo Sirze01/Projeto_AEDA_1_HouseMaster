@@ -115,8 +115,12 @@ unsigned Intervention::_idSeq = 0;
 Intervention::Intervention(date appointment, Service type, bool forcePro): _appointment(appointment), _type(type),
     _forcePro(forcePro), _id(++_idSeq), _state(Scheduled) {}
 
-Service Intervention::getService() {
-    return _type;
+date * Intervention::getAppointment(){
+    return &_appointment;
+}
+
+Service* Intervention::getService() {
+    return &_type;
 }
 
 processState Intervention::getProcessState() {

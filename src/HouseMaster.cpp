@@ -2,6 +2,8 @@
 
 HouseMaster::InexistentService::InexistentService(const std::string &error_msg): std::out_of_range(error_msg) {}
 
+HouseMaster::UnavailableAppointment::UnavailableAppointment(const std::string &error_msg): std::logic_error(error_msg) {}
+
 HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
     for (std::string line; std::getline(collaborators, line); ) {
         std::istringstream lss(line);
@@ -72,6 +74,20 @@ void HouseMaster::updateInterventions() {
             _interventions.insert(registry);
         }
     }
+}
+
+void HouseMaster::assignColaborator(Intervention * intervention) {
+    auto it = std::find(_collaborators.begin(), _collaborators.end(),
+                        [&intervention](Collaborator* &collaborator){
+       return ( collaborator -> canPreform(intervention->getService()) &&
+                collaborator ->isAvailable(intervention->getAppointment()));
+    });
+
+    if(it != _collaborators.end()) {
+        _collaborators.at(std::distance(_collaborators.begin(), it))->addAppointment(intervention->getAppointment());
+    }
+    else
+        throw UnavailableAppointment("No collaborators available to the desired date!");
 }
 
 

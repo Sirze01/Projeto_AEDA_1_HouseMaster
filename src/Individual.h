@@ -1,9 +1,9 @@
 #ifndef SRC_INDIVIDUAL_H
 #define SRC_INDIVIDUAL_H
 
-#include<string>
-#include<vector>
-#include"Services.h"
+#include <string>
+#include <vector>
+#include "Services.h"
 
 
 class Individual{
@@ -11,7 +11,7 @@ public:
     explicit Individual(std::string name);
     unsigned int getId() const;
     std::string getName();
-    bool operator== (const Individual& right);
+    bool operator== (const Individual& ind2);
 
 protected:
     std::string _name;
@@ -31,7 +31,6 @@ enum Classification {
     savior
 };
 
-
 class Collaborator: public Individual
 {
 public:
@@ -39,18 +38,18 @@ public:
     std::vector<Service*> getServices();
     bool canPreform(Service* service);
     int getScore();
-    int getAvailability();
+    bool isAvailable(date* appointment);
+    void addAppointment(date* date);
     static unsigned int _idSeq;
 
 private:
     std::vector<Service*> _services;
     Classification _score;
-    bool _availability;
+    std::vector<date*> _avaiability;
 };
 
 
-
-
+// Client code
 class Client: public Individual
 {
 public:
