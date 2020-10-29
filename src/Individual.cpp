@@ -50,6 +50,7 @@ bool Collaborator::canPreform(Service *service) {
         return s1.name == s2.name;
     });
     return found != _services.end();
+}
 
 void Collaborator::addAppointment(date *date) {
     _avaiability.push_back(date);
@@ -58,7 +59,7 @@ void Collaborator::addAppointment(date *date) {
 bool Collaborator::isAvailable(date start, date duration) {
     for (const auto &intervention : getAssociatedInterventions()) {
         date interventionStart = intervention->getStartingTime();
-        date interventionEnd = intervention->getStartingTime() + intervention->getService().duration;
+        date interventionEnd = intervention->getStartingTime() + intervention->getService()->duration;
         // TODO - faltava operador < e >. mt trst.
 
     }

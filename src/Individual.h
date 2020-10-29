@@ -62,7 +62,7 @@ private:
     std::vector<Classification> _classifications;
     std::vector<Service *> _services;
     Classification _score;
-    bool _avaiability;
+    std::vector<date *> _avaiability;
 };
 
 

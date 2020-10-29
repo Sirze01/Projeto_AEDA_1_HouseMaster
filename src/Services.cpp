@@ -42,7 +42,7 @@ void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsi
     this->hours = hours;
     this->minutes = minutes;
 
-    if (day < 1 || day > getDaysInMonth() + 1 || month < 1 || month > 12 || hours > 23 || minutes > 59)
+    if (day < 1 || day > getDaysInMonth() || month < 1 || month > 12 || hours > 23 || minutes > 59)
         throw InvalidDate(dateToStr() + " isn't a valid date!");
     // TODO substitute by a boolean funtion - more readable
 }
@@ -94,9 +94,6 @@ Intervention::Intervention(date appointment, Service type, bool forcePro) : _sta
                                                                             _forcePro(forcePro), _id(++_idSeq),
                                                                             _state(Scheduled), _price() {}
 
-date * Intervention::getAppointment(){
-    return &_appointment;
-}
 
 Service* Intervention::getService() {
     return &_type;
