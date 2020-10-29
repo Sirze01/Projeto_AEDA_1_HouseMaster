@@ -33,6 +33,10 @@ public:
 
     void updateInterventions();
 
+    void assignColaborator(Intervention* intervention);
+
+    class UnavailableAppointment;
+
     class InexistentService;
 
 private:
@@ -46,6 +50,11 @@ private:
 class HouseMaster::InexistentService : public std::out_of_range {
 public:
     explicit InexistentService(const std::string &error_msg);
+};
+
+class HouseMaster::UnavailableAppointment: public std::logic_error{
+public:
+    UnavailableAppointment(const std::string &error_msg);
 };
 
 

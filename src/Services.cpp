@@ -94,8 +94,12 @@ Intervention::Intervention(date appointment, Service type, bool forcePro) : _sta
                                                                             _forcePro(forcePro), _id(++_idSeq),
                                                                             _state(Scheduled), _price() {}
 
-Service Intervention::getService() {
-    return _type;
+date * Intervention::getAppointment(){
+    return &_appointment;
+}
+
+Service* Intervention::getService() {
+    return &_type;
 }
 
 processState Intervention::getProcessState() {

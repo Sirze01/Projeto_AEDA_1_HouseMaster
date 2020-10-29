@@ -15,8 +15,8 @@ unsigned int Individual::getId() const {
     return _id;
 }
 
-bool Individual::operator==(const Individual &right) {
-    if (_name == right._name || _id == right._id)
+bool Individual::operator==(const Individual& ind2) {
+    if(_name == ind2._name || _id == ind2._id)
         return true;
     return false;
 }
@@ -42,6 +42,7 @@ Collaborator::Collaborator(std::vector<Service *> functions, const std::string &
                                                                                                _services(std::move(functions)),
                                                                                                _score(newHere) {}
 
+
 bool Collaborator::canPreform(Service *service) {
     auto found = std::find_if(_services.begin(), _services.end(), [&service](Service *service1) {
         Service s1 = *service;
@@ -49,6 +50,9 @@ bool Collaborator::canPreform(Service *service) {
         return s1.name == s2.name;
     });
     return found != _services.end();
+
+void Collaborator::addAppointment(date *date) {
+    _avaiability.push_back(date);
 }
 
 bool Collaborator::isAvailable(date start, date duration) {

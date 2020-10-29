@@ -6,7 +6,6 @@
 #include <cmath>
 #include"Services.h"
 
-
 class Individual {
 public:
     explicit Individual(std::string name);
@@ -14,8 +13,8 @@ public:
     unsigned int getId() const;
 
     std::string getName();
-
-    bool operator==(const Individual &right);
+  
+    bool operator== (const Individual& ind2);
 
     const std::vector<Intervention *> &getAssociatedInterventions() const;
 
@@ -50,6 +49,9 @@ public:
 
     int getScore();
 
+    void addAppointment(date* date);
+
+
     void addClassification(Classification classification);
 
     Classification getAverageClassification();
@@ -60,9 +62,11 @@ private:
     std::vector<Classification> _classifications;
     std::vector<Service *> _services;
     Classification _score;
+    bool _avaiability;
 };
 
 
+// Client code
 class Client : public Individual {
 public:
     Client(unsigned int nif, const std::string &name);
