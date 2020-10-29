@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Don't use e.g. GNU extension (like -std=gnu++11) for portability
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.12.4)
 
 if (WIN32)
     link_libraries(wsock32 ws2_32)
