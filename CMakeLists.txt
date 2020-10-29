@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12.4)
 project(src)
 
+
 # Use C++11
 set(CMAKE_CXX_STANDARD 11)
 # Require (at least) it
