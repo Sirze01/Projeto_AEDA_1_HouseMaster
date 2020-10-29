@@ -70,15 +70,18 @@ void Collaborator::addClassification(Classification classification) {
     _classifications.push_back(classification);
 }
 
-Classification Collaborator::getAverageClassification() {
-    int sum{};
-    for (const auto &classification : _classifications) {  // TODO accumulator talvez :hot_face:
-
-        if (sum/_classifications.size() > savior) break;
-        sum += classification;
+void Collaborator::updateScore() {
+    double sum{}, average{};
+    if(_classifications.empty()) _score = newHere;
+    else {
+        std::for_each(_classifications.begin(), _classifications.end(), [&] (int n) {
+            sum += n;
+        });
+        average = sum / static_cast<double>(_classifications.size());
+        if (average > savior) _score = savior;
+        else if (average < unreliable) _score = unreliable;
+        else _score = static_cast<Classification>(round(average));
     }
-    if (_classifications.empty()) return newHere;
-    return Classification(sum/_classifications.size());
 }
 
 

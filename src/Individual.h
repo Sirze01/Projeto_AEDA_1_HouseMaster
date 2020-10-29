@@ -1,10 +1,11 @@
 #ifndef SRC_INDIVIDUAL_H
 #define SRC_INDIVIDUAL_H
 
-#include<string>
-#include<vector>
+#include <string>
+#include <vector>
 #include <cmath>
-#include"Services.h"
+#include <numeric>
+#include "Services.h"
 
 class Individual {
 public:
@@ -54,7 +55,7 @@ public:
 
     void addClassification(Classification classification);
 
-    Classification getAverageClassification();
+    void updateScore();
 
     static unsigned int _idSeq;
 
