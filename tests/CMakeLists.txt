@@ -1,5 +1,5 @@
 project(Projeto_AEDA_1_HouseMaster)
-cmake_minimum_required(VERSION 3.12.4)
+cmake_minimum_required(VERSION 3.10.2)
 
 SET(CMAKE_CXX_STANDARD 14)
 
@@ -37,8 +37,8 @@ include_directories(../src/)
 
 # Link against gtest or gtest_main as needed
 
-add_executable(testing date_test.cpp )
+add_executable(testing date_test.cpp)
 
-target_link_libraries(testing PRIVATE gtest_main Projeto_AEDA_1_HouseMasterlib)
+target_link_libraries(testing PRIVATE gtest_main Projeto_AEDA_1_HouseMaster)
 
 add_test(NAME testing COMMAND testing)
