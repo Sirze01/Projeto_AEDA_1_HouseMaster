@@ -1,6 +1,5 @@
-cmake_minimum_required(VERSION 3.12.4)
-project(src)
-
+cmake_minimum_required(VERSION 3.10.2)
+project(Projeto_AEDA_1_HouseMaster)
 
 # Use C++11
 set(CMAKE_CXX_STANDARD 11)
@@ -35,4 +34,4 @@ option(BUILD_TESTING "Build the testing tree." ON)
 if (BUILD_TESTING AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
     enable_testing()
     add_subdirectory(tests)
-endif () 
+endif ()
