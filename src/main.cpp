@@ -12,22 +12,24 @@ int main() {
     Collaborator* w1 = houseMaster.getCollaborators().front();
     Collaborator* w2 = houseMaster.getCollaborators().back();
 
-   std::cout << "Worker 1\nName : " << w1->getName() << "\nStarting Score : " << w1->getScore() << "\n\n";
-   std::cout << "Worker 2\nName : " << w2->getName() << "\nStarting Score : " << w2->getScore() << "\n\n";
-
-   w1->addClassification(clumsy);
     w1->addClassification(clumsy);
-    w1->addClassification(clumsy);
-    w1->addClassification(clumsy);
-    w1->addClassification(clumsy);
+    w1->addClassification(hardWorker);
+    w1->addClassification(attentive);
 
+    w2->addClassification(hardWorker);
+    w2->addClassification(attentive);
+    w2->addClassification(savior);
 
-
-   w1->updateScore();
-   w2->updateScore();
+    w1->updateScore();
+    w2->updateScore();
 
     std::cout << "Worker 1\nName : " << w1->getName() << "\nEnding Score : " << w1->getScore() << "\n\n";
     std::cout << "Worker 2\nName : " << w2->getName() << "\nEnding Score : " << w2->getScore() << "\n\n";
+
+    houseMaster.sortCollaboratorsByScore();
+    for (const auto &collab : houseMaster.getCollaborators()) {
+        std::cout << collab->getName() << " : " << collab->getScore() << "\n";
+    }
 
 
 /*

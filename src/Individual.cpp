@@ -83,6 +83,7 @@ void Collaborator::updateScore() {
 }
 
 
+
 // Client associated methods
 unsigned Client::_idSeq = 0;
 

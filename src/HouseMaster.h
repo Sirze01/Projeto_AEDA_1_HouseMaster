@@ -35,6 +35,8 @@ public:
 
     void assignColaborator(Intervention* intervention);
 
+    void sortCollaboratorsByScore();
+
     class UnavailableAppointment;
 
     class InexistentService;
@@ -56,6 +58,7 @@ class HouseMaster::UnavailableAppointment: public std::logic_error{
 public:
     UnavailableAppointment(const std::string &error_msg);
 };
+
 
 
 #endif //SRC_HOUSEMASTER_H

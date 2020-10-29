@@ -75,6 +75,12 @@ void HouseMaster::updateInterventions() {
     }
 }
 
+void HouseMaster::sortCollaboratorsByScore() {
+    std::sort(_collaborators.begin(), _collaborators.end(), [](Collaborator* collaborator1, Collaborator* collaborator2) {
+        return collaborator1->getScore() > collaborator2->getScore();
+    });
+}
+
 void HouseMaster::assignColaborator(Intervention * intervention) {
    /* auto it = std::find(_collaborators.begin(), _collaborators.end(),
                         [&intervention](Collaborator* &collaborator){
