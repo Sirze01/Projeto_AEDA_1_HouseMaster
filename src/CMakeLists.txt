@@ -1,9 +1,13 @@
+
+cmake_minimum_required(VERSION 3.12.4)
+project(Projeto_AEDA_1_HouseMaster)
 # Use C++11
 set(CMAKE_CXX_STANDARD 11)
 # Require (at least) it
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Don't use e.g. GNU extension (like -std=gnu++11) for portability
 set(CMAKE_CXX_EXTENSIONS OFF)
+
 
 if (WIN32)
     link_libraries(wsock32 ws2_32)

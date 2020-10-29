@@ -53,7 +53,7 @@ void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsi
     this -> hours = hours;
     this -> minutes = minutes;
 
-    if(day < 1 || day > getDaysInMonth() + 1)
+    if(day < 1 || day > getDaysInMonth())
         throw InvalidDate(dateToStr() + " isn't a valid date!");
 
     else if(month < 1 || month > 12)
@@ -64,6 +64,12 @@ void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsi
 
     else if (minutes > 59)
         throw InvalidDate(dateToStr() + " isn't a valid date!");
+}
+
+bool date::operator==(const date &d2) const{
+    if (day != d2.day || month != d2.month || year != d2.year || hours != d2.hours || minutes != d2.minutes)
+        return 0;
+    return 1;
 }
 
 date date::operator+(date& d1)
