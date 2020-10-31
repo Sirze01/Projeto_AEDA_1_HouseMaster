@@ -99,4 +99,11 @@ TEST(Date, date_operators){
     EXPECT_EQ(date(1,1,2020,00,00) > date(2,1,2020,00,00), false);
     EXPECT_EQ(date(1,1,2020,00,00) > date(1,2,2020,00,01), false);
     EXPECT_EQ(date(1,1,2020,00,00) > date(1,1,2021,00,01), false);
+
+    EXPECT_EQ(date(1, 10, 2020, 20, 30) + date(0, 0, 0, 0, 15, 0), date(1, 10, 2020, 20, 45));  // add 15 min to date
+    EXPECT_EQ(date(1, 10, 2020, 20, 50) + date(0, 0, 0, 0, 15, 0), date(1, 10, 2020, 21, 05));  // add 15 min to end of hours
+    EXPECT_EQ(date(1, 10, 2020, 23, 50) + date(0, 0, 0, 0, 15, 0), date(2, 10, 2020, 0, 5));    // add 15 min to end of the day
+    EXPECT_EQ(date(31, 10, 2020, 23, 50) + date(0, 0, 0, 0, 15, 0), date(1, 11, 2020, 0, 5));   // add 15 min to end of month
+    EXPECT_EQ(date(31, 12, 2020, 23, 50) + date(0, 0, 0, 0, 15, 0), date(1, 1, 2021, 0, 5));    // add 15 min to end of year
+    EXPECT_EQ(date(29, 2, 2020, 23, 50) + date(0, 0, 0, 0, 15, 0), date(1, 3, 2020, 0, 5));     // add 15 min to end of february
 }
