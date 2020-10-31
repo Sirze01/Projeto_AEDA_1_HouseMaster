@@ -77,7 +77,11 @@ public:
 
     processState getProcessState();
 
+    bool conflictsWith(date start, date duration);
+
     float getPrice() const;
+
+    date getEndTime() const;
 };
 
 #endif

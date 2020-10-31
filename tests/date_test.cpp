@@ -5,10 +5,9 @@ using testing::Eq;
 
 TEST(Date, leap_year){
     EXPECT_EQ(date(1,2,2020,20,00).getDaysInMonth(), 29);
-    date(1,2,2020,20,00).getDaysInMonth();
 
     EXPECT_EQ(date(1,2,2021,20,00).getDaysInMonth(), 28);
-    date(1,2,2020,20,00).getDaysInMonth();
+
 }
 
 TEST(Date, month_days){

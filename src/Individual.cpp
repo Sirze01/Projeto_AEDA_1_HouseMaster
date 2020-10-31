@@ -56,14 +56,13 @@ void Collaborator::addAppointment(date *date) {
     _avaiability.push_back(date);
 }
 
-bool Collaborator::isAvailable(date start, date duration) {
+bool Collaborator::isAvailable(date start, date duration) {  // not tested yet
     for (const auto &intervention : getAssociatedInterventions()) {
-        date interventionStart = intervention->getStartingTime();
-        date interventionEnd = intervention->getStartingTime() + intervention->getService()->duration;
-        // TODO - faltava operador < e >. mt trst.
-
+        if (intervention->conflictsWith(start, duration)) {
+            return false;
+        }
     }
-    return false;
+    return true;
 }
 
 void Collaborator::addClassification(Classification classification) {

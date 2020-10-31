@@ -15,6 +15,7 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
             s->name = service;
             s->pro = false;
             services.push_back(s);
+            _availableServices.push_back(s);
         }
         auto collaborator = new Collaborator(services, name);
         this->_collaborators.push_back(collaborator);

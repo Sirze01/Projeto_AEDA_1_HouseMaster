@@ -172,3 +172,21 @@ const date &Intervention::getStartingTime() const {
     return _startingTime;
 }
 
+bool Intervention::conflictsWith(date start, date duration) {
+
+    date interventionStart = _startingTime;
+    std::cout << "Start " << interventionStart.dateToStr() << "\n";
+    date interventionEnd = _startingTime + _type.duration;
+    std::cout << "End " << interventionEnd.dateToStr() << "\n";
+
+    date otherStart = start;
+    date otherEnd = start + duration;
+
+    std::cout << (interventionStart > otherStart && interventionStart < otherEnd) << " " << (interventionEnd > otherStart && interventionStart < otherStart) << "\n";
+    return (interventionStart > otherStart && interventionStart < otherEnd) || (interventionEnd > otherStart && interventionStart < otherStart);
+}
+
+date Intervention::getEndTime() const {
+    return _startingTime + _type.duration;
+}
+

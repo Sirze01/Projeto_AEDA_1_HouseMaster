@@ -5,213 +5,23 @@
 
 int main() {
 
+    HouseMaster h1(std::ifstream("data/collabs.txt"), std::ifstream("data/clients.txt"));
 
+    std::vector<Collaborator *> collabs = h1.getCollaborators();
+    std::vector<Service *> services = h1.getAvailableServices();
+    std::vector<Client *> clients = h1.getClients();
 
-    HouseMaster houseMaster(std::ifstream("data/collabs.txt"), std::ifstream("data/clients.txt"));
+    Service* s1 = services.front();
 
-    Collaborator* w1 = houseMaster.getCollaborators().front();
-    Collaborator* w2 = houseMaster.getCollaborators().back();
+    date start(0, 0, 0, 01, 05, 0);
+    date start2(0, 0, 0, 01, 10, 0);
+    date duration(0, 0, 0, 2, 30, 0);
 
-    w1->addClassification(clumsy);
-    w1->addClassification(hardWorker);
-    w1->addClassification(attentive);
+    s1->duration = duration;
 
-    w2->addClassification(hardWorker);
-    w2->addClassification(attentive);
-    w2->addClassification(savior);
+    auto i1 = new Intervention(start, *s1, false);
+    auto i2 = new Intervention(start2, *s1, false);
 
-    w1->updateScore();
-    w2->updateScore();
-
-    std::cout << "Worker 1\nName : " << w1->getName() << "\nEnding Score : " << w1->getScore() << "\n\n";
-    std::cout << "Worker 2\nName : " << w2->getName() << "\nEnding Score : " << w2->getScore() << "\n\n";
-
-    houseMaster.sortCollaboratorsByScore();
-    for (const auto &collab : houseMaster.getCollaborators()) {
-        std::cout << collab->getName() << " : " << collab->getScore() << "\n";
-    }
-
-
-/*
-    // TESTING DATE
-    std::cout << "____DATE____" << std::endl;
-*/
-
-
-    /*
-    // Leap year
-    date first_date;
-    first_date.day = 2;
-    first_date.month = 2;
-    first_date.year = 2024;
-    first_date.hours = 20;
-    first_date.minutes = 30;
-    std::cout << "Days in February 2024: " << first_date.getDaysInMonth() << std::endl;
-
-    //Non leap year
-    date second_date;
-    second_date.day = 1;
-    second_date.month = 2;
-    second_date.year = 2025;
-    second_date.hours = 00;
-    second_date.minutes = 15;
-    std::cout << "Days in February 2025: " << second_date.getDaysInMonth() << std::endl;
-
-    */
-
-/*
-    // add 15 min to date
-    date first_date(1,12,2020,23,59);
-
-    std::cout << "Date 1: " << first_date.day << "-" <<  first_date.month << "-" << first_date.year << "  -  " <<
-        first_date.hours << "h" << first_date.minutes<< "min" << std::endl;
-
-    date second_date(0,0,0,0,15, 0);
-
-    std::cout << "Date 2: " << second_date.day << "-" <<  second_date.month << "-" << second_date.year << "  -  " <<
-        second_date.hours << "h" << second_date.minutes << "min" << std::endl;
-
-
-    date final_date = first_date + second_date;
-    std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " <<
-        final_date.hours << "h" << final_date.minutes << "min" << std::endl;
-*/
-
-
-/*
-    // add 15 min to end of hours
-    date first_date;
-    first_date.day = 1;
-    first_date.month = 10;
-    first_date.year = 2020;
-    first_date.hours = 20;
-    first_date.minutes = 50;
-
-    std::cout << "Date 1: " << first_date.day << "-" <<  first_date.month << "-" << first_date.year << "  -  " <<
-        first_date.hours << "h" << first_date.minutes << "min" << std::endl;
-
-    date second_date;
-    second_date.day = 1;
-    second_date.month = 10;
-    second_date.year = 2020;
-    second_date.hours = 00;
-    second_date.minutes = 15;
-
-    std::cout << "Date 2: " << second_date.day << "-" <<  second_date.month << "-" << second_date.year << "  -  " <<
-        second_date.hours << "h" << second_date.minutes << "min" << std::endl;
-
-
-    date final_date = first_date + second_date;
-    std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " <<
-        final_date.hours << "h" << final_date.minutes << "min" << std::endl;
-*/
-
-
-/*
-    // add 15 min to end of the day
-    date first_date;
-    first_date.day = 1;
-    first_date.month = 10;
-    first_date.year = 2020;
-    first_date.hours = 23;
-    first_date.minutes = 50;
-
-    std::cout << "Date 1: " << first_date.day << "-" <<  first_date.month << "-" << first_date.year << "  -  " <<
-        first_date.hours << "h" << first_date.minutes << "min" << std::endl;
-
-    date second_date;
-    second_date.day = 1;
-    second_date.month = 10;
-    second_date.year = 2020;
-    second_date.hours = 00;
-    second_date.minutes = 15;
-
-    std::cout << "Date 2: " << second_date.day << "-" <<  second_date.month << "-" << second_date.year << "  -  " <<
-        second_date.hours << "h" << second_date.minutes << "min" << std::endl;
-
-
-    date final_date = first_date + second_date;
-    std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " <<
-        final_date.hours << "h" << final_date.minutes << "min" << std::endl;
-*/
-
-
-/*
-    // add 15 min to end of the day and month
-    date first_date;
-    first_date.day = 31;
-    first_date.month = 10;
-    first_date.year = 2020;
-    first_date.hours = 23;
-    first_date.minutes = 50;
-
-    std::cout << "Date 1: " << first_date.day << "-" <<  first_date.month << "-" << first_date.year << "  -  " <<
-        first_date.hours << "h" << first_date.minutes << "min" << std::endl;
-
-    date second_date;
-    second_date.day = 31;
-    second_date.month = 10;
-    second_date.year = 2020;
-    second_date.hours = 00;
-    second_date.minutes = 15;
-
-    std::cout << "Date 2: " << second_date.day << "-" <<  second_date.month << "-" << second_date.year << "  -  " <<
-        second_date.hours << "h" << second_date.minutes << "min" << std::endl;
-
-
-    date final_date = first_date + second_date;
-    std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " <<
-        final_date.hours << "h" << final_date.minutes << "min" << std::endl;
-*/
-
-
-/*
-// add 15 min to end of the day, month and year
-    date first_date;
-    first_date.day = 31;
-    first_date.month = 12;
-    first_date.year = 2020;
-    first_date.hours = 23;
-    first_date.minutes = 50;
-
-    std::cout << "Date 1: " << first_date.day << "-" <<  first_date.month << "-" << first_date.year << "  -  " <<
-        first_date.hours << "h" << first_date.minutes << "min" << std::endl;
-
-    date second_date;
-    second_date.day = 31;
-    second_date.month = 12;
-    second_date.year = 2020;
-    second_date.hours = 00;
-    second_date.minutes = 15;
-
-    std::cout << "Date 2: " << second_date.day << "-" <<  second_date.month << "-" << second_date.year << "  -  " <<
-        second_date.hours << "h" << second_date.minutes << "min" << std::endl;
-
-
-    date final_date = first_date + second_date;
-    std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " <<
-        final_date.hours << "h" << final_date.minutes << "min" << std::endl;
-*/
-
-
-/*
-// add 15 min to end of the day and month in february
-    date first_date(28,2,2019,23,1);
-
-
-    std::cout << "Date 1: " << first_date.day << "-" <<  first_date.month << "-" << first_date.year << "  -  " <<
-        first_date.hours << "h" << first_date.minutes << "min" << std::endl;
-
-    date second_date(27,2,2019,00,15);
-
-    std::cout << "Date 2: " << second_date.day << "-" <<  second_date.month << "-" << second_date.year << "  -  " <<
-        second_date.hours << "h" << second_date.minutes << "min" << std::endl;
-
-
-    date final_date = first_date + second_date;
-    std::cout << "Final date: " << final_date.day << "-" <<  final_date.month << "-" << final_date.year << "  -  " <<
-        final_date.hours << "h" << final_date.minutes << "min" << std::endl;
-*/
 
     return 0;
 }
