@@ -65,13 +65,11 @@ date date::operator+(const date &d1) const {
     date service_date;
     service_date.minutes = (this->minutes + d1.minutes) % 60;
     service_date.hours = (this->hours + d1.hours + ((this->minutes + d1.minutes) / 60)) % 24;
-    service_date.day = d1.day;
-    service_date.month = d1.month;
-    service_date.year = d1.year;
+    service_date.day = this->day + d1.day;
+    service_date.month = this->month + d1.month;
+    service_date.year = this->year + d1.year;
     if (((this->hours + d1.hours + ((this->minutes + d1.minutes) / 60)) / 24) != 0) {
-        service_date.month = this->month + d1.month;
-        service_date.year = this->year + d1.year;
-        service_date.day = this->day + d1.day + 1;
+        service_date.day += 1;
         while (service_date.day > service_date.getDaysInMonth()) {
             service_date.day -= service_date.getDaysInMonth();
             service_date.month += 1;
@@ -80,10 +78,6 @@ date date::operator+(const date &d1) const {
                 service_date.year += 1;
             }
         }
-    } else {
-        service_date.day = this->day + d1.day;
-        service_date.month = this->month + d1.month;
-        service_date.year = this->year + d1.year;
     }
     return service_date;
 }
