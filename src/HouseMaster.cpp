@@ -17,7 +17,7 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
             services.push_back(s);
             _availableServices.push_back(s);
         }
-        auto collaborator = new Collaborator(services, name);
+        auto collaborator = new Collaborator(services, name, false);
         this->_collaborators.push_back(collaborator);
     }
 
@@ -83,6 +83,7 @@ void HouseMaster::sortCollaboratorsByScore() {
 }
 
 void HouseMaster::assignColaborator(Intervention * intervention) {
+    /*
    auto it = std::find(_collaborators.begin(), _collaborators.end(),
                         [&intervention](Collaborator* &collaborator){
        return ( collaborator -> canPreform(intervention->getService()) &&
@@ -94,6 +95,7 @@ void HouseMaster::assignColaborator(Intervention * intervention) {
     }
     else
         throw UnavailableAppointment("No collaborators available to the desired date!");
+        */
 }
 
 
