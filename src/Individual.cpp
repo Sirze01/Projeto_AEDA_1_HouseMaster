@@ -38,9 +38,9 @@ int Collaborator::getScore() {
 }
 
 
-Collaborator::Collaborator(std::vector<Service *> functions, const std::string &name) : Individual(name),
+Collaborator::Collaborator(std::vector<Service *> functions, const std::string &name, bool pro) : Individual(name),
                                                                                                _services(std::move(functions)),
-                                                                                               _score(newHere) {}
+                                                                                               _score(newHere), _pro(pro){}
 
 
 bool Collaborator::canPreform(Service *service) {
@@ -56,7 +56,7 @@ void Collaborator::addAppointment(date *date) {
     _avaiability.push_back(date);
 }
 
-bool Collaborator::isAvailable(date start, date duration) {  // not tested yet
+bool Collaborator::isAvailable(date start, date duration) {
     for (const auto &intervention : getAssociatedInterventions()) {
         if (intervention->conflictsWith(start, duration)) {
             return false;
@@ -81,6 +81,20 @@ void Collaborator::updateScore() {
     }
 }
 
+bool Collaborator::hasQualificationToPreform(Service *service) const {
+    return !service->pro || isPro();
+}
+
+bool Collaborator::isPro() const {
+    return _pro;
+}
+
+bool Collaborator::canDo(Intervention *intervention) {
+    Service *service = intervention->getService();
+    date start = intervention->getStartingTime();
+    date duration = intervention->getService()->duration;
+    return isAvailable(start, duration) && canPreform(service) && hasQualificationToPreform(service);
+}
 
 
 // Client associated methods

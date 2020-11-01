@@ -83,7 +83,7 @@ void HouseMaster::sortCollaboratorsByScore() {
 }
 
 void HouseMaster::assignColaborator(Intervention * intervention) {
-   /* auto it = std::find(_collaborators.begin(), _collaborators.end(),
+   auto it = std::find(_collaborators.begin(), _collaborators.end(),
                         [&intervention](Collaborator* &collaborator){
        return ( collaborator -> canPreform(intervention->getService()) &&
                 collaborator ->isAvailable(intervention->getStartingTime()));
@@ -93,7 +93,7 @@ void HouseMaster::assignColaborator(Intervention * intervention) {
         _collaborators.at(std::distance(_collaborators.begin(), it))->addAppointment(intervention->getAppointment());
     }
     else
-        throw UnavailableAppointment("No collaborators available to the desired date!");*/
+        throw UnavailableAppointment("No collaborators available to the desired date!");
 }
 
 

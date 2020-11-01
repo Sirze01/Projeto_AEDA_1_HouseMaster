@@ -40,18 +40,23 @@ enum Classification {
 
 class Collaborator : public Individual {
 public:
-    Collaborator(std::vector<Service *> functions, const std::string &name);
+    Collaborator(std::vector<Service *> functions, const std::string &name, bool pro);
 
     std::vector<Service *> getServices();
+
+    bool isPro() const;
 
     bool canPreform(Service *service);
 
     bool isAvailable(date start, date duration);
 
+    bool hasQualificationToPreform(Service *service) const;
+
+    bool canDo(Intervention *intervention);
+
     int getScore();
 
     void addAppointment(date* date);
-
 
     void addClassification(Classification classification);
 
@@ -64,6 +69,7 @@ private:
     std::vector<Service *> _services;
     Classification _score;
     std::vector<date *> _avaiability;
+    bool _pro;
 };
 
 

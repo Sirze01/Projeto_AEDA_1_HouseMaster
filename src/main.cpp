@@ -13,14 +13,16 @@ int main() {
 
     Service* s1 = services.front();
 
-    date start(0, 0, 0, 01, 05, 0);
-    date start2(0, 0, 0, 01, 10, 0);
+    date start(1, 11, 2020, 01, 15, 0);
+    date start2(31, 10, 2020, 23, 55, 0);
     date duration(0, 0, 0, 2, 30, 0);
 
     s1->duration = duration;
 
     auto i1 = new Intervention(start, *s1, false);
     auto i2 = new Intervention(start2, *s1, false);
+
+    std::cout << i1->conflictsWith(start2, start2 + duration);
 
 
     return 0;
