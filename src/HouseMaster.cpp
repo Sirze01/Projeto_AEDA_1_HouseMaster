@@ -83,19 +83,19 @@ void HouseMaster::sortCollaboratorsByScore() {
 }
 
 void HouseMaster::assignColaborator(Intervention * intervention) {
-    /*
-   auto it = std::find(_collaborators.begin(), _collaborators.end(),
-                        [&intervention](Collaborator* &collaborator){
-       return ( collaborator -> canPreform(intervention->getService()) &&
-                collaborator ->isAvailable(intervention->getStartingTime()));
+
+    sortCollaboratorsByScore();
+
+    auto found = std::find_if(_collaborators.begin(), _collaborators.end(),
+                              [&intervention](Collaborator* collaborator) -> bool{
+        return collaborator->canDo(intervention);
     });
 
-    if(it != _collaborators.end()) {
-        _collaborators.at(std::distance(_collaborators.begin(), it))->addAppointment(intervention->getAppointment());
+    if(found != _collaborators.end()) {
+        intervention->setCollabId(_collaborators.at(std::distance(_collaborators.begin(), found))->getId());
     }
     else
         throw UnavailableAppointment("No collaborators available to the desired date!");
-        */
 }
 
 

@@ -50,13 +50,12 @@ public:
 
     bool isAvailable(date start, date duration);
 
-    bool hasQualificationToPreform(Service *service) const;
+    bool hasQualificationToPreform(Intervention *intervention) const;
 
     bool canDo(Intervention *intervention);
 
     int getScore();
 
-    void addAppointment(date* date);
 
     void addClassification(Classification classification);
 
@@ -68,7 +67,6 @@ private:
     std::vector<Classification> _classifications;
     std::vector<Service *> _services;
     Classification _score;
-    std::vector<date *> _avaiability;
     bool _pro;
 };
 

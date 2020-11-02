@@ -65,15 +65,22 @@ private:
     bool _forcePro;
     processState _state;
     float _price;
+    unsigned int _collabId;
 
 public:
     static unsigned int _idSeq;
 
     Intervention(date appointment, Service type, bool forcePro);
 
-    const date &getStartingTime() const;
+    const date *getStartingTime() const;
 
     Service* getService();
+
+    bool getForcePro() const;
+
+    unsigned int getCollabId() const;
+
+    void setCollabId(unsigned int collabId);
 
     processState getProcessState();
 

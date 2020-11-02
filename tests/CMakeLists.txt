@@ -37,7 +37,7 @@ include_directories(../src/)
 
 # Link against gtest or gtest_main as needed
 
-add_executable(testing date_test.cpp)
+add_executable(testing date_test.cpp houseMaster_test.cpp)
 
 target_link_libraries(testing PRIVATE gtest_main Projeto_AEDA_1_HouseMaster)
 

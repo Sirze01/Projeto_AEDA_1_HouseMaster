@@ -1,5 +1,5 @@
 .idea
-src/cmake-build-debug
-src/.idea
+/src/.idea
 cmake-build-debug
 tests/cmake-build-debug
+/src/cmake-build-debug/

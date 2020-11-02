@@ -52,9 +52,6 @@ bool Collaborator::canPreform(Service *service) {
     return found != _services.end();
 }
 
-void Collaborator::addAppointment(date *date) {
-    _avaiability.push_back(date);
-}
 
 bool Collaborator::isAvailable(date start, date duration) {
     for (const auto &intervention : getAssociatedInterventions()) {
@@ -81,8 +78,8 @@ void Collaborator::updateScore() {
     }
 }
 
-bool Collaborator::hasQualificationToPreform(Service *service) const {
-    return !service->pro || isPro();
+bool Collaborator::hasQualificationToPreform(Intervention *intervention) const {
+    return !(intervention->getService()->pro || intervention->getForcePro()) || isPro();
 }
 
 bool Collaborator::isPro() const {
@@ -91,9 +88,9 @@ bool Collaborator::isPro() const {
 
 bool Collaborator::canDo(Intervention *intervention) {
     Service *service = intervention->getService();
-    date start = intervention->getStartingTime();
+    date start = *intervention->getStartingTime();
     date duration = intervention->getService()->duration;
-    return isAvailable(start, duration) && canPreform(service) && hasQualificationToPreform(service);
+    return isAvailable(start, duration) && canPreform(service) && hasQualificationToPreform(intervention);
 }
 
 
