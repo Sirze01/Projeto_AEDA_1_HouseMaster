@@ -40,7 +40,9 @@ int Collaborator::getScore() {
 
 Collaborator::Collaborator(std::vector<Service *> functions, const std::string &name, bool pro) : Individual(name),
                                                                                                _services(std::move(functions)),
-                                                                                               _score(newHere), _pro(pro){}
+                                                                                               _score(newHere), _pro(pro) {
+    _id = _idSeq++;
+}
 
 
 bool Collaborator::canPreform(Service *service) {
@@ -97,19 +99,26 @@ bool Collaborator::canDo(Intervention *intervention) {
 // Client associated methods
 unsigned Client::_idSeq = 0;
 
-Client::Client(unsigned int nif, const std::string &name) : Individual(name), _nif(nif), _requestedInterventions() {}
+Client::Client(unsigned int nif, const std::string &name, bool premium)
+        : Individual(name), _nif(nif), _requestedInterventions(), _premium(premium) {
+    _id = _idSeq++;
+}
 
 unsigned int Client::getNif() {
     return (_nif);
 }
 
-int Client::requestIntervention(date appointment, Service type, bool forcePro) {
-    auto intervention = new Intervention(appointment, std::move(type), forcePro);
+int Client::requestIntervention(date appointment, Service type) {
+    auto intervention = new Intervention(appointment, std::move(type), _premium);
     _requestedInterventions.push_back(intervention);
     return 0;
 }
 
 const std::vector<Intervention *> &Client::getRequestedInterventions() const {
     return _requestedInterventions;
+}
+
+bool Client::isPremium() const {
+    return _premium;
 }
 

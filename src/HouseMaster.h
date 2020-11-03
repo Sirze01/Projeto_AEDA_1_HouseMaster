@@ -17,7 +17,7 @@ class HouseMaster {
 public:
     HouseMaster() = default;
 
-    HouseMaster(std::ifstream collaborators, std::ifstream clients);
+    HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services);
 
     const std::vector<Collaborator *> &getCollaborators() const;
 
@@ -36,6 +36,8 @@ public:
     void assignColaborator(Intervention* intervention);
 
     void sortCollaboratorsByScore();
+
+    Service* findServiceByName(const std::string &name);
 
     class UnavailableAppointment;
 
@@ -58,6 +60,7 @@ class HouseMaster::UnavailableAppointment: public std::logic_error{
 public:
     UnavailableAppointment(const std::string &error_msg);
 };
+
 
 
 

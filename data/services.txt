@@ -1,0 +1,7 @@
+ajudar os amiguinhos com física,no,3,2h30
+ajudar os amiguinhos com amat,no,3,3h00
+jantar na cantina as 18h30,no,2.70,1h00
+montar um carro do nada,no,2.50,10h00
+desmontar um computador,no,4,2h00
+canalizador,yes,5,3h00
+andar a correr atrás de uma princesa ou lá o que é,no,1,4h00

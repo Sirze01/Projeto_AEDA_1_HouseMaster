@@ -17,6 +17,9 @@ date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int
     }
 }
 
+
+
+
 void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
     this->day = day;
     this->month = month;
@@ -143,6 +146,11 @@ bool date::operator>(const date &d2) const
     }
 }
 
+void date::readDuration(const std::string &duration) {
+    std::stringstream ss(duration);
+    char sep{};
+    ss >> hours >> sep >> minutes;
+}
 
 
 // Despite the static variables being already 0 initialized
@@ -194,4 +202,8 @@ bool Intervention::conflictsWith(date start, date duration) {
 
 date Intervention::getEndTime() const {
     return _startingTime + _type.duration;
+}
+
+Service::Service(const std::string &name, bool pro, float basePrice, const date &duration) : name(name), pro(pro), basePrice(basePrice), duration(duration){
+
 }

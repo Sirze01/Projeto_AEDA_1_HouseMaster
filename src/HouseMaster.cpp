@@ -4,30 +4,63 @@ HouseMaster::InexistentService::InexistentService(const std::string &error_msg) 
 
 HouseMaster::UnavailableAppointment::UnavailableAppointment(const std::string &error_msg): std::logic_error(error_msg) {}
 
-HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients) {
-    for (std::string line; std::getline(collaborators, line);) {
-        std::istringstream lss(line);
-        std::string name{}, service{};
-        std::vector<Service *> services{};
+HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services) {
+
+    // read services.txt
+    for (std::string line; std::getline(services, line);) {
+
+        std::stringstream lss(line);
+        // name
+        std::string name;
         std::getline(lss, name, ',');
-        while (std::getline(lss, service, ',')) {
-            auto *s = new Service;
-            s->name = service;
-            s->pro = false;
-            services.push_back(s);
-            _availableServices.push_back(s);
-        }
-        auto collaborator = new Collaborator(services, name, false);
-        this->_collaborators.push_back(collaborator);
+        // pro
+        std::string proStr;
+        std::getline(lss, proStr, ',');
+        bool pro = proStr == "yes";
+        // price
+        std::string priceStr;
+        std::getline(lss, priceStr, ',');
+        float price = std::stof(priceStr);
+        // duration
+        std::string durationStr;
+        std::getline(lss, durationStr, ',');
+        date duration; duration.readDuration(durationStr);
+
+        auto service = new Service(name, pro, price, duration);
+        _availableServices.push_back(service);
+
     }
 
+    // read collaborators.txt
+    for (std::string line; std::getline(collaborators, line);) {
+        std::stringstream lss(line);
+        // name
+        std::string name;
+        std::getline(lss, name, ',');
+        // pro
+        std::string proStr;
+        std::getline(lss, proStr, ',');
+        // services
+        std::string serviceName{};
+        std::vector<Service* > collabServices{};
+        while (std::getline(lss, serviceName, ',')) {
+            auto *service = findServiceByName(serviceName);
+            collabServices.push_back(service);
+        }
+        auto collaborator = new Collaborator(collabServices, name, proStr=="yes");
+        _collaborators.push_back(collaborator);
+    }
+
+    // read clients.txt
     for (std::string line; std::getline(clients, line);) {
         std::stringstream lss(line);
         std::string name;
-        unsigned int nif{};
+        std::string nifStr{};
+        std::string premiumStr{};
         std::getline(lss, name, ',');
-        lss >> nif;
-        auto client = new Client(nif, name);
+        std::getline(lss, nifStr, ',');
+        std::getline(lss, premiumStr, ',');
+        auto client = new Client(std::stoul(nifStr), name, premiumStr == "yes");
         this->_clients.push_back(client);
     }
 }
@@ -80,6 +113,13 @@ void HouseMaster::sortCollaboratorsByScore() {
     std::sort(_collaborators.begin(), _collaborators.end(), [](Collaborator* collaborator1, Collaborator* collaborator2) {
         return collaborator1->getScore() > collaborator2->getScore();
     });
+}
+
+Service *HouseMaster::findServiceByName(const std::string &name) {
+    auto found = std::find_if(_availableServices.begin(), _availableServices.end(), [&name](Service* s1) {
+        return s1->name == name;
+    });
+    return *found;
 }
 
 void HouseMaster::assignColaborator(Intervention * intervention) {

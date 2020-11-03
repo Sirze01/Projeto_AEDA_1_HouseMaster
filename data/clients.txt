@@ -1,4 +1,4 @@
-cliente muito simpático, 1111232
-cliente que faz comentários racistas, 374435
-cliente que não se lembra do nome, 999999999
-adriano malheiro caloteiro, 5045085040508
+cliente muito simpático,1111232,no
+cliente que faz comentários racistas,374435,no
+cliente que não se lembra do nome,999999999,yes
+adriano malheiro caloteiro,5045085040508,no

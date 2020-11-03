@@ -18,6 +18,8 @@ struct date {
     date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
          int valid = 1);
 
+    void readDuration(const std::string &duration);
+
     void setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
 
     int getDaysInMonth() const;
@@ -43,10 +45,11 @@ public:
 };
 
 struct Service {
-    bool pro;
     std::string name;
+    bool pro;
     float basePrice;
     date duration;
+    Service(const std::string &name, bool pro, float basePrice, const date &duration);
 };
 
 

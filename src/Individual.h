@@ -74,11 +74,13 @@ private:
 // Client code
 class Client : public Individual {
 public:
-    Client(unsigned int nif, const std::string &name);
+    Client(unsigned int nif, const std::string &name, bool premium);
 
     unsigned int getNif();
 
-    int requestIntervention(date appointment, Service type, bool forcePro);
+    bool isPremium() const;
+
+    int requestIntervention(date appointment, Service type);
 
     static unsigned int _idSeq;
 
@@ -88,6 +90,7 @@ public:
 private:
     unsigned int _nif;
     std::vector<Intervention *> _requestedInterventions;
+    bool _premium;
 };
 
 #endif
