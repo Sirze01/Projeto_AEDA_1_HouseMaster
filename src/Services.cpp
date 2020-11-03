@@ -5,32 +5,18 @@
 date::date() = default;
 
 date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
-           int valid) {
-    if (valid) {
-        setDate(day, month, year, hours, minutes);
-    } else {
-        this->day = day;
-        this->month = month;
-        this->year = year;
-        this->hours = hours;
-        this->minutes = minutes;
-    }
-}
-
-
-
-
-void date::setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
+           bool valid) {
     this->day = day;
     this->month = month;
     this->year = year;
     this->hours = hours;
     this->minutes = minutes;
-
-    if (!isValidDate())
-        throw InvalidDate(dateToStr() + " isn't a valid date!");
+    if(valid){
+        isValidDate(true);
+    }
 
 }
+
 
 int date::getDaysInMonth() const {
     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
@@ -50,10 +36,13 @@ int date::getDaysInMonth() const {
 
 
 
-bool date::isValidDate() {
-    if (day < 1 || day > getDaysInMonth() || month < 1 || month > 12 || hours > 23 || minutes > 59)
-        return 0;
-    return 1;
+bool date::isValidDate(bool throwExcept) {
+    if (day < 1 || day > getDaysInMonth() || month < 1 || month > 12 || hours > 23 || minutes > 59) {
+        if(throwExcept)
+            throw InvalidDate(dateToStr() + " isn't a valid date!");
+        return false;
+    }
+    return true;
 }
 
 date::InvalidDate::InvalidDate(const std::string &error_msg) : std::invalid_argument(error_msg) {}

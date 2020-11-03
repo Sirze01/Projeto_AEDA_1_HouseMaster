@@ -53,8 +53,7 @@ TEST(Date, valid_date){
     val2.minutes = 0;
     EXPECT_EQ(date(25,06,2020, 9,00), val2);
 
-    date val1;
-    val1.setDate(25,06,2020,9,0);
+    date val1(25,06,2020,9,0);
     EXPECT_EQ(val1, val2);
 
     EXPECT_THROW(date d1(31, 2, 2020, 20,0), date::InvalidDate);

@@ -58,7 +58,7 @@ public:
 
 class HouseMaster::UnavailableAppointment: public std::logic_error{
 public:
-    UnavailableAppointment(const std::string &error_msg);
+    explicit UnavailableAppointment(const std::string &error_msg);
 };
 
 

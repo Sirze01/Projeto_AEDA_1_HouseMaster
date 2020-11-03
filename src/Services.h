@@ -16,15 +16,13 @@ struct date {
     date();
 
     date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
-         int valid = 1);
+          bool valid= true);
 
     void readDuration(const std::string &duration);
 
-    void setDate(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
-
     int getDaysInMonth() const;
 
-    bool isValidDate();
+    bool isValidDate(bool throwExcept=false);
 
     class InvalidDate;
 
