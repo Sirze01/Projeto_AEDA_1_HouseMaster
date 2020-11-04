@@ -4,25 +4,31 @@
 #include <algorithm>
 
 
-Individual::Individual(std::string name) : _name(std::move(name)), _id() {
+Individual::Individual(std::string name) : _displayName(std::move(name)), _id() {
 }
 
 std::string Individual::getName() {
-    return _name;
+    return _displayName;
 }
 
 unsigned int Individual::getId() const {
     return _id;
 }
 
-bool Individual::operator==(const Individual& ind2) {
-    if(_name == ind2._name || _id == ind2._id)
-        return true;
-    return false;
+bool Individual::operator==(const Individual& ind2) const {
+    return _uniqueName == ind2._uniqueName;
 }
 
 const std::vector<Intervention *> &Individual::getAssociatedInterventions() const {
     return _associatedInterventions;
+}
+
+std::string Individual::getInfo() const {
+    return std::string();
+}
+
+std::string Individual::getUniqueName() const {
+    return _uniqueName;
 }
 
 
@@ -42,6 +48,9 @@ Collaborator::Collaborator(std::vector<Service *> functions, const std::string &
                                                                                                _services(std::move(functions)),
                                                                                                _score(newHere), _pro(pro) {
     _id = _idSeq++;
+    std::stringstream ss;
+    ss << "collab" << _id;
+    _uniqueName = ss.str();
 }
 
 
@@ -95,6 +104,14 @@ bool Collaborator::canDo(Intervention *intervention) {
     return isAvailable(start, duration) && canPreform(service) && hasQualificationToPreform(intervention);
 }
 
+std::string Collaborator::getInfo() const {
+    std::stringstream ss{};
+    ss << "Name: " << _displayName << " Score: " << _score;
+    return ss.str();
+}
+
+
+
 
 // Client associated methods
 unsigned Client::_idSeq = 0;
@@ -102,6 +119,9 @@ unsigned Client::_idSeq = 0;
 Client::Client(unsigned int nif, const std::string &name, bool premium)
         : Individual(name), _nif(nif), _requestedInterventions(), _premium(premium) {
     _id = _idSeq++;
+    std::stringstream ss;
+    ss << "client" << _id;
+    _uniqueName = ss.str();
 }
 
 unsigned int Client::getNif() {
@@ -120,5 +140,12 @@ const std::vector<Intervention *> &Client::getRequestedInterventions() const {
 
 bool Client::isPremium() const {
     return _premium;
+}
+
+std::string Client::getInfo() const {
+    std::stringstream ss{};
+    std::string pro = _premium ? "yes" : "no";
+    ss << "Name: " << _displayName << " NIF: " << _nif << " Pro: " << pro;
+    return ss.str();
 }
 

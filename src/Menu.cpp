@@ -1,5 +1,9 @@
+
+/*
 #include <iostream>
 #include "Menu.h"
+#include <limits>
+
 
 int Menu::initialMenu()
 {
@@ -12,7 +16,43 @@ int Menu::initialMenu()
     std::cout << "|                                |" << std::endl;
     std::cout << "| [0] Exit                       |" << std::endl;
     std::cout << "|________________________________|" << std::endl;
+
     std::cin >> role_choice;
+
+    while (true) {
+        if (std::cin.fail() || std::cin.peek() != '\n') {
+            if (std::cin.eof()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "User chose to close the input.\n";
+                break;
+            } else {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid choice. Make sure you are entering a valid number: " << std::endl;
+                std::cin >> role_choice;
+            }
+        } else if (role_choice < 1 || role_choice > 3) {
+            std::cout << "Invalid choice. Make sure you chose one of the available options: " << std::endl;
+            std::cin >> role_choice;
+        } else {
+            break;
+        }
+    }
+
+
+    switch (role_choice) {
+        case administrator:
+            checkAdmin();
+            break;
+        case collaborator:
+            break;
+        case client:
+            break;
+    }
+
+*/
+/*
     while (role_choice == -1)
     {
         if (std::cin.fail())
@@ -29,12 +69,15 @@ int Menu::initialMenu()
         {
             switch (role_choice)
             {
-                case 1: individualType = 1;
-                case 2: individualType = 2;
-                case 3: individualType = 3;
+                case 1: individualType = 1; break;
+                case 2: individualType = 2; break;
+                case 3: individualType = 3; break;
             }
         }
     }
+
+    *//*
+
     return role_choice;
 }
 
@@ -45,20 +88,17 @@ void Menu::exitMenu()
     switch (individualType)
     {
         case 1:
-            {
                 std::cout << "|             Saving             |" << std::endl;
                 std::cout << "|          your changes          |" << std::endl;
-            }
+                break;
         case 2:
-        {
             std::cout << "|           Thank you            |" << std::endl;
             std::cout << "|      for working with us!      |" << std::endl;
-        }
+            break;
         case 3:
-        {
             std::cout << "|           Thank you            |" << std::endl;
             std::cout << "|   for believing in our work    |" << std::endl;
-        }
+            break;
     }
     std::cout << "|                                |" << std::endl;
     std::cout << "|                                |" << std::endl;
@@ -67,7 +107,8 @@ void Menu::exitMenu()
 
 int Menu::checkAdmin()
 {
-    int password;
+    std::string password;
+    int MAX_TRIES = 3;
     std::cout << " __________HOUSE MASTER__________ " << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "|                                |" << std::endl;
@@ -77,17 +118,19 @@ int Menu::checkAdmin()
     std::cout << "|                                |" << std::endl;
     std::cout << "|________________________________|" << std::endl;
     std::cin >> password;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i <= MAX_TRIES; i++)
     {
-        if (password == 1234)
+        if (password == "admin")
         {
+            adminMenu();
             return 0;
         } else
         {
             std::cout << "Invalid password! Try again: " << std::endl;
+            std::cin >> password;
         }
     }
-    std::cout << "Invalid password" << std::endl;
+    std::cout << "Too many tries! Logging out..." << std::endl;
     return -1;
 }
 
@@ -207,7 +250,7 @@ int Menu::adminMenu()
 int Menu::collabMenu()
 {
     std::cout << " __________HOUSE MASTER__________ " << std::endl;
-    std::cout << " Welcome back, " << name << "!\n\n" << std::endl;
+    std::cout << " Welcome back, !\n\n" << std::endl;
     std::cout << " [1] Evaluations" << std::endl;
     std::cout << " [2] Services" << std::endl;
     std::cout << " [3] Scheduled Services" << std::endl;
@@ -226,7 +269,7 @@ int Menu::collabMenu()
 int Menu::clientMenu()
 {
     std::cout << " __________HOUSE MASTER__________ " << std::endl;
-    std::cout << " Welcome back, " << name << "!\n\n" << std::endl;
+    std::cout << " Welcome back, "  << "!\n\n" << std::endl;
 
     // Ver serviços agendados
     // Ver serviços oferecidos pela house master
@@ -322,4 +365,67 @@ int Menu::newCollab()
     // forma de dizer que é pro em X trabalho
     std::cout << "\n\n\n Thanks for joining de team! We are excited to work with you, " << name << "!" << std::endl;
 
+}*/
+
+#include "Menu.h"
+
+Menu::Menu(std::string prompt, std::map<std::string, std::function<void()>> options) : _prompt(std::move(prompt)), _options(std::move(options)), _choice() {
+
 }
+
+void Menu::show() {
+
+    unsigned count = 1;
+
+    std::cout << " __________HOUSE MASTER__________ " << std::endl;
+    std::cout << "| " << std::setw(30) << std::right << _prompt << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+
+    for (const auto &option : _options) {
+        std::cout << "| [" << count << "] " << std::setw(27) << std::left << option.first << "|" << std::endl;
+        count ++;
+    }
+
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [0] Exit Program               |" << std::endl;
+    std::cout << "|________________________________|" << std::endl;
+}
+
+void Menu::select() {
+
+    unsigned choice = 0;
+    std::cout << "Your choice: \n";
+    std::cin >> choice;
+
+    while (true) {
+        if (std::cin.fail() || std::cin.peek() != '\n') {
+            if (std::cin.eof()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "User chose to close the input.\n";
+                break;
+            } else {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid choice. Make sure you are entering a valid number: " << std::endl;
+                std::cin >> choice;
+            }
+        } else if (choice < 0 || choice > _options.size()) {
+            std::cout << "Invalid choice. Make sure you chose one of the available options: " << std::endl;
+            std::cin >> choice;
+        } else {
+            break;
+        }
+    }
+    _choice = choice;
+}
+
+void Menu::execute() {
+
+    if (!_choice) exit(0);
+    std::vector<std::string> keys{};
+    std::transform(_options.begin(), _options.end(), back_inserter(keys), [](const std::pair<std::string, std::function<void()>>& funcs){return funcs.first;});
+    _options.at(keys.at(_choice-1))();
+
+}
+

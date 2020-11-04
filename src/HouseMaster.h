@@ -39,6 +39,10 @@ public:
 
     Service* findServiceByName(const std::string &name);
 
+    Client* findClientByUniqueName(const std::string &name);
+
+    Collaborator* findCollabByUniqueName(const std::string &name);
+
     class UnavailableAppointment;
 
     class InexistentService;
@@ -60,7 +64,6 @@ class HouseMaster::UnavailableAppointment: public std::logic_error{
 public:
     explicit UnavailableAppointment(const std::string &error_msg);
 };
-
 
 
 
