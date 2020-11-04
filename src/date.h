@@ -18,6 +18,8 @@ struct date {
     date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
          bool valid= true);
 
+    date(const std::string &date);
+
     void readDuration(const std::string &duration);
 
     int getDaysInMonth() const;

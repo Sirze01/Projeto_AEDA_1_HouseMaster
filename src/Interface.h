@@ -17,9 +17,12 @@ public:
     Interface() = default;
     explicit Interface(HouseMaster houseMaster);
     void selectRole();
-    void clientLogin();
-    void collabLogin();
+    void userLogin();
+    bool readRole(const std::string &username);
     void adminLogin();
+    void clientOpperations();
+    date readInterventionDate();
+    Service selectService();
 private:
     HouseMaster _houseMaster;
     Individual *_user;

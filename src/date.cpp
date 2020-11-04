@@ -1,4 +1,5 @@
 #include "date.h"
+#include <iostream>
 
 date::date() = default;
 
@@ -134,4 +135,11 @@ void date::readDuration(const std::string &duration) {
     std::stringstream ss(duration);
     char sep{};
     ss >> hours >> sep >> minutes;
+}
+
+date::date(const std::string &date) {
+    std::stringstream ss(date);
+    char sep{};
+    // DD/MM/YYYY HH:mm
+    ss >> day >> sep >> month >> sep >> year >> hours >> sep >> minutes;
 }
