@@ -7,15 +7,17 @@ Interface::Interface(HouseMaster houseMaster) : _houseMaster(std::move(houseMast
 
 }
 
-void Interface::selectRole() {
-
+void Interface::selectRole(bool &running) {
+    bool innerRunning = true;
     Menu roles("Choose your role", {{"Admin", [&]() {
         std::cout << "Welcome to HouseMaster. You have ADMIN privilege.\n";
         adminLogin();
     }}, {"User (Collaborator/Client)", [&]() {
         userLogin();
         std::cout << "Login succeeded for " << _user->getName() << "\n";
-        clientOpperations();
+        while (innerRunning) {
+            clientOpperations(innerRunning);
+        }
     }}});
 
     roles.show();
@@ -64,12 +66,25 @@ bool Interface::readRole(const std::string &username) {
     return true;
 }
 
-void Interface::clientOpperations() {
+void Interface::clientOpperations(bool &running) {
     auto * client = dynamic_cast<Client*>(_user);
+    bool innerRunning = true;
     Menu clientMenu("Welcome" + client->getName(), {{"Request an Intervention", [&](){
-        Service service = selectService();
-        date interventionDate = readInterventionDate();
-        client->requestIntervention(interventionDate, service);
+        while (innerRunning) {
+            Service service = selectService(innerRunning);
+            if (!service.name.empty()) {
+                date interventionDate = readInterventionDate();
+                client->requestIntervention(interventionDate, service);
+            }
+        }
+    }}, {"Browse Services", [&](){
+        while (innerRunning) {
+            Service service = selectService(innerRunning);
+            if (!service.name.empty()) showService(service);
+            std::cin.ignore();
+        }
+    }}, {"Logout", [&](){
+        running= false;
     }}});
     clientMenu.show();
     clientMenu.select();
@@ -84,20 +99,41 @@ date Interface::readInterventionDate() {
     return interventionDate;
 }
 
-Service Interface::selectService() {
+Service Interface::selectService(bool &running) {
     std::vector<Service* > services = _houseMaster.getAvailableServices();
     Service* selection{};
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : services) {
-        options.insert(std::pair<std::string, std::function<void()>>(i->name, [&services, &selection, &i](){
+        options.insert(std::pair<std::string, std::function<void()>>(i->name, [&selection, &i](){
             selection = i;
             std::cout << "Selected " << i->name << "\n";
         }));
     }
+    std::string goBack;
+    std::stringstream ss{}; ss << "Go Back"; goBack = ss.str();
+    options.insert(std::pair<std::string, std::function<void()>>(goBack, [&running, &selection](){
+        running = false;
+        selection = new Service();
+    }));
     Menu servicesMenu("Select a service", options);
     servicesMenu.show();
     servicesMenu.select();
     servicesMenu.execute();
     return *selection;
+}
+
+void Interface::showService(Service service) {
+    std::string pro = service.pro ? "yes" : "no";
+    std::cout << " __________HOUSE MASTER__________ " << std::endl;
+    std::cout << "| " << std::setw(30) << std::right << service.name << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [" << "Base Price" << "] " << std::setw(16) << std::right << service.basePrice << "€ |" << std::endl;
+    std::cout << "| [" << "Duration" << "] " << std::setw(19) << std::right << service.duration.dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Professional" << "] " << std::setw(15) << std::right << pro << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [Enter] Go Back                |" << std::endl;
+    std::cout << "| [0] Exit Program               |" << std::endl;
+    std::cout << "|________________________________|" << std::endl;
+    std::cin.ignore();
 }
 

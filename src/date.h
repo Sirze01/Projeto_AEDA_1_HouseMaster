@@ -4,6 +4,7 @@
 #include <string>
 #include <stdexcept>
 #include <sstream>
+#include <iomanip>
 
 
 struct date {
@@ -24,7 +25,7 @@ struct date {
 
     int getDaysInMonth() const;
 
-    bool isValidDate(bool throwExcept=false);
+    bool isValidDate(bool throwExcept=false) const;
 
     class InvalidDate;
 

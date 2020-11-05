@@ -16,13 +16,14 @@ class Interface {
 public:
     Interface() = default;
     explicit Interface(HouseMaster houseMaster);
-    void selectRole();
+    void selectRole(bool &running);
     void userLogin();
     bool readRole(const std::string &username);
     void adminLogin();
-    void clientOpperations();
+    void clientOpperations(bool &running);
     date readInterventionDate();
-    Service selectService();
+    Service selectService(bool &running);
+    void showService(Service service);
 private:
     HouseMaster _houseMaster;
     Individual *_user;

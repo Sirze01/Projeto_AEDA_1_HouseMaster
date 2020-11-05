@@ -32,7 +32,7 @@ int date::getDaysInMonth() const {
     } else return -1;     // exception
 }
 
-bool date::isValidDate(bool throwExcept) {
+bool date::isValidDate(bool throwExcept) const {
     if (day < 1 || day > getDaysInMonth() || month < 1 || month > 12 || hours > 23 || minutes > 59) {
         if(throwExcept)
             throw InvalidDate(dateToStr() + " isn't a valid date!");
@@ -45,7 +45,13 @@ date::InvalidDate::InvalidDate(const std::string &error_msg) : std::invalid_argu
 
 std::string date::dateToStr() const {
     std::ostringstream stream;
-    stream << day << '/' << month << '/' << year << "  " << hours << ':' << minutes;
+    if (isValidDate()) {
+        stream << std::setfill('0');
+        stream << std::setw(2) << day << '/' << month << '/' << std::setw(4)
+        << year << "  " << std::setw(2) << hours << ':' << minutes;
+    } else {
+        stream << std::setw(2) << hours << "h" << minutes;
+    }
     return stream.str();
 }
 
