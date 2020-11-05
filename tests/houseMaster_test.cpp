@@ -65,6 +65,7 @@ TEST(HouseMaster, fileConstructor){
     
 }
 
+/*
 TEST(HouseMaster, getters){
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
@@ -86,7 +87,12 @@ TEST(HouseMaster, sortCollaboratorsByScore){
 }
 
 TEST(HouseMaster, assignCollaborator){
+    HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
+                             std::ifstream("../../data/clients.txt"),
+                             std::ifstream("../../data/services.txt"));
 
+    houseMaster1.getClients().at(0)->requestIntervention(date(23,12,2020,9,30),
+                                                         *houseMaster1.getAvailableServices().at(0));
 }
 
 TEST(HouseMaster, UnnavailableAppointment){
