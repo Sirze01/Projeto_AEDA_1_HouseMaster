@@ -2,34 +2,18 @@
 
 #include <utility>
 #include <algorithm>
+#include <sstream>
 
+Individual::Individual():_displayName(), _id() {}
 
-Individual::Individual(std::string name) : _displayName(std::move(name)), _id() {
+Individual::Individual(std::string  name) : _displayName(std::move(name)), _id(0) {
 }
 
 std::string Individual::getName() {
     return _displayName;
 }
 
-unsigned int Individual::getId() const {
-    return _id;
-}
 
-bool Individual::operator==(const Individual& ind2) const {
-    return _uniqueName == ind2._uniqueName;
-}
-
-const std::vector<Intervention *> &Individual::getAssociatedInterventions() const {
-    return _associatedInterventions;
-}
-
-std::string Individual::getInfo() const {
-    return std::string();
-}
-
-std::string Individual::getUniqueName() const {
-    return _uniqueName;
-}
 
 
 // Collaborator associated methods
@@ -48,9 +32,6 @@ Collaborator::Collaborator(std::vector<Service *> functions, const std::string &
                                                                                                _services(std::move(functions)),
                                                                                                _score(newHere), _pro(pro) {
     _id = _idSeq++;
-    std::stringstream ss;
-    ss << "collab" << _id;
-    _uniqueName = ss.str();
 }
 
 
@@ -61,6 +42,10 @@ bool Collaborator::canPreform(Service *service) {
         return s1.name == s2.name;
     });
     return found != _services.end();
+}
+
+bool Collaborator::operator==(const Collaborator& ind2) const {
+    return _id == ind2._id;
 }
 
 
@@ -104,12 +89,11 @@ bool Collaborator::canDo(Intervention *intervention) {
     return isAvailable(start, duration) && canPreform(service) && hasQualificationToPreform(intervention);
 }
 
-std::string Collaborator::getInfo() const {
-    std::stringstream ss{};
-    ss << "Name: " << _displayName << " Score: " << _score;
-    return ss.str();
+std::string Collaborator::getId() const {
+    std::ostringstream outStr;
+    outStr << "collab" << _id;
+    return outStr.str();
 }
-
 
 
 
@@ -119,9 +103,6 @@ unsigned Client::_idSeq = 0;
 Client::Client(unsigned int nif, const std::string &name, bool premium)
         : Individual(name), _nif(nif), _requestedInterventions(), _premium(premium) {
     _id = _idSeq++;
-    std::stringstream ss;
-    ss << "client" << _id;
-    _uniqueName = ss.str();
 }
 
 unsigned int Client::getNif() {
@@ -142,10 +123,12 @@ bool Client::isPremium() const {
     return _premium;
 }
 
-std::string Client::getInfo() const {
-    std::stringstream ss{};
-    std::string pro = _premium ? "yes" : "no";
-    ss << "Name: " << _displayName << " NIF: " << _nif << " Pro: " << pro;
-    return ss.str();
+std::string Client::getId() const {
+    std::ostringstream outStr;
+    outStr << "client" << _id;
+    return outStr.str();
 }
 
+bool Client::operator==(const Client& ind2) const {
+    return _id == ind2._id;
+}

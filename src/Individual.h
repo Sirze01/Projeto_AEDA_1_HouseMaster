@@ -10,28 +10,18 @@
 class Individual {
 public:
 
-    Individual() = default;
+    Individual();
 
     explicit Individual(std::string name);
 
-    unsigned int getId() const;
+    virtual std::string getId() const = 0;
 
     std::string getName();
-  
-    bool operator== (const Individual& ind2) const;
-
-    const std::vector<Intervention *> &getAssociatedInterventions() const;
-
-    virtual std::string getInfo() const;
-
-    std::string getUniqueName() const;
 
 
 protected:
     std::string _displayName;
-    std::string _uniqueName;
-    unsigned int _id{};
-    std::vector<Intervention *> _associatedInterventions;
+    unsigned int _id;
 };
 
 
@@ -71,9 +61,14 @@ public:
 
     static unsigned int _idSeq;
 
-    std::string getInfo() const override;
+    std::string getId() const override;
+
+    bool operator== (const Collaborator& ind2) const;
+
+    //std::vector<Intervention*> getAssociatedInterventions(){return _associatedInterventions};
 
 private:
+    //std::vector<Intervention*> _associatedInterventions;
     std::vector<Classification> _classifications;
     std::vector<Service *> _services;
     Classification _score;
@@ -96,8 +91,9 @@ public:
 
     const std::vector<Intervention *> &getRequestedInterventions() const;
 
-    std::string getInfo() const override;
+    std::string getId() const override;
 
+    bool operator== (const Client& ind2) const;
 
 private:
     unsigned int _nif;

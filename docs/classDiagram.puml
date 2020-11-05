@@ -35,10 +35,11 @@
  }
 
 class HouseMaster{
-    - vector<servicesType*> availableServices
-    - vector<individuals*> collaborators
-    - vector<individuals*> clients
-    - vector<intervention*> interventions
+    - std::unordered_set<servicesType*> availableServices
+    - std::unordered_map<std::string, Individual*> usernames
+    - std::map<std::string, Collaborator*> collaborators
+    - std::unordered_map<std::string, Client*> clients
+    - std::unordered_set<intervention*> interventions
     ----
     + void houseMaster()
     

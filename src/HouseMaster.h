@@ -15,7 +15,7 @@
 
 class HouseMaster {
 public:
-    HouseMaster() = default;
+    HouseMaster();
 
     HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services);
 

@@ -4,6 +4,8 @@ HouseMaster::InexistentService::InexistentService(const std::string &error_msg) 
 
 HouseMaster::UnavailableAppointment::UnavailableAppointment(const std::string &error_msg): std::logic_error(error_msg) {}
 
+HouseMaster::HouseMaster(): _availableServices(), _clients(), _collaborators(), _interventions() {}
+
 HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services) {
 
     // read services.txt
