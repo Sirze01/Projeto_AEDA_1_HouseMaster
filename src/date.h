@@ -4,6 +4,7 @@
 #include <string>
 #include <stdexcept>
 #include <sstream>
+#include <iomanip>
 
 
 struct date {
@@ -18,11 +19,13 @@ struct date {
     date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
          bool valid= true);
 
+    date(const std::string &date);
+
     void readDuration(const std::string &duration);
 
     int getDaysInMonth() const;
 
-    bool isValidDate(bool throwExcept=false);
+    bool isValidDate(bool throwExcept=false) const;
 
     class InvalidDate;
 

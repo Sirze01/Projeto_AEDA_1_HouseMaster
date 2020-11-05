@@ -9,19 +9,28 @@
 
 class Individual {
 public:
+
+    Individual() = default;
+
     explicit Individual(std::string name);
 
     unsigned int getId() const;
 
     std::string getName();
   
-    bool operator== (const Individual& ind2);
+    bool operator== (const Individual& ind2) const;
 
     const std::vector<Intervention *> &getAssociatedInterventions() const;
 
+    virtual std::string getInfo() const;
+
+    std::string getUniqueName() const;
+
+
 protected:
-    std::string _name;
-    unsigned int _id;
+    std::string _displayName;
+    std::string _uniqueName;
+    unsigned int _id{};
     std::vector<Intervention *> _associatedInterventions;
 };
 
@@ -56,12 +65,13 @@ public:
 
     int getScore();
 
-
     void addClassification(Classification classification);
 
     void updateScore();
 
     static unsigned int _idSeq;
+
+    std::string getInfo() const override;
 
 private:
     std::vector<Classification> _classifications;
@@ -85,6 +95,8 @@ public:
     static unsigned int _idSeq;
 
     const std::vector<Intervention *> &getRequestedInterventions() const;
+
+    std::string getInfo() const override;
 
 
 private:

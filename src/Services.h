@@ -10,9 +10,10 @@
 
 struct Service {
     std::string name;
-    bool pro;
-    float basePrice;
+    bool pro{};
+    float basePrice{};
     date duration;
+    Service() = default;
     Service(const std::string &name, bool pro, float basePrice, const date &duration);
 };
 

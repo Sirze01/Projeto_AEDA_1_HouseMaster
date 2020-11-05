@@ -119,8 +119,26 @@ Service *HouseMaster::findServiceByName(const std::string &name) {
     auto found = std::find_if(_availableServices.begin(), _availableServices.end(), [&name](Service* s1) {
         return s1->name == name;
     });
+    // exception!!
     return *found;
 }
+
+Client *HouseMaster::findClientByUniqueName(const std::string &name) {
+    auto found = std::find_if(_clients.begin(), _clients.end(), [&name](Client* c1) {
+        return c1->getUniqueName() == name;
+    });
+    // exception!!
+    return *found;
+}
+
+Collaborator *HouseMaster::findCollabByUniqueName(const std::string &name) {
+    auto found = std::find_if(_collaborators.begin(), _collaborators.end(), [&name](Collaborator* c1) {
+        return c1->getUniqueName() == name;
+    });
+    // exception!!
+    return *found;
+}
+
 
 void HouseMaster::assignColaborator(Intervention * intervention) {
 
