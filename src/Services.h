@@ -27,13 +27,14 @@ enum processState {
 
 class Intervention {
 private:
-    unsigned int _id;
-    date _startingTime;
+    //unsigned int _id;
+    std::string _clientId;
+    std::string _collabId;
     Service _type;
+    date _startingTime;
     bool _forcePro;
-    processState _state;
     float _price;
-    unsigned int _collabId;
+    processState _state;
 
 public:
     static unsigned int _idSeq;
@@ -46,7 +47,9 @@ public:
 
     bool getForcePro() const;
 
-    unsigned int getCollabId() const;
+    std::string getCollabId() const;
+
+    std::string getClientId() const;
 
     void setCollabId(unsigned int collabId);
 
