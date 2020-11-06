@@ -2,6 +2,7 @@
 #define SRC_INDIVIDUAL_H
 
 #include <string>
+#include <unordered_set>
 #include <vector>
 #include <cmath>
 #include <numeric>
@@ -39,13 +40,13 @@ enum Classification {
 
 class Collaborator : public Individual {
 public:
-    Collaborator(std::vector<Service *> functions, const std::string &name, bool pro);
+    Collaborator(std::vector<std::string> functions, const std::string &name, bool pro);
 
-    std::vector<Service *> getServices();
+    std::vector<std::string> getServices();
 
     bool isPro() const;
 
-    bool canPreform(Service *service);
+    bool canPreform(const std::string& service);
 
     bool isAvailable(date start, date duration);
 
@@ -65,12 +66,14 @@ public:
 
     bool operator== (const Collaborator& ind2) const;
 
-    //std::vector<Intervention*> getAssociatedInterventions(){return _associatedInterventions};
+    bool operator< (const Collaborator& col2) const;
+
 
 private:
-    //std::vector<Intervention*> _associatedInterventions;
+
+    std::unordered_set<Intervention*> _associatedInterventions;
     std::vector<Classification> _classifications;
-    std::vector<Service *> _services;
+    std::vector<std::string> _services;
     Classification _score;
     bool _pro;
 };
@@ -79,17 +82,13 @@ private:
 // Client code
 class Client : public Individual {
 public:
+    static unsigned int _idSeq;
+
     Client(unsigned int nif, const std::string &name, bool premium);
 
     unsigned int getNif();
 
     bool isPremium() const;
-
-    int requestIntervention(date appointment, Service type);
-
-    static unsigned int _idSeq;
-
-    const std::vector<Intervention *> &getRequestedInterventions() const;
 
     std::string getId() const override;
 
@@ -97,7 +96,6 @@ public:
 
 private:
     unsigned int _nif;
-    std::vector<Intervention *> _requestedInterventions;
     bool _premium;
 };
 

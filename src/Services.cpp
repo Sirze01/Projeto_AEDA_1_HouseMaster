@@ -1,19 +1,10 @@
 #include"Services.h"
 #include <utility>
 
-// Despite the static variables being already 0 initialized
-//unsigned Intervention::_idSeq = 0;
-
-/*
-Intervention::Intervention(date appointment, Service type, bool forcePro) : _startingTime(appointment),_type(std::move(type)),
-                                                                            _forcePro(forcePro), _id(++_idSeq),
-                                                                            _state(Scheduled), _price() {}
-*/
-
-Intervention::Intervention(date appointment, Service type, bool forcePro) : _startingTime(appointment),_type(std::move(type)),
+Intervention::Intervention(const date& appointment, const Service& type, bool forcePro) : _startingTime(appointment),_type(std::move(type)),
                                                                             _forcePro(forcePro),_state(Scheduled), _price() {}
 
-Service* Intervention::getService() {
+const Service* Intervention::getService()const{
     return &_type;
 }
 
@@ -37,7 +28,7 @@ std::string Intervention::getClientId() const {
     return _clientId;
 }
 
-void Intervention::setCollabId(unsigned int collabId) {
+void Intervention::setCollabId(const std::string& collabId) {
     _collabId = collabId;
 }
 

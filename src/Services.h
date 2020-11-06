@@ -19,10 +19,9 @@ struct Service {
 
 
 enum processState {
-    WaitingPayment,
     Scheduled,
     InProgress,
-    Concluded
+    Canceled
 };
 
 class Intervention {
@@ -37,13 +36,12 @@ private:
     processState _state;
 
 public:
-    static unsigned int _idSeq;
 
-    Intervention(date appointment, Service type, bool forcePro);
+    Intervention(const date& appointment, const Service& type, bool forcePro);
 
     const date *getStartingTime() const;
 
-    Service* getService();
+    const Service* getService() const;
 
     bool getForcePro() const;
 
@@ -51,7 +49,7 @@ public:
 
     std::string getClientId() const;
 
-    void setCollabId(unsigned int collabId);
+    void setCollabId(const std::string& collabId);
 
     processState getProcessState();
 

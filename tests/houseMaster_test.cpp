@@ -21,84 +21,43 @@ TEST(HouseMaster, fileConstructor){
     svc.push_back(Service("canalizador", true, 5, date(0,0,0,3,0,0)));
     svc.push_back(Service("andar a correr atras de uma princesa ou la o que e", false, 1, date(0,0,0,4,0,0)));
     for(size_t i = 0; i < svc.size(); i++){
-        EXPECT_EQ(svc.at(i).name, houseMaster1.getAvailableServices().at(i)->name);
-        EXPECT_EQ(svc.at(i).basePrice, houseMaster1.getAvailableServices().at(i)->basePrice);
-        EXPECT_EQ(svc.at(i).duration, houseMaster1.getAvailableServices().at(i)->duration);
-        EXPECT_EQ(svc.at(i).pro, houseMaster1.getAvailableServices().at(i)->pro);
+        EXPECT_EQ(svc.at(i).name, houseMaster1.getAvailableServices()[svc.at(i).name]->name);
+        EXPECT_EQ(svc.at(i).pro, houseMaster1.getAvailableServices()[svc.at(i).name]->pro);
+        EXPECT_EQ(svc.at(i).duration, houseMaster1.getAvailableServices()[svc.at(i).name]->duration);
+        EXPECT_EQ(svc.at(i).basePrice, houseMaster1.getAvailableServices()[svc.at(i).name]->basePrice);
     }
 
 
 
     std::vector<Client> cltVec;
-    cltVec.push_back(Client(1111232, "cliente muito simpatico", false));
+    cltVec.push_back(Client(1111232, "mafarrico", false));
     cltVec.push_back(Client(374435, "cliente que faz comentarios racistas", false));
     cltVec.push_back(Client(999999999, "cliente que nao se lembra do nome", true));
     cltVec.push_back(Client(5045085040508, "adriano malheiro caloteiro", false));
 
-    for(size_t i = 0; i<cltVec.size(); i++){
-        EXPECT_EQ(cltVec.at(i).getName(), houseMaster1.getClients().at(i)->getName());
-        EXPECT_EQ(cltVec.at(i).getNif(), houseMaster1.getClients().at(i)->getNif());
-        EXPECT_EQ(cltVec.at(i).getAssociatedInterventions(), houseMaster1.getClients().at(i)->getAssociatedInterventions());
-        EXPECT_EQ(cltVec.at(i).getRequestedInterventions(), houseMaster1.getClients().at(i)->getRequestedInterventions());
+    for(size_t i = 0; i<1; i++){
+        EXPECT_EQ(cltVec.at(i).getName(), houseMaster1.getClients()["client0"]->getName());
+        EXPECT_EQ(cltVec.at(i).getNif(), houseMaster1.getClients()["client0"]->getNif());
     }
 
     std::vector<Collaborator> colVec;
-    std::vector<Service*> tmpvec;
-    tmpvec.push_back(houseMaster1.findServiceByName("ajudar os amiguinhos com fisica"));
-    tmpvec.push_back(houseMaster1.findServiceByName("ajudar os amiguinhos com amat"));
-    tmpvec.push_back(houseMaster1.findServiceByName("jantar na cantina as 18h30"));
+    std::vector<std::string> tmpvec;
+    tmpvec.push_back("ajudar os amiguinhos com fisica");
+    tmpvec.push_back("ajudar os amiguinhos com amat");
+    tmpvec.push_back("jantar na cantina as 18h30");
     colVec.push_back(Collaborator(tmpvec, "Miro Osvaldo", true));
     tmpvec.clear();
-    tmpvec.push_back(houseMaster1.findServiceByName("montar um carro do nada"));
-    tmpvec.push_back(houseMaster1.findServiceByName("desmontar um computador"));
+    tmpvec.push_back("montar um carro do nada");
+    tmpvec.push_back("desmontar um computador");
     colVec.push_back(Collaborator(tmpvec, "Jose Retiros", false));
-    tmpvec.clear();
-    tmpvec.push_back(houseMaster1.findServiceByName("canalizador"));
-    tmpvec.push_back(houseMaster1.findServiceByName("andar a correr atras de uma princesa ou la o que e"));
+    tmpvec.push_back("canalizador");
+    tmpvec.push_back("andar a correr atras de uma princesa ou la o que e");
     colVec.push_back(Collaborator(tmpvec, "Super Mario", true));
-    for(size_t i = 0; i < colVec.size(); i++){
-        EXPECT_EQ(colVec.at(i).getName(), houseMaster1.getCollaborators().at(i)->getName());
+    /*for(size_t i = 0; i < colVec.size(); i++){
+        EXPECT_EQ(colVec.at(i).getName(), houseMaster1.getCollaborators()[]->getName());
         EXPECT_EQ(colVec.at(i).getScore(), houseMaster1.getCollaborators().at(i)->getScore());
         EXPECT_EQ(colVec.at(i).getServices(), houseMaster1.getCollaborators().at(i)->getServices());
         EXPECT_EQ(colVec.at(i).isPro(), houseMaster1.getCollaborators().at(i)->isPro());
-    }
+    }*/
     
-}
-
-/*
-TEST(HouseMaster, getters){
-    HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
-                             std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"));
-
-
-}
-
-TEST(HouseMaster, availableServicesManip){
-
-}
-
-TEST(HouseMaster, updateInterventions){
-
-}
-
-TEST(HouseMaster, sortCollaboratorsByScore){
-
-}
-
-TEST(HouseMaster, assignCollaborator){
-    HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
-                             std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"));
-
-    houseMaster1.getClients().at(0)->requestIntervention(date(23,12,2020,9,30),
-                                                         *houseMaster1.getAvailableServices().at(0));
-}
-
-TEST(HouseMaster, UnnavailableAppointment){
-
-}
-
-TEST(HouseMaster, InexistentService){
-
 }

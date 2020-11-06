@@ -7,7 +7,6 @@ HouseMaster::UnavailableAppointment::UnavailableAppointment(const std::string &e
 HouseMaster::HouseMaster(): _availableServices(), _clients(), _collaborators(), _interventions() {}
 
 HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services) {
-
     // read services.txt
     for (std::string line; std::getline(services, line);) {
 
@@ -28,9 +27,7 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         std::getline(lss, durationStr, ',');
         date duration; duration.readDuration(durationStr);
 
-        auto service = new Service(name, pro, price, duration);
-        _availableServices.push_back(service);
-
+        addAvailableService(name, pro, price, duration);
     }
 
     // read collaborators.txt
@@ -44,13 +41,12 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         std::getline(lss, proStr, ',');
         // services
         std::string serviceName{};
-        std::vector<Service* > collabServices{};
+        std::vector<std::string> collabServices;
         while (std::getline(lss, serviceName, ',')) {
-            auto *service = findServiceByName(serviceName);
-            collabServices.push_back(service);
+            collabServices.push_back(serviceName);
         }
-        auto collaborator = new Collaborator(collabServices, name, proStr=="yes");
-        _collaborators.push_back(collaborator);
+
+        addCollaborator(collabServices, name, proStr=="yes");
     }
 
     // read clients.txt
@@ -62,36 +58,32 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         std::getline(lss, name, ',');
         std::getline(lss, nifStr, ',');
         std::getline(lss, premiumStr, ',');
-        auto client = new Client(std::stoul(nifStr), name, premiumStr == "yes");
-        this->_clients.push_back(client);
+
+        addClient(std::stoul(nifStr), name, premiumStr == "yes");
     }
 }
 
-const std::vector<Collaborator *> &HouseMaster::getCollaborators() const {
+std::map<std::string, Collaborator *> & HouseMaster::getCollaborators() {
     return _collaborators;
 }
 
-const std::vector<Client *> &HouseMaster::getClients() const {
-    return _clients;
-}
 
-const std::vector<Service *> &HouseMaster::getAvailableServices() const {
-    return _availableServices;
-}
 
-const std::set<std::pair<Client *, Intervention *> > &HouseMaster::getInterventions() const {
+std::vector<Intervention *>& HouseMaster::getInterventions() {
     return _interventions;
 }
 
-void HouseMaster::addAvailableService(Service *service) {
-    _availableServices.push_back(service);
+void HouseMaster::addAvailableService(const std::string& name, bool pro, float basePrice, date duration) {
+    auto service = new Service(name, pro, basePrice, duration);
+    _availableServices.insert({name, service});
 }
 
-void HouseMaster::removeAvailableService(Service *service) {
+void HouseMaster::removeAvailableService(const std::string& serviceName) {
     try {
-        auto it = std::find(_availableServices.begin(), _availableServices.end(), service);
+        auto it = _availableServices.find(serviceName);
         if (it != _availableServices.end()) {
-            delete *it;
+            delete it->second;
+            _availableServices.erase(it);
         } else {
             throw InexistentService("There's no such service!");
         }
@@ -101,58 +93,138 @@ void HouseMaster::removeAvailableService(Service *service) {
     }
 }
 
-void HouseMaster::updateInterventions() {
-    for (const auto &client : _clients) {
-        for (const auto &intervention : client->getRequestedInterventions()) {
-            Intervention *inter = intervention;
-            auto registry = std::make_pair(client, inter);
-            _interventions.insert(registry);
+std::unordered_map<std::string, Service *>& HouseMaster::getAvailableServices() {
+    return _availableServices;
+}
+
+void HouseMaster::addCollaborator(const std::vector<std::string>& functions, const std::string &name, bool pro) {
+    auto collab = new Collaborator(functions, name, pro);
+    _collaborators.insert({collab->getId(), collab});
+    _usernameMap.insert({collab->getId(), collab->getId()});
+}
+
+void HouseMaster::addCollaborator(const std::string& username,  Collaborator* collaborator) {
+    _collaborators.insert(std::pair<std::string, Collaborator*>(collaborator->getId(), collaborator));
+    _usernameMap.insert({username, collaborator->getId()});
+
+}
+
+void HouseMaster::removeCollaborator(const std::string &id) {
+    auto it = _collaborators.find(id);
+    auto UsernameIt = std::find_if(_usernameMap.begin(), _usernameMap.end(),
+                                   [&id](const std::pair<std::string, std::string>& mapped){return mapped.second == id;});
+    if(it != _collaborators.end()){
+        if(UsernameIt != _usernameMap.end()) {
+            _collaborators.erase(it);
+            _usernameMap.erase(UsernameIt);
         }
+        else{
+            //throws except
+        }
+
+    }
+    else{
+        //throws except
     }
 }
 
-void HouseMaster::sortCollaboratorsByScore() {
-    std::sort(_collaborators.begin(), _collaborators.end(), [](Collaborator* collaborator1, Collaborator* collaborator2) {
-        return collaborator1->getScore() > collaborator2->getScore();
-    });
+void HouseMaster::deleteCollaborator(const std::string &id) {
+    auto it = _collaborators.find(id);
+    auto UsernameIt = std::find_if(_usernameMap.begin(), _usernameMap.end(),
+                                   [&id](const std::pair<std::string, std::string>& mapped){return mapped.second == id;});
+    if(it != _collaborators.end()){
+        if(UsernameIt != _usernameMap.end()) {
+            delete it->second;
+            _collaborators.erase(it);
+            _usernameMap.erase(UsernameIt);
+        }
+        else{
+            //throws except
+        }
+
+    }
+    else{
+        //throws except
+    }
 }
 
-Service *HouseMaster::findServiceByName(const std::string &name) {
-    auto found = std::find_if(_availableServices.begin(), _availableServices.end(), [&name](Service* s1) {
-        return s1->name == name;
-    });
-    // exception!!
-    return *found;
+void HouseMaster::addClient(unsigned int nif, const std::string &name, bool premium) {
+    auto client = new Client(nif, name, premium);
+    _clients.insert({client->getId(), client});
+    _usernameMap.insert({client->getId(), client->getId()});
 }
 
-Client *HouseMaster::findClientByUniqueName(const std::string &name) {
-    auto found = std::find_if(_clients.begin(), _clients.end(), [&name](Client* c1) {
-        return c1->getUniqueName() == name;
-    });
-    // exception!!
-    return *found;
+void HouseMaster::removeClient(const std::string &clientId) {
+    auto ClientIt = _clients.find(clientId);
+    auto UsernameIt = std::find_if(_usernameMap.begin(), _usernameMap.end(),
+                                   [&clientId](const std::pair<std::string, std::string>& mapped){return mapped.second == clientId;});
+    if(ClientIt != _clients.end()){
+        if(UsernameIt != _usernameMap.end()) {
+            delete ClientIt->second;
+            _clients.erase(ClientIt);
+            _usernameMap.erase(UsernameIt);
+        }
+        else{
+            //throws except
+        }
+
+    }
+    else{
+        //throws except
+    }
 }
 
-Collaborator *HouseMaster::findCollabByUniqueName(const std::string &name) {
-    auto found = std::find_if(_collaborators.begin(), _collaborators.end(), [&name](Collaborator* c1) {
-        return c1->getUniqueName() == name;
-    });
-    // exception!!
-    return *found;
+std::unordered_map<std::string, Client *>& HouseMaster::getClients() {
+    return _clients;
+}
+
+void HouseMaster::addIntervention(const date &appointment, const std::string &type, bool forcePro) {
+    auto it = _availableServices.find(type);
+    if(it != _availableServices.end()) {
+        auto newIntervention = new Intervention(appointment, *_availableServices[type], forcePro);
+        _interventions.push_back(newIntervention);
+    }
+    else{
+        //throw except
+    }
+}
+
+std::vector<std::pair<std::string, Collaborator*>> HouseMaster::sortCollaboratorsByScore() {
+    std::vector<std::pair<std::string, Collaborator*>> temp;
+    for(const auto& elem : _collaborators){
+        temp.emplace_back(elem);
+    }
+    std::sort(temp.begin(), temp.end(), colComparer);
+    return temp;
+
 }
 
 
-void HouseMaster::assignColaborator(Intervention * intervention) {
 
-    sortCollaboratorsByScore();
+Individual* HouseMaster::findByUsername(const std::string &username) {
+    auto it = _usernameMap.find(username);
+    if(it != _usernameMap.end()){
+        if(it->second.substr(0, 6) == "collab")
+            return _collaborators[it->second];
+        else if(it->second.substr(0, 6) == "client")
+            return _clients[it->second];
+    }
+    else{
+        // throw except
+    }
+}
 
-    auto found = std::find_if(_collaborators.begin(), _collaborators.end(),
-                              [&intervention](Collaborator* collaborator) -> bool{
-        return collaborator->canDo(intervention);
+
+
+void HouseMaster::assignColaborator(Intervention * intervention, const std::vector<std::pair<std::string, Collaborator*>>& orderedColls) {
+
+    auto found = std::find_if(orderedColls.begin(), orderedColls.end(),
+                              [&intervention](std::pair<std::string, Collaborator*> collaborator) -> bool{
+        return collaborator.second->canDo(intervention);
     });
 
-    if(found != _collaborators.end()) {
-        intervention->setCollabId(_collaborators.at(std::distance(_collaborators.begin(), found))->getId());
+    if(found != orderedColls.end()) {
+        intervention->setCollabId(found->first);
     }
     else
         throw UnavailableAppointment("No collaborators available to the desired date!");

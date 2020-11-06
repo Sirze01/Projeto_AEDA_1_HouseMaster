@@ -5,12 +5,19 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <unordered_set>
 #include <set>
-#include "Individual.h"
-#include "Services.h"
+#include <map>
+#include <unordered_map>
 #include <utility>
 #include <stdexcept>
 #include <iostream>
+#include "Individual.h"
+#include "Services.h"
+
+bool colComparer(std::pair<std::string, Collaborator*>& a, std::pair<std::string, Collaborator*>& b){
+    return a.second->getScore() > b.second->getScore();
+}
 
 
 class HouseMaster {
@@ -19,39 +26,48 @@ public:
 
     HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services);
 
-    const std::vector<Collaborator *> &getCollaborators() const;
+    std::map<std::string, Collaborator *>& getCollaborators() ;
 
-    const std::vector<Client *> &getClients() const;
+    std::unordered_map<std::string, Client *>& getClients() ;
 
-    const std::vector<Service *> &getAvailableServices() const;
+    std::vector<Intervention *>& getInterventions() ;
 
-    const std::set<std::pair<Client *, Intervention *> > &getInterventions() const;
+    void addAvailableService(const std::string& name, bool pro, float basePrice, date duration); //DONE
 
-    void addAvailableService(Service *service);
+    void removeAvailableService(const std::string& serviceName);                                 //DONE
 
-    void removeAvailableService(Service *service);
+    std::unordered_map<std::string, Service*>& getAvailableServices();
 
-    void updateInterventions();
+    void addCollaborator(const std::vector<std::string>& functions, const std::string &name, bool pro);
 
-    void assignColaborator(Intervention* intervention);
+    void addCollaborator(const std::string& username, Collaborator* collaborator);
 
-    void sortCollaboratorsByScore();
+    void removeCollaborator(const std::string& collId);
 
-    Service* findServiceByName(const std::string &name);
+    void deleteCollaborator(const std::string& collId);
 
-    Client* findClientByUniqueName(const std::string &name);
+    void addClient(unsigned int nif, const std::string &name, bool premium);
 
-    Collaborator* findCollabByUniqueName(const std::string &name);
+    void removeClient(const std::string& clientId);
+
+    void addIntervention(const date& appointment, const std::string& type, bool forcePro);
+
+    void assignColaborator(Intervention*, const std::vector<std::pair<std::string, Collaborator*>>&);
+
+    std::vector<std::pair<std::string, Collaborator*>> sortCollaboratorsByScore();
+
+    Individual* findByUsername(const std::string &name);
 
     class UnavailableAppointment;
 
     class InexistentService;
 
 private:
-    std::vector<Collaborator *> _collaborators;
-    std::vector<Client *> _clients;
-    std::vector<Service *> _availableServices;
-    std::set<std::pair<Client *, Intervention *> > _interventions;
+    std::unordered_map<std::string, std::string> _usernameMap;
+    std::map<std::string, Collaborator*> _collaborators;
+    std::unordered_map<std::string, Client*> _clients;
+    std::unordered_map<std::string, Service*> _availableServices;
+    std::vector<Intervention*> _interventions;
 };
 
 
@@ -64,6 +80,7 @@ class HouseMaster::UnavailableAppointment: public std::logic_error{
 public:
     explicit UnavailableAppointment(const std::string &error_msg);
 };
+
 
 
 
