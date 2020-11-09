@@ -8,6 +8,8 @@
 #include <numeric>
 #include "Services.h"
 
+class HouseMaster;
+
 class Individual {
 public:
 
@@ -91,6 +93,8 @@ public:
     bool isPremium() const;
 
     std::string getId() const override;
+
+    //void requestIntervention(HouseMaster* hm, const std::string& date, const std::string& type, bool forcePro=false);
 
     bool operator== (const Client& ind2) const;
 

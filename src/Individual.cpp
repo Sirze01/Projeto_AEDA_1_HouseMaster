@@ -1,5 +1,4 @@
 #include "Individual.h"
-#include "HouseMaster.h"
 
 #include <utility>
 #include <algorithm>
@@ -118,6 +117,13 @@ std::string Client::getId() const {
     outStr << "client" << _id;
     return outStr.str();
 }
+
+/*
+void Client::requestIntervention(HouseMaster* hm, const std::string &date, const std::string &type,
+                                 bool forcePro) {
+    hm->addIntervention(date,type, forcePro);
+}
+ */
 
 bool Client::operator==(const Client& ind2) const {
     return _id == ind2._id;

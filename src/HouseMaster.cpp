@@ -1,5 +1,9 @@
 #include "HouseMaster.h"
 
+bool colComparer(std::pair<std::string, Collaborator*>& a, std::pair<std::string, Collaborator*>& b){
+    return a.second->getScore() > b.second->getScore();
+}
+
 HouseMaster::InexistentService::InexistentService(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
 HouseMaster::UnavailableAppointment::UnavailableAppointment(const std::string &error_msg): std::logic_error(error_msg) {}
@@ -63,7 +67,7 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
     }
 }
 
-std::map<std::string, Collaborator *> & HouseMaster::getCollaborators() {
+std::unordered_map<std::string, Collaborator *> & HouseMaster::getCollaborators() {
     return _collaborators;
 }
 
@@ -198,8 +202,6 @@ std::vector<std::pair<std::string, Collaborator*>> HouseMaster::sortCollaborator
     return temp;
 
 }
-
-
 
 Individual* HouseMaster::findByUsername(const std::string &username) {
     auto it = _usernameMap.find(username);

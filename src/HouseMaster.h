@@ -15,10 +15,7 @@
 #include "Individual.h"
 #include "Services.h"
 
-bool colComparer(std::pair<std::string, Collaborator*>& a, std::pair<std::string, Collaborator*>& b){
-    return a.second->getScore() > b.second->getScore();
-}
-
+bool colComparer(std::pair<std::string, Collaborator*>& a, std::pair<std::string, Collaborator*>& b);
 
 class HouseMaster {
 public:
@@ -26,7 +23,7 @@ public:
 
     HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services);
 
-    std::map<std::string, Collaborator *>& getCollaborators() ;
+    std::unordered_map<std::string, Collaborator *>& getCollaborators() ;
 
     std::unordered_map<std::string, Client *>& getClients() ;
 
@@ -64,7 +61,7 @@ public:
 
 private:
     std::unordered_map<std::string, std::string> _usernameMap;
-    std::map<std::string, Collaborator*> _collaborators;
+    std::unordered_map<std::string, Collaborator*> _collaborators;
     std::unordered_map<std::string, Client*> _clients;
     std::unordered_map<std::string, Service*> _availableServices;
     std::vector<Intervention*> _interventions;
@@ -80,8 +77,5 @@ class HouseMaster::UnavailableAppointment: public std::logic_error{
 public:
     explicit UnavailableAppointment(const std::string &error_msg);
 };
-
-
-
 
 #endif //SRC_HOUSEMASTER_H
