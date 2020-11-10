@@ -18,12 +18,12 @@ std::string Individual::getName() {
 
 
 // Collaborator associated methods
-unsigned Collaborator::_idSeq = 0;
+unsigned Collaborator::_idSeqCol = 0;
 
 Collaborator::Collaborator(std::vector<std::string> functions, const std::string &name, bool pro) : Individual(name),
                                                                                                     _services(std::move(functions)),
                                                                                                     _score(newHere), _pro(pro) {
-    _id = _idSeq++;
+    _id = _idSeqCol++;
 }
 
 std::vector<std::string> Collaborator::getServices() {
@@ -82,7 +82,7 @@ void Collaborator::updateScore() {
 }
 
 std::string Collaborator::getId() const {
-    std::ostringstream outStr;
+    std::stringstream outStr;
     outStr << "collab" << _id;
     return outStr.str();
 }
@@ -97,11 +97,11 @@ bool Collaborator::operator<(const Collaborator &col2) const{
 
 
 // Client associated methods
-unsigned Client::_idSeq = 0;
+unsigned Client::_idSeqClt = 0;
 
 Client::Client(unsigned int nif, const std::string &name, bool premium)
         : Individual(name), _nif(nif), _premium(premium) {
-    _id = _idSeq++;
+    _id = _idSeqClt++;
 }
 
 unsigned int Client::getNif() {
@@ -113,17 +113,11 @@ bool Client::isPremium() const {
 }
 
 std::string Client::getId() const {
-    std::ostringstream outStr;
+    std::stringstream outStr;
     outStr << "client" << _id;
     return outStr.str();
 }
 
-/*
-void Client::requestIntervention(HouseMaster* hm, const std::string &date, const std::string &type,
-                                 bool forcePro) {
-    hm->addIntervention(date,type, forcePro);
-}
- */
 
 bool Client::operator==(const Client& ind2) const {
     return _id == ind2._id;

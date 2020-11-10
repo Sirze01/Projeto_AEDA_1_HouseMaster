@@ -62,7 +62,7 @@ public:
 
     void updateScore();
 
-    static unsigned int _idSeq;
+    static unsigned int _idSeqCol;
 
     std::string getId() const override;
 
@@ -84,7 +84,7 @@ private:
 // Client code
 class Client : public Individual {
 public:
-    static unsigned int _idSeq;
+    static unsigned int _idSeqClt;
 
     Client(unsigned int nif, const std::string &name, bool premium);
 
@@ -94,7 +94,7 @@ public:
 
     std::string getId() const override;
 
-    //void requestIntervention(HouseMaster* hm, const std::string& date, const std::string& type, bool forcePro=false);
+    void requestIntervention(HouseMaster& hm, const std::string& date, const std::string& type, bool forcePro=false);
 
     bool operator== (const Client& ind2) const;
 

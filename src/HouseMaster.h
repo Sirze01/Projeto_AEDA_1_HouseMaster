@@ -37,11 +37,11 @@ public:
 
     void addCollaborator(const std::vector<std::string>& functions, const std::string &name, bool pro);
 
-    void addCollaborator(const std::string& username, Collaborator* collaborator);
+    //void addCollaborator(const std::string& username, Collaborator* collaborator);
 
     void removeCollaborator(const std::string& collId);
 
-    void deleteCollaborator(const std::string& collId);
+    //void deleteCollaborator(const std::string& collId);
 
     void addClient(unsigned int nif, const std::string &name, bool premium);
 
@@ -59,6 +59,14 @@ public:
 
     class InexistentService;
 
+    class ExistentService;
+
+    class InexistentCollab;
+
+    class InexistentClient;
+
+    class ExistentClient;
+
 private:
     std::unordered_map<std::string, std::string> _usernameMap;
     std::unordered_map<std::string, Collaborator*> _collaborators;
@@ -67,15 +75,36 @@ private:
     std::vector<Intervention*> _interventions;
 };
 
+// Must add in the cpp also the definition of the Client::requestIntervention method to complete the forward declaration
+
+class HouseMaster::UnavailableAppointment: public std::logic_error{
+public:
+    explicit UnavailableAppointment(const std::string &error_msg);
+};
 
 class HouseMaster::InexistentService : public std::out_of_range {
 public:
     explicit InexistentService(const std::string &error_msg);
 };
 
-class HouseMaster::UnavailableAppointment: public std::logic_error{
+class HouseMaster::ExistentService : public std::out_of_range {
 public:
-    explicit UnavailableAppointment(const std::string &error_msg);
+    explicit ExistentService(const std::string &error_msg);
+};
+
+class HouseMaster::InexistentCollab : public std::out_of_range{
+public:
+    explicit InexistentCollab(const std::string &error_msg);
+};
+
+class HouseMaster::InexistentClient : public std::out_of_range{
+public:
+    explicit InexistentClient(const std::string &error_msg);
+};
+
+class HouseMaster::ExistentClient : public std::out_of_range{
+public:
+    explicit ExistentClient(const std::string &error_msg);
 };
 
 #endif //SRC_HOUSEMASTER_H
