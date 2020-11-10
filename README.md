@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/Sirze01/Projeto_AEDA_1_HouseMaster.svg?branch=main)](https://travis-ci.org/Sirze01/Projeto_AEDA_1_HouseMaster)
-[![Codecov](https://img.shields.io/codecov/c/github/Sirze01/Projeto_AEDA_1_HouseMaster?logo=codecov&style=flat-square)](https://codecov.io/gh/Sirze01/Projeto_AEDA_1_HouseMaster)
-[![CodeFactor](https://www.codefactor.io/repository/github/sirze01/projeto_aeda_1_housemaster/badge)](https://www.codefactor.io/repository/github/sirze01/projeto_aeda_1_housemaster)
+![Travis (.org) branch](https://img.shields.io/travis/Sirze01/Projeto_AEDA_1_HouseMaster/dev?logo=travis&style=flat-square)
+![Codecov branch](https://img.shields.io/codecov/c/github/Sirze01/Projeto_AEDA_1_HouseMaster/dev?logo=codecov&style=flat-square)
 # Projeto_AEDA_1_HouseMaster
