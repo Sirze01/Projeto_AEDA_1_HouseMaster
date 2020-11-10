@@ -17,9 +17,9 @@ HouseMaster::InexistentClient::InexistentClient(const std::string &error_msg) : 
 
 HouseMaster::ExistentClient::ExistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
-void Client::requestIntervention(HouseMaster& hm, const std::string &date, const std::string &type,
+void Client::requestIntervention(HouseMaster& hm, const date &_date, const std::string &type, const std::string &clientId,
                                  bool forcePro) {
-    hm.addIntervention(date,type, forcePro);
+    hm.addIntervention(_date, type, forcePro, clientId);
 }
 
 HouseMaster::HouseMaster() : _availableServices(), _clients(), _collaborators(), _interventions() {}
@@ -213,13 +213,14 @@ std::unordered_map<std::string, Client *> &HouseMaster::getClients() {
     return _clients;
 }
 
-void HouseMaster::addIntervention(const date &appointment, const std::string &type, bool forcePro) {
+void HouseMaster::addIntervention(const date &appointment, const std::string &type, bool forcePro, const std::string &clientId) {
     auto it = _availableServices.find(type);
     if (it != _availableServices.end()) {
         auto newIntervention = new Intervention(appointment, *_availableServices[type], forcePro);
+        newIntervention->setClientId(clientId);
         _interventions.push_back(newIntervention);
     } else {
-        //throw except
+        throw InexistentService("There's no such service!");
     }
 }
 

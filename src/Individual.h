@@ -21,6 +21,8 @@ public:
 
     std::string getName();
 
+    //void markAsComplete
+
 
 protected:
     std::string _displayName;
@@ -94,7 +96,9 @@ public:
 
     std::string getId() const override;
 
-    void requestIntervention(HouseMaster& hm, const std::string& date, const std::string& type, bool forcePro=false);
+    void requestIntervention(HouseMaster& hm, const date &_date, const std::string& type,const std::string &clientId, bool forcePro=false);
+
+    // void cancelIntervention
 
     bool operator== (const Client& ind2) const;
 

@@ -51,6 +51,8 @@ public:
 
     void setCollabId(const std::string& collabId);
 
+    void setClientId(const std::string &clientId);
+
     processState getProcessState();
 
     bool conflictsWith(date start, date duration);

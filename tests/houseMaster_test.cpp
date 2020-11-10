@@ -143,11 +143,22 @@ TEST(HouseMasterTest, clientsManip){
 
 
 TEST(HouseMasterTest, interventionManip){
+    Collaborator::_idSeqCol = 0;
+    Client::_idSeqClt = 0;
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
                              std::ifstream("../../data/services.txt"));
 
     // add Intervention
+    houseMaster1.addIntervention(date(12,05,2001,01,00,0), "desmontar um computador", true, "");
+    auto it =  std::find_if(houseMaster1.getInterventions().begin(), houseMaster1.getInterventions().end(), [](Intervention * intervention){
+        if(intervention->getClientId() == "" && intervention->getService()->name == "desmontar um computador"){return true;}});
+    EXPECT_FALSE(it == houseMaster1.getInterventions().end());
+
+    houseMaster1.getClients()["client3"]->requestIntervention(houseMaster1, date(12,12,2012,21,00), "canalizador", houseMaster1.getClients()["client3"]->getId());
+    it = std::find_if(houseMaster1.getInterventions().begin(), houseMaster1.getInterventions().end(), [](Intervention * intervention){
+        if(intervention->getClientId() == "client3" && intervention->getService()->name == "canalizador" && *intervention->getStartingTime() == date(12,05,2001,01,00,0)){return true;}});
+    EXPECT_FALSE(it == houseMaster1.getInterventions().end());
 }
 
 

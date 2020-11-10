@@ -32,6 +32,9 @@ void Intervention::setCollabId(const std::string& collabId) {
     _collabId = collabId;
 }
 
+void Intervention::setClientId(const std::string& clientId) {
+    _clientId = clientId;
+}
 
 const date* Intervention::getStartingTime() const {
     return &_startingTime;
