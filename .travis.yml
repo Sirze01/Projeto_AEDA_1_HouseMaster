@@ -17,7 +17,6 @@ addons:
 
 branches:
   only:
-    - main
     - dev
 
 before_install:
