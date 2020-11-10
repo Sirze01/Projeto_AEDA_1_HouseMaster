@@ -43,6 +43,13 @@ bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, dat
     return true;
 }
 
+bool Collaborator::canDo(HouseMaster& hm, const std::string &collabId, Intervention *intervention) {
+    const Service *service = intervention->getService();
+    date start = *intervention->getStartingTime();
+    date duration = service->duration;
+    return isAvailable(hm, collabId, start, duration) && canPreform(service->name) && hasQualificationToPreform(intervention);
+}
+
 void Collaborator::markInterventionAsInProgress(HouseMaster &hm, Intervention *a) {
     hm.changeinterventionState(a, InProgress);
 }
@@ -291,10 +298,10 @@ Individual *HouseMaster::findByUsername(const std::string &username) {
 
 void HouseMaster::assignColaborator(Intervention *intervention,
                                     const std::vector<std::pair<std::string, Collaborator *>> &orderedColls) {
-
+    HouseMaster* hm = this;
     auto found = std::find_if(orderedColls.begin(), orderedColls.end(),
-                              [&intervention](std::pair<std::string, Collaborator *> collaborator) -> bool {
-                                  return collaborator.second->canDo(intervention);
+                              [&intervention, &hm](std::pair<std::string, Collaborator *> collaborator) -> bool {
+                                  return collaborator.second->canDo(*hm, collaborator.second->getId(), intervention);
                               });
 
     if (found != orderedColls.end()) {

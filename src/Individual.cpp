@@ -46,13 +46,6 @@ bool Collaborator::hasQualificationToPreform(Intervention *intervention) const {
     return !(intervention->getService()->pro || intervention->getForcePro()) || isPro();
 }
 
-bool Collaborator::canDo(Intervention *intervention) {
-    const Service *service = intervention->getService();
-    date start = *intervention->getStartingTime();
-    date duration = service->duration;
-    return isAvailable(start, duration) && canPreform(service->name) && hasQualificationToPreform(intervention);
-}
-
 int Collaborator::getScore() {
     return _score;
 }

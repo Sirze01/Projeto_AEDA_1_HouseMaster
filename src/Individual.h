@@ -57,7 +57,7 @@ public:
 
     bool hasQualificationToPreform(Intervention *intervention) const;
 
-    bool canDo(Intervention *intervention);
+    bool canDo(HouseMaster& hm, const std::string &collabId, Intervention *intervention);
 
     int getScore();
 
