@@ -19,9 +19,10 @@ public:
 
     virtual std::string getId() const = 0;
 
+    std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm, const std::string &id);
+
     std::string getName();
 
-    //void markAsComplete
 
 
 protected:
@@ -52,7 +53,7 @@ public:
 
     bool canPreform(const std::string& service);
 
-    bool isAvailable(date start, date duration);
+    bool isAvailable(HouseMaster &hm, const std::string &collabId, date start, date duration);
 
     bool hasQualificationToPreform(Intervention *intervention) const;
 
@@ -61,6 +62,10 @@ public:
     int getScore();
 
     void addClassification(Classification classification);
+
+    void markInterventionAsInProgress(HouseMaster &hm, Intervention* intervention);
+
+    void markInterventionAsComplete(HouseMaster &hm, Intervention* intervention);
 
     void updateScore();
 
@@ -75,7 +80,6 @@ public:
 
 private:
 
-    std::unordered_set<Intervention*> _associatedInterventions;
     std::vector<Classification> _classifications;
     std::vector<std::string> _services;
     Classification _score;
@@ -98,7 +102,9 @@ public:
 
     void requestIntervention(HouseMaster& hm, const date &_date, const std::string& type,const std::string &clientId, bool forcePro=false);
 
-    // void cancelIntervention
+    void cancelIntervention(HouseMaster &hm, Intervention* intervention);
+
+    void classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification);
 
     bool operator== (const Client& ind2) const;
 

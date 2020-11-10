@@ -22,6 +22,35 @@ void Client::requestIntervention(HouseMaster& hm, const date &_date, const std::
     hm.addIntervention(_date, type, forcePro, clientId);
 }
 
+std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &hm, const std::string &clientId) {
+   return hm.getAssociatedInterventions(clientId);
+}
+
+void Client::cancelIntervention(HouseMaster &hm, Intervention * intervention) {
+    hm.changeinterventionState(intervention, Canceled);
+}
+
+void Client::classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification) {
+    hm.getCollaborators()[collabId]->addClassification(classification);
+}
+
+bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, date start, date duration) {
+    for (const auto &intervention : hm.getAssociatedInterventions(collabId)) {
+        if (intervention->conflictsWith(start, duration)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void Collaborator::markInterventionAsInProgress(HouseMaster &hm, Intervention *a) {
+    hm.changeinterventionState(a, InProgress);
+}
+
+void Collaborator::markInterventionAsComplete(HouseMaster &hm, Intervention *a) {
+    hm.changeinterventionState(a, Complete);
+}
+
 HouseMaster::HouseMaster() : _availableServices(), _clients(), _collaborators(), _interventions() {}
 
 HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services) {
@@ -222,6 +251,19 @@ void HouseMaster::addIntervention(const date &appointment, const std::string &ty
     } else {
         throw InexistentService("There's no such service!");
     }
+}
+
+void HouseMaster::changeinterventionState(Intervention *intervention, processState state) {
+    intervention->setProcessState(state);
+}
+
+std::vector<Intervention *> HouseMaster::getAssociatedInterventions(const std::string &id) {
+    std::vector<Intervention*> retVec;
+    for(const auto &intervention : _interventions){
+        if (intervention->getClientId() == id || intervention->getCollabId() == id)
+            retVec.push_back(intervention);
+    }
+    return retVec;
 }
 
 std::vector<std::pair<std::string, Collaborator *>> HouseMaster::sortCollaboratorsByScore() {

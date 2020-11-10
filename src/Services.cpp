@@ -1,8 +1,9 @@
 #include"Services.h"
 #include <utility>
 
-Intervention::Intervention(const date& appointment, const Service& type, bool forcePro) : _startingTime(appointment),_type(std::move(type)),
-                                                                            _forcePro(forcePro),_state(Scheduled), _price() {}
+
+Intervention::Intervention(const date& appointment, Service  type, bool forcePro) : _startingTime(appointment),_type(std::move(type)),
+                                                                            _forcePro(forcePro),_state(Scheduled), _price(){}
 
 const Service* Intervention::getService()const{
     return &_type;
@@ -10,6 +11,10 @@ const Service* Intervention::getService()const{
 
 processState Intervention::getProcessState() {
     return _state;
+}
+
+void Intervention::setProcessState(processState state) {
+    _state = state;
 }
 
 bool Intervention::getForcePro() const {
@@ -55,6 +60,6 @@ date Intervention::getEndTime() const {
     return _startingTime + _type.duration;
 }
 
-Service::Service(const std::string &name, bool pro, float basePrice, const date &duration) : name(name), pro(pro), basePrice(basePrice), duration(duration){
+Service::Service(std::string name, bool pro, float basePrice, const date &duration) : name(std::move(name)), pro(pro), basePrice(basePrice), duration(duration){
 
 }

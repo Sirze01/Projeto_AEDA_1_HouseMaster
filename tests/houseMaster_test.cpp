@@ -163,10 +163,37 @@ TEST(HouseMasterTest, interventionManip){
 
 
 TEST(HouseMasterTest, usageTest){
+    Collaborator::_idSeqCol = 0;
+    Client::_idSeqClt = 0;
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
                              std::ifstream("../../data/services.txt"));
 
-    // remove client
-    // add client
+    // Client requests intervention
+
+    houseMaster1.getClients()["client3"]->requestIntervention(houseMaster1,
+        date(12,11,2020,12,00), "desmontar um computador", "client3");
+
+    // Client cancels it
+    houseMaster1.getClients()["client3"]->cancelIntervention(houseMaster1, houseMaster1.getClients()["client3"]->getAssociatedInterventions(houseMaster1, "client3").at(0));
+
+    // client requests another
+    houseMaster1.getClients()["client2"]->requestIntervention(houseMaster1,
+    date(12,11,2020,12,00), "andar a correr atras de uma princesa ou la o que e", "client2");
+
+    // Admin assigns collab
+    houseMaster1.assignColaborator(houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0), houseMaster1.sortCollaboratorsByScore());
+
+    // Collab starts working
+    houseMaster1.getCollaborators()
+    [houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0)->getCollabId()]->
+    markInterventionAsInProgress(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0));
+
+    // Collab concludes
+    houseMaster1.getCollaborators()
+    [houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0)->getCollabId()]->
+            markInterventionAsComplete(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0));
+
+    // Client classifies collaborator
+    houseMaster1.getClients()["client2"]->classifyCollaborator(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0)->getCollabId(), savior);
 }

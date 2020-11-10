@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <sstream>
 
+unsigned int Collaborator::_idSeqCol = 0;
+unsigned int Client::_idSeqClt = 0;
 
 Individual::Individual():_displayName(), _id() {}
 
@@ -18,7 +20,6 @@ std::string Individual::getName() {
 
 
 // Collaborator associated methods
-unsigned Collaborator::_idSeqCol = 0;
 
 Collaborator::Collaborator(std::vector<std::string> functions, const std::string &name, bool pro) : Individual(name),
                                                                                                     _services(std::move(functions)),
@@ -39,15 +40,6 @@ bool Collaborator::canPreform(const std::string& service) {
         return service == service1;
     });
     return found != _services.end();
-}
-
-bool Collaborator::isAvailable(date start, date duration) {
-    for (const auto &intervention : _associatedInterventions) {
-        if (intervention->conflictsWith(start, duration)) {
-            return false;
-        }
-    }
-    return true;
 }
 
 bool Collaborator::hasQualificationToPreform(Intervention *intervention) const {
@@ -97,7 +89,6 @@ bool Collaborator::operator<(const Collaborator &col2) const{
 
 
 // Client associated methods
-unsigned Client::_idSeqClt = 0;
 
 Client::Client(unsigned int nif, const std::string &name, bool premium)
         : Individual(name), _nif(nif), _premium(premium) {
@@ -117,6 +108,7 @@ std::string Client::getId() const {
     outStr << "client" << _id;
     return outStr.str();
 }
+
 
 
 bool Client::operator==(const Client& ind2) const {

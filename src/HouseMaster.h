@@ -49,7 +49,9 @@ public:
 
     void addIntervention(const date& appointment, const std::string& type, bool forcePro, const std::string &clientId);
 
-    //void changeinterventionState
+    void changeinterventionState(Intervention* intervention, processState state);
+
+    std::vector<Intervention*> getAssociatedInterventions(const std::string& id);
 
     void assignColaborator(Intervention*, const std::vector<std::pair<std::string, Collaborator*>>&);
 

@@ -14,19 +14,20 @@ struct Service {
     float basePrice{};
     date duration;
     Service() = default;
-    Service(const std::string &name, bool pro, float basePrice, const date &duration);
+    Service(std::string name, bool pro, float basePrice, const date &duration);
 };
 
 
 enum processState {
     Scheduled,
     InProgress,
+    Complete,
     Canceled
 };
 
 class Intervention {
 private:
-    //unsigned int _id;
+
     std::string _clientId;
     std::string _collabId;
     Service _type;
@@ -37,7 +38,7 @@ private:
 
 public:
 
-    Intervention(const date& appointment, const Service& type, bool forcePro);
+    Intervention(const date &appointment, Service  type, bool forcePro);
 
     const date *getStartingTime() const;
 
@@ -55,11 +56,14 @@ public:
 
     processState getProcessState();
 
+    void setProcessState(processState state);
+
     bool conflictsWith(date start, date duration);
 
     float getPrice() const;
 
     date getEndTime() const;
+
 };
 
 #endif
