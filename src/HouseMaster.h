@@ -23,6 +23,8 @@ public:
 
     HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services);
 
+    ~HouseMaster();
+
     std::unordered_map<std::string, Collaborator *>& getCollaborators() ;
 
     std::unordered_map<std::string, Client *>& getClients() ;
