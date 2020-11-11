@@ -388,3 +388,18 @@ void HouseMaster::writeClientsInfo()
     }
     else std::cout << "Unable to write in clients' file";
 }
+
+void HouseMaster::writeServicesInfo()
+{
+    std::ofstream servicesFile("Services.txt");
+    if (servicesFile.is_open())
+    {
+        auto service_it = _availableServices.begin();
+        while (service_it != _availableServices.end())
+        {
+            servicesFile << service_it->second->name << "," << service_it->second->pro << "," << service_it->second->basePrice << "," << service_it->second->duration.dateToStr();
+        }
+        servicesFile.close();
+    }
+    else std::cout << "Unable to write in services' file";
+}

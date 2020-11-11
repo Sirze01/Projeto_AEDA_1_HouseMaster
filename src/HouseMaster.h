@@ -61,10 +61,6 @@ public:
 
     Individual* findByUsername(const std::string &name);
 
-    void writeCollabsInfo();
-
-    void writeClientsInfo();
-
     class UnavailableAppointment;
 
     class InexistentService;
@@ -78,6 +74,12 @@ public:
     class ExistentClient;
 
     void addAvailableService(Service *service);
+
+    void writeCollabsInfo();
+
+    void writeClientsInfo();
+
+    void writeServicesInfo();
 
 private:
     std::unordered_map<std::string, std::string> _usernameMap;
