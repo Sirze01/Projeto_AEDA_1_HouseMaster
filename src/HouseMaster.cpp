@@ -17,13 +17,13 @@ HouseMaster::InexistentClient::InexistentClient(const std::string &error_msg) : 
 
 HouseMaster::ExistentClient::ExistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
+std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &hm, const std::string &clientId) {
+    return hm.getAssociatedInterventions(clientId);
+}
+
 void Client::requestIntervention(HouseMaster& hm, const date &_date, const std::string &type, const std::string &clientId,
                                  bool forcePro) {
     hm.addIntervention(_date, type, forcePro, clientId);
-}
-
-std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &hm, const std::string &clientId) {
-   return hm.getAssociatedInterventions(clientId);
 }
 
 void Client::cancelIntervention(HouseMaster &hm, Intervention * intervention) {
