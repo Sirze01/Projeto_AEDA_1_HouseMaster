@@ -350,41 +350,41 @@ void HouseMaster::assignColaborator(Intervention *intervention,
 }
 
 
-HouseMaster::~HouseMaster()
+
+void HouseMaster::writeCollabsInfo()
 {
-    std::ofstream endFile("HouseMaster.txt");
-    if (endFile.is_open())
+    std::ofstream collabFile("Collabs.txt");
+    if (collabFile.is_open())
     {
-        //Write clients info
-        endFile << "Clients:\n";
+        auto collab_it = _collaborators.begin();
+        while (collab_it != _collaborators.end())
+        {
+            collabFile << collab_it->second->getId() << ",";
+            if (collab_it->second->isPro()) {collabFile << "yes,"; } else {collabFile << "no,"}
+            for (int i = 0; i < collab_it->second->getServices().size(); i++)
+            {
+                if (i = collab_it->second->getServices().size() - 1)
+                    collabFile << collab_it->second->getServices()[i];
+                else collabFile << collab_it->second->getServices()[i] << ",";
+            }
+        }
+    }
+    else std::cout << "Unable to write in collaborators' file";
+}
+
+
+void HouseMaster::writeClientsInfo()
+{
+    std::ofstream clientsFile("Clients.txt");
+    if (clientsFile.is_open())
+    {
         auto client_it = _clients.begin();
         while (client_it != _clients.end())
         {
-            endFile << client_it->second->getId() << ":";
-            endFile << "NIF: " << client_it->second->getNif();
-            if (client_it->second->isPremium())
-            {
-                endFile << "Has a premium membership; ";
-            }
-
-            //Write collaborators info
-            endFile << "\n\nCollaborators:\n";
-            auto collab_it = _collaborators.begin();
-            while (collab_it != _collaborators.end())
-            {
-                endFile << collab_it->second->getId() << ":";
-                if (collab_it->second->isPro()) { endFile << "Is a professional; "; }
-                endFile << "Medium score: " << collab_it->second->getScore() << "Services: ";
-                for (int i = 0; i < collab_it->second->getServices().size(); i++)
-                {
-                    endFile << collab_it->second->getServices()[i] << ", ";
-                }
-            }
-
-            endFile << "\n\nToday we have " << _clients.size() << "clients and " << _collaborators.size()
-                    << "collaborators working with us. Let's keep working!";
-            endFile.close();
+            clientsFile << client_it->second->getId() << "," << client_it->second->getNif();
+            if (client_it->second->isPremium()) {clientsFile << "yes";} else {clientsFile << "no";}
         }
+        clientsFile.close();
     }
-    else std::cout << "Unable to write in file";
+    else std::cout << "Unable to write in clients' file";
 }

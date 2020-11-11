@@ -23,8 +23,6 @@ public:
 
     HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services);
 
-    ~HouseMaster();
-
     std::unordered_map<std::string, Collaborator *>& getCollaborators() ;
 
     std::unordered_map<std::string, Client *>& getClients() ;
@@ -62,6 +60,10 @@ public:
     std::vector<std::pair<std::string, Collaborator*>> sortCollaboratorsByScore();
 
     Individual* findByUsername(const std::string &name);
+
+    void writeCollabsInfo();
+
+    void writeClientsInfo();
 
     class UnavailableAppointment;
 
