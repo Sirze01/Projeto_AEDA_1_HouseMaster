@@ -369,13 +369,15 @@ int Menu::newCollab()
 
 #include "Menu.h"
 
-Menu::Menu(std::string prompt, std::map<std::string, std::function<void()>> options) : _prompt(std::move(prompt)), _options(std::move(options)), _choice() {
+Menu::Menu(std::string prompt, std::map<std::string, std::function<void()>> options)
+        : _prompt(std::move(prompt)), _options(std::move(options)), _choice() {
 
 }
 
 void Menu::show() {
 
     unsigned count = 1;
+    unsigned back = _options.size() + 1;
 
     std::cout << " __________HOUSE MASTER__________ " << std::endl;
     std::cout << "| " << std::setw(30) << std::right << _prompt << " |" << std::endl;
@@ -387,7 +389,7 @@ void Menu::show() {
     }
 
     std::cout << "|                                |" << std::endl;
-    std::cout << "| [0] Exit Program               |" << std::endl;
+    std::cout << "| [0] EXIT " << "            [" << back << "] BACK  |" << std::endl;
     std::cout << "|________________________________|" << std::endl;
 }
 
@@ -410,7 +412,7 @@ void Menu::select() {
                 std::cout << "Invalid choice. Make sure you are entering a valid number: " << std::endl;
                 std::cin >> choice;
             }
-        } else if (choice < 0 || choice > _options.size()) {
+        } else if (choice < 0 || choice > _options.size() + 1) {
             std::cout << "Invalid choice. Make sure you chose one of the available options: " << std::endl;
             std::cin >> choice;
         } else {
@@ -420,9 +422,13 @@ void Menu::select() {
     _choice = choice;
 }
 
-void Menu::execute() {
+void Menu::execute(bool &running) {
 
     if (!_choice) exit(0);
+    if (_choice == _options.size() + 1) {
+        running = false;
+        return;
+    }
     std::vector<std::string> keys{};
     std::transform(_options.begin(), _options.end(), back_inserter(keys), [](const std::pair<std::string, std::function<void()>>& funcs){return funcs.first;});
     _options.at(keys.at(_choice-1))();

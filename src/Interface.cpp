@@ -12,17 +12,22 @@ void Interface::selectRole(bool &running) {
     Menu roles("Choose your role", {{"Admin", [&]() {
         std::cout << "Welcome to HouseMaster. You have ADMIN privilege.\n";
         adminLogin();
-    }}, {"User (Collaborator/Client)", [&]() {
+        while (innerRunning) {
+            adminOpperations(innerRunning);
+        }
+    }},
+    {"User (Collaborator/Client)", [&]() {
         userLogin();
         std::cout << "Login succeeded for " << _user->getName() << "\n";
         while (innerRunning) {
+
             clientOpperations(innerRunning);
         }
     }}});
 
     roles.show();
     roles.select();
-    roles.execute();
+    roles.execute(running);
 
 }
 
@@ -42,17 +47,13 @@ void Interface::userLogin() {
         std::cout << "Login Failed, try again\n";
         std::cout << "Username : "; std::cin >> username;
     }
-    if (_role == collaborator) {
-        _user = _houseMaster.findCollabByUniqueName(username);
-    }
-    else if (_role == client) _user = _houseMaster.findClientByUniqueName(username);
-
+    _user = _houseMaster.findByUsername(username);
 }
 
 bool Interface::readRole(const std::string &username) {
     std::string roleName{};
     Role role{};
-    for (const auto &i : username) {
+    for (const auto &i : username) {  // muito xanxo melhorar
         if (isalpha(i)) roleName += i;
         else break;
     }
@@ -69,26 +70,25 @@ bool Interface::readRole(const std::string &username) {
 void Interface::clientOpperations(bool &running) {
     auto * client = dynamic_cast<Client*>(_user);
     bool innerRunning = true;
-    Menu clientMenu("Welcome" + client->getName(), {{"Request an Intervention", [&](){
+    Menu clientMenu("Welcome, " + client->getName(), {{"Request an Intervention", [&]() {
         while (innerRunning) {
-            Service service = selectService(innerRunning);
-            if (!service.name.empty()) {
+            std::string service = selectService(innerRunning);
+            if (!service.empty()) {
                 date interventionDate = readInterventionDate();
-                client->requestIntervention(interventionDate, service);
+                client->requestIntervention(_houseMaster, interventionDate, service, false);
             }
         }
-    }}, {"Browse Services", [&](){
+    }}, {"Browse Services", [&]() {
         while (innerRunning) {
-            Service service = selectService(innerRunning);
-            if (!service.name.empty()) showService(service);
+            std::string serviceName = selectService(innerRunning);
+            Service *service = _houseMaster.getAvailableServices()[serviceName];
+            if (!serviceName.empty()) show(*service);
             std::cin.ignore();
         }
-    }}, {"Logout", [&](){
-        running= false;
     }}});
     clientMenu.show();
     clientMenu.select();
-    clientMenu.execute();
+    clientMenu.execute(running);
 }
 
 date Interface::readInterventionDate() {
@@ -99,30 +99,24 @@ date Interface::readInterventionDate() {
     return interventionDate;
 }
 
-Service Interface::selectService(bool &running) {
-    std::vector<Service* > services = _houseMaster.getAvailableServices();
-    Service* selection{};
+std::string Interface::selectService(bool &running) {
+    auto services = _houseMaster.getAvailableServices();
+    std::string selection{};
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : services) {
-        options.insert(std::pair<std::string, std::function<void()>>(i->name, [&selection, &i](){
-            selection = i;
-            std::cout << "Selected " << i->name << "\n";
+        options.insert(std::pair<std::string, std::function<void()>>(i.first, [&selection, &i](){
+            std::cout << "Selected " << i.first << "\n";
+            selection = i.first;
         }));
     }
-    std::string goBack;
-    std::stringstream ss{}; ss << "Go Back"; goBack = ss.str();
-    options.insert(std::pair<std::string, std::function<void()>>(goBack, [&running, &selection](){
-        running = false;
-        selection = new Service();
-    }));
     Menu servicesMenu("Select a service", options);
     servicesMenu.show();
     servicesMenu.select();
-    servicesMenu.execute();
-    return *selection;
+    servicesMenu.execute(running);
+    return selection;
 }
 
-void Interface::showService(Service service) {
+void Interface::show(const Service& service) {
     std::string pro = service.pro ? "yes" : "no";
     std::cout << " __________HOUSE MASTER__________ " << std::endl;
     std::cout << "| " << std::setw(30) << std::right << service.name << " |" << std::endl;
@@ -132,8 +126,141 @@ void Interface::showService(Service service) {
     std::cout << "| [" << "Professional" << "] " << std::setw(15) << std::right << pro << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "| [Enter] Go Back                |" << std::endl;
-    std::cout << "| [0] Exit Program               |" << std::endl;
     std::cout << "|________________________________|" << std::endl;
     std::cin.ignore();
 }
+
+void Interface::adminOpperations(bool &running) {
+
+    bool innerRunning = true;
+    Menu adminMenu("Welcome, ADMIN", {{"Register collaborator", [&](){
+        readNewCollaboratorData(innerRunning);
+
+    }}, {"Show all collaborators", [&](){
+        while (innerRunning) {
+            std::string collabName = selectCollab(innerRunning);
+            Collaborator *collab = _houseMaster.getCollaborators()[collabName];
+            if (!collabName.empty()) show(*collab);
+            std::cin.ignore();
+        }
+    }}});
+    adminMenu.show();
+    adminMenu.select();
+    adminMenu.execute(running);
+}
+
+void Interface::readNewCollaboratorData(bool &running) {
+
+    std::string name{}, pro{};
+    std::vector<std::string> services{};
+
+    std::cout << "Name ? "; std::cin.ignore(9999, '\n'); std::getline(std::cin, name, '\n');
+    std::cout << "PEAD NAME " << name << "\n\n";
+
+    std::cout << "Pro ? [yes/no] "; std::cin >> pro;
+    while (pro != "yes" && pro != "no") {
+        std::cout << R"(Invalid choice. Make sure you chose one of "yes" or "no" )" << std::endl;
+        std::cin >> pro;
+    }
+
+    bool innerRunning = true;
+
+    Menu pickServices("Pick your services", {{"Choose from the HouseMaster services", [&](){
+        while (running) {
+            std::string service = selectService(running);
+            if (service.empty()) services.push_back(service);
+        }
+    }}, {"Add a new one", [&](){
+        std::string serviceName = readNewServiceData(running);
+        services.push_back(serviceName);
+
+    }}});
+
+    while (innerRunning) {
+        pickServices.show();
+        pickServices.select();
+        pickServices.execute(innerRunning);
+    }
+
+    _houseMaster.addCollaborator(services, name, pro=="true");
+
+}
+
+std::string Interface::readNewServiceData(bool &running) {
+    std::string name{}, proStr{}, durationStr;
+    float basePrice{};
+    date duration{};
+
+    std::cout << "Name ? "; std::cin.ignore(); std::getline(std::cin, name, '\n');
+
+    std::cout << "Pro ? [yes/no] "; std::cin >> proStr;
+    while (proStr != "yes" && proStr != "no") {
+        std::cout << R"(Invalid choice. Make sure you chose one of "yes" or "no" )" << std::endl;
+        std::cin >> proStr;
+    }
+
+    bool pro = proStr == "yes";
+
+    std::cout << "Base price ? "; std::cin >> basePrice;
+    while (true) {
+        if (std::cin.fail() || std::cin.peek() != '\n') {
+            if (std::cin.eof()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "User chose to close the input.\n";
+                break;
+            } else {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid choice. Make sure you are entering a valid number: " << std::endl;
+                std::cin >> basePrice;
+            }
+        } else if (basePrice < 0) {
+            std::cout << "Invalid choice. Make sure the price is a positive float: " << std::endl;
+            std::cin >> basePrice;
+        } else {
+            break;
+        }
+    }
+
+    std::cout << "Mean duration : "; std::cin >> durationStr;
+    duration.readDuration(durationStr);
+    _houseMaster.addAvailableService(name, pro, basePrice, duration);
+
+    return name;
+
+}
+
+std::string Interface::selectCollab(bool &running) {
+    auto collabs = _houseMaster.getCollaborators();
+    std::string selection{};
+    std::map<std::string, std::function<void()>> options{};
+    for (const auto &i : collabs) {
+        options.insert(std::pair<std::string, std::function<void()>>(_houseMaster.getCollaborators()[i.first]->getName(), [&selection, &i](){
+            std::cout << "Selected " << i.first << "\n";
+            selection = i.first;
+        }));
+    }
+    Menu servicesMenu("Select a collaborator", options);
+    servicesMenu.show();
+    servicesMenu.select();
+    servicesMenu.execute(running);
+    return selection;
+}
+
+void Interface::show(const Collaborator &collaborator) {
+    std::string pro = collaborator.isPro() ? "yes" : "no";
+    std::cout << " __________HOUSE MASTER__________ " << std::endl;
+    std::cout << "| " << std::setw(30) << std::right << collaborator.getName() << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [" << "ID" << "] " << std::setw(16) << std::right << collaborator.getId() << " |" << std::endl;
+    std::cout << "| [" << "Score" << "] " << std::setw(19) << std::right << collaborator.getScore() << " |" << std::endl;
+    std::cout << "| [" << "Professional" << "] " << std::setw(15) << std::right << pro << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [Enter] Go Back                |" << std::endl;
+    std::cout << "|________________________________|" << std::endl;
+    std::cin.ignore();
+}
+
+
 

@@ -12,7 +12,7 @@ Individual::Individual():_displayName(), _id() {}
 Individual::Individual(std::string  name) : _displayName(std::move(name)), _id(0) {
 }
 
-std::string Individual::getName() {
+std::string Individual::getName() const{
     return _displayName;
 }
 
@@ -46,7 +46,7 @@ bool Collaborator::hasQualificationToPreform(Intervention *intervention) const {
     return !(intervention->getService()->pro || intervention->getForcePro()) || isPro();
 }
 
-int Collaborator::getScore() {
+int Collaborator::getScore() const {
     return _score;
 }
 
