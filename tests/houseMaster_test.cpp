@@ -116,7 +116,7 @@ TEST(HouseMasterTest, collaboratorsManip){
     // add collaborator
     std::vector<std::string> functions;
     functions.push_back("montar um carro do nada"); functions.push_back("desmontar um computador");
-    houseMaster1.addCollaborator(nullptr);
+    houseMaster1.addCollaborator(functions, "Jose Retiros", false);
     EXPECT_FALSE(houseMaster1.getCollaborators().find("collab3") == houseMaster1.getCollaborators().end());
 
 }
@@ -135,9 +135,9 @@ TEST(HouseMasterTest, clientsManip){
     EXPECT_THROW(houseMaster1.removeClient("client0"), HouseMaster::InexistentClient);
 
     // add client
-    houseMaster1.addClient(nullptr);
+    houseMaster1.addClient(1111232, "mafarrico", false);
     EXPECT_FALSE(houseMaster1.getClients().find("client4") == houseMaster1.getClients().end());
-    EXPECT_THROW(houseMaster1.addClient(nullptr), HouseMaster::ExistentClient);
+    EXPECT_THROW(houseMaster1.addClient(1111232, "mafarrico", false), HouseMaster::ExistentClient);
 
 }
 
@@ -177,7 +177,7 @@ TEST(HouseMasterTest, usageTest){
                                                               false);
 
     // Client cancels it
-    houseMaster1.getClients()["client3"]->cancelIntervention(houseMaster1, houseMaster1.getClients()["client3"]->getAssociatedInterventions(houseMaster1, "client3").at(0));
+    houseMaster1.getClients()["client3"]->cancelIntervention(houseMaster1, houseMaster1.getClients()["client3"]->getAssociatedInterventions(houseMaster1).at(0));
 
     // client requests another
     houseMaster1.getClients()["client2"]->requestIntervention(houseMaster1,
@@ -186,18 +186,18 @@ TEST(HouseMasterTest, usageTest){
                                                               false);
 
     // Admin assigns collab
-    houseMaster1.assignColaborator(houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0), houseMaster1.sortCollaboratorsByScore());
+    houseMaster1.assignColaborator(houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0), houseMaster1.sortCollaboratorsByScore());
 
     // Collab starts working
     houseMaster1.getCollaborators()
-    [houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0)->getCollabId()]->
-    markInterventionAsInProgress(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0));
+    [houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0)->getCollabId()]->
+    markInterventionAsInProgress(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0));
 
     // Collab concludes
     houseMaster1.getCollaborators()
-    [houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0)->getCollabId()]->
-            markInterventionAsComplete(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0));
+    [houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0)->getCollabId()]->
+            markInterventionAsComplete(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0));
 
     // Client classifies collaborator
-    houseMaster1.getClients()["client2"]->classifyCollaborator(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1, "client2").at(0)->getCollabId(), savior);
+    houseMaster1.getClients()["client2"]->classifyCollaborator(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0)->getCollabId(), savior);
 }

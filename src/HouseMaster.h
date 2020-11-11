@@ -47,6 +47,8 @@ public:
 
     void addClient(Client *client);
 
+    void addClient(unsigned int nif, const std::string &name, bool premium);
+
     void removeClient(const std::string& clientId);
 
     void addIntervention(const date& appointment, const std::string& type, bool forcePro, const std::string &clientId);
@@ -88,8 +90,6 @@ private:
     std::unordered_map<std::string, Service*> _availableServices;
     std::vector<Intervention*> _interventions;
 
-
-    void addClient(unsigned int nif, const std::string &name, bool premium);
 };
 
 // Must add in the cpp also the definition of the Client::requestIntervention method to complete the forward declaration

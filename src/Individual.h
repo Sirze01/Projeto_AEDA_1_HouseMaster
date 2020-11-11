@@ -19,7 +19,7 @@ public:
 
     virtual std::string getId() const = 0;
 
-    std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm, const std::string &id);
+    std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm);
 
     std::string getName() const;
 
