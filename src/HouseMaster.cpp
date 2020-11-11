@@ -360,7 +360,7 @@ void HouseMaster::writeCollabsInfo()
         while (collab_it != _collaborators.end())
         {
             collabFile << collab_it->second->getId() << ",";
-            if (collab_it->second->isPro()) {collabFile << "yes,"; } else {collabFile << "no,"}
+            if (collab_it->second->isPro()) {collabFile << "yes,"; } else {collabFile << "no,";}
             for (int i = 0; i < collab_it->second->getServices().size(); i++)
             {
                 if (i = collab_it->second->getServices().size() - 1)
