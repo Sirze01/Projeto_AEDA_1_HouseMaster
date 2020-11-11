@@ -22,13 +22,17 @@ public:
     void adminLogin();
     void clientOpperations(bool &running);
     date readInterventionDate();
-    Service selectService(bool &running);
-    void showService(Service service);
+    std::string selectService(bool &running);
+    void show(const Service& service);
+    void show(const Collaborator& collaborator);
+    void adminOpperations(bool &running);
+    std::string selectCollab(bool &running);
+    void readNewCollaboratorData(bool &running);
+    std::string readNewServiceData(bool &running);
 private:
     HouseMaster _houseMaster;
     Individual *_user;
     Role _role;
-
 };
 
 

@@ -35,15 +35,17 @@ public:
 
     std::unordered_map<std::string, Service*>& getAvailableServices();
 
-    void addCollaborator(const std::vector<std::string>& functions, const std::string &name, bool pro);
+    void addCollaborator(Collaborator *collab);
 
     //void addCollaborator(const std::string& username, Collaborator* collaborator);
 
     void removeCollaborator(const std::string& collId);
 
+    void addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro);
+
     //void deleteCollaborator(const std::string& collId);
 
-    void addClient(unsigned int nif, const std::string &name, bool premium);
+    void addClient(Client *client);
 
     void removeClient(const std::string& clientId);
 
@@ -71,12 +73,17 @@ public:
 
     class ExistentClient;
 
+    void addAvailableService(Service *service);
+
 private:
     std::unordered_map<std::string, std::string> _usernameMap;
     std::unordered_map<std::string, Collaborator*> _collaborators;
     std::unordered_map<std::string, Client*> _clients;
     std::unordered_map<std::string, Service*> _availableServices;
     std::vector<Intervention*> _interventions;
+
+
+    void addClient(unsigned int nif, const std::string &name, bool premium);
 };
 
 // Must add in the cpp also the definition of the Client::requestIntervention method to complete the forward declaration

@@ -13,10 +13,10 @@
 class Menu {
 public:
     Menu() = default;
-    Menu(std::string prompt, std::map<std::string, std::function<void()> > options);
+    Menu(std::string prompt, std::map<std::string, std::function<void()>> options);
     void show();
     void select();
-    void execute();
+    void execute(bool &running);
 private:
     std::string _prompt;
     std::map<std::string, std::function<void()> > _options;

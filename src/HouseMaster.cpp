@@ -17,9 +17,8 @@ HouseMaster::InexistentClient::InexistentClient(const std::string &error_msg) : 
 
 HouseMaster::ExistentClient::ExistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
-void Client::requestIntervention(HouseMaster& hm, const date &_date, const std::string &type, const std::string &clientId,
-                                 bool forcePro) {
-    hm.addIntervention(_date, type, forcePro, clientId);
+void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro) {
+    hm.addIntervention(_date, type, forcePro, this->getId());
 }
 
 std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &hm, const std::string &clientId) {
@@ -136,6 +135,14 @@ void HouseMaster::addAvailableService(const std::string &name, bool pro, float b
     }
 }
 
+void HouseMaster::addAvailableService(Service* service) {
+    if (_availableServices.find(service->name) != _availableServices.end())
+        throw ExistentService("A service with the same name already exists!");
+    else {
+        _availableServices.insert({service->name, service});
+    }
+}
+
 void HouseMaster::removeAvailableService(const std::string &serviceName) {
 
     auto it = _availableServices.find(serviceName);
@@ -151,19 +158,17 @@ std::unordered_map<std::string, Service *> &HouseMaster::getAvailableServices() 
     return _availableServices;
 }
 
+void HouseMaster::addCollaborator(Collaborator *collab) {
+    _collaborators.insert({collab->getId(), collab});
+    _usernameMap.insert({collab->getId(), collab->getId()});
+}
+
 void HouseMaster::addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro) {
     auto collab = new Collaborator(functions, name, pro);
     _collaborators.insert({collab->getId(), collab});
     _usernameMap.insert({collab->getId(), collab->getId()});
 }
 
-/*
-void HouseMaster::addCollaborator(const std::string &username, Collaborator *collaborator) {
-    _collaborators.insert(std::pair<std::string, Collaborator *>(collaborator->getId(), collaborator));
-    _usernameMap.insert({username, collaborator->getId()});
-
-}
- */
 
 void HouseMaster::removeCollaborator(const std::string &id) {
     auto it = _collaborators.find(id);
@@ -199,14 +204,47 @@ void HouseMaster::deleteCollaborator(const std::string &id) {
         } else {
             //throws except
         }
-
     } else {
         //throws except
     }
 }
 */
 
+
+void HouseMaster::addClient(Client *client) {
+
+    // nif name premium
+    auto it = std::find_if(_clients.begin(), _clients.end(), [&client](const std::pair<std::string, Client*> &pair){
+        return (pair.second->getNif() == client->getNif());
+    });
+    if(it == _clients.end()) {
+        _clients.insert({client->getId(), client});
+        _usernameMap.insert({client->getId(), client->getId()});
+    }
+    else{
+        throw HouseMaster::ExistentClient("Client already registred!");
+    }
+}
+
 void HouseMaster::addClient(unsigned int nif, const std::string &name, bool premium) {
+    auto it = std::find_if(_clients.begin(), _clients.end(), [&nif](const std::pair<std::string, Client*> &pair){
+        if(pair.second->getNif() == nif)
+            return true;
+        else
+            return false;
+    });
+    if(it == _clients.end()) {
+        auto client = new Client(nif, name, premium);
+        _clients.insert({client->getId(), client});
+        _usernameMap.insert({client->getId(), client->getId()});
+    }
+    else{
+        throw HouseMaster::ExistentClient("Client already registred!");
+    }
+}
+
+/*
+ * void HouseMaster::addClient(unsigned int nif, const std::string &name, bool premium) {
     auto it = std::find_if(_clients.begin(), _clients.end(), [&nif](const std::pair<std::string, Client*> &pair){
                                if(pair.second->getNif() == nif)
                                    return true;
@@ -222,6 +260,7 @@ void HouseMaster::addClient(unsigned int nif, const std::string &name, bool prem
         throw HouseMaster::ExistentClient("Client already registred!");
     }
 }
+ */
 
 void HouseMaster::removeClient(const std::string &clientId) {
 

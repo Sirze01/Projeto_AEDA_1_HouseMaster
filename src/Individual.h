@@ -21,7 +21,7 @@ public:
 
     std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm, const std::string &id);
 
-    std::string getName();
+    std::string getName() const;
 
 
 
@@ -59,7 +59,7 @@ public:
 
     bool canDo(HouseMaster& hm, const std::string &collabId, Intervention *intervention);
 
-    int getScore();
+    int getScore() const;
 
     void addClassification(Classification classification);
 
@@ -100,7 +100,7 @@ public:
 
     std::string getId() const override;
 
-    void requestIntervention(HouseMaster& hm, const date &_date, const std::string& type,const std::string &clientId, bool forcePro=false);
+    void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro);
 
     void cancelIntervention(HouseMaster &hm, Intervention* intervention);
 
