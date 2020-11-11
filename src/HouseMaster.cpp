@@ -353,29 +353,31 @@ void HouseMaster::assignColaborator(Intervention *intervention,
 
 void HouseMaster::writeCollabsInfo()
 {
-    std::ofstream collabFile("Collabs.txt");
+    std::ofstream collabFile;
+    collabFile.open("../../data/CollabsEnd.txt", std::ios::app);
     if (collabFile.is_open())
     {
         auto collab_it = _collaborators.begin();
         while (collab_it != _collaborators.end())
         {
-            collabFile << collab_it->second->getId() << ",";
-            if (collab_it->second->isPro()) {collabFile << "yes,"; } else {collabFile << "no,";}
+            collabFile << collab_it->first;
+            if (collab_it->second->isPro()) { collabFile << "yes,"; } else { collabFile << "no,"; }
             for (int i = 0; i < collab_it->second->getServices().size(); i++)
             {
-                if (i = collab_it->second->getServices().size() - 1)
+                if (i == collab_it->second->getServices().size() - 1)
                     collabFile << collab_it->second->getServices()[i];
                 else collabFile << collab_it->second->getServices()[i] << ",";
             }
+            collab_it++;
         }
-    }
-    else std::cout << "Unable to write in collaborators' file";
+        collabFile.close();
+    } else std::cout << "Unable to write in clients' file";
 }
 
 
 void HouseMaster::writeClientsInfo()
 {
-    std::ofstream clientsFile("Clients.txt");
+    std::ofstream clientsFile("../../data/ClientsEnd.txt", std::ios::app);
     if (clientsFile.is_open())
     {
         auto client_it = _clients.begin();
@@ -391,7 +393,7 @@ void HouseMaster::writeClientsInfo()
 
 void HouseMaster::writeServicesInfo()
 {
-    std::ofstream servicesFile("Services.txt");
+    std::ofstream servicesFile("../../data/ServicesEnd.txt", std::ios::app);
     if (servicesFile.is_open())
     {
         auto service_it = _availableServices.begin();
