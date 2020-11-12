@@ -362,14 +362,15 @@ void HouseMaster::writeCollabsInfo()
         auto collab_it = _collaborators.begin();
         while (collab_it != _collaborators.end())
         {
-            collabFile << collab_it->first;
-            if (collab_it->second->isPro()) { collabFile << "yes,"; } else { collabFile << "no,"; }
+            collabFile << collab_it->second->getName();
+            if (collab_it->second->isPro()) { collabFile << ",yes,"; } else { collabFile << ",no,"; }
             for (int i = 0; i < collab_it->second->getServices().size(); i++)
             {
                 if (i == collab_it->second->getServices().size() - 1)
                     collabFile << collab_it->second->getServices()[i];
                 else collabFile << collab_it->second->getServices()[i] << ",";
             }
+            collabFile << '\n';
             collab_it++;
         }
         collabFile.close();
@@ -385,8 +386,10 @@ void HouseMaster::writeClientsInfo()
         auto client_it = _clients.begin();
         while (client_it != _clients.end())
         {
-            clientsFile << client_it->second->getId() << "," << client_it->second->getNif();
-            if (client_it->second->isPremium()) {clientsFile << "yes";} else {clientsFile << "no";}
+            clientsFile << client_it->second->getName() << "," << client_it->second->getNif();
+            if (client_it->second->isPremium()) {clientsFile << ",yes";} else {clientsFile << ",no";}
+            clientsFile << '\n';
+            client_it ++;
         }
         clientsFile.close();
     }
@@ -401,7 +404,8 @@ void HouseMaster::writeServicesInfo()
         auto service_it = _availableServices.begin();
         while (service_it != _availableServices.end())
         {
-            servicesFile << service_it->second->name << "," << service_it->second->pro << "," << service_it->second->basePrice << "," << service_it->second->duration.dateToStr();
+            servicesFile << service_it->second->name << "," << service_it->second->pro << "," << service_it->second->basePrice << "," << service_it->second->duration.dateToStr() << '\n';
+            service_it++;
         }
         servicesFile.close();
     }

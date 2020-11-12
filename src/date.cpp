@@ -50,7 +50,7 @@ std::string date::dateToStr() const {
         stream << std::setw(2) << day << '/' << month << '/' << std::setw(4)
         << year << "  " << std::setw(2) << hours << ':' << minutes;
     } else {
-        stream << std::setw(2) << hours << "h" << minutes;
+        stream << std::setfill('0') <<std::setw(2) << hours << "h" << minutes;
     }
     return stream.str();
 }
