@@ -1,4 +1,4 @@
-mafarrico,1111232,no
-cliente que faz comentarios racistas,374435,no
-cliente que nao se lembra do nome,999999999,yes
-adriano malheiro caloteiro,5045085040508,no
+sonso,22331122,no
+socorro,453455323,no
+aaaaaaa,23421234,yes
+cliente de teste,323432234,no
