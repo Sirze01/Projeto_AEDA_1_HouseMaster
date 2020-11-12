@@ -30,11 +30,11 @@ private:
 
     std::string _clientId;
     std::string _collabId;
-    Service _type;
     date _startingTime;
+    Service _type;
     bool _forcePro;
-    float _price;
     processState _state;
+    float _price;
 
 public:
 

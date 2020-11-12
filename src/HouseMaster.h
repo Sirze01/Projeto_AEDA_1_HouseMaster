@@ -84,10 +84,10 @@ public:
     void writeServicesInfo();
 
 private:
+    std::unordered_map<std::string, Service*> _availableServices;
+    std::unordered_map<std::string, Client*> _clients;
     std::unordered_map<std::string, std::string> _usernameMap;
     std::unordered_map<std::string, Collaborator*> _collaborators;
-    std::unordered_map<std::string, Client*> _clients;
-    std::unordered_map<std::string, Service*> _availableServices;
     std::vector<Intervention*> _interventions;
 
 };

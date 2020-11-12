@@ -333,7 +333,9 @@ Individual *HouseMaster::findByUsername(const std::string &username) {
             return _clients[it->second];
     } else {
         // throw except
+
     }
+    return nullptr;
 }
 
 
@@ -364,7 +366,7 @@ void HouseMaster::writeCollabsInfo()
         {
             collabFile << collab_it->second->getName();
             if (collab_it->second->isPro()) { collabFile << ",yes,"; } else { collabFile << ",no,"; }
-            for (int i = 0; i < collab_it->second->getServices().size(); i++)
+            for (size_t i = 0; i < collab_it->second->getServices().size(); i++)
             {
                 if (i == collab_it->second->getServices().size() - 1)
                     collabFile << collab_it->second->getServices()[i];

@@ -26,3 +26,4 @@ target_include_directories(Projeto_AEDA_1_HouseMaster PUBLIC ${CMAKE_CURRENT_SOU
 
 target_link_libraries(Projeto_AEDA_1_HouseMaster PUBLIC gtest_main coverage_config)
 
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
