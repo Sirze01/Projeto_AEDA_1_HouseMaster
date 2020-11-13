@@ -20,19 +20,19 @@ TEST(HouseMasterTest, fileConstructor){
     svc.emplace_back("canalizador", true, 5, date(0,0,0,3,0,false));
     svc.emplace_back("andar a correr atras de uma princesa ou la o que e", false, 1, date(0,0,0,4,0,false));
     for(auto & i : svc){
-        EXPECT_EQ(i.name, houseMaster1.getAvailableServices()[i.name]->name);
-        EXPECT_EQ(i.pro, houseMaster1.getAvailableServices()[i.name]->pro);
-        EXPECT_EQ(i.duration, houseMaster1.getAvailableServices()[i.name]->duration);
-        EXPECT_EQ(i.basePrice, houseMaster1.getAvailableServices()[i.name]->basePrice);
+        EXPECT_EQ(i.getName(), houseMaster1.getAvailableServices()[i.getName()]->getName());
+        EXPECT_EQ(i.getPro(), houseMaster1.getAvailableServices()[i.getName()]->getPro());
+        EXPECT_EQ(i.getDuration(), houseMaster1.getAvailableServices()[i.getName()]->getDuration());
+        EXPECT_EQ(i.getBasePrice(), houseMaster1.getAvailableServices()[i.getName()]->getBasePrice());
     }
 
 
     Client::_idSeqClt= 0 ;
     std::vector<Client> cltVec;
-    cltVec.emplace_back(1111232, "mafarrico", false);
-    cltVec.emplace_back(374435, "cliente que faz comentarios racistas", false);
-    cltVec.emplace_back(999999999, "cliente que nao se lembra do nome", true);
-    cltVec.emplace_back(5045085040508, "adriano malheiro caloteiro", false);
+    cltVec.emplace_back(22331122, "sonso", false);
+    cltVec.emplace_back(453455323, "socorro", false);
+    cltVec.emplace_back(23421234, "aaaaaaa", true);
+    cltVec.emplace_back(323432234, "cliente de teste", false);
 
     for(auto &client:cltVec){
         out.str("");
@@ -152,13 +152,13 @@ TEST(HouseMasterTest, interventionManip){
     // add Intervention
     houseMaster1.addIntervention(date(12,05,2001,01,00,0), "desmontar um computador", true, "");
     auto it =  std::find_if(houseMaster1.getInterventions().begin(), houseMaster1.getInterventions().end(), [](Intervention * intervention){
-        if(intervention->getClientId() == "" && intervention->getService()->name == "desmontar um computador"){return true;}});
+        if(intervention->getClientId() == "" && intervention->getService()->getName() == "desmontar um computador"){return true;}});
     EXPECT_FALSE(it == houseMaster1.getInterventions().end());
 
     houseMaster1.getClients()["client3"]->requestIntervention(houseMaster1, date(12, 12, 2012, 21, 00), "canalizador",
                                                               false);
     it = std::find_if(houseMaster1.getInterventions().begin(), houseMaster1.getInterventions().end(), [](Intervention * intervention){
-        if(intervention->getClientId() == "client3" && intervention->getService()->name == "canalizador" && *intervention->getStartingTime() == date(12,05,2001,01,00,0)){return true;}});
+        if(intervention->getClientId() == "client3" && intervention->getService()->getName() == "canalizador" && *intervention->getStartingTime() == date(12,05,2001,01,00,0)){return true;}});
     EXPECT_FALSE(it == houseMaster1.getInterventions().end());
 }
 
@@ -191,12 +191,12 @@ TEST(HouseMasterTest, usageTest){
     // Collab starts working
     houseMaster1.getCollaborators()
     [houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0)->getCollabId()]->
-    markInterventionAsInProgress(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0));
+    markInterventionAsInProgress(houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0));
 
     // Collab concludes
     houseMaster1.getCollaborators()
     [houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0)->getCollabId()]->
-            markInterventionAsComplete(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0));
+            markInterventionAsComplete(houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0));
 
     // Client classifies collaborator
     houseMaster1.getClients()["client2"]->classifyCollaborator(houseMaster1, houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0)->getCollabId(), savior);

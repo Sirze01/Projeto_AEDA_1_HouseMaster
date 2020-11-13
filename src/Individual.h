@@ -53,7 +53,7 @@ public:
 
     bool canPreform(const std::string& service);
 
-    bool isAvailable(HouseMaster &hm, const std::string &collabId, date start, date duration);
+    static bool isAvailable(HouseMaster &hm, const std::string &collabId, date start, date duration);
 
     bool hasQualificationToPreform(Intervention *intervention) const;
 
@@ -63,9 +63,9 @@ public:
 
     void addClassification(Classification classification);
 
-    void markInterventionAsInProgress(HouseMaster &hm, Intervention* intervention);
+    static void markInterventionAsInProgress(Intervention* intervention);
 
-    void markInterventionAsComplete(HouseMaster &hm, Intervention* intervention);
+    static void markInterventionAsComplete(Intervention* intervention);
 
     void updateScore();
 
@@ -100,7 +100,7 @@ public:
 
     std::string getId() const override;
 
-    void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro);
+    void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int variableValue=0);
 
     void cancelIntervention(HouseMaster &hm, Intervention* intervention);
 

@@ -1,9 +1,31 @@
 #include"Services.h"
 #include <utility>
+Service::Service(std::string name, bool pro, float basePrice, const date &duration) :
+        _name(std::move(name)), _pro(pro), _basePrice(basePrice), _duration(duration){}
+
+std::string Service::getName() const{
+    return _name;
+}
+
+bool Service::getPro() const{
+    return _pro;
+}
+
+float Service::getBasePrice() const{
+    return _basePrice;
+}
+
+date Service::getDuration() const{
+    return _duration;
+}
+
+float Service::calculatePrice() {
+    return _basePrice;
+}
 
 
-Intervention::Intervention(const date& appointment, Service  type, bool forcePro) : _startingTime(appointment),_type(std::move(type)),
-                                                                            _forcePro(forcePro),_state(Scheduled), _price(){}
+Intervention::Intervention(const date& appointment, Service  type, bool forcePro) :
+_startingTime(appointment),_type(std::move(type)), _forcePro(forcePro),_state(Scheduled), _price(){}
 
 const Service* Intervention::getService()const{
     return &_type;
@@ -57,9 +79,5 @@ bool Intervention::conflictsWith(date start, date duration) {
 }
 
 date Intervention::getEndTime() const {
-    return _startingTime + _type.duration;
-}
-
-Service::Service(std::string name, bool pro, float basePrice, const date &duration) : name(std::move(name)), pro(pro), basePrice(basePrice), duration(duration){
-
+    return _startingTime + _type.getDuration();
 }

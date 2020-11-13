@@ -117,12 +117,12 @@ std::string Interface::selectService(bool &running) {
 }
 
 void Interface::show(const Service& service) {
-    std::string pro = service.pro ? "yes" : "no";
+    std::string pro = service.getPro() ? "yes" : "no";
     std::cout << " __________HOUSE MASTER__________ " << std::endl;
-    std::cout << "| " << std::setw(30) << std::right << service.name << " |" << std::endl;
+    std::cout << "| " << std::setw(30) << std::right << service.getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
-    std::cout << "| [" << "Base Price" << "] " << std::setw(16) << std::right << service.basePrice << "€ |" << std::endl;
-    std::cout << "| [" << "Duration" << "] " << std::setw(19) << std::right << service.duration.dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Base Price" << "] " << std::setw(16) << std::right << service.getBasePrice() << "€ |" << std::endl;
+    std::cout << "| [" << "Duration" << "] " << std::setw(19) << std::right << service.getDuration().dateToStr() << " |" << std::endl;
     std::cout << "| [" << "Professional" << "] " << std::setw(15) << std::right << pro << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "| [Enter] Go Back                |" << std::endl;

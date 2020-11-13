@@ -43,7 +43,7 @@ bool Collaborator::canPreform(const std::string& service) {
 }
 
 bool Collaborator::hasQualificationToPreform(Intervention *intervention) const {
-    return !(intervention->getService()->pro || intervention->getForcePro()) || isPro();
+    return !(intervention->getService()->getPro() || intervention->getForcePro()) || isPro();
 }
 
 int Collaborator::getScore() const {

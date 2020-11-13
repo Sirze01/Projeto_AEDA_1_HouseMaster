@@ -23,7 +23,7 @@ std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &h
 }
 
 
-void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro) {
+void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int variableValue) {
     hm.addIntervention(_date, type, forcePro, this->getId());
 }
 
@@ -47,16 +47,16 @@ bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, dat
 bool Collaborator::canDo(HouseMaster& hm, const std::string &collabId, Intervention *intervention) {
     const Service *service = intervention->getService();
     date start = *intervention->getStartingTime();
-    date duration = service->duration;
-    return isAvailable(hm, collabId, start, duration) && canPreform(service->name) && hasQualificationToPreform(intervention);
+    date duration = service->getDuration();
+    return isAvailable(hm, collabId, start, duration) && canPreform(service->getName()) && hasQualificationToPreform(intervention);
 }
 
-void Collaborator::markInterventionAsInProgress(HouseMaster &hm, Intervention *a) {
-    hm.changeinterventionState(a, InProgress);
+void Collaborator::markInterventionAsInProgress(Intervention *a) {
+    HouseMaster::changeinterventionState(a, InProgress);
 }
 
-void Collaborator::markInterventionAsComplete(HouseMaster &hm, Intervention *a) {
-    hm.changeinterventionState(a, Complete);
+void Collaborator::markInterventionAsComplete(Intervention *a) {
+    HouseMaster::changeinterventionState(a, Complete);
 }
 
 HouseMaster::HouseMaster() : _availableServices(), _clients(), _collaborators(), _interventions() {}
@@ -138,10 +138,10 @@ void HouseMaster::addAvailableService(const std::string &name, bool pro, float b
 }
 
 void HouseMaster::addAvailableService(Service* service) {
-    if (_availableServices.find(service->name) != _availableServices.end())
+    if (_availableServices.find(service->getName()) != _availableServices.end())
         throw ExistentService("A service with the same name already exists!");
     else {
-        _availableServices.insert({service->name, service});
+        _availableServices.insert({service->getName(), service});
     }
 }
 
@@ -406,7 +406,8 @@ void HouseMaster::writeServicesInfo()
         auto service_it = _availableServices.begin();
         while (service_it != _availableServices.end())
         {
-            servicesFile << service_it->second->name << "," << service_it->second->pro << "," << service_it->second->basePrice << "," << service_it->second->duration.dateToStr() << '\n';
+            servicesFile << service_it->second->getName() << "," << service_it->second->getPro() << "," <<
+            service_it->second->getBasePrice() << "," << service_it->second->getDuration().dateToStr() << '\n';
             service_it++;
         }
         servicesFile.close();

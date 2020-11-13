@@ -1,20 +1,27 @@
 #ifndef SRC_SERVICES_H
 #define SRC_SERVICES_H
 
-#include<stdexcept>
-#include<string>
-#include<sstream>
-#include<iostream>
+#include <stdexcept>
+#include <string>
+#include <sstream>
+#include <iostream>
 
 #include "date.h"
 
-struct Service {
-    std::string name;
-    bool pro{};
-    float basePrice{};
-    date duration;
+class Service {
+private:
+    std::string _name;
+    bool _pro;
+    float _basePrice;
+    date _duration;
+public:
     Service() = default;
     Service(std::string name, bool pro, float basePrice, const date &duration);
+    std::string getName() const;
+    bool getPro() const;
+    float getBasePrice() const;
+    date getDuration() const;
+    virtual float calculatePrice();
 };
 
 
@@ -38,7 +45,7 @@ private:
 
 public:
 
-    Intervention(const date &appointment, Service  type, bool forcePro);
+    Intervention(const date &appointment, Service type, bool forcePro);
 
     const date *getStartingTime() const;
 
