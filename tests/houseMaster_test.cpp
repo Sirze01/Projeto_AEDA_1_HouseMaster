@@ -158,8 +158,9 @@ TEST(HouseMasterTest, interventionManip){
     houseMaster1.getClients()["client3"]->requestIntervention(houseMaster1, date(12, 12, 2012, 21, 00), "canalizador",
                                                               false);
     it = std::find_if(houseMaster1.getInterventions().begin(), houseMaster1.getInterventions().end(), [](Intervention * intervention){
-        if(intervention->getClientId() == "client3" && intervention->getService()->getName() == "canalizador" && *intervention->getStartingTime() == date(12,05,2001,01,00,0)){return true;}});
+        if(intervention->getClientId() == "client3" && intervention->getService()->getName() == "canalizador" && *intervention->getStartingTime() == date(12,12,2012,21,00)){return true;}});
     EXPECT_FALSE(it == houseMaster1.getInterventions().end());
+
 }
 
 

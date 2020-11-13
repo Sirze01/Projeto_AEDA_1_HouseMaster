@@ -100,7 +100,7 @@ public:
 
     std::string getId() const override;
 
-    void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int variableValue=0);
+    void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro);
 
     void cancelIntervention(HouseMaster &hm, Intervention* intervention);
 

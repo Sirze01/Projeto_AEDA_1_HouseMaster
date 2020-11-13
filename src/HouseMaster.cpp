@@ -23,7 +23,7 @@ std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &h
 }
 
 
-void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int variableValue) {
+void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro) {
     hm.addIntervention(_date, type, forcePro, this->getId());
 }
 
