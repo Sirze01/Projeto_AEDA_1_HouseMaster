@@ -178,7 +178,7 @@ TEST(HouseMasterTest, usageTest){
                                                               false);
 
     // Client cancels it
-    houseMaster1.getClients()["client3"]->cancelIntervention(houseMaster1, houseMaster1.getClients()["client3"]->getAssociatedInterventions(houseMaster1).at(0));
+    houseMaster1.getClients()["client3"]->cancelIntervention(houseMaster1.getClients()["client3"]->getAssociatedInterventions(houseMaster1).at(0));
 
     // client requests another
     houseMaster1.getClients()["client2"]->requestIntervention(houseMaster1,

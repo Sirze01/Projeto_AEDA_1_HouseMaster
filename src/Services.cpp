@@ -1,5 +1,6 @@
-#include"Services.h"
+#include "Services.h"
 #include <utility>
+
 Service::Service(std::string name, bool pro, float basePrice, const date &duration) :
         _name(std::move(name)), _pro(pro), _basePrice(basePrice), _duration(duration){}
 
@@ -23,9 +24,31 @@ float Service::calculatePrice() {
     return _basePrice;
 }
 
+Painting::Painting(std::string name, bool pro, float basePrice, const date &duration) : Service(std::move(name), pro, basePrice, duration), _roomNumber(0) {}
+
+void Painting::setRoomNumber(int number) {
+    _roomNumber = number;
+}
+
+float Painting::calculatePrice() {
+    float price = getBasePrice();
+    float sum = 0;
+    for(int n = 1; n < _roomNumber + 1; n++){
+        if(n == 1)
+            sum += price;
+        else if(price >= MinimumPricePerRoom) {
+            price = float(ROOM_DISCOUNT) * price;
+            sum += price;
+        }
+        else
+            sum += price;
+    }
+    return sum;
+}
+
 
 Intervention::Intervention(const date& appointment, Service  type, bool forcePro) :
-_startingTime(appointment),_type(std::move(type)), _forcePro(forcePro),_state(Scheduled), _price(){}
+        _startingTime(appointment), _type(std::move(type)), _forcePro(forcePro), _state(Scheduled), _cost(){}
 
 const Service* Intervention::getService()const{
     return &_type;
@@ -43,8 +66,8 @@ bool Intervention::getForcePro() const {
     return _forcePro;
 }
 
-float Intervention::getPrice() const {
-    return _price;
+float Intervention::getCost() const {
+    return _cost;
 }
 
 std::string Intervention::getCollabId() const {
@@ -76,6 +99,10 @@ bool Intervention::conflictsWith(date start, date duration) {
     date otherEnd = start + duration;
 
     return (interventionStart > otherStart && interventionStart < otherEnd) || (getEndTime() > otherStart && interventionStart < otherStart);
+}
+
+void Intervention::calculateCost() {
+    _cost = float(1 + HouseMasterTax) * _type.calculatePrice();
 }
 
 date Intervention::getEndTime() const {

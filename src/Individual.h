@@ -69,6 +69,10 @@ public:
 
     void updateScore();
 
+    void calculateEarnings(float &hmEarnings);
+
+    float comissionByScore();
+
     static unsigned int _idSeqCol;
 
     std::string getId() const override;
@@ -84,6 +88,7 @@ private:
     std::vector<std::string> _services;
     Classification _score;
     bool _pro;
+    float _earnings;
 };
 
 
@@ -102,7 +107,7 @@ public:
 
     void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro);
 
-    void cancelIntervention(HouseMaster &hm, Intervention* intervention);
+    static void cancelIntervention(Intervention* intervention);
 
     void classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification);
 

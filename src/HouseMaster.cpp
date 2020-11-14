@@ -17,18 +17,16 @@ HouseMaster::InexistentClient::InexistentClient(const std::string &error_msg) : 
 
 HouseMaster::ExistentClient::ExistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
-
 std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &hm) {
     return hm.getAssociatedInterventions(this->getId());
 }
-
 
 void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro) {
     hm.addIntervention(_date, type, forcePro, this->getId());
 }
 
-void Client::cancelIntervention(HouseMaster &hm, Intervention * intervention) {
-    hm.changeinterventionState(intervention, Canceled);
+void Client::cancelIntervention(Intervention * intervention) {
+    HouseMaster::changeinterventionState(intervention, Canceled);
 }
 
 void Client::classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification) {
@@ -59,9 +57,12 @@ void Collaborator::markInterventionAsComplete(Intervention *a) {
     HouseMaster::changeinterventionState(a, Complete);
 }
 
-HouseMaster::HouseMaster() : _availableServices(), _clients(), _collaborators(), _interventions() {}
 
-HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services) {
+
+// HouseMaster Methods
+HouseMaster::HouseMaster() : _availableServices(), _clients(), _collaborators(), _interventions(), _earnings() {}
+
+HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services) : _earnings() {
     // read services.txt
     for (std::string line; std::getline(services, line);) {
 
@@ -123,7 +124,6 @@ std::unordered_map<std::string, Collaborator *> &HouseMaster::getCollaborators()
     return _collaborators;
 }
 
-
 std::vector<Intervention *> &HouseMaster::getInterventions() {
     return _interventions;
 }
@@ -171,7 +171,6 @@ void HouseMaster::addCollaborator(const std::vector<std::string> &functions, con
     _usernameMap.insert({collab->getId(), collab->getId()});
 }
 
-
 void HouseMaster::removeCollaborator(const std::string &id) {
     auto it = _collaborators.find(id);
     auto UsernameIt = std::find_if(_usernameMap.begin(), _usernameMap.end(),
@@ -211,7 +210,6 @@ void HouseMaster::deleteCollaborator(const std::string &id) {
     }
 }
 */
-
 
 void HouseMaster::addClient(Client *client) {
 
@@ -303,6 +301,19 @@ void HouseMaster::addIntervention(const date &appointment, const std::string &ty
 
 void HouseMaster::changeinterventionState(Intervention *intervention, processState state) {
     intervention->setProcessState(state);
+}
+
+void HouseMaster::changeinterventionStatePayed(Intervention *intervention) {
+    intervention->setProcessState(PaymentComplete);
+}
+
+void HouseMaster::processTransaction(Intervention *intervention) {
+    float hmEarnings;
+    intervention->calculateCost();
+    hmEarnings = intervention->getCost() - (intervention->getCost() / float(1 + HouseMasterTax));
+    getCollaborators()[intervention->getCollabId()]->calculateEarnings(hmEarnings);
+    _earnings += hmEarnings;
+    changeinterventionStatePayed(intervention);
 }
 
 std::vector<Intervention *> HouseMaster::getAssociatedInterventions(const std::string &id) {

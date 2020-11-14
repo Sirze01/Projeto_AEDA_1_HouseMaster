@@ -15,6 +15,8 @@
 #include "Individual.h"
 #include "Services.h"
 
+
+
 bool colComparer(std::pair<std::string, Collaborator*>& a, std::pair<std::string, Collaborator*>& b);
 
 class HouseMaster {
@@ -23,15 +25,15 @@ public:
 
     HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services);
 
-    std::unordered_map<std::string, Collaborator *>& getCollaborators() ;
+    std::unordered_map<std::string, Collaborator *>& getCollaborators();
 
-    std::unordered_map<std::string, Client *>& getClients() ;
+    std::unordered_map<std::string, Client *>& getClients();
 
-    std::vector<Intervention *>& getInterventions() ;
+    std::vector<Intervention *>& getInterventions();
 
-    void addAvailableService(const std::string& name, bool pro, float basePrice, date duration); //DONE
+    void addAvailableService(const std::string& name, bool pro, float basePrice, date duration);
 
-    void removeAvailableService(const std::string& serviceName);                                 //DONE
+    void removeAvailableService(const std::string& serviceName);
 
     std::unordered_map<std::string, Service*>& getAvailableServices();
 
@@ -54,6 +56,10 @@ public:
     void addIntervention(const date& appointment, const std::string& type, bool forcePro, const std::string &clientId);
 
     static void changeinterventionState(Intervention* intervention, processState state);
+
+    static void changeinterventionStatePayed(Intervention* intervention);
+
+    void processTransaction(Intervention *intervention);
 
     std::vector<Intervention*> getAssociatedInterventions(const std::string& id);
 
@@ -89,6 +95,7 @@ private:
     std::unordered_map<std::string, std::string> _usernameMap;
     std::unordered_map<std::string, Collaborator*> _collaborators;
     std::vector<Intervention*> _interventions;
+    float _earnings;
 
 };
 

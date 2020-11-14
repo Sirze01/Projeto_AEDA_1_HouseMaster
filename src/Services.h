@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "date.h"
+#include "Services_Constants.h"
 
 class Service {
 private:
@@ -24,9 +25,19 @@ public:
     virtual float calculatePrice();
 };
 
+class Painting : public Service{
+private:
+    int _roomNumber;
+public:
+    Painting(std::string name, bool pro, float basePrice, const date &duration);
+    void setRoomNumber(int number);
+    float calculatePrice() override;
+};
+
 
 enum processState {
     Scheduled,
+    PaymentComplete,
     InProgress,
     Complete,
     Canceled
@@ -41,7 +52,7 @@ private:
     Service _type;
     bool _forcePro;
     processState _state;
-    float _price;
+    float _cost;
 
 public:
 
@@ -67,7 +78,9 @@ public:
 
     bool conflictsWith(date start, date duration);
 
-    float getPrice() const;
+    void calculateCost(); // Calculates cost to the client, earnings to housemaster and collab
+
+    float getCost() const;
 
     date getEndTime() const;
 

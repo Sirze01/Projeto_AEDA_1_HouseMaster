@@ -76,7 +76,7 @@ class Intervention{
     + void intervention(date appointment, servicesType type, bool forcePro)
     + int getService()
     + int getProcessState()
-    + int getPrice()
+    + int getCost()
 }
 
 
