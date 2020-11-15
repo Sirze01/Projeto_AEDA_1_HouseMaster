@@ -1,7 +1,7 @@
 #include "Services.h"
 #include <utility>
 
-Service::Service(std::string name, bool pro, float basePrice, const date &duration) :
+Service::Service(std::string name, bool pro, float basePrice, const duration &duration) :
         _name(std::move(name)), _pro(pro), _basePrice(basePrice), _duration(duration){}
 
 std::string Service::getName() const{
@@ -16,7 +16,7 @@ float Service::getBasePrice() const{
     return _basePrice;
 }
 
-date Service::getDuration() const{
+duration Service::getDuration() const{
     return _duration;
 }
 
@@ -24,7 +24,7 @@ float Service::calculatePrice() {
     return _basePrice;
 }
 
-Painting::Painting(std::string name, bool pro, float basePrice, const date &duration) : Service(std::move(name), pro, basePrice, duration), _roomNumber(0) {}
+Painting::Painting(std::string name, bool pro, float basePrice, const duration &duration) : Service(std::move(name), pro, basePrice, duration), _roomNumber(0) {}
 
 void Painting::setRoomNumber(int number) {
     _roomNumber = number;
@@ -91,7 +91,7 @@ const date* Intervention::getStartingTime() const {
 }
 
 //Tentar usar referencia para outra intervention
-bool Intervention::conflictsWith(date start, date duration) {
+bool Intervention::conflictsWith(date start, duration duration) {
 
     date interventionStart = _startingTime;
 

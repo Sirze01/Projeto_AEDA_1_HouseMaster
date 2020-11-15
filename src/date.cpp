@@ -3,20 +3,22 @@
 
 date::date() = default;
 
-date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
-           bool valid) {
+date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes) {
     this->day = day;
     this->month = month;
     this->year = year;
     this->hours = hours;
     this->minutes = minutes;
-    if(valid){
-        isValidDate(true);
-    }
-
 }
 
-int date::getDaysInMonth() const {
+date::date(const std::string &date) {
+    std::stringstream ss(date);
+    char sep{};
+    // DD/MM/YYYY HH:mm
+    ss >> day >> sep >> month >> sep >> year >> hours >> sep >> minutes;
+}
+
+unsigned int date::getDaysInMonth() const {
     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
         return 31;
     } else if (month == 4 || month == 6 || month == 9 || month == 11) {
@@ -45,13 +47,9 @@ date::InvalidDate::InvalidDate(const std::string &error_msg) : std::invalid_argu
 
 std::string date::dateToStr() const {
     std::ostringstream stream;
-    if (isValidDate()) {
-        stream << std::setfill('0');
-        stream << std::setw(2) << day << '/' << month << '/' << std::setw(4)
-        << year << "  " << std::setw(2) << hours << ':' << minutes;
-    } else {
-        stream << std::setfill('0') <<std::setw(2) << hours << "h" << minutes;
-    }
+    stream << std::setfill('0');
+    stream << std::setw(2) << day << '/' << month << '/' << std::setw(4)
+    << year << "  " << std::setw(2) << hours << ':' << minutes;
     return stream.str();
 }
 
@@ -137,15 +135,42 @@ bool date::operator>(const date &d2) const
     }
 }
 
-void date::readDuration(const std::string &duration) {
+
+
+//duration
+
+duration::duration() = default;
+
+duration::duration(unsigned int hours, unsigned int minutes)
+{
+    this->hours = hours;
+    this->minutes = minutes;
+}
+
+duration::duration(const std::string &duration) {
     std::stringstream ss(duration);
+    //HH:mm
     char sep{};
     ss >> hours >> sep >> minutes;
 }
 
-date::date(const std::string &date) {
-    std::stringstream ss(date);
-    char sep{};
-    // DD/MM/YYYY HH:mm
-    ss >> day >> sep >> month >> sep >> year >> hours >> sep >> minutes;
+
+std::string duration::durationToStr() const
+{
+    std::ostringstream stream;
+    stream << std::setfill('0') <<std::setw(2) << hours << "h" << minutes;
+    return stream.str();
+}
+
+
+//duration::InvalidDuration::InvalidDuration(const std::string &error_msg) : std::invalid_argument(error_msg) {}
+
+
+bool duration::isValidDuration() const
+{
+    if (hours > 23 || minutes > 59) {
+        std::cout << durationToStr() + " isn't a valid date!";
+        return false;
+    }
+    return true;
 }

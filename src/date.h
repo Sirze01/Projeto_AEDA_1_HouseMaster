@@ -16,14 +16,11 @@ struct date {
 
     date();
 
-    date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes,
-         bool valid= true);
+    date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
 
     date(const std::string &date);
 
-    void readDuration(const std::string &duration);
-
-    int getDaysInMonth() const;
+    unsigned int getDaysInMonth() const;
 
     bool isValidDate(bool throwExcept=false) const;
 
@@ -45,5 +42,32 @@ class date::InvalidDate : public std::invalid_argument {
 public:
     explicit InvalidDate(const std::string &error_msg);
 };
+
+
+//duration
+
+struct duration: public date
+{
+    duration();
+
+    duration(unsigned int hours, unsigned int minutes);
+
+    duration(const std::string &duration);
+
+    bool isValidDuration() const;
+
+    //class InvalidDuration;
+
+    std::string durationToStr() const;
+};
+
+/*
+class duration::InvalidDuration
+{
+public:
+    explicit InvalidDuration(const std::string &error_msg);
+};
+*/
+
 
 #endif

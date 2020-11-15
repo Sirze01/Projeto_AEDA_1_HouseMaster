@@ -193,7 +193,7 @@ void Interface::readNewCollaboratorData(bool &running) {
 std::string Interface::readNewServiceData(bool &running) {
     std::string name{}, proStr{}, durationStr;
     float basePrice{};
-    date duration{};
+    //duration duration{};
 
     std::cout << "Name ? "; std::cin.ignore(); std::getline(std::cin, name, '\n');
 
@@ -228,7 +228,7 @@ std::string Interface::readNewServiceData(bool &running) {
     }
 
     std::cout << "Mean duration : "; std::cin >> durationStr;
-    duration.readDuration(durationStr);
+    duration duration(durationStr);
     _houseMaster.addAvailableService(name, pro, basePrice, duration);
 
     return name;

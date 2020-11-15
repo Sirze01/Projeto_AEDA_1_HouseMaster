@@ -37,7 +37,7 @@ void Client::classifyCollaborator(HouseMaster &hm, const std::string &collabId, 
     hm.getCollaborators()[collabId]->addClassification(classification);
 }
 
-bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, date start, date duration) {
+bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, date start, duration duration) {
     for (const auto &intervention : hm.getAssociatedInterventions(collabId)) {
         if (intervention->conflictsWith(start, duration)) {
             return false;
@@ -49,7 +49,7 @@ bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, dat
 bool Collaborator::canDo(HouseMaster& hm, const std::string &collabId, Intervention *intervention) {
     const Service *service = intervention->getService();
     date start = *intervention->getStartingTime();
-    date duration = service->getDuration();
+    duration duration = service->getDuration();
     return isAvailable(hm, collabId, start, duration) && canPreform(service->getName()) && hasQualificationToPreform(intervention);
 }
 
@@ -85,8 +85,7 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         // duration
         std::string durationStr;
         std::getline(lss, durationStr, ',');
-        date duration;
-        duration.readDuration(durationStr);
+        duration duration(durationStr);
 
         // check if everything is valid, if not throw an exception
 
@@ -138,7 +137,7 @@ std::vector<Intervention *> &HouseMaster::getInterventions() {
     return _interventions;
 }
 
-void HouseMaster::addAvailableService(const std::string &name, bool pro, float basePrice, date duration) {
+void HouseMaster::addAvailableService(const std::string &name, bool pro, float basePrice, duration duration) {
     if (_availableServices.find(name) != _availableServices.end())
         throw ExistentService("A service with the same name already exists!");
     else {

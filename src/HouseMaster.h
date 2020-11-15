@@ -31,7 +31,7 @@ public:
 
     std::vector<Intervention *>& getInterventions();
 
-    void addAvailableService(const std::string& name, bool pro, float basePrice, date duration);
+    void addAvailableService(const std::string& name, bool pro, float basePrice, duration duration);
 
     void removeAvailableService(const std::string& serviceName);
 

@@ -55,7 +55,7 @@ public:
 
     bool canPreform(const std::string& service);
 
-    static bool isAvailable(HouseMaster &hm, const std::string &collabId, date start, date duration);
+    static bool isAvailable(HouseMaster &hm, const std::string &collabId, date start, duration duration);
 
     bool hasQualificationToPreform(Intervention *intervention) const;
 

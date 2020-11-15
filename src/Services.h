@@ -14,14 +14,14 @@ private:
     std::string _name;
     bool _pro;
     float _basePrice;
-    date _duration;
+    duration _duration;
 public:
     Service() = default;
-    Service(std::string name, bool pro, float basePrice, const date &duration);
+    Service(std::string name, bool pro, float basePrice, const duration &duration);
     std::string getName() const;
     bool getPro() const;
     float getBasePrice() const;
-    date getDuration() const;
+    duration getDuration() const;
     virtual float calculatePrice();
 };
 
@@ -29,7 +29,7 @@ class Painting : public Service{
 private:
     int _roomNumber;
 public:
-    Painting(std::string name, bool pro, float basePrice, const date &duration);
+    Painting(std::string name, bool pro, float basePrice, const duration &duration);
     void setRoomNumber(int number);
     float calculatePrice() override;
 };
@@ -76,7 +76,7 @@ public:
 
     void setProcessState(processState state);
 
-    bool conflictsWith(date start, date duration);
+    bool conflictsWith(date start, duration duration);
 
     void calculateCost(); // Calculates cost to the client, earnings to housemaster and collab
 
