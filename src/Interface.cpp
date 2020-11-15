@@ -53,7 +53,7 @@ bool Interface::readRole(const std::string &username) {
     std::string roleName{};
     Role role{};
     for (const auto &i : username) {  // muito xanxo melhorar
-        if (isalpha(i)) roleName += i;
+        if (isalpha(i)) roleName += i;  // ai isto ta xanxo que fode e nem funciona bem
         else break;
     }
     if (roleName == "collab") role = collaborator;
@@ -87,7 +87,7 @@ void Interface::clientOpperations(bool &running) {
     }}, {"See active interventions", [&](){
         while (innerRunning) {
             Intervention* intervention = selectActiveIntervention(innerRunning);
-
+            if (!intervention->getService()->getName().empty()) ;
         }
     }}});
     clientMenu.show();
@@ -126,7 +126,7 @@ void Interface::show(const Service& service) {
     std::cout << "| " << std::setw(30) << std::right << service.getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "| [" << "Base Price" << "] " << std::setw(16) << std::right << service.getBasePrice() << "€ |" << std::endl;
-    std::cout << "| [" << "Duration" << "] " << std::setw(19) << std::right << service.getDuration().dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Duration" << "] " << std::setw(19) << std::right << service.getDuration().durationToStr() << " |" << std::endl;
     std::cout << "| [" << "Professional" << "] " << std::setw(15) << std::right << pro << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "| [Enter] Go Back                |" << std::endl;

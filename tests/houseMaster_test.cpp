@@ -12,13 +12,13 @@ TEST(HouseMasterTest, fileConstructor){
                              std::ifstream("../../data/services.txt"));
 
     std::vector<Service> svc;
-    svc.emplace_back("ajudar os amiguinhos com fisica", false, 3, date(0,0,0,2,30,false));
-    svc.emplace_back("ajudar os amiguinhos com amat", false, 3, date(0,0,0,3,0,false));
-    svc.emplace_back("jantar na cantina as 18h30", false, 2.70, date(0,0,0,1,0,false));
-    svc.emplace_back("montar um carro do nada", false, 2.5, date(0,0,0,10,0,false));
-    svc.emplace_back("desmontar um computador", false, 4, date(0,0,0,2,0,false));
-    svc.emplace_back("canalizador", true, 5, date(0,0,0,3,0,false));
-    svc.emplace_back("andar a correr atras de uma princesa ou la o que e", false, 1, date(0,0,0,4,0,false));
+    svc.emplace_back("ajudar os amiguinhos com fisica", false, 3, duration(2,30));
+    svc.emplace_back("ajudar os amiguinhos com amat", false, 3, duration(3,0));
+    svc.emplace_back("jantar na cantina as 18h30", false, 2.70, duration(1,0));
+    svc.emplace_back("montar um carro do nada", false, 2.5, duration(10,0));
+    svc.emplace_back("desmontar um computador", false, 4, duration(2,0));
+    svc.emplace_back("canalizador", true, 5, duration(3,0));
+    svc.emplace_back("andar a correr atras de uma princesa ou la o que e", false, 1, duration(4,0));
     for(auto & i : svc){
         EXPECT_EQ(i.getName(), houseMaster1.getAvailableServices()[i.getName()]->getName());
         EXPECT_EQ(i.getPro(), houseMaster1.getAvailableServices()[i.getName()]->getPro());
@@ -90,11 +90,11 @@ TEST(HouseMasterTest, servicesManip){
     EXPECT_THROW(houseMaster1.removeAvailableService("ajudar os amiguinhos com fisica"),HouseMaster::InexistentService);
 
     // add service
-    houseMaster1.addAvailableService("ajudar os amiguinhos com fisica", false, 3, date(0,0,0,2,30,false));
+    houseMaster1.addAvailableService("ajudar os amiguinhos com fisica", false, 3, duration(2,30));
     EXPECT_FALSE(houseMaster1.getAvailableServices().find("ajudar os amiguinhos com fisica") == houseMaster1.getAvailableServices().end());
 
     // Try to add existent service
-    EXPECT_THROW(houseMaster1.addAvailableService("ajudar os amiguinhos com fisica", false, 3, date(0,0,0,2,30,false)),HouseMaster::ExistentService);
+    EXPECT_THROW(houseMaster1.addAvailableService("ajudar os amiguinhos com fisica", false, 3, duration(2,30)),HouseMaster::ExistentService);
 }
 
 
@@ -150,7 +150,7 @@ TEST(HouseMasterTest, interventionManip){
                              std::ifstream("../../data/services.txt"));
 
     // add Intervention
-    houseMaster1.addIntervention(date(12,05,2001,01,00,0), "desmontar um computador", true, "");
+    houseMaster1.addIntervention(date(12,05,2001,01,00), "desmontar um computador", true, "");
     auto it =  std::find_if(houseMaster1.getInterventions().begin(), houseMaster1.getInterventions().end(), [](Intervention * intervention){
         if(intervention->getClientId() == "" && intervention->getService()->getName() == "desmontar um computador"){return true;}});
     EXPECT_FALSE(it == houseMaster1.getInterventions().end());
