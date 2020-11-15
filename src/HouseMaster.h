@@ -63,6 +63,8 @@ public:
 
     std::vector<Intervention*> getAssociatedInterventions(const std::string& id);
 
+    std::vector<Intervention*> getAssociatedActiveInterventions(const std::string& id);
+
     void assignColaborator(Intervention*, const std::vector<std::pair<std::string, Collaborator*>>&);
 
     std::vector<std::pair<std::string, Collaborator*>> sortCollaboratorsByScore();

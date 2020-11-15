@@ -29,6 +29,7 @@ public:
     std::string selectCollab(bool &running);
     void readNewCollaboratorData(bool &running);
     std::string readNewServiceData(bool &running);
+    Intervention* selectActiveIntervention(bool &running);
 private:
     HouseMaster _houseMaster;
     Individual *_user;

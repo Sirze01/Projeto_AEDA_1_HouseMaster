@@ -412,7 +412,7 @@ void Menu::select() {
                 std::cout << "Invalid choice. Make sure you are entering a valid number: " << std::endl;
                 std::cin >> choice;
             }
-        } else if (choice < 0 || choice > _options.size() + 1) {
+        } else if (choice > _options.size() + 1) {
             std::cout << "Invalid choice. Make sure you chose one of the available options: " << std::endl;
             std::cin >> choice;
         } else {

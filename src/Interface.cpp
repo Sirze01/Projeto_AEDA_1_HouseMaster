@@ -20,7 +20,6 @@ void Interface::selectRole(bool &running) {
         userLogin();
         std::cout << "Login succeeded for " << _user->getName() << "\n";
         while (innerRunning) {
-
             clientOpperations(innerRunning);
         }
     }}});
@@ -84,6 +83,11 @@ void Interface::clientOpperations(bool &running) {
             Service *service = _houseMaster.getAvailableServices()[serviceName];
             if (!serviceName.empty()) show(*service);
             std::cin.ignore();
+        }
+    }}, {"See active interventions", [&](){
+        while (innerRunning) {
+            Intervention* intervention = selectActiveIntervention(innerRunning);
+
         }
     }}});
     clientMenu.show();
@@ -241,10 +245,27 @@ std::string Interface::selectCollab(bool &running) {
             selection = i.first;
         }));
     }
-    Menu servicesMenu("Select a collaborator", options);
-    servicesMenu.show();
-    servicesMenu.select();
-    servicesMenu.execute(running);
+    Menu collabsMenu("Select a collaborator", options);
+    collabsMenu.show();
+    collabsMenu.select();
+    collabsMenu.execute(running);
+    return selection;
+}
+
+Intervention *Interface::selectActiveIntervention(bool &running) {
+    auto interventions = _houseMaster.getInterventions();
+    std::vector<Intervention*> activeInterventions = _houseMaster.getAssociatedActiveInterventions(_user->getId());
+    std::map<std::string, std::function<void()>> options{};
+    Intervention* selection{};
+    for (const auto &i : activeInterventions) {
+        options.insert(std::pair<std::string, std::function<void()>>(i->getService()->getName() + " " + i->getStartingTime()->dateToStr(), [&selection, &i](){
+            selection = i;
+        }));
+    }
+    Menu activeInterventionsMenu("Select an intervention", options);
+    activeInterventionsMenu.show();
+    activeInterventionsMenu.select();
+    activeInterventionsMenu.execute(running);
     return selection;
 }
 
@@ -261,6 +282,8 @@ void Interface::show(const Collaborator &collaborator) {
     std::cout << "|________________________________|" << std::endl;
     std::cin.ignore();
 }
+
+
 
 
 

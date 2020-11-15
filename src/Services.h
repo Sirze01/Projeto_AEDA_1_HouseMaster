@@ -84,6 +84,8 @@ public:
 
     date getEndTime() const;
 
+    bool isActive() const;
+
 };
 
 #endif

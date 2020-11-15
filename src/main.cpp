@@ -13,9 +13,11 @@ int main() {
         i1.selectRole(running);
     }
 
-    //h1.writeClientsInfo();
-    //h1.writeServicesInfo();
+    /*
+    h1.writeClientsInfo();
+    h1.writeServicesInfo();
     h1.writeCollabsInfo();
+     */
 
     return 0;
 }

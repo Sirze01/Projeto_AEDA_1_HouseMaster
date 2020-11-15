@@ -108,3 +108,7 @@ void Intervention::calculateCost() {
 date Intervention::getEndTime() const {
     return _startingTime + _type.getDuration();
 }
+
+bool Intervention::isActive() const {
+    return _state == InProgress || _state == Scheduled;
+}

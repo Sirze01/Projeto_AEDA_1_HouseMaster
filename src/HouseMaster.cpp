@@ -21,6 +21,10 @@ std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &h
     return hm.getAssociatedInterventions(this->getId());
 }
 
+std::vector<Intervention*> Individual::getAssociatedActiveInterventions(HouseMaster &hm) {
+    return hm.getAssociatedActiveInterventions(this->getId());
+}
+
 void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro) {
     hm.addIntervention(_date, type, forcePro, this->getId());
 }
@@ -84,6 +88,8 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         date duration;
         duration.readDuration(durationStr);
 
+        // check if everything is valid, if not throw an exception
+
         addAvailableService(name, pro, price, duration);
     }
 
@@ -103,6 +109,8 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
             collabServices.push_back(serviceName);
         }
 
+        // check if everything is valid, if not throw an exception
+
         addCollaborator(collabServices, name, proStr == "yes");
     }
 
@@ -115,6 +123,8 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         std::getline(lss, name, ',');
         std::getline(lss, nifStr, ',');
         std::getline(lss, premiumStr, ',');
+
+        // check if everything is valid, if not throw an exception
 
         addClient(std::stoul(nifStr), name, premiumStr == "yes");
     }
@@ -320,6 +330,15 @@ std::vector<Intervention *> HouseMaster::getAssociatedInterventions(const std::s
     std::vector<Intervention*> retVec;
     for(const auto &intervention : _interventions){
         if (intervention->getClientId() == id || intervention->getCollabId() == id)
+            retVec.push_back(intervention);
+    }
+    return retVec;
+}
+
+std::vector<Intervention *> HouseMaster::getAssociatedActiveInterventions(const std::string &id) {
+    std::vector<Intervention*> retVec;
+    for(const auto &intervention : _interventions){
+        if ((intervention->getClientId() == id || intervention->getCollabId() == id) && intervention->isActive())
             retVec.push_back(intervention);
     }
     return retVec;

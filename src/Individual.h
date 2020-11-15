@@ -21,6 +21,8 @@ public:
 
     std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm);
 
+    std::vector<Intervention*> getAssociatedActiveInterventions(HouseMaster &hm);
+
     std::string getName() const;
 
 
