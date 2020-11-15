@@ -443,3 +443,24 @@ void HouseMaster::writeServicesInfo()
     }
     else std::cout << "Unable to write in services' file";
 }
+
+void HouseMaster::writeInterventionsInfo()
+{
+    std::ofstream interventionsFile("../../data/InterventionsUpdate.txt", std::ios_base::app);
+    time_t timeToday;
+    time (&timeToday);
+    interventionsFile << "\n\n" << asctime(localtime(&timeToday)) << "\n";
+    if (interventionsFile.is_open())
+    {
+        auto int_it = _interventions.begin();
+        while (int_it != _interventions.end())
+        {
+            interventionsFile << "Service: " << (*int_it)->getService() << ", from " << (*int_it)->getStartingTime()->dateToStr()
+            << " to " << (*int_it)->getEndTime().dateToStr() << ", to client " << (*int_it)->getClientId() << " done by " << (*int_it)->getCollabId()
+            << ", cost: " << (*int_it)->getCost() << '\n';
+            int_it++;
+        }
+        interventionsFile.close();
+    }
+    else std::cout << "Unable to write in interventions' file";
+}

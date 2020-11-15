@@ -91,6 +91,8 @@ public:
 
     void writeServicesInfo();
 
+    void writeInterventionsInfo();
+
 private:
     std::unordered_map<std::string, Service*> _availableServices;
     std::unordered_map<std::string, Client*> _clients;
