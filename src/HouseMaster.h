@@ -71,6 +71,8 @@ public:
 
     Individual* findByUsername(const std::string &name);
 
+    void markAsComplete(Intervention* intervention);
+
     class UnavailableAppointment;
 
     class InexistentService;

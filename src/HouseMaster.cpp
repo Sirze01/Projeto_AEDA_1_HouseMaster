@@ -464,3 +464,7 @@ void HouseMaster::writeInterventionsInfo()
     }
     else std::cout << "Unable to write in interventions' file";
 }
+
+void HouseMaster::markAsComplete(Intervention *intervention) {
+    intervention->setProcessState(Complete);
+}

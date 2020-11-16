@@ -75,6 +75,7 @@ void Interface::clientOpperations(bool &running) {
             if (!service.empty()) {
                 date interventionDate = readInterventionDate();
                 client->requestIntervention(_houseMaster, interventionDate, service, false);
+
             }
         }
     }}, {"Browse Services", [&]() {
@@ -87,7 +88,19 @@ void Interface::clientOpperations(bool &running) {
     }}, {"See active interventions", [&](){
         while (innerRunning) {
             Intervention* intervention = selectActiveIntervention(innerRunning);
-            if (!intervention->getService()->getName().empty()) ;
+            if (!intervention->getService()->getName().empty()) {
+                Menu activeInterventionMenu("Active intervention", {{"Mark as done", [&](){
+                    _houseMaster.markAsComplete(intervention);
+                }},{"Cancel Intervention", [&](){
+                    HouseMaster::changeinterventionState(intervention, Canceled);
+                }}, {"See details", [&](){
+                    show(*intervention);
+                    std::cin.ignore();
+                }}});
+                activeInterventionMenu.show();
+                activeInterventionMenu.select();
+                activeInterventionMenu.execute(running);
+            }
         }
     }}});
     clientMenu.show();
@@ -277,6 +290,21 @@ void Interface::show(const Collaborator &collaborator) {
     std::cout << "| [" << "ID" << "] " << std::setw(16) << std::right << collaborator.getId() << " |" << std::endl;
     std::cout << "| [" << "Score" << "] " << std::setw(19) << std::right << collaborator.getScore() << " |" << std::endl;
     std::cout << "| [" << "Professional" << "] " << std::setw(15) << std::right << pro << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [Enter] Go Back                |" << std::endl;
+    std::cout << "|________________________________|" << std::endl;
+    std::cin.ignore();
+}
+
+
+void Interface::show(Intervention &intervention) {
+    intervention.calculateCost();
+    std::cout << " __________HOUSE MASTER__________ " << std::endl;
+    std::cout << "| " << std::setw(30) << std::right << intervention.getService()->getName() << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [" << "Starting at" << "] " << std::setw(16) << std::right << intervention.getStartingTime()->dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Cost" << "] " << std::setw(19) << std::right << intervention.getCost() << " |" << std::endl;
+    std::cout << "| [" << "Collaborator" << "] " << std::setw(15) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()] << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "| [Enter] Go Back                |" << std::endl;
     std::cout << "|________________________________|" << std::endl;

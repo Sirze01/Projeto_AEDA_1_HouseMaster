@@ -25,6 +25,7 @@ public:
     std::string selectService(bool &running);
     void show(const Service& service);
     void show(const Collaborator& collaborator);
+    void show(Intervention& intervention);
     void adminOpperations(bool &running);
     std::string selectCollab(bool &running);
     void readNewCollaboratorData(bool &running);
