@@ -13,15 +13,23 @@ void Interface::selectRole(bool &running) {
         std::cout << "Welcome to HouseMaster. You have ADMIN privilege.\n";
         adminLogin();
         while (innerRunning) {
-            adminOpperations(innerRunning);
+            adminOperations(innerRunning);
         }
     }},
     {"User (Collaborator/Client)", [&]() {
         userLogin();
         std::cout << "Login succeeded for " << _user->getName() << "\n";
-        while (innerRunning) {
-            clientOpperations(innerRunning);
+        if (_role == client) {
+            while (innerRunning) {
+                clientOperations(innerRunning);
+            }
+        } else if (_role == collaborator) {
+            while (innerRunning) {
+                collaboratorOperations(innerRunning);
+            }
         }
+
+
     }}});
 
     roles.show();
@@ -68,7 +76,7 @@ bool Interface::readRole(const std::string &username) {
     return true;
 }
 
-void Interface::clientOpperations(bool &running) {
+void Interface::clientOperations(bool &running) {
     auto * client = dynamic_cast<Client*>(_user);
     bool innerRunning = true;
     Menu clientMenu("Welcome, " + client->getName(), {{"Request an Intervention", [&]() {
@@ -77,7 +85,7 @@ void Interface::clientOpperations(bool &running) {
             if (!service.empty()) {
                 date interventionDate = readInterventionDate();
                 client->requestIntervention(_houseMaster, interventionDate, service, false);
-
+                // assign the collaborator
             }
         }
     }}, {"Browse Services", [&]() {
@@ -90,13 +98,15 @@ void Interface::clientOpperations(bool &running) {
     }}, {"See active interventions", [&](){
         while (innerRunning) {
             Intervention* intervention = selectActiveIntervention(innerRunning);
-            if (!intervention->getService()->getName().empty()) {
+            if (intervention) {
                 Menu activeInterventionMenu("Active intervention", {{"Mark as done", [&](){
                     _houseMaster.markAsComplete(intervention);
+                    // free the collaborator
                 }},{"Cancel Intervention", [&](){
                     HouseMaster::changeinterventionState(intervention, Canceled);
+                    // free the collaborator
                 }}, {"See details", [&](){
-                    show(*intervention);
+                    if (!intervention->getService()->getName().empty()) show(*intervention);
                     std::cin.ignore();
                 }}});
                 activeInterventionMenu.show();
@@ -109,6 +119,40 @@ void Interface::clientOpperations(bool &running) {
     clientMenu.select();
     clientMenu.execute(running);
 }
+
+void Interface::collaboratorOperations(bool &running) {
+    auto * collab = dynamic_cast<Collaborator*>(_user);
+    bool innerRunning = true;
+    Menu collabsMenu("Welcome, " + _user->getName(), {{"See profile",[&](){
+        show(*collab);
+        std::cin.ignore();
+    }}, {"See active interventions", [&](){
+        // à espera que o josé desensarilhe o assign collaborator :)
+    }}, {"Learn a service", [&](){
+
+        Menu pickServices("Learn a service", {{"Choose from the HouseMaster services", [&](){
+            while (running) {
+                std::string service = selectService(running);
+                if (service.empty()) collab->addService(service);
+            }
+        }}, {"Add a new one", [&](){
+            std::string serviceName = readNewServiceData(running);
+            collab->addService(serviceName);
+
+        }}});
+
+        while (innerRunning) {
+            pickServices.show();
+            pickServices.select();
+            pickServices.execute(innerRunning);
+        }
+
+    }}});
+    collabsMenu.show();
+    collabsMenu.select();
+    collabsMenu.execute(running);
+}
+
 
 date Interface::readInterventionDate() {
     std::string dateString{};
@@ -149,7 +193,7 @@ void Interface::show(const Service& service) {
     std::cin.ignore();
 }
 
-void Interface::adminOpperations(bool &running) {
+void Interface::adminOperations(bool &running) {
 
     bool innerRunning = true;
     Menu adminMenu("Welcome, ADMIN", {{"Register collaborator", [&](){
@@ -312,6 +356,7 @@ void Interface::show(Intervention &intervention) {
     std::cout << "|________________________________|" << std::endl;
     std::cin.ignore();
 }
+
 
 
 

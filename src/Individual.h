@@ -65,6 +65,8 @@ public:
 
     void addClassification(Classification classification);
 
+    void addService(std::string service);
+
     static void markInterventionAsInProgress(Intervention* intervention);
 
     static void markInterventionAsComplete(Intervention* intervention);
