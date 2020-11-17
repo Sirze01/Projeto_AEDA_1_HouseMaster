@@ -56,18 +56,17 @@ struct duration: public date
 
     bool isValidDuration() const;
 
-    //class InvalidDuration;
+    class InvalidDuration;
 
     std::string durationToStr() const;
 };
 
-/*
-class duration::InvalidDuration
+
+class duration::InvalidDuration : public std::invalid_argument
 {
 public:
     explicit InvalidDuration(const std::string &error_msg);
 };
-*/
 
 
 #endif

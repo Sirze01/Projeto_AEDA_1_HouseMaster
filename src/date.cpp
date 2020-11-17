@@ -31,7 +31,7 @@ unsigned int date::getDaysInMonth() const {
                 } else return 28;
             } else return 29;
         } else return 28;
-    } else return -1;     // exception
+    } else throw InvalidDate(dateToStr() + " - this month doesn't exist!");
 }
 
 bool date::isValidDate(bool throwExcept) const {
@@ -76,8 +76,8 @@ date date::operator+(const date &d1) const {
 
 bool date::operator==(const date &d2) const{
     if (day != d2.day || month != d2.month || year != d2.year || hours != d2.hours || minutes != d2.minutes)
-        return 0;
-    return 1;
+        return false;
+    return true;
 }
 
 bool date::operator<(const date &d2) const
@@ -86,7 +86,7 @@ bool date::operator<(const date &d2) const
     else if (year > d2.year) {return false;}
     else            //same year
     {if (month < d2.month) {return true;}
-        else if (month > d2.month) {return false;}
+        else if (month > d2.month){return false;}
         else        //same month
         {
             if (day < d2.day) {return true;}
@@ -163,14 +163,13 @@ std::string duration::durationToStr() const
 }
 
 
-//duration::InvalidDuration::InvalidDuration(const std::string &error_msg) : std::invalid_argument(error_msg) {}
-
-
 bool duration::isValidDuration() const
 {
     if (hours > 23 || minutes > 59) {
-        std::cout << durationToStr() + " isn't a valid date!";
+        std::cout << durationToStr() + " isn't a valid duration!";
         return false;
     }
     return true;
 }
+
+duration::InvalidDuration::InvalidDuration(const std::string &error_msg) : std::invalid_argument(error_msg) {}
