@@ -85,6 +85,10 @@ public:
 
     class ExistentClient;
 
+    class NonexistentUsername;
+
+    class UnableToWriteFile;
+
     void addAvailableService(Service *service);
 
     void writeCollabsInfo();
@@ -135,6 +139,18 @@ public:
 class HouseMaster::ExistentClient : public std::out_of_range{
 public:
     explicit ExistentClient(const std::string &error_msg);
+};
+
+
+class HouseMaster::NonexistentUsername: public std::out_of_range
+{
+public:
+    explicit NonexistentUsername(const std::string &error_msg);
+};
+
+class HouseMaster::UnableToWriteFile: public std::ifstream::failure{
+public:
+    explicit UnableToWriteFile(const std::string &error_msg);
 };
 
 #endif //SRC_HOUSEMASTER_H

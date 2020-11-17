@@ -31,10 +31,16 @@ public:
     void readNewCollaboratorData(bool &running);
     std::string readNewServiceData(bool &running);
     Intervention* selectActiveIntervention(bool &running);
+    class NonexistentRole;
 private:
     HouseMaster _houseMaster;
     Individual *_user;
     Role _role;
+};
+
+class Interface::NonexistentRole: public std::logic_error{
+public:
+    explicit NonexistentRole (const std::string &error_msg);
 };
 
 

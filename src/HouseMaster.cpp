@@ -17,6 +17,10 @@ HouseMaster::InexistentClient::InexistentClient(const std::string &error_msg) : 
 
 HouseMaster::ExistentClient::ExistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
+HouseMaster::NonexistentUsername::NonexistentUsername(const std::string &error_msg) : out_of_range(error_msg){}
+
+HouseMaster::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) {}
+
 std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &hm) {
     return hm.getAssociatedInterventions(this->getId());
 }
@@ -60,7 +64,6 @@ void Collaborator::markInterventionAsInProgress(Intervention *a) {
 void Collaborator::markInterventionAsComplete(Intervention *a) {
     HouseMaster::changeinterventionState(a, Complete);
 }
-
 
 
 // HouseMaster Methods
@@ -191,6 +194,7 @@ void HouseMaster::removeCollaborator(const std::string &id) {
             _collaborators.erase(it);
             _usernameMap.erase(UsernameIt);
         } else {
+            throw NonexistentUsername("This username does not exist!");
             //throws except
         }
 
@@ -284,6 +288,7 @@ void HouseMaster::removeClient(const std::string &clientId) {
             _clients.erase(ClientIt);
             _usernameMap.erase(UsernameIt);
         } else {
+            throw NonexistentUsername("This username does not exist!");
             //throws except
         }
 
@@ -350,7 +355,6 @@ std::vector<std::pair<std::string, Collaborator *>> HouseMaster::sortCollaborato
     }
     std::sort(temp.begin(), temp.end(), colComparer);
     return temp;
-
 }
 
 Individual *HouseMaster::findByUsername(const std::string &username) {
@@ -361,6 +365,7 @@ Individual *HouseMaster::findByUsername(const std::string &username) {
         else if (it->second.substr(0, 6) == "client")
             return _clients[it->second];
     } else {
+        throw NonexistentUsername("This username does not exist!");
         // throw except
 
     }
@@ -405,7 +410,7 @@ void HouseMaster::writeCollabsInfo()
             collab_it++;
         }
         collabFile.close();
-    } else std::cout << "Unable to write in clients' file";
+    } else throw UnableToWriteFile("Unable to write in clients' file");
 }
 
 
@@ -424,7 +429,7 @@ void HouseMaster::writeClientsInfo()
         }
         clientsFile.close();
     }
-    else std::cout << "Unable to write in clients' file";
+    else throw UnableToWriteFile("Unable to write in clients' file");
 }
 
 void HouseMaster::writeServicesInfo()
@@ -441,7 +446,7 @@ void HouseMaster::writeServicesInfo()
         }
         servicesFile.close();
     }
-    else std::cout << "Unable to write in services' file";
+    else throw UnableToWriteFile("Unable to write in services' file");
 }
 
 void HouseMaster::writeInterventionsInfo()
@@ -462,7 +467,7 @@ void HouseMaster::writeInterventionsInfo()
         }
         interventionsFile.close();
     }
-    else std::cout << "Unable to write in interventions' file";
+    else throw UnableToWriteFile("Unable to write in interventions' file");
 }
 
 void HouseMaster::markAsComplete(Intervention *intervention) {

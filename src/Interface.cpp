@@ -49,6 +49,7 @@ void Interface::userLogin() {
     _user = _houseMaster.findByUsername(username);
 }
 
+
 bool Interface::readRole(const std::string &username) {
     std::string roleName{};
     Role role{};
@@ -59,8 +60,9 @@ bool Interface::readRole(const std::string &username) {
     if (roleName == "collab") role = collaborator;
     else if (roleName == "client") role = client;
     else {
+        throw NonexistentRole("Role does not exist!");
         // later make an exception!
-        return false;
+        //return false;
     }
     _role = role;
     return true;
