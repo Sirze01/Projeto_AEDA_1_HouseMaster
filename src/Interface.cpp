@@ -43,7 +43,7 @@ void Interface::selectRole(bool &running) {
 void Interface::adminLogin() {
     std::string password{};
     std::cout << "Password : "; std::cin >> password;
-    for (int i = 0; i <= 3; i++)
+    for (int i = 0; i <= 1; i++)
     {
         if (password=="admin")
         {
