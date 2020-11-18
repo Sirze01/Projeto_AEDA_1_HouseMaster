@@ -53,7 +53,7 @@ public:
 
     void removeClient(const std::string& clientId);
 
-    void addIntervention(const date& appointment, const std::string& type, bool forcePro, const std::string &clientId);
+    Intervention* addIntervention(const date& appointment, const std::string& type, bool forcePro, const std::string &clientId);
 
     static void changeinterventionState(Intervention* intervention, processState state);
 

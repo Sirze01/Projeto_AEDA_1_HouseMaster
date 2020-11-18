@@ -20,13 +20,14 @@ public:
     void userLogin();
     bool readRole(const std::string &username);
     void adminLogin();
-    void clientOpperations(bool &running);
+    void clientOperations(bool &running);
+    void collaboratorOperations(bool &running);
     date readInterventionDate();
     std::string selectService(bool &running);
     void show(const Service& service);
     void show(const Collaborator& collaborator);
     void show(Intervention& intervention);
-    void adminOpperations(bool &running);
+    void adminOperations(bool &running);
     std::string selectCollab(bool &running);
     void readNewCollaboratorData(bool &running);
     std::string readNewServiceData(bool &running);

@@ -86,19 +86,18 @@ void Intervention::setClientId(const std::string& clientId) {
     _clientId = clientId;
 }
 
-const date* Intervention::getStartingTime() const {
-    return &_startingTime;
+const date Intervention::getStartingTime() const {
+    return _startingTime;
 }
 
-//Tentar usar referencia para outra intervention
 bool Intervention::conflictsWith(date start, duration duration) {
-
-    date interventionStart = _startingTime;
 
     date otherStart = start;
     date otherEnd = start + duration;
 
-    return (interventionStart > otherStart && interventionStart < otherEnd) || (getEndTime() > otherStart && interventionStart < otherStart);
+    return (getEndTime() > otherStart && getStartingTime() < otherStart) ||
+    (getStartingTime() < otherEnd && getEndTime() > otherEnd) ||
+    getStartingTime() == otherStart || getEndTime() == otherStart || getStartingTime() == otherEnd || getEndTime() == otherEnd;
 }
 
 void Intervention::calculateCost() {
@@ -110,5 +109,6 @@ date Intervention::getEndTime() const {
 }
 
 bool Intervention::isActive() const {
-    return _state == InProgress || _state == Scheduled;
+    bool a = _state != Complete && _state != Canceled;
+    return a;
 }
