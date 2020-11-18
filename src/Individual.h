@@ -39,7 +39,7 @@ enum Classification {
     clumsy = -1,
     newHere = 0,
     getsItDone = 1,
-    hardWorker = 2,
+    hardWorking = 2,
     attentive = 3,
     savior = 4
 };

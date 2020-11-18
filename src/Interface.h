@@ -27,6 +27,8 @@ public:
     void show(const Service& service);
     void show(const Collaborator& collaborator);
     void show(Intervention& intervention);
+    void showPayment(Intervention* intervention);
+    Classification readClassification(bool &running);
     void adminOperations(bool &running);
     std::string selectCollab(bool &running);
     void readNewCollaboratorData(bool &running);

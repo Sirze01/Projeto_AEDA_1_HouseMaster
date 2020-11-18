@@ -111,7 +111,13 @@ void Interface::clientOperations(bool &running) {
             Intervention* intervention = selectActiveIntervention(innerRunning);
             if (intervention) {
                 Menu activeInterventionMenu("Active intervention", {{"Mark as done", [&](){
+                    // mark as complete, prompt client to pay, prompt client to classify
                     _houseMaster.markAsComplete(intervention);
+                    showPayment(intervention);
+                    std::cin.ignore();
+                    intervention->pay();
+                    Classification classification = readClassification(innerRunning);
+                    _houseMaster.getCollaborators()[intervention->getCollabId()]->addClassification(classification);
                 }},{"Cancel Intervention", [&](){
                     Client::cancelIntervention(intervention);
                 }}, {"See details", [&](){
@@ -151,7 +157,10 @@ void Interface::collaboratorOperations(bool &running) {
         Menu pickServices("Learn a service", {{"Choose from the HouseMaster services", [&](){
             while (running) {
                 std::string service = selectService(running);
-                if (!service.empty()) collab->addService(service);
+                if (!service.empty()) {
+                    if (!collab->canPreform(service)) collab->addService(service);
+                    else std::cout << collab->getName() << " already knows " << service << "\n";
+                }
             }
         }}, {"Add a new one", [&](){
             std::string serviceName = readNewServiceData(running);
@@ -361,7 +370,6 @@ void Interface::show(const Collaborator &collaborator) {
 
 
 void Interface::show(Intervention &intervention) {
-    intervention.calculateCost();
     std::cout << " __________HOUSE MASTER__________ " << std::endl;
     std::cout << "| " << std::setw(30) << std::right << intervention.getService()->getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
@@ -373,6 +381,42 @@ void Interface::show(Intervention &intervention) {
     std::cout << "| [Enter] Go Back                |" << std::endl;
     std::cout << "|________________________________|" << std::endl;
     std::cin.ignore();
+}
+
+void Interface::showPayment(Intervention *intervention) {
+    float cost = intervention->getCost();
+    auto *client = dynamic_cast<Client*> (_user);
+    std::cout << " __________HOUSE MASTER__________ " << std::endl;
+    std::cout << "| " << std::setw(30) << std::right << intervention->getService()->getName() << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [" << "Client Name" << "] " << std::setw(16) << std::right << client->getName() << " |" << std::endl;
+    std::cout << "| [" << "Client NIF" << "] " << std::setw(16) << std::right << client->getNif() << " |" << std::endl;
+    std::cout << "| [" << "Total cost" << "] " << std::setw(16) << std::right << cost << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [Enter] Confirm                |" << std::endl;
+    std::cout << "|________________________________|" << std::endl;
+    std::cin.ignore();
+}
+
+Classification Interface::readClassification(bool &running) {
+    Classification classification{};
+    Menu classifications("Review intervention", {{"Unreliable", [&classification](){
+        classification = unreliable;
+    }}, {"Clumsy", [&classification](){
+        classification = clumsy;
+    }}, {"Gets it done", [&classification] () {
+        classification = getsItDone;
+    }}, {"Hardworking", [&classification](){
+        classification = hardWorking;
+    }}, {"Attentive", [&classification](){
+        classification = attentive;
+    }}, {"Savior", [&classification](){
+        classification = savior;
+    }}});
+    classifications.show();
+    classifications.select();
+    classifications.execute(running);
+    return classification;
 }
 
 
