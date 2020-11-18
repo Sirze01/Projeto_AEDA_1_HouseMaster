@@ -392,7 +392,7 @@ void HouseMaster::assignColaborator(Intervention *intervention,
 void HouseMaster::writeCollabsInfo()
 {
     std::ofstream collabFile;
-    collabFile.open("../../data/CollabsEnd.txt", std::ios::app);
+    collabFile.open("../../data/CollabsEnd.txt");
     if (collabFile.is_open())
     {
         auto collab_it = _collaborators.begin();
@@ -416,7 +416,7 @@ void HouseMaster::writeCollabsInfo()
 
 void HouseMaster::writeClientsInfo()
 {
-    std::ofstream clientsFile("../../data/ClientsEnd.txt", std::ios::app);
+    std::ofstream clientsFile("../../data/ClientsEnd.txt");
     if (clientsFile.is_open())
     {
         auto client_it = _clients.begin();
@@ -434,7 +434,7 @@ void HouseMaster::writeClientsInfo()
 
 void HouseMaster::writeServicesInfo()
 {
-    std::ofstream servicesFile("../../data/ServicesEnd.txt", std::ios::app);
+    std::ofstream servicesFile("../../data/ServicesEnd.txt");
     if (servicesFile.is_open())
     {
         auto service_it = _availableServices.begin();

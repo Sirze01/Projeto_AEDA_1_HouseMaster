@@ -148,7 +148,7 @@ public:
     explicit NonexistentUsername(const std::string &error_msg);
 };
 
-class HouseMaster::UnableToWriteFile: public std::ifstream::failure{
+class HouseMaster::UnableToWriteFile: public std::ios_base::failure{
 public:
     explicit UnableToWriteFile(const std::string &error_msg);
 };

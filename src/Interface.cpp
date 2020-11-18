@@ -34,9 +34,22 @@ void Interface::selectRole(bool &running) {
 void Interface::adminLogin() {
     std::string password{};
     std::cout << "Password : "; std::cin >> password;
-    if (password=="admin") std::cout << "success \n";
-    else std::cout << "Wrong password. No admin for you. :^)";
-    _role = admin;
+    for (int i = 0; i <= 3; i++)
+    {
+        if (password=="admin")
+        {
+            std::cout << "success \n";
+            _role = admin;
+            break;
+        }
+        else
+        {
+            std::cout << "Wrong password. Try again:\n";
+            std::cin >> password;
+        }
+    }
+    std::cout << "Too many tries! No admin for you. :^) Logging out...\n";
+    exit(0);
 }
 
 void Interface::userLogin() {
@@ -61,8 +74,6 @@ bool Interface::readRole(const std::string &username) {
     else if (roleName == "client") role = client;
     else {
         throw NonexistentRole("Role does not exist!");
-        // later make an exception!
-        //return false;
     }
     _role = role;
     return true;

@@ -1,0 +1,56 @@
+\hypertarget{class_intervention}{}\doxysection{Intervention Class Reference}
+\label{class_intervention}\index{Intervention@{Intervention}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_intervention_a3bfe3701e55e0dc2d70cd7ba7bc3e727}\label{class_intervention_a3bfe3701e55e0dc2d70cd7ba7bc3e727}} 
+{\bfseries Intervention} (const \mbox{\hyperlink{structdate}{date}} \&appointment, \mbox{\hyperlink{class_service}{Service}} type, bool force\+Pro)
+\item 
+\mbox{\Hypertarget{class_intervention_ae0ed7aaa53d697108dea60f56740a461}\label{class_intervention_ae0ed7aaa53d697108dea60f56740a461}} 
+const \mbox{\hyperlink{structdate}{date}} $\ast$ {\bfseries get\+Starting\+Time} () const
+\item 
+\mbox{\Hypertarget{class_intervention_a2a8deaf4ddf3d65cd8d5664492175ff2}\label{class_intervention_a2a8deaf4ddf3d65cd8d5664492175ff2}} 
+const \mbox{\hyperlink{class_service}{Service}} $\ast$ {\bfseries get\+Service} () const
+\item 
+\mbox{\Hypertarget{class_intervention_a4161493515554c78270fbbb78f76667f}\label{class_intervention_a4161493515554c78270fbbb78f76667f}} 
+bool {\bfseries get\+Force\+Pro} () const
+\item 
+\mbox{\Hypertarget{class_intervention_a29b7b5ed3cb707be20d022c23b80181c}\label{class_intervention_a29b7b5ed3cb707be20d022c23b80181c}} 
+std\+::string {\bfseries get\+Collab\+Id} () const
+\item 
+\mbox{\Hypertarget{class_intervention_aa5e0dd4773ed831d503d9c7c37dfdceb}\label{class_intervention_aa5e0dd4773ed831d503d9c7c37dfdceb}} 
+std\+::string {\bfseries get\+Client\+Id} () const
+\item 
+\mbox{\Hypertarget{class_intervention_aa97005429c232981de49a2b1624c5166}\label{class_intervention_aa97005429c232981de49a2b1624c5166}} 
+void {\bfseries set\+Collab\+Id} (const std\+::string \&collab\+Id)
+\item 
+\mbox{\Hypertarget{class_intervention_a476e65367ea34963bb7963acdbf02381}\label{class_intervention_a476e65367ea34963bb7963acdbf02381}} 
+void {\bfseries set\+Client\+Id} (const std\+::string \&client\+Id)
+\item 
+\mbox{\Hypertarget{class_intervention_ac60e43d12bd5370142cfc0d5139cac89}\label{class_intervention_ac60e43d12bd5370142cfc0d5139cac89}} 
+process\+State {\bfseries get\+Process\+State} ()
+\item 
+\mbox{\Hypertarget{class_intervention_ab8be848e6e81a646ea879a3de911971e}\label{class_intervention_ab8be848e6e81a646ea879a3de911971e}} 
+void {\bfseries set\+Process\+State} (process\+State state)
+\item 
+\mbox{\Hypertarget{class_intervention_ac622ea2f756932decdaebb3b33f604e1}\label{class_intervention_ac622ea2f756932decdaebb3b33f604e1}} 
+bool {\bfseries conflicts\+With} (\mbox{\hyperlink{structdate}{date}} start, \mbox{\hyperlink{structduration}{duration}} \mbox{\hyperlink{structduration}{duration}})
+\item 
+\mbox{\Hypertarget{class_intervention_aa0d5dec96a4f8102d47a4eb67dc197de}\label{class_intervention_aa0d5dec96a4f8102d47a4eb67dc197de}} 
+void {\bfseries calculate\+Cost} ()
+\item 
+\mbox{\Hypertarget{class_intervention_a3d340fab082de3cf5f3e41b3c0aef7ca}\label{class_intervention_a3d340fab082de3cf5f3e41b3c0aef7ca}} 
+float {\bfseries get\+Cost} () const
+\item 
+\mbox{\Hypertarget{class_intervention_a4b5f78a01fe4b8c2d425982ea49b72fe}\label{class_intervention_a4b5f78a01fe4b8c2d425982ea49b72fe}} 
+\mbox{\hyperlink{structdate}{date}} {\bfseries get\+End\+Time} () const
+\item 
+\mbox{\Hypertarget{class_intervention_aeb99f30b2fa5d858ce720d3bf53d348d}\label{class_intervention_aeb99f30b2fa5d858ce720d3bf53d348d}} 
+bool {\bfseries is\+Active} () const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Services.\+h\item 
+src/Services.\+cpp\end{DoxyCompactItemize}

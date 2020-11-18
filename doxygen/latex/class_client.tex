@@ -1,0 +1,52 @@
+\hypertarget{class_client}{}\doxysection{Client Class Reference}
+\label{class_client}\index{Client@{Client}}
+Inheritance diagram for Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_client}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_client_a05f1795e3e58621056741a7bea50fa56}\label{class_client_a05f1795e3e58621056741a7bea50fa56}} 
+{\bfseries Client} (unsigned int nif, const std\+::string \&name, bool premium)
+\item 
+\mbox{\Hypertarget{class_client_acea7186df20208ee3c06f3a6062c6b6a}\label{class_client_acea7186df20208ee3c06f3a6062c6b6a}} 
+unsigned int {\bfseries get\+Nif} ()
+\item 
+\mbox{\Hypertarget{class_client_af77c74a396a63b45707e692c691e7b47}\label{class_client_af77c74a396a63b45707e692c691e7b47}} 
+bool {\bfseries is\+Premium} () const
+\item 
+\mbox{\Hypertarget{class_client_af32439d7d2f6328d36e13dd6185f6f6f}\label{class_client_af32439d7d2f6328d36e13dd6185f6f6f}} 
+std\+::string {\bfseries get\+Id} () const override
+\item 
+\mbox{\Hypertarget{class_client_a60106b21818397305ac4b0ee45519346}\label{class_client_a60106b21818397305ac4b0ee45519346}} 
+void {\bfseries request\+Intervention} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, const \mbox{\hyperlink{structdate}{date}} \&\+\_\+date, const std\+::string \&type, bool force\+Pro)
+\item 
+\mbox{\Hypertarget{class_client_a00b016e15629cbc05c449be7aca41f9a}\label{class_client_a00b016e15629cbc05c449be7aca41f9a}} 
+void {\bfseries classify\+Collaborator} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, const std\+::string \&collab\+Id, Classification classification)
+\item 
+\mbox{\Hypertarget{class_client_ad96ad90838611b279c0cd875f245bb89}\label{class_client_ad96ad90838611b279c0cd875f245bb89}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{class_client}{Client}} \&ind2) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_client_af8ab2fa8f23fdc3d539e316423375fc6}\label{class_client_af8ab2fa8f23fdc3d539e316423375fc6}} 
+static void {\bfseries cancel\+Intervention} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_client_aeba79acf02c10e104ef9fd233003c0c1}\label{class_client_aeba79acf02c10e104ef9fd233003c0c1}} 
+static unsigned int {\bfseries \+\_\+id\+Seq\+Clt} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Individual.\+h\item 
+src/House\+Master.\+cpp\item 
+src/Individual.\+cpp\end{DoxyCompactItemize}

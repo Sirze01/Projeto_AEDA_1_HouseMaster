@@ -1,0 +1,117 @@
+\hypertarget{class_house_master}{}\doxysection{House\+Master Class Reference}
+\label{class_house_master}\index{HouseMaster@{HouseMaster}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_existent_client}{Existent\+Client}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_existent_service}{Existent\+Service}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_inexistent_client}{Inexistent\+Client}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_inexistent_collab}{Inexistent\+Collab}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_inexistent_service}{Inexistent\+Service}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_nonexistent_username}{Nonexistent\+Username}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_unable_to_write_file}{Unable\+To\+Write\+File}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_unavailable_appointment}{Unavailable\+Appointment}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_house_master_ae3836006d020a7461ae6185a8c2c7bb9}\label{class_house_master_ae3836006d020a7461ae6185a8c2c7bb9}} 
+{\bfseries House\+Master} (std\+::ifstream collaborators, std\+::ifstream clients, std\+::ifstream services)
+\item 
+\mbox{\Hypertarget{class_house_master_a946b4e652e7c5cefe9cc1d80939f5f80}\label{class_house_master_a946b4e652e7c5cefe9cc1d80939f5f80}} 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{class_collaborator}{Collaborator}} $\ast$ $>$ \& {\bfseries get\+Collaborators} ()
+\item 
+\mbox{\Hypertarget{class_house_master_a05b448d2b9053634e8d241ab9bccf701}\label{class_house_master_a05b448d2b9053634e8d241ab9bccf701}} 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{class_client}{Client}} $\ast$ $>$ \& {\bfseries get\+Clients} ()
+\item 
+\mbox{\Hypertarget{class_house_master_a77672db8bf2a2305480d31e31a55e7be}\label{class_house_master_a77672db8bf2a2305480d31e31a55e7be}} 
+std\+::vector$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \& {\bfseries get\+Interventions} ()
+\item 
+\mbox{\Hypertarget{class_house_master_aef8ece9324b2b00f0ce6cf28be6cab7a}\label{class_house_master_aef8ece9324b2b00f0ce6cf28be6cab7a}} 
+void {\bfseries add\+Available\+Service} (const std\+::string \&name, bool pro, float base\+Price, \mbox{\hyperlink{structduration}{duration}} \mbox{\hyperlink{structduration}{duration}})
+\item 
+\mbox{\Hypertarget{class_house_master_a708274d2af0291ded0662d525a4ece3a}\label{class_house_master_a708274d2af0291ded0662d525a4ece3a}} 
+void {\bfseries remove\+Available\+Service} (const std\+::string \&service\+Name)
+\item 
+\mbox{\Hypertarget{class_house_master_a6190fe8b65e17415ef2d84436a471281}\label{class_house_master_a6190fe8b65e17415ef2d84436a471281}} 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{class_service}{Service}} $\ast$ $>$ \& {\bfseries get\+Available\+Services} ()
+\item 
+\mbox{\Hypertarget{class_house_master_af7126c7a455377136cd410e82dcf10da}\label{class_house_master_af7126c7a455377136cd410e82dcf10da}} 
+void {\bfseries add\+Collaborator} (\mbox{\hyperlink{class_collaborator}{Collaborator}} $\ast$collab)
+\item 
+\mbox{\Hypertarget{class_house_master_ae7239fc0902f4dc768e5419a4e267643}\label{class_house_master_ae7239fc0902f4dc768e5419a4e267643}} 
+void {\bfseries remove\+Collaborator} (const std\+::string \&coll\+Id)
+\item 
+\mbox{\Hypertarget{class_house_master_ac8e99d505a436b12ba2408dba9a32a51}\label{class_house_master_ac8e99d505a436b12ba2408dba9a32a51}} 
+void {\bfseries add\+Collaborator} (const std\+::vector$<$ std\+::string $>$ \&functions, const std\+::string \&name, bool pro)
+\item 
+\mbox{\Hypertarget{class_house_master_ae22c8791df686f80efc821ed2cf33050}\label{class_house_master_ae22c8791df686f80efc821ed2cf33050}} 
+void {\bfseries add\+Client} (\mbox{\hyperlink{class_client}{Client}} $\ast$client)
+\item 
+\mbox{\Hypertarget{class_house_master_acc1942a13f34dd5324378a96b660d669}\label{class_house_master_acc1942a13f34dd5324378a96b660d669}} 
+void {\bfseries add\+Client} (unsigned int nif, const std\+::string \&name, bool premium)
+\item 
+\mbox{\Hypertarget{class_house_master_a81ca5dd5245ad560b25d7ced1b0eab94}\label{class_house_master_a81ca5dd5245ad560b25d7ced1b0eab94}} 
+void {\bfseries remove\+Client} (const std\+::string \&client\+Id)
+\item 
+\mbox{\Hypertarget{class_house_master_a6758205d8006f2a66f9c709520191d6b}\label{class_house_master_a6758205d8006f2a66f9c709520191d6b}} 
+void {\bfseries add\+Intervention} (const \mbox{\hyperlink{structdate}{date}} \&appointment, const std\+::string \&type, bool force\+Pro, const std\+::string \&client\+Id)
+\item 
+\mbox{\Hypertarget{class_house_master_a0a957c5c939d12395fb5a3735c3b522d}\label{class_house_master_a0a957c5c939d12395fb5a3735c3b522d}} 
+void {\bfseries process\+Transaction} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\item 
+\mbox{\Hypertarget{class_house_master_a98d2878743f0a93942ab0538974121d3}\label{class_house_master_a98d2878743f0a93942ab0538974121d3}} 
+std\+::vector$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ {\bfseries get\+Associated\+Interventions} (const std\+::string \&id)
+\item 
+\mbox{\Hypertarget{class_house_master_a099088f959a1f4e05b312b3d3570382e}\label{class_house_master_a099088f959a1f4e05b312b3d3570382e}} 
+std\+::vector$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ {\bfseries get\+Associated\+Active\+Interventions} (const std\+::string \&id)
+\item 
+\mbox{\Hypertarget{class_house_master_a9bbc426849e05f79dff7c1ccf9af6078}\label{class_house_master_a9bbc426849e05f79dff7c1ccf9af6078}} 
+void {\bfseries assign\+Colaborator} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$, const std\+::vector$<$ std\+::pair$<$ std\+::string, \mbox{\hyperlink{class_collaborator}{Collaborator}} $\ast$ $>$$>$ \&)
+\item 
+\mbox{\Hypertarget{class_house_master_a05ac4d93180aab181c5d34b0669fdeec}\label{class_house_master_a05ac4d93180aab181c5d34b0669fdeec}} 
+std\+::vector$<$ std\+::pair$<$ std\+::string, \mbox{\hyperlink{class_collaborator}{Collaborator}} $\ast$ $>$ $>$ {\bfseries sort\+Collaborators\+By\+Score} ()
+\item 
+\mbox{\Hypertarget{class_house_master_ab4f4ca3b8d3c8ab746c1308578e630a4}\label{class_house_master_ab4f4ca3b8d3c8ab746c1308578e630a4}} 
+\mbox{\hyperlink{class_individual}{Individual}} $\ast$ {\bfseries find\+By\+Username} (const std\+::string \&name)
+\item 
+\mbox{\Hypertarget{class_house_master_a2e72964224fe36b247acf5b3685a981c}\label{class_house_master_a2e72964224fe36b247acf5b3685a981c}} 
+void {\bfseries mark\+As\+Complete} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\item 
+\mbox{\Hypertarget{class_house_master_acaa187c4180637218bb759ad1e9da69f}\label{class_house_master_acaa187c4180637218bb759ad1e9da69f}} 
+void {\bfseries add\+Available\+Service} (\mbox{\hyperlink{class_service}{Service}} $\ast$service)
+\item 
+\mbox{\Hypertarget{class_house_master_a1a412c313b22cd45a37047417e3877e8}\label{class_house_master_a1a412c313b22cd45a37047417e3877e8}} 
+void {\bfseries write\+Collabs\+Info} ()
+\item 
+\mbox{\Hypertarget{class_house_master_a0384c750d237e1935b85ebab81c8b600}\label{class_house_master_a0384c750d237e1935b85ebab81c8b600}} 
+void {\bfseries write\+Clients\+Info} ()
+\item 
+\mbox{\Hypertarget{class_house_master_a93b2a00de8735aa33a83a3ba0c660d29}\label{class_house_master_a93b2a00de8735aa33a83a3ba0c660d29}} 
+void {\bfseries write\+Services\+Info} ()
+\item 
+\mbox{\Hypertarget{class_house_master_adb21278023a3c427904967bb9bb35c55}\label{class_house_master_adb21278023a3c427904967bb9bb35c55}} 
+void {\bfseries write\+Interventions\+Info} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_house_master_ae3b3900bec21290dc4f6a84e74c4312a}\label{class_house_master_ae3b3900bec21290dc4f6a84e74c4312a}} 
+static void {\bfseries changeintervention\+State} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention, process\+State state)
+\item 
+\mbox{\Hypertarget{class_house_master_a05db6d382f28f401549fc327655f5802}\label{class_house_master_a05db6d382f28f401549fc327655f5802}} 
+static void {\bfseries changeintervention\+State\+Payed} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/House\+Master.\+h\item 
+src/House\+Master.\+cpp\end{DoxyCompactItemize}

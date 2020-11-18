@@ -1,0 +1,79 @@
+\hypertarget{class_collaborator}{}\doxysection{Collaborator Class Reference}
+\label{class_collaborator}\index{Collaborator@{Collaborator}}
+Inheritance diagram for Collaborator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_collaborator}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_collaborator_ad6b0be3fa03078c35dbaed673545cfa7}\label{class_collaborator_ad6b0be3fa03078c35dbaed673545cfa7}} 
+{\bfseries Collaborator} (std\+::vector$<$ std\+::string $>$ functions, const std\+::string \&name, bool pro)
+\item 
+\mbox{\Hypertarget{class_collaborator_ad18fb0d5477582acae7ae3c234c45e7f}\label{class_collaborator_ad18fb0d5477582acae7ae3c234c45e7f}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries get\+Services} ()
+\item 
+\mbox{\Hypertarget{class_collaborator_a6e1f2c60f0cf673ce4acfc4ee64b1859}\label{class_collaborator_a6e1f2c60f0cf673ce4acfc4ee64b1859}} 
+bool {\bfseries is\+Pro} () const
+\item 
+\mbox{\Hypertarget{class_collaborator_a780481471beff54f17a35637d142cdad}\label{class_collaborator_a780481471beff54f17a35637d142cdad}} 
+bool {\bfseries can\+Preform} (const std\+::string \&service)
+\item 
+\mbox{\Hypertarget{class_collaborator_a23b47f6816997bd40ede70441c8fe9c0}\label{class_collaborator_a23b47f6816997bd40ede70441c8fe9c0}} 
+bool {\bfseries has\+Qualification\+To\+Preform} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention) const
+\item 
+\mbox{\Hypertarget{class_collaborator_a5d87e0f9f6bd1f0efd8aa4bb1beb1d3e}\label{class_collaborator_a5d87e0f9f6bd1f0efd8aa4bb1beb1d3e}} 
+bool {\bfseries can\+Do} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, const std\+::string \&collab\+Id, \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\item 
+\mbox{\Hypertarget{class_collaborator_a5830072a64d9c3cfb4a3b09e56b600a8}\label{class_collaborator_a5830072a64d9c3cfb4a3b09e56b600a8}} 
+int {\bfseries get\+Score} () const
+\item 
+\mbox{\Hypertarget{class_collaborator_a1ef8ae3dd100349e2fa1543d9687c0b4}\label{class_collaborator_a1ef8ae3dd100349e2fa1543d9687c0b4}} 
+void {\bfseries add\+Classification} (Classification classification)
+\item 
+\mbox{\Hypertarget{class_collaborator_af9de92550ebbf6eb8869e2abea56ed49}\label{class_collaborator_af9de92550ebbf6eb8869e2abea56ed49}} 
+void {\bfseries update\+Score} ()
+\item 
+\mbox{\Hypertarget{class_collaborator_af2c4dcb54f03d7be8f012f56361e2d2f}\label{class_collaborator_af2c4dcb54f03d7be8f012f56361e2d2f}} 
+void {\bfseries calculate\+Earnings} (float \&hm\+Earnings)
+\item 
+\mbox{\Hypertarget{class_collaborator_ad30387f818c8ea213884e36266a86d60}\label{class_collaborator_ad30387f818c8ea213884e36266a86d60}} 
+float {\bfseries comission\+By\+Score} ()
+\item 
+\mbox{\Hypertarget{class_collaborator_a9b8a4cf6e0b8b55f2cf0e4692b085af0}\label{class_collaborator_a9b8a4cf6e0b8b55f2cf0e4692b085af0}} 
+std\+::string {\bfseries get\+Id} () const override
+\item 
+\mbox{\Hypertarget{class_collaborator_a26a9dd5bb9cfee5d2f685cd38de7b75e}\label{class_collaborator_a26a9dd5bb9cfee5d2f685cd38de7b75e}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{class_collaborator}{Collaborator}} \&ind2) const
+\item 
+\mbox{\Hypertarget{class_collaborator_aee435d4c932ee9012a82c9ecdd57031a}\label{class_collaborator_aee435d4c932ee9012a82c9ecdd57031a}} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{class_collaborator}{Collaborator}} \&col2) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_collaborator_ab631c60444d84174986a263cc55d0d9d}\label{class_collaborator_ab631c60444d84174986a263cc55d0d9d}} 
+static bool {\bfseries is\+Available} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, const std\+::string \&collab\+Id, \mbox{\hyperlink{structdate}{date}} start, \mbox{\hyperlink{structduration}{duration}} \mbox{\hyperlink{structduration}{duration}})
+\item 
+\mbox{\Hypertarget{class_collaborator_aa8c94f8532c2f61f79109127ce694363}\label{class_collaborator_aa8c94f8532c2f61f79109127ce694363}} 
+static void {\bfseries mark\+Intervention\+As\+In\+Progress} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\item 
+\mbox{\Hypertarget{class_collaborator_af527e9e3115eed7202daf55627455ed0}\label{class_collaborator_af527e9e3115eed7202daf55627455ed0}} 
+static void {\bfseries mark\+Intervention\+As\+Complete} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_collaborator_a76af07739580e004f73f49d58e6469db}\label{class_collaborator_a76af07739580e004f73f49d58e6469db}} 
+static unsigned int {\bfseries \+\_\+id\+Seq\+Col} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Individual.\+h\item 
+src/House\+Master.\+cpp\item 
+src/Individual.\+cpp\end{DoxyCompactItemize}
