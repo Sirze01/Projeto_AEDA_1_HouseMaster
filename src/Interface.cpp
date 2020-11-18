@@ -113,7 +113,7 @@ void Interface::clientOperations(bool &running) {
                 Menu activeInterventionMenu("Active intervention", {{"Mark as done", [&](){
                     _houseMaster.markAsComplete(intervention);
                 }},{"Cancel Intervention", [&](){
-                    HouseMaster::changeinterventionState(intervention, Canceled);
+                    Client::cancelIntervention(intervention);
                 }}, {"See details", [&](){
                     if (!intervention->getService()->getName().empty()) show(*intervention);
                     std::cin.ignore();
@@ -136,13 +136,22 @@ void Interface::collaboratorOperations(bool &running) {
         show(*collab);
         std::cin.ignore();
     }}, {"See active interventions", [&](){
-        // à espera que o josé desensarilhe o assign collaborator :)
+        Intervention* intervention = selectActiveIntervention(innerRunning);
+        if (intervention) {
+            Menu activeInterventionMenu("Active intervention", {{"See details", [&](){
+                if (!intervention->getService()->getName().empty()) show(*intervention);
+                std::cin.ignore();
+            }}});
+            activeInterventionMenu.show();
+            activeInterventionMenu.select();
+            activeInterventionMenu.execute(running);
+        }
     }}, {"Learn a service", [&](){
 
         Menu pickServices("Learn a service", {{"Choose from the HouseMaster services", [&](){
             while (running) {
                 std::string service = selectService(running);
-                if (service.empty()) collab->addService(service);
+                if (!service.empty()) collab->addService(service);
             }
         }}, {"Add a new one", [&](){
             std::string serviceName = readNewServiceData(running);
@@ -227,7 +236,6 @@ void Interface::readNewCollaboratorData(bool &running) {
     std::vector<std::string> services{};
 
     std::cout << "Name ? "; std::cin.ignore(9999, '\n'); std::getline(std::cin, name, '\n');
-    std::cout << "PEAD NAME " << name << "\n\n";
 
     std::cout << "Pro ? [yes/no] "; std::cin >> pro;
     while (pro != "yes" && pro != "no") {
@@ -358,6 +366,7 @@ void Interface::show(Intervention &intervention) {
     std::cout << "| " << std::setw(30) << std::right << intervention.getService()->getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "| [" << "Starting at" << "] " << std::setw(16) << std::right << intervention.getStartingTime().dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Ending at" << "] " << std::setw(16) << std::right << intervention.getEndTime().dateToStr() << " |" << std::endl;
     std::cout << "| [" << "Cost" << "] " << std::setw(19) << std::right << intervention.getCost() << " |" << std::endl;
     std::cout << "| [" << "Collaborator" << "] " << std::setw(15) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
