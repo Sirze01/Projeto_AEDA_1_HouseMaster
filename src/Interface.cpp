@@ -97,7 +97,6 @@ void Interface::clientOperations(bool &running) {
             if (!service.empty()) {
                 date interventionDate = readInterventionDate();
                 client->requestIntervention(_houseMaster, interventionDate, service, false);
-                // assign the collaborator
             }
         }
     }}, {"Browse Services", [&]() {
@@ -113,10 +112,8 @@ void Interface::clientOperations(bool &running) {
             if (intervention) {
                 Menu activeInterventionMenu("Active intervention", {{"Mark as done", [&](){
                     _houseMaster.markAsComplete(intervention);
-                    // free the collaborator
                 }},{"Cancel Intervention", [&](){
                     HouseMaster::changeinterventionState(intervention, Canceled);
-                    // free the collaborator
                 }}, {"See details", [&](){
                     if (!intervention->getService()->getName().empty()) show(*intervention);
                     std::cin.ignore();
@@ -362,7 +359,7 @@ void Interface::show(Intervention &intervention) {
     std::cout << "|                                |" << std::endl;
     std::cout << "| [" << "Starting at" << "] " << std::setw(16) << std::right << intervention.getStartingTime().dateToStr() << " |" << std::endl;
     std::cout << "| [" << "Cost" << "] " << std::setw(19) << std::right << intervention.getCost() << " |" << std::endl;
-    std::cout << "| [" << "Collaborator" << "] " << std::setw(15) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()] << " |" << std::endl;
+    std::cout << "| [" << "Collaborator" << "] " << std::setw(15) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "| [Enter] Go Back                |" << std::endl;
     std::cout << "|________________________________|" << std::endl;

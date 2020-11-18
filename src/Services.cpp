@@ -86,7 +86,7 @@ void Intervention::setClientId(const std::string& clientId) {
     _clientId = clientId;
 }
 
-const date Intervention::getStartingTime() const {
+date Intervention::getStartingTime() const {
     return _startingTime;
 }
 
@@ -109,6 +109,5 @@ date Intervention::getEndTime() const {
 }
 
 bool Intervention::isActive() const {
-    bool a = _state != Complete && _state != Canceled;
-    return a;
+    return _state != Complete && _state != Canceled;
 }

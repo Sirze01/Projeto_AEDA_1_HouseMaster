@@ -307,6 +307,7 @@ Intervention* HouseMaster::addIntervention(const date &appointment, const std::s
     if (it != _availableServices.end()) {
         auto newIntervention = new Intervention(appointment, *_availableServices[type], forcePro);
         newIntervention->setClientId(clientId);
+        newIntervention->calculateCost();
         _interventions.push_back(newIntervention);
         return newIntervention;
     } else {

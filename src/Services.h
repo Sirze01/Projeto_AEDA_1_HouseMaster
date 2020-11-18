@@ -58,7 +58,7 @@ public:
 
     Intervention(const date &appointment, Service type, bool forcePro);
 
-    const date getStartingTime() const;
+    date getStartingTime() const;
 
     const Service* getService() const;
 
