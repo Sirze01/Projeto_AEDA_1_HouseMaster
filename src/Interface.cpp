@@ -49,7 +49,7 @@ void Interface::adminLogin() {
         {
             std::cout << "success \n";
             _role = admin;
-            break;
+            return;
         }
         else
         {
