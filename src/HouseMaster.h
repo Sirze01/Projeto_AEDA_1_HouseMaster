@@ -50,9 +50,9 @@ public:
     void addClient(Client *client);
     void addClient(unsigned int nif, const std::string &name, bool premium);
     void removeClient(const std::string& clientId);
-    Intervention* addIntervention(const date& appointment, const std::string& type, bool forcePro, const std::string &clientId);
+    //Intervention* addIntervention(const date& appointment, const std::string& type, bool forcePro, const std::string &clientId);
+    Intervention* addIntervention(const date& appointment, const std::string& type, bool forcePro, const std::string &clientId, unsigned int nrOfRooms=0);
     static void changeinterventionState(Intervention* intervention, processState state);
-    static void changeinterventionStatePayed(Intervention* intervention);
     void processTransaction(Intervention *intervention);
     std::vector<Intervention*> getAssociatedInterventions(const std::string& id);
     std::vector<Intervention*> getAssociatedActiveInterventions(const std::string& id);

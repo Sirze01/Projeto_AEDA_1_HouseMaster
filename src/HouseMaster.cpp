@@ -301,11 +301,25 @@ void HouseMaster::removeClient(const std::string &clientId) {
 std::unordered_map<std::string, Client *> &HouseMaster::getClients() {
     return _clients;
 }
-
+/*
 Intervention* HouseMaster::addIntervention(const date &appointment, const std::string &type, bool forcePro, const std::string &clientId) {
     auto it = _availableServices.find(type);
     if (it != _availableServices.end()) {
         auto newIntervention = new Intervention(appointment, *_availableServices[type], forcePro);
+        newIntervention->setClientId(clientId);
+        newIntervention->calculateCost();
+        _interventions.push_back(newIntervention);
+        return newIntervention;
+    } else {
+        throw InexistentService("There's no such service!");
+    }
+}
+*/
+Intervention* HouseMaster::addIntervention(const date &appointment, const std::string &type, bool forcePro,
+                                           const std::string &clientId, unsigned int nrOfRooms) {
+    auto it = _availableServices.find(type);
+    if (it != _availableServices.end()) {
+        auto newIntervention = new Intervention(appointment, *_availableServices[type], forcePro, nrOfRooms);
         newIntervention->setClientId(clientId);
         newIntervention->calculateCost();
         _interventions.push_back(newIntervention);
@@ -319,9 +333,6 @@ void HouseMaster::changeinterventionState(Intervention *intervention, processSta
     intervention->setProcessState(state);
 }
 
-void HouseMaster::changeinterventionStatePayed(Intervention *intervention) {
-    intervention->setProcessState(PaymentComplete);
-}
 
 void HouseMaster::processTransaction(Intervention *intervention) {
     float hmEarnings;
@@ -329,7 +340,7 @@ void HouseMaster::processTransaction(Intervention *intervention) {
     hmEarnings = intervention->getCost() - (intervention->getCost() / float(1 + HouseMasterTax));
     getCollaborators()[intervention->getCollabId()]->calculateEarnings(hmEarnings);
     _earnings += hmEarnings;
-    changeinterventionStatePayed(intervention);
+    intervention->pay();
 }
 
 std::vector<Intervention *> HouseMaster::getAssociatedInterventions(const std::string &id) {

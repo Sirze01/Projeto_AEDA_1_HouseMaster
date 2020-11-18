@@ -47,8 +47,16 @@ float Painting::calculatePrice() {
 }
 
 
-Intervention::Intervention(const date& appointment, Service  type, bool forcePro) :
-        _startingTime(appointment), _type(std::move(type)), _forcePro(forcePro), _state(Scheduled), _cost(){}
+Intervention::Intervention(const date& appointment, Service  type, bool forcePro, int nrOfRooms) :
+        _startingTime(appointment), _type(std::move(type)), _forcePro(forcePro), _state(Scheduled), _cost(), _paid(false){
+    if (_type.getName() == "Painting"){
+        if (nrOfRooms == 0) {}
+        else {
+            Painting *ptr = dynamic_cast<Painting *>(&_type);
+            ptr->setRoomNumber(nrOfRooms);
+        }
+    }
+}
 
 const Service* Intervention::getService()const{
     return &_type;
@@ -106,6 +114,10 @@ void Intervention::calculateCost() {
 
 date Intervention::getEndTime() const {
     return _startingTime + _type.getDuration();
+}
+
+void Intervention::pay() {
+    _paid = true;
 }
 
 bool Intervention::isActive() const {

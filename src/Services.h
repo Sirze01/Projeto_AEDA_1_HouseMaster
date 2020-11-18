@@ -37,7 +37,6 @@ public:
 
 enum processState {
     Scheduled,
-    PaymentComplete,
     InProgress,
     Complete,
     Canceled
@@ -53,10 +52,11 @@ private:
     bool _forcePro;
     processState _state;
     float _cost;
+    bool _paid;
 
 public:
 
-    Intervention(const date &appointment, Service type, bool forcePro);
+    Intervention(const date &appointment, Service type, bool forcePro, int nrOfRooms = 0);
 
     date getStartingTime() const;
 
@@ -83,6 +83,8 @@ public:
     float getCost() const;
 
     date getEndTime() const;
+
+    void pay();
 
     bool isActive() const;
 

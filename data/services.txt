@@ -5,3 +5,4 @@ montar um carro do nada,no,2.50,10h00
 desmontar um computador,no,4,2h00
 canalizador,yes,5,3h00
 andar a correr atras de uma princesa ou la o que e,no,1,4h00
+Painting,yes,34,12h00
