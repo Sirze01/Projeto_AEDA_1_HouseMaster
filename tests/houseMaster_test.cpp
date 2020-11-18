@@ -158,7 +158,7 @@ TEST(HouseMasterTest, interventionManip){
     houseMaster1.getClients()["client3"]->requestIntervention(houseMaster1, date(12, 12, 2012, 21, 00), "canalizador",
                                                               false);
     it = std::find_if(houseMaster1.getInterventions().begin(), houseMaster1.getInterventions().end(), [](Intervention * intervention){
-        if(intervention->getClientId() == "client3" && intervention->getService()->getName() == "canalizador" && *intervention->getStartingTime() == date(12,12,2012,21,00)){return true;}});
+        if(intervention->getClientId() == "client3" && intervention->getService()->getName() == "canalizador" && intervention->getStartingTime() == date(12,12,2012,21,00)){return true;}});
     EXPECT_FALSE(it == houseMaster1.getInterventions().end());
 
 }
@@ -178,16 +178,19 @@ TEST(HouseMasterTest, usageTest){
                                                               false);
 
     // Client cancels it
-    houseMaster1.getClients()["client3"]->cancelIntervention(houseMaster1.getClients()["client3"]->getAssociatedInterventions(houseMaster1).at(0));
+    houseMaster1.getClients()["client3"]->cancelIntervention(houseMaster1.getClients()["client3"]->getAssociatedActiveInterventions(houseMaster1).at(0));
 
     // client requests another
     houseMaster1.getClients()["client2"]->requestIntervention(houseMaster1,
                                                               date(12, 11, 2020, 12, 00),
-                                                              "andar a correr atras de uma princesa ou la o que e",
+                                                              "desmontar um computador",
                                                               false);
 
-    // Admin assigns collab
-    houseMaster1.assignColaborator(houseMaster1.getClients()["client2"]->getAssociatedInterventions(houseMaster1).at(0), houseMaster1.sortCollaboratorsByScore());
+    // Client tries to assign another intervention for same time
+
+    EXPECT_THROW(houseMaster1.getClients()["client1"]->requestIntervention(houseMaster1, date(12,11,2020, 12,00),
+                                                                           "desmontar um computador",
+                                                                           false), HouseMaster::UnavailableAppointment);
 
     // Collab starts working
     houseMaster1.getCollaborators()

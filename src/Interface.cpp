@@ -1,7 +1,8 @@
-
 #include "Interface.h"
 
 #include <utility>
+
+Interface::NonexistentRole::NonexistentRole(const std::string &error_msg) : std::logic_error(error_msg){}
 
 Interface::Interface(HouseMaster houseMaster) : _houseMaster(std::move(houseMaster)), _user(), _role() {
 
@@ -317,7 +318,7 @@ Intervention *Interface::selectActiveIntervention(bool &running) {
     std::map<std::string, std::function<void()>> options{};
     Intervention* selection{};
     for (const auto &i : activeInterventions) {
-        options.insert(std::pair<std::string, std::function<void()>>(i->getService()->getName() + " " + i->getStartingTime()->dateToStr(), [&selection, &i](){
+        options.insert(std::pair<std::string, std::function<void()>>(i->getService()->getName() + " " + i->getStartingTime().dateToStr(), [&selection, &i](){
             selection = i;
         }));
     }
@@ -348,7 +349,7 @@ void Interface::show(Intervention &intervention) {
     std::cout << " __________HOUSE MASTER__________ " << std::endl;
     std::cout << "| " << std::setw(30) << std::right << intervention.getService()->getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
-    std::cout << "| [" << "Starting at" << "] " << std::setw(16) << std::right << intervention.getStartingTime()->dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Starting at" << "] " << std::setw(16) << std::right << intervention.getStartingTime().dateToStr() << " |" << std::endl;
     std::cout << "| [" << "Cost" << "] " << std::setw(19) << std::right << intervention.getCost() << " |" << std::endl;
     std::cout << "| [" << "Collaborator" << "] " << std::setw(15) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()] << " |" << std::endl;
     std::cout << "|                                |" << std::endl;

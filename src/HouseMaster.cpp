@@ -19,7 +19,7 @@ HouseMaster::ExistentClient::ExistentClient(const std::string &error_msg) : std:
 
 HouseMaster::NonexistentUsername::NonexistentUsername(const std::string &error_msg) : out_of_range(error_msg){}
 
-HouseMaster::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) {}
+HouseMaster::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) : std::ifstream::failure(error_msg) {}
 
 std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &hm) {
     return hm.getAssociatedInterventions(this->getId());
@@ -30,7 +30,7 @@ std::vector<Intervention*> Individual::getAssociatedActiveInterventions(HouseMas
 }
 
 void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro) {
-    hm.addIntervention(_date, type, forcePro, this->getId());
+    hm.assignColaborator(hm.addIntervention(_date, type, forcePro, this->getId()), hm.sortCollaboratorsByScore());
 }
 
 void Client::cancelIntervention(Intervention * intervention) {
@@ -42,7 +42,7 @@ void Client::classifyCollaborator(HouseMaster &hm, const std::string &collabId, 
 }
 
 bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, date start, duration duration) {
-    for (const auto &intervention : hm.getAssociatedInterventions(collabId)) {
+    for (const auto &intervention : hm.getAssociatedActiveInterventions(collabId)) {
         if (intervention->conflictsWith(start, duration)) {
             return false;
         }
@@ -52,7 +52,7 @@ bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, dat
 
 bool Collaborator::canDo(HouseMaster& hm, const std::string &collabId, Intervention *intervention) {
     const Service *service = intervention->getService();
-    date start = *intervention->getStartingTime();
+    date start = intervention->getStartingTime();
     duration duration = service->getDuration();
     return isAvailable(hm, collabId, start, duration) && canPreform(service->getName()) && hasQualificationToPreform(intervention);
 }
@@ -302,12 +302,13 @@ std::unordered_map<std::string, Client *> &HouseMaster::getClients() {
     return _clients;
 }
 
-void HouseMaster::addIntervention(const date &appointment, const std::string &type, bool forcePro, const std::string &clientId) {
+Intervention* HouseMaster::addIntervention(const date &appointment, const std::string &type, bool forcePro, const std::string &clientId) {
     auto it = _availableServices.find(type);
     if (it != _availableServices.end()) {
         auto newIntervention = new Intervention(appointment, *_availableServices[type], forcePro);
         newIntervention->setClientId(clientId);
         _interventions.push_back(newIntervention);
+        return newIntervention;
     } else {
         throw InexistentService("There's no such service!");
     }
@@ -460,7 +461,7 @@ void HouseMaster::writeInterventionsInfo()
         auto int_it = _interventions.begin();
         while (int_it != _interventions.end())
         {
-            interventionsFile << "Service: " << (*int_it)->getService() << ", from " << (*int_it)->getStartingTime()->dateToStr()
+            interventionsFile << "Service: " << (*int_it)->getService() << ", from " << (*int_it)->getStartingTime().dateToStr()
             << " to " << (*int_it)->getEndTime().dateToStr() << ", to client " << (*int_it)->getClientId() << " done by " << (*int_it)->getCollabId()
             << ", cost: " << (*int_it)->getCost() << '\n';
             int_it++;
