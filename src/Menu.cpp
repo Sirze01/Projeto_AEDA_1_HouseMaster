@@ -379,18 +379,18 @@ void Menu::show() {
     unsigned count = 1;
     unsigned back = _options.size() + 1;
 
-    std::cout << " __________HOUSE MASTER__________ " << std::endl;
-    std::cout << "| " << std::setw(30) << std::right << _prompt << " |" << std::endl;
-    std::cout << "|                                |" << std::endl;
+    std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
+    std::cout << "| " << std::setw(50) << std::right << _prompt << " |" << std::endl;
+    std::cout << "|                                                    |" << std::endl;
 
     for (const auto &option : _options) {
-        std::cout << "| [" << count << "] " << std::setw(27) << std::left << option.first << "|" << std::endl;
+        std::cout << "| [" << count << "] " << std::setw(47) << std::left << option.first << "|" << std::endl;
         count ++;
     }
 
-    std::cout << "|                                |" << std::endl;
-    std::cout << "| [0] EXIT (no save)" << "   [" << back << "] BACK  |" << std::endl;
-    std::cout << "|________________________________|" << std::endl;
+    std::cout << "|                                                    |" << std::endl;
+    std::cout << "| [0] EXIT (no save)" << "                       [" << back << "] BACK  |" << std::endl;
+    std::cout << "|____________________________________________________|" << std::endl;
 }
 
 void Menu::select() {

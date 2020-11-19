@@ -61,7 +61,7 @@ public:
      * @param functions Vector of strings containing the names of the Services the Collaborator can preform
      * @param name String with the name of the new Collaborator
      * @param pro Boolean describing if the Collaborator has professional credentials*/
-    void addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro);
+    void addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro, float earnings=0);
     //void deleteCollaborator(const std::string& collId);
     /**Void method to add a new Client to the database
      * @param client* Pointer to the new Client*/
@@ -89,6 +89,7 @@ public:
     class InexistentService;
     class ExistentService;
     class InexistentCollab;
+    class AssignedCollab;
     class InexistentClient;
     class ExistentClient;
     class NonexistentUsername;
@@ -130,6 +131,11 @@ public:
 class HouseMaster::InexistentCollab : public std::out_of_range{
 public:
     explicit InexistentCollab(const std::string &error_msg);
+};
+
+class HouseMaster::AssignedCollab : public std::logic_error{
+public:
+    explicit AssignedCollab(const std::string &error_msg);
 };
 
 class HouseMaster::InexistentClient : public std::out_of_range{

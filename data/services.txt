@@ -7,4 +7,3 @@ jantar na cantina as 18h30,no,2.7,01h0,default
 desmontar um computador,no,4,02h0,default
 Painting,yes,34,12h0,painting
 aaaaaaaaaaing,no,2,04h0,default
-pintar,yes,45,45h0,default

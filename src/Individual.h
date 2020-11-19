@@ -49,7 +49,7 @@ enum Classification {
 
 class Collaborator : public Individual {
 public:
-    Collaborator(std::vector<std::string> functions, const std::string &name, bool pro);
+    Collaborator(std::vector<std::string> functions, const std::string &name, bool pro, float earnings=0);
 
     ~Collaborator() override = default;
 
@@ -78,6 +78,8 @@ public:
     void updateScore();
 
     void calculateEarnings(float &hmEarnings);
+
+    float getEarnings() const;
 
     float comissionByScore();
 

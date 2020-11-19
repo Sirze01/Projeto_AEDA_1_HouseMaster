@@ -13,6 +13,8 @@ HouseMaster::ExistentService::ExistentService(const std::string &error_msg) : st
 
 HouseMaster::InexistentCollab::InexistentCollab(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
+HouseMaster::AssignedCollab::AssignedCollab(const std::string &error_msg) : std::logic_error(error_msg){}
+
 HouseMaster::InexistentClient::InexistentClient(const std::string &error_msg) : std::out_of_range(error_msg){}
 
 HouseMaster::ExistentClient::ExistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
@@ -110,6 +112,10 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         // pro
         std::string proStr;
         std::getline(lss, proStr, ',');
+        // earnings
+        std::string earnStr;
+        std::getline(lss, earnStr, ',');
+        float collabEarnings = std::stof(earnStr);
         // services
         std::string serviceName{};
         std::vector<std::string> collabServices;
@@ -119,7 +125,7 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
 
         // check if everything is valid, if not throw an exception
 
-        addCollaborator(collabServices, name, proStr == "yes");
+        addCollaborator(collabServices, name, proStr == "yes", collabEarnings);
     }
 
     // read clients.txt
@@ -197,8 +203,8 @@ void HouseMaster::addCollaborator(Collaborator *collab) {
     _usernameMap.insert({collab->getId(), collab->getId()});
 }
 
-void HouseMaster::addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro) {
-    auto collab = new Collaborator(functions, name, pro);
+void HouseMaster::addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro, float earnings) {
+    auto collab = new Collaborator(functions, name, pro, earnings);
     _collaborators.insert({collab->getId(), collab});
     _usernameMap.insert({collab->getId(), collab->getId()});
 }
@@ -211,8 +217,12 @@ void HouseMaster::removeCollaborator(const std::string &id) {
                                    });
     if (it != _collaborators.end()) {
         if (UsernameIt != _usernameMap.end()) {
+           if(getAssociatedActiveInterventions(id).empty()){
             _collaborators.erase(it);
-            _usernameMap.erase(UsernameIt);
+            _usernameMap.erase(UsernameIt);}
+           else{
+               throw AssignedCollab("Collaborator still has incomplete Interventions!");
+           }
         } else {
             throw NonexistentUsername("This username does not exist!");
         }
@@ -433,6 +443,7 @@ void HouseMaster::writeCollabsInfo()
         {
             collabFile << collab_it->second->getName();
             if (collab_it->second->isPro()) { collabFile << ",yes,"; } else { collabFile << ",no,"; }
+            collabFile << collab_it->second->getEarnings() << ',';
             for (size_t i = 0; i < collab_it->second->getServices().size(); i++)
             {
                 if (i == collab_it->second->getServices().size() - 1)
