@@ -39,6 +39,7 @@ public:
     void showFinances() const;
     void readNewClientData();
     unsigned readNumberOfRooms();
+    void showSortedCollabs();
 private:
     HouseMaster _houseMaster;
     Individual *_user;

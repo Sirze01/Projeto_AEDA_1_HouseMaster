@@ -389,7 +389,7 @@ void Menu::show() {
     }
 
     std::cout << "|                                                    |" << std::endl;
-    std::cout << "| [0] EXIT (no save)" << "                       [" << back << "] BACK  |" << std::endl;
+    std::cout << "| [0] EXIT (no save)" << "                      [" << std::setw(2) << std::right << back << "] BACK  |" << std::endl;
     std::cout << "|____________________________________________________|" << std::endl;
 }
 
@@ -424,7 +424,10 @@ void Menu::select() {
 
 void Menu::execute(bool &running) {
 
-    if (!_choice) exit(0);
+    if (!_choice) {
+        std::cout << "Leaving without saving...\n";
+        exit(0);
+    }
     if (_choice == _options.size() + 1) {
         running = false;
         return;
