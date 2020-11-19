@@ -15,7 +15,7 @@ public:
 
     Individual();
 
-    
+    virtual ~Individual() = default;
 
     explicit Individual(std::string name);
 
@@ -51,7 +51,7 @@ class Collaborator : public Individual {
 public:
     Collaborator(std::vector<std::string> functions, const std::string &name, bool pro);
 
-
+    ~Collaborator() override = default;
 
     std::vector<std::string> getServices();
 
@@ -107,7 +107,7 @@ public:
 
     Client(unsigned int nif, const std::string &name, bool premium);
 
-
+    ~Client() override= default;
 
     unsigned int getNif();
 
