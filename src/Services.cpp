@@ -1,6 +1,8 @@
 #include "Services.h"
 #include <utility>
 
+Service::Service() : _name(), _pro(false), _basePrice(0), _duration(duration(0,0)) {}
+
 Service::Service(std::string name, bool pro, float basePrice, const duration &duration) :
         _name(std::move(name)), _pro(pro), _basePrice(basePrice), _duration(duration){}
 
@@ -34,14 +36,10 @@ float Painting::calculatePrice() {
     float price = getBasePrice();
     float sum = 0;
     for(int n = 1; n < _roomNumber + 1; n++){
-        if(n == 1)
-            sum += price;
-        else if(price >= MinimumPricePerRoom) {
+        if(n > 1 && price >= MinimumPricePerRoom) {
             price = float(ROOM_DISCOUNT) * price;
-            sum += price;
         }
-        else
-            sum += price;
+        sum += price;
     }
     return sum;
 }
@@ -52,7 +50,7 @@ Intervention::Intervention(const date& appointment, Service  type, bool forcePro
     if (_type.getName() == "Painting"){
         if (nrOfRooms == 0) {}
         else {
-            Painting *ptr = dynamic_cast<Painting *>(&_type);
+            auto *ptr = dynamic_cast<Painting *>(&_type);
             ptr->setRoomNumber(nrOfRooms);
         }
     }
@@ -78,6 +76,10 @@ float Intervention::getCost() const {
     return _cost;
 }
 
+bool Intervention::getPaid() const {
+    return _paid;
+}
+
 std::string Intervention::getCollabId() const {
     return _collabId;
 }
@@ -98,7 +100,7 @@ date Intervention::getStartingTime() const {
     return _startingTime;
 }
 
-bool Intervention::conflictsWith(date start, duration duration) {
+bool Intervention::conflictsWith(date start, duration duration) const{
 
     date otherStart = start;
     date otherEnd = start + duration;

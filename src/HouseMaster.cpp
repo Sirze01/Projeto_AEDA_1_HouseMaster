@@ -21,11 +21,11 @@ HouseMaster::NonexistentUsername::NonexistentUsername(const std::string &error_m
 
 HouseMaster::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) : std::ifstream::failure(error_msg) {}
 
-std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &hm) {
+std::vector<Intervention*> Individual::getAssociatedInterventions(HouseMaster &hm) const{
     return hm.getAssociatedInterventions(this->getId());
 }
 
-std::vector<Intervention*> Individual::getAssociatedActiveInterventions(HouseMaster &hm) {
+std::vector<Intervention*> Individual::getAssociatedActiveInterventions(HouseMaster &hm) const{
     return hm.getAssociatedActiveInterventions(this->getId());
 }
 

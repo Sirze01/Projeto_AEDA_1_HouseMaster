@@ -19,9 +19,9 @@ public:
 
     virtual std::string getId() const = 0;
 
-    std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm);
+    std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm) const;
 
-    std::vector<Intervention*> getAssociatedActiveInterventions(HouseMaster &hm);
+    std::vector<Intervention*> getAssociatedActiveInterventions(HouseMaster &hm) const;
 
     std::string getName() const;
 
@@ -65,7 +65,7 @@ public:
 
     void addClassification(Classification classification);
 
-    void addService(std::string service);
+    void addService(const std::string& service);
 
     static void markInterventionAsInProgress(Intervention* intervention);
 
