@@ -90,23 +90,15 @@ void Interface::userLogin() {
 bool Interface::readRole(const std::string &username) {
     std::string roleName{};
     Role role{};
+    if (username == "client") {std::cout << "You need to be more specific! Example: 'client123'. ";throw NonexistentRole("This role does not exist!");}
+    else if (username == "collab") {std::cout << "You need to be more specific! Example: 'collab123'. ";throw NonexistentRole("This role does not exist!");}
     for (const auto &i : username) {
         if (isalpha(i)) roleName += i;  // TODO ai isto ta xanxo que fode e nem funciona bem
         else break;                     // TODO apagar este comentário
     }
     if (roleName == "collab") role = collaborator;
     else if (roleName == "client") role = client;
-    else {
-        try
-        {
-            throw NonexistentRole("Role does not exist!");
-        }
-        catch (...)
-        {
-            std::cout << "You inserted an invalid role, please try again:\n";
-            userLogin();
-        }
-    }
+    else throw NonexistentRole("This role does not exist!");
     _role = role;
     return true;
 }
