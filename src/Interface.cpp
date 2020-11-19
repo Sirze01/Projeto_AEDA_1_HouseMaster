@@ -229,9 +229,11 @@ void Interface::adminOperations(bool &running) {
     }}, {"Show all collaborators", [&](){
         while (innerRunning) {
             std::string collabName = selectCollab(innerRunning);
-            Collaborator *collab = _houseMaster.getCollaborators()[collabName];
-            if (!collabName.empty()) show(*collab);
-            std::cin.ignore();
+            if (!collabName.empty()) {
+                Collaborator *collab = _houseMaster.getCollaborators()[collabName];
+                if (collab) show(*collab);
+                std::cin.ignore();
+            }
         }
     }}});
     adminMenu.show();
@@ -257,11 +259,11 @@ void Interface::readNewCollaboratorData(bool &running) {
     Menu pickServices("Pick your services", {{"Choose from the HouseMaster services", [&](){
         while (running) {
             std::string service = selectService(running);
-            if (service.empty()) services.push_back(service);
+            if (!service.empty()) services.push_back(service);
         }
     }}, {"Add a new one", [&](){
         std::string serviceName = readNewServiceData(running);
-        services.push_back(serviceName);
+        if (!serviceName.empty()) services.push_back(serviceName);
 
     }}});
 
@@ -326,7 +328,6 @@ std::string Interface::selectCollab(bool &running) {
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : collabs) {
         options.insert(std::pair<std::string, std::function<void()>>(_houseMaster.getCollaborators()[i.first]->getName(), [&selection, &i](){
-            std::cout << "Selected " << i.first << "\n";
             selection = i.first;
         }));
     }
@@ -417,6 +418,10 @@ Classification Interface::readClassification(bool &running) {
     classifications.select();
     classifications.execute(running);
     return classification;
+}
+
+HouseMaster Interface::getHouseMasterState() const {
+    return _houseMaster;
 }
 
 

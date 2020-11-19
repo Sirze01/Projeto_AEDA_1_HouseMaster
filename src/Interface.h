@@ -35,6 +35,7 @@ public:
     std::string readNewServiceData(bool &running);
     Intervention* selectActiveIntervention(bool &running);
     class NonexistentRole;
+    HouseMaster getHouseMasterState() const;
 private:
     HouseMaster _houseMaster;
     Individual *_user;
