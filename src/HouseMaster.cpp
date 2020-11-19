@@ -29,8 +29,8 @@ std::vector<Intervention*> Individual::getAssociatedActiveInterventions(HouseMas
     return hm.getAssociatedActiveInterventions(this->getId());
 }
 
-void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro) {
-    hm.assignColaborator(hm.addIntervention(_date, type, forcePro, this->getId()), hm.sortCollaboratorsByScore());
+void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int nrOfRooms) {
+    hm.assignColaborator(hm.addIntervention(_date, type, forcePro, this->getId(), nrOfRooms), hm.sortCollaboratorsByScore());
 }
 
 void Client::cancelIntervention(Intervention * intervention) {
@@ -301,6 +301,7 @@ void HouseMaster::removeClient(const std::string &clientId) {
 std::unordered_map<std::string, Client *> &HouseMaster::getClients() {
     return _clients;
 }
+
 /*
 Intervention* HouseMaster::addIntervention(const date &appointment, const std::string &type, bool forcePro, const std::string &clientId) {
     auto it = _availableServices.find(type);
@@ -315,6 +316,7 @@ Intervention* HouseMaster::addIntervention(const date &appointment, const std::s
     }
 }
 */
+
 Intervention* HouseMaster::addIntervention(const date &appointment, const std::string &type, bool forcePro,
                                            const std::string &clientId, unsigned int nrOfRooms) {
     auto it = _availableServices.find(type);

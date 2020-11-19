@@ -109,7 +109,7 @@ public:
 
     std::string getId() const override;
 
-    void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro);
+    void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int nrOfRooms=0);
 
     static void cancelIntervention(Intervention* intervention);
 
