@@ -89,6 +89,7 @@ public:
     class InexistentService;
     class ExistentService;
     class InexistentCollab;
+    class AssignedCollab;
     class InexistentClient;
     class ExistentClient;
     class NonexistentUsername;
@@ -130,6 +131,11 @@ public:
 class HouseMaster::InexistentCollab : public std::out_of_range{
 public:
     explicit InexistentCollab(const std::string &error_msg);
+};
+
+class HouseMaster::AssignedCollab : public std::logic_error{
+public:
+    explicit AssignedCollab(const std::string &error_msg);
 };
 
 class HouseMaster::InexistentClient : public std::out_of_range{

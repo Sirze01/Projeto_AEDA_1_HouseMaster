@@ -13,6 +13,8 @@ HouseMaster::ExistentService::ExistentService(const std::string &error_msg) : st
 
 HouseMaster::InexistentCollab::InexistentCollab(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
+HouseMaster::AssignedCollab::AssignedCollab(const std::string &error_msg) : std::logic_error(error_msg){}
+
 HouseMaster::InexistentClient::InexistentClient(const std::string &error_msg) : std::out_of_range(error_msg){}
 
 HouseMaster::ExistentClient::ExistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
@@ -215,8 +217,12 @@ void HouseMaster::removeCollaborator(const std::string &id) {
                                    });
     if (it != _collaborators.end()) {
         if (UsernameIt != _usernameMap.end()) {
+           if(getAssociatedActiveInterventions(id).empty()){
             _collaborators.erase(it);
-            _usernameMap.erase(UsernameIt);
+            _usernameMap.erase(UsernameIt);}
+           else{
+               throw AssignedCollab("Collaborator still has incomplete Interventions!");
+           }
         } else {
             throw NonexistentUsername("This username does not exist!");
         }
@@ -437,7 +443,7 @@ void HouseMaster::writeCollabsInfo()
         {
             collabFile << collab_it->second->getName();
             if (collab_it->second->isPro()) { collabFile << ",yes,"; } else { collabFile << ",no,"; }
-            collabFile << ',' << collab_it->second->getEarnings() << ',';
+            collabFile << collab_it->second->getEarnings() << ',';
             for (size_t i = 0; i < collab_it->second->getServices().size(); i++)
             {
                 if (i == collab_it->second->getServices().size() - 1)
