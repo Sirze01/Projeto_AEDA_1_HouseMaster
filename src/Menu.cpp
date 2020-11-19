@@ -389,7 +389,7 @@ void Menu::show() {
     }
 
     std::cout << "|                                |" << std::endl;
-    std::cout << "| [0] EXIT " << "            [" << back << "] BACK  |" << std::endl;
+    std::cout << "| [0] EXIT (no save)" << "   [" << back << "] BACK  |" << std::endl;
     std::cout << "|________________________________|" << std::endl;
 }
 

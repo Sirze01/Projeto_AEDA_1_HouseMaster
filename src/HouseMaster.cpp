@@ -487,3 +487,7 @@ void HouseMaster::writeInterventionsInfo()
 void HouseMaster::markAsComplete(Intervention *intervention) {
     intervention->setProcessState(Complete);
 }
+
+float HouseMaster::getEarnings() const {
+    return _earnings;
+}

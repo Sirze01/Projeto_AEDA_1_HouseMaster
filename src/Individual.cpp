@@ -51,6 +51,7 @@ int Collaborator::getScore() const {
 
 void Collaborator::addClassification(Classification classification) {
     _classifications.push_back(classification);
+    updateScore();
 }
 
 void Collaborator::updateScore() {

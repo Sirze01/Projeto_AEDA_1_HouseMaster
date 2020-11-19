@@ -7,3 +7,13 @@ Service: aaaaaaaaaaing, from 12/12/2012  12:34 to 12/12/2012  16:34, to client c
 
 Thu Nov 19 01:27:03 2020
 
+
+
+Thu Nov 19 01:46:58 2020
+
+Service: canalizador, from 12/12/2012  12:23 to 12/12/2012  15:23, to client client0 done by collab2, cost: 6
+
+
+Thu Nov 19 01:52:31 2020
+
+Service: ajudar os amiguinhos com amat, from 12/12/2012  12:34 to 12/12/2012  15:34, to client client1 done by collab3, cost: 3.6

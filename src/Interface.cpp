@@ -115,7 +115,7 @@ void Interface::clientOperations(bool &running) {
                     _houseMaster.markAsComplete(intervention);
                     showPayment(intervention);
                     std::cin.ignore();
-                    intervention->pay();
+                    _houseMaster.processTransaction(intervention);
                     Classification classification = readClassification(innerRunning);
                     _houseMaster.getCollaborators()[intervention->getCollabId()]->addClassification(classification);
                 }},{"Cancel Intervention", [&](){
@@ -225,7 +225,6 @@ void Interface::adminOperations(bool &running) {
     bool innerRunning = true;
     Menu adminMenu("Welcome, ADMIN", {{"Register collaborator", [&](){
         readNewCollaboratorData(innerRunning);
-
     }}, {"Show all collaborators", [&](){
         while (innerRunning) {
             std::string collabName = selectCollab(innerRunning);
@@ -235,6 +234,8 @@ void Interface::adminOperations(bool &running) {
                 std::cin.ignore();
             }
         }
+    }}, {"See HouseMaster finances", [&](){
+        showFinances();
     }}});
     adminMenu.show();
     adminMenu.select();
@@ -422,6 +423,18 @@ Classification Interface::readClassification(bool &running) {
 
 HouseMaster Interface::getHouseMasterState() const {
     return _houseMaster;
+}
+
+void Interface::showFinances() const {
+    float money = _houseMaster.getEarnings();
+    std::cout << " __________HOUSE MASTER__________ " << std::endl;
+    std::cout << "| " << std::setw(30) << std::right << "HouseMaster finances"<< " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [" << "Current Balance" << "] " << std::setw(16) << std::right << money << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [Enter] Confirm                |" << std::endl;
+    std::cout << "|________________________________|" << std::endl;
+    std::cin.ignore();
 }
 
 

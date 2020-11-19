@@ -36,6 +36,7 @@ public:
     Intervention* selectActiveIntervention(bool &running);
     class NonexistentRole;
     HouseMaster getHouseMasterState() const;
+    void showFinances() const;
 private:
     HouseMaster _houseMaster;
     Individual *_user;
