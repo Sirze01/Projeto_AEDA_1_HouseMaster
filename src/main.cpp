@@ -6,7 +6,10 @@
 
 int main() {
 
-    HouseMaster h1(std::ifstream("../../data/collabs.txt"), std::ifstream("../../data/clients.txt"), std::ifstream("../../data/services.txt"));
+    HouseMaster h1(std::ifstream("../../data/collabs.txt"),
+                   std::ifstream("../../data/clients.txt"),
+                   std::ifstream("../../data/services.txt"),
+                   std::ifstream("../../data/finances.txt"));
     Interface i1(h1);
     bool running = true;
     while (running) {
@@ -17,5 +20,6 @@ int main() {
     h1.writeServicesInfo();
     h1.writeCollabsInfo();
     h1.writeInterventionsInfo();
+    h1.writeFinantialInfo();
     return 0;
 }

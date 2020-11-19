@@ -29,7 +29,7 @@ public:
     /**HouseMaster's empty constructor*/
     HouseMaster();
     /**HouseMaster's constructor using files*/
-    HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services);
+    HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services, std::ifstream earnings);
     /**HouseMaster's destructor*/
     ~HouseMaster() = default;
     /**A normal member taking no arguments and returning an unordered map of Collaborators
@@ -83,7 +83,7 @@ public:
     void assignColaborator(Intervention*, const std::vector<std::pair<std::string, Collaborator*>>&);
     std::vector<std::pair<std::string, Collaborator*>> sortCollaboratorsByScore();
     Individual* findByUsername(const std::string &name);
-    void markAsComplete(Intervention* intervention);
+    static void markAsComplete(Intervention* intervention);
     float getEarnings() const;
     class UnavailableAppointment;
     class InexistentService;
@@ -98,6 +98,7 @@ public:
     void writeClientsInfo();
     void writeServicesInfo();
     void writeInterventionsInfo();
+    void writeFinantialInfo() const;
 private:
     std::unordered_map<std::string, Service*> _availableServices;
     std::unordered_map<std::string, Client*> _clients;

@@ -43,3 +43,33 @@ Thu Nov 19 15:55:44 2020
 Thu Nov 19 16:12:14 2020
 
 Service: Painting, from 12/12/2012  12:12 to 13/12/2012  00:12, to client client0 done by collab3, cost: 40.8
+
+
+Thu Nov 19 18:21:33 2020
+
+
+
+Thu Nov 19 18:39:08 2020
+
+Service: Painting, from 12/10/2001  00:0 to 12/10/2001  12:0, to client client2 done by collab4, cost: 40.8
+Service: Painting, from 12/10/2011  00:0 to 12/10/2011  12:0, to client client2 done by collab4, cost: 40.8
+Service: Painting, from 12/10/2013  00:0 to 12/10/2013  12:0, to client client2 done by collab4, cost: 40.8
+Service: Painting, from 12/10/2014  00:0 to 12/10/2014  12:0, to client client2 done by collab4, cost: 40.8
+Service: Painting, from 12/10/2015  00:0 to 12/10/2015  12:0, to client client2 done by collab4, cost: 40.8
+Service: Painting, from 12/10/2016  00:0 to 12/10/2016  12:0, to client client2 done by collab4, cost: 40.8
+
+
+Thu Nov 19 18:43:44 2020
+
+
+
+Thu Nov 19 18:48:15 2020
+
+
+
+Thu Nov 19 18:48:35 2020
+
+
+
+Thu Nov 19 18:49:01 2020
+

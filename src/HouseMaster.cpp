@@ -69,7 +69,7 @@ void Collaborator::markInterventionAsComplete(Intervention *a) {
 // HouseMaster Methods
 HouseMaster::HouseMaster() : _availableServices(), _clients(), _collaborators(), _interventions(), _earnings() {}
 
-HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services) : _earnings() {
+HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services, std::ifstream earnings) {
     // read services.txt
     for (std::string line; std::getline(services, line);) {
 
@@ -136,6 +136,11 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
 
         addClient(std::stoul(nifStr), name, premiumStr == "yes");
     }
+
+    // read earnings.txt
+    for (std::string line; std::getline(earnings, line);) {
+        _earnings = std::stof(line);
+    }
 }
 
 std::unordered_map<std::string, Collaborator *> &HouseMaster::getCollaborators() {
@@ -159,7 +164,7 @@ void HouseMaster::addAvailablePaintService(const std::string &name, bool pro, fl
     if (_availableServices.find(name) != _availableServices.end())
         throw ExistentService("A service with the same name already exists!");
     else {
-        Painting* service = new Painting(name, pro, basePrice, duration);
+        auto service = new Painting(name, pro, basePrice, duration);
         _availableServices.insert({name, service});
     }
 }
@@ -210,7 +215,6 @@ void HouseMaster::removeCollaborator(const std::string &id) {
             _usernameMap.erase(UsernameIt);
         } else {
             throw NonexistentUsername("This username does not exist!");
-            //throws except
         }
 
     } else {
@@ -469,7 +473,7 @@ void HouseMaster::writeServicesInfo() {
         while (service_it != _availableServices.end()) {
 
             Service* sv = (*service_it).second;
-            Painting* pt = dynamic_cast<Painting*>(sv);
+            auto pt = dynamic_cast<Painting*>(sv);
             servicesFile << service_it->second->getName() << ",";
             if (service_it->second->getPro()) {servicesFile << "yes";} else {servicesFile << "no";}
             servicesFile << "," << service_it->second->getBasePrice() << "," << service_it->second->getDuration().durationToStr();
@@ -505,6 +509,17 @@ void HouseMaster::writeInterventionsInfo()
         interventionsFile.close();
     }
     else throw UnableToWriteFile("Unable to write in interventions' file");
+}
+
+void HouseMaster::writeFinantialInfo() const {
+    std::ofstream finantialInfo("../../data/finances.txt", std::ios_base::trunc);
+
+    if (finantialInfo.is_open())
+    {
+        finantialInfo << _earnings<< std::endl;
+        finantialInfo.close();
+    }
+    else throw UnableToWriteFile("Unable to write in finances' file");
 }
 
 void HouseMaster::markAsComplete(Intervention *intervention) {
