@@ -18,11 +18,10 @@ std::string Individual::getName() const{
 
 
 
-
 // Collaborator associated methods
 
-Collaborator::Collaborator(std::vector<std::string> functions, const std::string &name, bool pro) : Individual(name),
-                            _services(std::move(functions)), _score(newHere), _pro(pro), _earnings(0) {
+Collaborator::Collaborator(std::vector<std::string> functions, const std::string &name, bool pro, float earnings) : Individual(name),
+                            _services(std::move(functions)), _score(newHere), _pro(pro), _earnings(earnings) {
     _id = _idSeqCol++;
 }
 
@@ -70,6 +69,10 @@ void Collaborator::calculateEarnings(float & hmEarnmings) {
     float collabEarnings = comissionByScore() * hmEarnmings;
     _earnings += collabEarnings;
     hmEarnmings = hmEarnmings - collabEarnings;
+}
+
+float Collaborator::getEarnings() const {
+    return _earnings;
 }
 
 float Collaborator::comissionByScore() {
