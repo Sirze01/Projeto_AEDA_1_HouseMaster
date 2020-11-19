@@ -59,6 +59,7 @@ public:
     std::vector<std::pair<std::string, Collaborator*>> sortCollaboratorsByScore();
     Individual* findByUsername(const std::string &name);
     void markAsComplete(Intervention* intervention);
+    float getEarnings() const;
     class UnavailableAppointment;
     class InexistentService;
     class ExistentService;

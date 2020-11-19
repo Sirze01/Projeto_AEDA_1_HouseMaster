@@ -10,14 +10,14 @@ Interface::Interface(HouseMaster houseMaster) : _houseMaster(std::move(houseMast
 
 void Interface::selectRole(bool &running) {
     bool innerRunning = true;
-    Menu roles("Choose your role", {{"Admin", [&]() {
+    Menu roles("Choose your role", {{"Login Admin", [&]() {
         std::cout << "Welcome to HouseMaster. You have ADMIN privilege.\n";
         adminLogin();
         while (innerRunning) {
             adminOperations(innerRunning);
         }
     }},
-    {"User (Collaborator/Client)", [&]() {
+    {"Login User (Collab/Client)", [&]() {
         userLogin();
         std::cout << "Login succeeded for " << _user->getName() << "\n";
         if (_role == client) {
@@ -31,6 +31,10 @@ void Interface::selectRole(bool &running) {
         }
 
 
+    }}, {"Register Client", [&](){
+        readNewClientData();
+        std::cout << "Press ENTER to continue\n";
+        std::cin.ignore();
     }}});
 
     roles.show();
@@ -57,7 +61,7 @@ void Interface::adminLogin() {
             std::cin >> password;
         }
     }
-    std::cout << "Too many tries! No admin for you. :^) Logging out...\n";
+    std::cout << "Too many tries! No admin for you.  Logging out...\n";
     exit(0);
 }
 
@@ -75,9 +79,9 @@ void Interface::userLogin() {
 bool Interface::readRole(const std::string &username) {
     std::string roleName{};
     Role role{};
-    for (const auto &i : username) {  // muito xanxo melhorar
-        if (isalpha(i)) roleName += i;  // ai isto ta xanxo que fode e nem funciona bem
-        else break;
+    for (const auto &i : username) {
+        if (isalpha(i)) roleName += i;  // TODO ai isto ta xanxo que fode e nem funciona bem
+        else break;                     // TODO apagar este comentário
     }
     if (roleName == "collab") role = collaborator;
     else if (roleName == "client") role = client;
@@ -111,9 +115,15 @@ void Interface::clientOperations(bool &running) {
             Intervention* intervention = selectActiveIntervention(innerRunning);
             if (intervention) {
                 Menu activeInterventionMenu("Active intervention", {{"Mark as done", [&](){
+                    // mark as complete, prompt client to pay, prompt client to classify
                     _houseMaster.markAsComplete(intervention);
+                    showPayment(intervention);
+                    std::cin.ignore();
+                    _houseMaster.processTransaction(intervention);
+                    Classification classification = readClassification(innerRunning);
+                    _houseMaster.getCollaborators()[intervention->getCollabId()]->addClassification(classification);
                 }},{"Cancel Intervention", [&](){
-                    HouseMaster::changeinterventionState(intervention, Canceled);
+                    Client::cancelIntervention(intervention);
                 }}, {"See details", [&](){
                     if (!intervention->getService()->getName().empty()) show(*intervention);
                     std::cin.ignore();
@@ -136,13 +146,25 @@ void Interface::collaboratorOperations(bool &running) {
         show(*collab);
         std::cin.ignore();
     }}, {"See active interventions", [&](){
-        // à espera que o josé desensarilhe o assign collaborator :)
+        Intervention* intervention = selectActiveIntervention(innerRunning);
+        if (intervention) {
+            Menu activeInterventionMenu("Active intervention", {{"See details", [&](){
+                if (!intervention->getService()->getName().empty()) show(*intervention);
+                std::cin.ignore();
+            }}});
+            activeInterventionMenu.show();
+            activeInterventionMenu.select();
+            activeInterventionMenu.execute(running);
+        }
     }}, {"Learn a service", [&](){
 
         Menu pickServices("Learn a service", {{"Choose from the HouseMaster services", [&](){
             while (running) {
                 std::string service = selectService(running);
-                if (service.empty()) collab->addService(service);
+                if (!service.empty()) {
+                    if (!collab->canPreform(service)) collab->addService(service);
+                    else std::cout << collab->getName() << " already knows " << service << "\n";
+                }
             }
         }}, {"Add a new one", [&](){
             std::string serviceName = readNewServiceData(running);
@@ -177,7 +199,6 @@ std::string Interface::selectService(bool &running) {
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : services) {
         options.insert(std::pair<std::string, std::function<void()>>(i.first, [&selection, &i](){
-            std::cout << "Selected " << i.first << "\n";
             selection = i.first;
         }));
     }
@@ -207,18 +228,46 @@ void Interface::adminOperations(bool &running) {
     bool innerRunning = true;
     Menu adminMenu("Welcome, ADMIN", {{"Register collaborator", [&](){
         readNewCollaboratorData(innerRunning);
-
     }}, {"Show all collaborators", [&](){
         while (innerRunning) {
             std::string collabName = selectCollab(innerRunning);
-            Collaborator *collab = _houseMaster.getCollaborators()[collabName];
-            if (!collabName.empty()) show(*collab);
-            std::cin.ignore();
+            if (!collabName.empty()) {
+                Collaborator *collab = _houseMaster.getCollaborators()[collabName];
+                if (collab) show(*collab);
+                std::cin.ignore();
+            }
         }
+    }}, {"See HouseMaster finances", [&](){
+        showFinances();
+    }}, {"Fire Collaborator", [&](){
+        // TODO
     }}});
     adminMenu.show();
     adminMenu.select();
     adminMenu.execute(running);
+}
+
+void Interface::readNewClientData() {
+    std::string name{}, premiumStr{};
+    unsigned nif{};
+
+    std::cout << "Name ? "; std::cin.ignore(9999, '\n'); std::getline(std::cin, name, '\n');
+
+    std::cout << "Premium ? [yes/no] "; std::cin >> premiumStr;
+    while (premiumStr != "yes" && premiumStr != "no") {
+        std::cout << R"(Invalid choice. Make sure you chose one of "yes" or "no" )" << std::endl;
+        std::cin >> premiumStr;
+    }
+
+    bool premium = premiumStr == "yes";
+
+    std::cout << "NIF ? "; std::cin >> nif; // TODO input validation
+
+    _houseMaster.addClient(nif, name, premium);
+    std::string username = (*_houseMaster.getClients().begin()).first;
+
+    std::cout << "Welcome, " << name << " you can now login with the username " << username << "\n";
+
 }
 
 void Interface::readNewCollaboratorData(bool &running) {
@@ -227,7 +276,6 @@ void Interface::readNewCollaboratorData(bool &running) {
     std::vector<std::string> services{};
 
     std::cout << "Name ? "; std::cin.ignore(9999, '\n'); std::getline(std::cin, name, '\n');
-    std::cout << "PEAD NAME " << name << "\n\n";
 
     std::cout << "Pro ? [yes/no] "; std::cin >> pro;
     while (pro != "yes" && pro != "no") {
@@ -240,11 +288,11 @@ void Interface::readNewCollaboratorData(bool &running) {
     Menu pickServices("Pick your services", {{"Choose from the HouseMaster services", [&](){
         while (running) {
             std::string service = selectService(running);
-            if (service.empty()) services.push_back(service);
+            if (!service.empty()) services.push_back(service);
         }
     }}, {"Add a new one", [&](){
         std::string serviceName = readNewServiceData(running);
-        services.push_back(serviceName);
+        if (!serviceName.empty()) services.push_back(serviceName);
 
     }}});
 
@@ -309,7 +357,6 @@ std::string Interface::selectCollab(bool &running) {
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : collabs) {
         options.insert(std::pair<std::string, std::function<void()>>(_houseMaster.getCollaborators()[i.first]->getName(), [&selection, &i](){
-            std::cout << "Selected " << i.first << "\n";
             selection = i.first;
         }));
     }
@@ -353,11 +400,11 @@ void Interface::show(const Collaborator &collaborator) {
 
 
 void Interface::show(Intervention &intervention) {
-    intervention.calculateCost();
     std::cout << " __________HOUSE MASTER__________ " << std::endl;
     std::cout << "| " << std::setw(30) << std::right << intervention.getService()->getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "| [" << "Starting at" << "] " << std::setw(16) << std::right << intervention.getStartingTime().dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Ending at" << "] " << std::setw(16) << std::right << intervention.getEndTime().dateToStr() << " |" << std::endl;
     std::cout << "| [" << "Cost" << "] " << std::setw(19) << std::right << intervention.getCost() << " |" << std::endl;
     std::cout << "| [" << "Collaborator" << "] " << std::setw(15) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
@@ -365,6 +412,60 @@ void Interface::show(Intervention &intervention) {
     std::cout << "|________________________________|" << std::endl;
     std::cin.ignore();
 }
+
+void Interface::showPayment(Intervention *intervention) {
+    float cost = intervention->getCost();
+    auto *client = dynamic_cast<Client*> (_user);
+    std::cout << " __________HOUSE MASTER__________ " << std::endl;
+    std::cout << "| " << std::setw(30) << std::right << intervention->getService()->getName() << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [" << "Client Name" << "] " << std::setw(16) << std::right << client->getName() << " |" << std::endl;
+    std::cout << "| [" << "Client NIF" << "] " << std::setw(16) << std::right << client->getNif() << " |" << std::endl;
+    std::cout << "| [" << "Total cost" << "] " << std::setw(16) << std::right << cost << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [Enter] Confirm                |" << std::endl;
+    std::cout << "|________________________________|" << std::endl;
+    std::cin.ignore();
+}
+
+Classification Interface::readClassification(bool &running) {
+    Classification classification{};
+    Menu classifications("Review intervention", {{"Unreliable", [&classification](){
+        classification = unreliable;
+    }}, {"Clumsy", [&classification](){
+        classification = clumsy;
+    }}, {"Gets it done", [&classification] () {
+        classification = getsItDone;
+    }}, {"Hardworking", [&classification](){
+        classification = hardWorking;
+    }}, {"Attentive", [&classification](){
+        classification = attentive;
+    }}, {"Savior", [&classification](){
+        classification = savior;
+    }}});
+    classifications.show();
+    classifications.select();
+    classifications.execute(running);
+    return classification;
+}
+
+HouseMaster Interface::getHouseMasterState() const {
+    return _houseMaster;
+}
+
+void Interface::showFinances() const {
+    float money = _houseMaster.getEarnings();
+    std::cout << " __________HOUSE MASTER__________ " << std::endl;
+    std::cout << "| " << std::setw(30) << std::right << "HouseMaster finances"<< " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [" << "Current Balance" << "] " << std::setw(16) << std::right << money << " |" << std::endl;
+    std::cout << "|                                |" << std::endl;
+    std::cout << "| [Enter] Confirm                |" << std::endl;
+    std::cout << "|________________________________|" << std::endl;
+    std::cin.ignore();
+}
+
+
 
 
 

@@ -407,7 +407,7 @@ void HouseMaster::assignColaborator(Intervention *intervention,
 void HouseMaster::writeCollabsInfo()
 {
     std::ofstream collabFile;
-    collabFile.open("../../data/CollabsEnd.txt");
+    collabFile.open("../../data/collabs.txt");
     if (collabFile.is_open())
     {
         auto collab_it = _collaborators.begin();
@@ -431,7 +431,7 @@ void HouseMaster::writeCollabsInfo()
 
 void HouseMaster::writeClientsInfo()
 {
-    std::ofstream clientsFile("../../data/ClientsEnd.txt");
+    std::ofstream clientsFile("../../data/clients.txt");
     if (clientsFile.is_open())
     {
         auto client_it = _clients.begin();
@@ -449,14 +449,15 @@ void HouseMaster::writeClientsInfo()
 
 void HouseMaster::writeServicesInfo()
 {
-    std::ofstream servicesFile("../../data/ServicesEnd.txt");
+    std::ofstream servicesFile("../../data/services.txt");
     if (servicesFile.is_open())
     {
         auto service_it = _availableServices.begin();
         while (service_it != _availableServices.end())
         {
-            servicesFile << service_it->second->getName() << "," << service_it->second->getPro() << "," <<
-            service_it->second->getBasePrice() << "," << service_it->second->getDuration().dateToStr() << '\n';
+            servicesFile << service_it->second->getName() << ",";
+            if (service_it->second->getPro()) {servicesFile << "yes";} else {servicesFile << "no";}
+            servicesFile << "," << service_it->second->getBasePrice() << "," << service_it->second->getDuration().durationToStr() << '\n';
             service_it++;
         }
         servicesFile.close();
@@ -466,7 +467,7 @@ void HouseMaster::writeServicesInfo()
 
 void HouseMaster::writeInterventionsInfo()
 {
-    std::ofstream interventionsFile("../../data/InterventionsUpdate.txt", std::ios_base::app);
+    std::ofstream interventionsFile("../../data/history.txt", std::ios_base::app);
     time_t timeToday;
     time (&timeToday);
     interventionsFile << "\n\n" << asctime(localtime(&timeToday)) << "\n";
@@ -475,7 +476,7 @@ void HouseMaster::writeInterventionsInfo()
         auto int_it = _interventions.begin();
         while (int_it != _interventions.end())
         {
-            interventionsFile << "Service: " << (*int_it)->getService() << ", from " << (*int_it)->getStartingTime().dateToStr()
+            interventionsFile << "Service: " << (*int_it)->getService()->getName() << ", from " << (*int_it)->getStartingTime().dateToStr()
             << " to " << (*int_it)->getEndTime().dateToStr() << ", to client " << (*int_it)->getClientId() << " done by " << (*int_it)->getCollabId()
             << ", cost: " << (*int_it)->getCost() << '\n';
             int_it++;
@@ -487,4 +488,8 @@ void HouseMaster::writeInterventionsInfo()
 
 void HouseMaster::markAsComplete(Intervention *intervention) {
     intervention->setProcessState(Complete);
+}
+
+float HouseMaster::getEarnings() const {
+    return _earnings;
 }

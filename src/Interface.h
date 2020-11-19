@@ -27,12 +27,17 @@ public:
     void show(const Service& service);
     void show(const Collaborator& collaborator);
     void show(Intervention& intervention);
+    void showPayment(Intervention* intervention);
+    Classification readClassification(bool &running);
     void adminOperations(bool &running);
     std::string selectCollab(bool &running);
     void readNewCollaboratorData(bool &running);
     std::string readNewServiceData(bool &running);
     Intervention* selectActiveIntervention(bool &running);
     class NonexistentRole;
+    HouseMaster getHouseMasterState() const;
+    void showFinances() const;
+    void readNewClientData();
 private:
     HouseMaster _houseMaster;
     Individual *_user;

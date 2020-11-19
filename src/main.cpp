@@ -12,13 +12,10 @@ int main() {
     while (running) {
         i1.selectRole(running);
     }
-
-    /*
+    h1 = i1.getHouseMasterState();
     h1.writeClientsInfo();
     h1.writeServicesInfo();
     h1.writeCollabsInfo();
     h1.writeInterventionsInfo();
-    */
-
     return 0;
 }
