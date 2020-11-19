@@ -1,9 +1,9 @@
-aaaaaaaaaaing,no,2,04h0
-Painting,yes,34,12h0
-desmontar um computador,no,4,02h0
-jantar na cantina as 18h30,no,2.7,01h0
-ajudar os amiguinhos com amat,no,3,03h0
-andar a correr atras de uma princesa ou la o que e,no,1,04h0
-canalizador,yes,5,03h0
-montar um carro do nada,no,2.5,10h0
-ajudar os amiguinhos com fisica,no,3,02h30
+ajudar os amiguinhos com fisica,no,3,02h30,default
+montar um carro do nada,no,2.5,10h0,default
+canalizador,yes,5,03h0,default
+andar a correr atras de uma princesa ou la o que e,no,1,04h0,default
+ajudar os amiguinhos com amat,no,3,03h0,default
+jantar na cantina as 18h30,no,2.7,01h0,default
+desmontar um computador,no,4,02h0,default
+Painting,yes,34,12h0,painting
+aaaaaaaaaaing,no,2,04h0,default

@@ -47,12 +47,11 @@ float Painting::calculatePrice() {
 
 Intervention::Intervention(const date& appointment, const Service& type, bool forcePro, unsigned int nrOfRooms) :
         _startingTime(appointment), _type(type), _forcePro(forcePro), _state(Scheduled), _cost(), _paid(false){
-    if (_type.getName() == "Painting"){
-        if (nrOfRooms == 0) {}
-        else {
-            auto *ptr = dynamic_cast<Painting *>(&_type);
-            ptr->setRoomNumber(nrOfRooms);
-        }
+
+    Service *sv = new Service(type);
+    Painting *painting = dynamic_cast<Painting*>(sv);
+    if (painting) {
+        painting->setRoomNumber(nrOfRooms);
     }
 }
 

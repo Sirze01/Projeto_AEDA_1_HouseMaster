@@ -105,6 +105,8 @@ private:
     std::unordered_map<std::string, Collaborator*> _collaborators;
     std::vector<Intervention*> _interventions;
     float _earnings;
+
+    void addAvailablePaintService(const std::string &name, bool pro, float basePrice, duration duration);
 };
 
 // Must add in the cpp also the definition of the Client::requestIntervention method to complete the forward declaration

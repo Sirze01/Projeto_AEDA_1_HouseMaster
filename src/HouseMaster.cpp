@@ -89,10 +89,16 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         std::string durationStr;
         std::getline(lss, durationStr, ',');
         duration duration(durationStr);
+        // category
+        std::string category{};
+        std::getline(lss, category, ',');
+        if (category=="default") {
+            addAvailableService(name, pro, price, duration);
+        } else if (category=="painting") {
+            addAvailablePaintService(name, pro, price, duration);
+        }
 
         // check if everything is valid, if not throw an exception
-
-        addAvailableService(name, pro, price, duration);
     }
 
     // read collaborators.txt
@@ -145,6 +151,15 @@ void HouseMaster::addAvailableService(const std::string &name, bool pro, float b
         throw ExistentService("A service with the same name already exists!");
     else {
         auto service = new Service(name, pro, basePrice, duration);
+        _availableServices.insert({name, service});
+    }
+}
+
+void HouseMaster::addAvailablePaintService(const std::string &name, bool pro, float basePrice, duration duration) {
+    if (_availableServices.find(name) != _availableServices.end())
+        throw ExistentService("A service with the same name already exists!");
+    else {
+        Painting* service = new Painting(name, pro, basePrice, duration);
         _availableServices.insert({name, service});
     }
 }
@@ -447,17 +462,23 @@ void HouseMaster::writeClientsInfo()
     else throw UnableToWriteFile("Unable to write in clients' file");
 }
 
-void HouseMaster::writeServicesInfo()
-{
+void HouseMaster::writeServicesInfo() {
     std::ofstream servicesFile("../../data/services.txt");
-    if (servicesFile.is_open())
-    {
+    if (servicesFile.is_open()) {
         auto service_it = _availableServices.begin();
-        while (service_it != _availableServices.end())
-        {
+        while (service_it != _availableServices.end()) {
+
+            Service* sv = (*service_it).second;
+            Painting* pt = dynamic_cast<Painting*>(sv);
             servicesFile << service_it->second->getName() << ",";
             if (service_it->second->getPro()) {servicesFile << "yes";} else {servicesFile << "no";}
-            servicesFile << "," << service_it->second->getBasePrice() << "," << service_it->second->getDuration().durationToStr() << '\n';
+            servicesFile << "," << service_it->second->getBasePrice() << "," << service_it->second->getDuration().durationToStr();
+            if (pt) {
+                servicesFile << ",painting";
+            } else {
+                servicesFile << ",default";
+            }
+            servicesFile << '\n';
             service_it++;
         }
         servicesFile.close();

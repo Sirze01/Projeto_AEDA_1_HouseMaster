@@ -38,6 +38,7 @@ public:
     HouseMaster getHouseMasterState() const;
     void showFinances() const;
     void readNewClientData();
+    unsigned readNumberOfRooms();
 private:
     HouseMaster _houseMaster;
     Individual *_user;

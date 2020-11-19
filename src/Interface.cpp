@@ -108,7 +108,13 @@ void Interface::clientOperations(bool &running) {
             std::string service = selectService(innerRunning);
             if (!service.empty()) {
                 date interventionDate = readInterventionDate();
-                client->requestIntervention(_houseMaster, interventionDate, service, false);
+                Service* sv = _houseMaster.getAvailableServices()[service];
+                if (dynamic_cast<Painting*>(sv)) {
+                    unsigned numberOfRooms = readNumberOfRooms();
+                    client->requestIntervention(_houseMaster, interventionDate, service, false, numberOfRooms);
+                } else {
+                    client->requestIntervention(_houseMaster, interventionDate, service, false);
+                }
             }
         }
     }}, {"Browse Services", [&]() {
@@ -471,6 +477,14 @@ void Interface::showFinances() const {
     std::cout << "| [Enter] Confirm                |" << std::endl;
     std::cout << "|________________________________|" << std::endl;
     std::cin.ignore();
+}
+
+unsigned Interface::readNumberOfRooms() {
+    unsigned rooms{};
+    std::cout << "How many rooms to paint?\n";
+    std::cin >> rooms;
+    // TODO input validation eewwwwww
+    return rooms;
 }
 
 
