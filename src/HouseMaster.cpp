@@ -401,7 +401,6 @@ Individual *HouseMaster::findByUsername(const std::string &username) {
     } else {
         throw NonexistentUsername("This username does not exist!");
         // throw except
-
     }
     return nullptr;
 }

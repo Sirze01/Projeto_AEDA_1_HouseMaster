@@ -67,14 +67,25 @@ void Interface::adminLogin() {
 
 void Interface::userLogin() {
     std::string username{};
-    std::cout << "Username : "; std::cin >> username;
-    while (!readRole(username)) {
-        std::cout << "Login Failed, try again\n";
-        std::cout << "Username : "; std::cin >> username;
-    }
+    std::cout << "Username : ";
+    std::cin >> username;
+    bool done;
+    do
+    {
+        try {
+            done = true;
+            readRole(username);
+        }
+        catch (const NonexistentRole &e)
+        {
+            done = false;
+            std::cout << e.what() << " Please try again\n";
+            std::cout << "Username : ";
+            std::cin >> username;
+        }
+    } while (!done);
     _user = _houseMaster.findByUsername(username);
 }
-
 
 bool Interface::readRole(const std::string &username) {
     std::string roleName{};
