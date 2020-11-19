@@ -140,7 +140,6 @@ void Interface::clientOperations(bool &running) {
             Intervention* intervention = selectActiveIntervention(innerRunning);
             if (intervention) {
                 Menu activeInterventionMenu("Active intervention", {{"Mark as done", [&](){
-                    // mark as complete, prompt client to pay, prompt client to classify
                     _houseMaster.markAsComplete(intervention);
                     showPayment(intervention);
                     std::cin.ignore();
@@ -264,7 +263,12 @@ void Interface::adminOperations(bool &running) {
         }
     }}, {"See HouseMaster finances", [&](){
         showFinances();
+        std::cin.ignore();
     }}, {"Fire Collaborator", [&](){
+        std::string collabName = selectCollab(innerRunning);
+        if (!collabName.empty()) {
+            _houseMaster.removeCollaborator(collabName);
+        }
         // TODO
     }}});
     adminMenu.show();
