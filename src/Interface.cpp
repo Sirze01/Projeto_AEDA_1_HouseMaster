@@ -289,7 +289,7 @@ void Interface::readNewClientData() {
     std::cout << "NIF ? "; std::cin >> nif; // TODO input validation
 
     _houseMaster.addClient(nif, name, premium);
-    std::string username = (*_houseMaster.getClients().begin()).first;
+    std::string username = (*_houseMaster.getClients().rbegin()).first;
 
     std::cout << "Welcome, " << name << " you can now login with the username " << username << "\n";
 

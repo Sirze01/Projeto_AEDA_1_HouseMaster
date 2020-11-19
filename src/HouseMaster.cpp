@@ -143,7 +143,7 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
     }
 }
 
-std::unordered_map<std::string, Collaborator *> &HouseMaster::getCollaborators() {
+std::map<std::string, Collaborator *> &HouseMaster::getCollaborators() {
     return _collaborators;
 }
 
@@ -317,7 +317,7 @@ void HouseMaster::removeClient(const std::string &clientId) {
 
 }
 
-std::unordered_map<std::string, Client *> &HouseMaster::getClients() {
+std::map<std::string, Client *> &HouseMaster::getClients() {
     return _clients;
 }
 

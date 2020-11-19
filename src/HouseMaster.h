@@ -34,10 +34,10 @@ public:
     ~HouseMaster() = default;
     /**A normal member taking no arguments and returning an unordered map of Collaborators
      * \return Unordered map of collaborators*/
-    std::unordered_map<std::string, Collaborator *>& getCollaborators();
+    std::map<std::string, Collaborator *> & getCollaborators();
     /**A normal member taking no arguments and returning an unordered map of Clients
      * \return Unordered map of clients*/
-    std::unordered_map<std::string, Client *>& getClients();
+    std::map<std::string, Client *> & getClients();
     /**A normal member taking no arguments and returning a vector of interventions
      * \return A vector with all the interventions ordered by the time of the request*/
     std::vector<Intervention *>& getInterventions();
@@ -101,9 +101,9 @@ public:
     void writeFinantialInfo() const;
 private:
     std::unordered_map<std::string, Service*> _availableServices;
-    std::unordered_map<std::string, Client*> _clients;
+    std::map<std::string, Client*> _clients;
     std::unordered_map<std::string, std::string> _usernameMap;
-    std::unordered_map<std::string, Collaborator*> _collaborators;
+    std::map<std::string, Collaborator*> _collaborators;
     std::vector<Intervention*> _interventions;
     float _earnings;
 
