@@ -269,7 +269,6 @@ void Interface::adminOperations(bool &running) {
         if (!collabName.empty()) {
             _houseMaster.removeCollaborator(collabName);
         }
-        // TODO
     }}});
     adminMenu.show();
     adminMenu.select();
@@ -415,45 +414,46 @@ Intervention *Interface::selectActiveIntervention(bool &running) {
 
 void Interface::show(const Collaborator &collaborator) {
     std::string pro = collaborator.isPro() ? "yes" : "no";
-    std::cout << " __________HOUSE MASTER__________ " << std::endl;
+    std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
     std::cout << "| " << std::setw(30) << std::right << collaborator.getName() << " |" << std::endl;
-    std::cout << "|                                |" << std::endl;
-    std::cout << "| [" << "ID" << "] " << std::setw(16) << std::right << collaborator.getId() << " |" << std::endl;
-    std::cout << "| [" << "Score" << "] " << std::setw(19) << std::right << collaborator.getScore() << " |" << std::endl;
-    std::cout << "| [" << "Professional" << "] " << std::setw(15) << std::right << pro << " |" << std::endl;
-    std::cout << "|                                |" << std::endl;
-    std::cout << "| [Enter] Go Back                |" << std::endl;
-    std::cout << "|________________________________|" << std::endl;
+    std::cout << "|                                                    |" << std::endl;
+    std::cout << "| [" << "ID" << "] " << std::setw(36) << std::right << collaborator.getId() << " |" << std::endl;
+    std::cout << "| [" << "Score" << "] " << std::setw(39) << std::right << collaborator.getScore() << " |" << std::endl;
+    std::cout << "| [" << "Professional" << "] " << std::setw(35) << std::right << pro << " |" << std::endl;
+    std::cout << "| [" << "Earnings" << "] " << std::setw(35) << std::right << collaborator.getEarnings() << " |" << std::endl;
+    std::cout << "|                                                    |" << std::endl;
+    std::cout << "| [Enter] Go Back                                    |" << std::endl;
+    std::cout << "|____________________________________________________|" << std::endl;
     std::cin.ignore();
 }
 
 
 void Interface::show(Intervention &intervention) {
-    std::cout << " __________HOUSE MASTER__________ " << std::endl;
-    std::cout << "| " << std::setw(30) << std::right << intervention.getService()->getName() << " |" << std::endl;
-    std::cout << "|                                |" << std::endl;
-    std::cout << "| [" << "Starting at" << "] " << std::setw(16) << std::right << intervention.getStartingTime().dateToStr() << " |" << std::endl;
-    std::cout << "| [" << "Ending at" << "] " << std::setw(16) << std::right << intervention.getEndTime().dateToStr() << " |" << std::endl;
-    std::cout << "| [" << "Cost" << "] " << std::setw(19) << std::right << intervention.getCost() << " |" << std::endl;
-    std::cout << "| [" << "Collaborator" << "] " << std::setw(15) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
-    std::cout << "|                                |" << std::endl;
-    std::cout << "| [Enter] Go Back                |" << std::endl;
-    std::cout << "|________________________________|" << std::endl;
+    std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
+    std::cout << "| " << std::setw(50) << std::right << intervention.getService()->getName() << " |" << std::endl;
+    std::cout << "|                                                     |" << std::endl;
+    std::cout << "| [" << "Starting at" << "] " << std::setw(36) << std::right << intervention.getStartingTime().dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Ending at" << "] " << std::setw(36) << std::right << intervention.getEndTime().dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Cost" << "] " << std::setw(39) << std::right << intervention.getCost() << " |" << std::endl;
+    std::cout << "| [" << "Collaborator" << "] " << std::setw(35) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
+    std::cout << "|                                                     |" << std::endl;
+    std::cout << "| [Enter] Go Back                                     |" << std::endl;
+    std::cout << "|_____________________________________________________|" << std::endl;
     std::cin.ignore();
 }
 
 void Interface::showPayment(Intervention *intervention) {
     float cost = intervention->getCost();
     auto *client = dynamic_cast<Client*> (_user);
-    std::cout << " __________HOUSE MASTER__________ " << std::endl;
-    std::cout << "| " << std::setw(30) << std::right << intervention->getService()->getName() << " |" << std::endl;
+    std::cout << " ___________________HOUSE MASTER____________________ " << std::endl;
+    std::cout << "| " << std::setw(50) << std::right << intervention->getService()->getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
-    std::cout << "| [" << "Client Name" << "] " << std::setw(16) << std::right << client->getName() << " |" << std::endl;
-    std::cout << "| [" << "Client NIF" << "] " << std::setw(16) << std::right << client->getNif() << " |" << std::endl;
-    std::cout << "| [" << "Total cost" << "] " << std::setw(16) << std::right << cost << " |" << std::endl;
-    std::cout << "|                                |" << std::endl;
-    std::cout << "| [Enter] Confirm                |" << std::endl;
-    std::cout << "|________________________________|" << std::endl;
+    std::cout << "| [" << "Client Name" << "] " << std::setw(36) << std::right << client->getName() << " |" << std::endl;
+    std::cout << "| [" << "Client NIF" << "] " << std::setw(36) << std::right << client->getNif() << " |" << std::endl;
+    std::cout << "| [" << "Total cost" << "] " << std::setw(36) << std::right << cost << " |" << std::endl;
+    std::cout << "|                                                   |" << std::endl;
+    std::cout << "| [Enter] Confirm                                   |" << std::endl;
+    std::cout << "|___________________________________________________|" << std::endl;
     std::cin.ignore();
 }
 
@@ -484,13 +484,13 @@ HouseMaster Interface::getHouseMasterState() const {
 
 void Interface::showFinances() const {
     float money = _houseMaster.getEarnings();
-    std::cout << " __________HOUSE MASTER__________ " << std::endl;
-    std::cout << "| " << std::setw(30) << std::right << "HouseMaster finances"<< " |" << std::endl;
-    std::cout << "|                                |" << std::endl;
-    std::cout << "| [" << "Current Balance" << "] " << std::setw(16) << std::right << money << " |" << std::endl;
-    std::cout << "|                                |" << std::endl;
-    std::cout << "| [Enter] Confirm                |" << std::endl;
-    std::cout << "|________________________________|" << std::endl;
+    std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
+    std::cout << "| " << std::setw(50) << std::right << "HouseMaster finances"<< " |" << std::endl;
+    std::cout << "|                                                    |" << std::endl;
+    std::cout << "| [" << "Current Balance" << "] " << std::setw(32) << std::right << money << " |" << std::endl;
+    std::cout << "|                                                    |" << std::endl;
+    std::cout << "| [Enter] Confirm                                    |" << std::endl;
+    std::cout << "|____________________________________________________|" << std::endl;
     std::cin.ignore();
 }
 
@@ -501,7 +501,6 @@ unsigned Interface::readNumberOfRooms() {
     // TODO input validation eewwwwww
     return rooms;
 }
-
 
 
 
