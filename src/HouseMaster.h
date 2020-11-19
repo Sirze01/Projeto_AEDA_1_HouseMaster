@@ -31,7 +31,7 @@ public:
     /**HouseMaster's constructor using files*/
     HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services);
     /**HouseMaster's destructor*/
-    //~HouseMaster();
+    ~HouseMaster() = default;
     /**A normal member taking no arguments and returning an unordered map of Collaborators
      * \return Unordered map of collaborators*/
     std::unordered_map<std::string, Collaborator *>& getCollaborators();
