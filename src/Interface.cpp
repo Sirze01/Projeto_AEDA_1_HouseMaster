@@ -86,7 +86,15 @@ bool Interface::readRole(const std::string &username) {
     if (roleName == "collab") role = collaborator;
     else if (roleName == "client") role = client;
     else {
-        throw NonexistentRole("Role does not exist!");
+        try
+        {
+            throw NonexistentRole("Role does not exist!");
+        }
+        catch (...)
+        {
+            std::cout << "You inserted an invalid role, please try again:\n";
+            userLogin();
+        }
     }
     _role = role;
     return true;
