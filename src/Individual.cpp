@@ -98,7 +98,7 @@ bool Collaborator::operator<(const Collaborator &col2) const{
     return _score < col2._score;
 }
 
-void Collaborator::addService(std::string service) {
+void Collaborator::addService(const std::string& service) {
     _services.push_back(service);
 }
 

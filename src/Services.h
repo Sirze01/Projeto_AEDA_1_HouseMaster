@@ -16,7 +16,7 @@ private:
     float _basePrice;
     duration _duration;
 public:
-    Service() = default;
+    Service();
     Service(std::string name, bool pro, float basePrice, const duration &duration);
     std::string getName() const;
     bool getPro() const;
@@ -76,11 +76,13 @@ public:
 
     void setProcessState(processState state);
 
-    bool conflictsWith(date start, duration duration);
+    bool conflictsWith(date start, duration duration) const;
 
     void calculateCost(); // Calculates cost to the client, earnings to housemaster and collab
 
     float getCost() const;
+
+    bool getPaid() const;
 
     date getEndTime() const;
 
