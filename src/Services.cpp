@@ -28,14 +28,14 @@ float Service::calculatePrice() {
 
 Painting::Painting(std::string name, bool pro, float basePrice, const duration &duration) : Service(std::move(name), pro, basePrice, duration), _roomNumber(0) {}
 
-void Painting::setRoomNumber(int number) {
+void Painting::setRoomNumber(unsigned int number) {
     _roomNumber = number;
 }
 
 float Painting::calculatePrice() {
     float price = getBasePrice();
     float sum = 0;
-    for(int n = 1; n < _roomNumber + 1; n++){
+    for(unsigned int n = 1; n < _roomNumber + 1; n++){
         if(n > 1 && price >= MinimumPricePerRoom) {
             price = float(ROOM_DISCOUNT) * price;
         }
@@ -45,8 +45,8 @@ float Painting::calculatePrice() {
 }
 
 
-Intervention::Intervention(const date& appointment, Service  type, bool forcePro, int nrOfRooms) :
-        _startingTime(appointment), _type(std::move(type)), _forcePro(forcePro), _state(Scheduled), _cost(), _paid(false){
+Intervention::Intervention(const date& appointment, const Service& type, bool forcePro, unsigned int nrOfRooms) :
+        _startingTime(appointment), _type(type), _forcePro(forcePro), _state(Scheduled), _cost(), _paid(false){
     if (_type.getName() == "Painting"){
         if (nrOfRooms == 0) {}
         else {

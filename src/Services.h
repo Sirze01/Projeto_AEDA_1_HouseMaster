@@ -18,6 +18,7 @@ private:
 public:
     Service();
     Service(std::string name, bool pro, float basePrice, const duration &duration);
+    virtual ~Service() = default;
     std::string getName() const;
     bool getPro() const;
     float getBasePrice() const;
@@ -27,10 +28,11 @@ public:
 
 class Painting : public Service{
 private:
-    int _roomNumber;
+    unsigned int _roomNumber;
 public:
     Painting(std::string name, bool pro, float basePrice, const duration &duration);
-    void setRoomNumber(int number);
+    ~Painting() override = default;
+    void setRoomNumber(unsigned int number);
     float calculatePrice() override;
 };
 
@@ -56,7 +58,9 @@ private:
 
 public:
 
-    Intervention(const date &appointment, Service type, bool forcePro, int nrOfRooms = 0);
+    Intervention(const date &appointment, const Service& type, bool forcePro, unsigned int nrOfRooms = 0);
+
+    ~Intervention() = default;
 
     date getStartingTime() const;
 

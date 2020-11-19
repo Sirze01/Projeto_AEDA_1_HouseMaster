@@ -29,7 +29,7 @@ std::vector<Intervention*> Individual::getAssociatedActiveInterventions(HouseMas
     return hm.getAssociatedActiveInterventions(this->getId());
 }
 
-void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int nrOfRooms) {
+void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int nrOfRooms) const{
     hm.assignColaborator(hm.addIntervention(_date, type, forcePro, this->getId(), nrOfRooms), hm.sortCollaboratorsByScore());
 }
 

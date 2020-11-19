@@ -15,6 +15,8 @@ public:
 
     Individual();
 
+    virtual ~Individual() = 0;
+
     explicit Individual(std::string name);
 
     virtual std::string getId() const = 0;
@@ -48,6 +50,8 @@ enum Classification {
 class Collaborator : public Individual {
 public:
     Collaborator(std::vector<std::string> functions, const std::string &name, bool pro);
+
+    ~Collaborator() override = default;
 
     std::vector<std::string> getServices();
 
@@ -103,17 +107,19 @@ public:
 
     Client(unsigned int nif, const std::string &name, bool premium);
 
+    ~Client() override = default;
+
     unsigned int getNif();
 
     bool isPremium() const;
 
     std::string getId() const override;
 
-    void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int nrOfRooms=0);
+    void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int nrOfRooms=0) const;
 
     static void cancelIntervention(Intervention* intervention);
 
-    void classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification);
+    static void classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification);
 
     bool operator== (const Client& ind2) const;
 
