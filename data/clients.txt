@@ -1,4 +1,6 @@
-sonso,22331122,no
-socorro,453455323,no
-aaaaaaa,23421234,yes
+outro xanxo,234234,no
+xanxo,123123,no
 cliente de teste,323432234,no
+aaaaaaa,23421234,yes
+socorro,453455323,no
+sonso,22331122,no

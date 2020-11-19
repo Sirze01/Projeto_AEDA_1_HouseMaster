@@ -10,14 +10,14 @@ Interface::Interface(HouseMaster houseMaster) : _houseMaster(std::move(houseMast
 
 void Interface::selectRole(bool &running) {
     bool innerRunning = true;
-    Menu roles("Choose your role", {{"Admin", [&]() {
+    Menu roles("Choose your role", {{"Login Admin", [&]() {
         std::cout << "Welcome to HouseMaster. You have ADMIN privilege.\n";
         adminLogin();
         while (innerRunning) {
             adminOperations(innerRunning);
         }
     }},
-    {"User (Collaborator/Client)", [&]() {
+    {"Login User (Collab/Client)", [&]() {
         userLogin();
         std::cout << "Login succeeded for " << _user->getName() << "\n";
         if (_role == client) {
@@ -31,6 +31,10 @@ void Interface::selectRole(bool &running) {
         }
 
 
+    }}, {"Register Client", [&](){
+        readNewClientData();
+        std::cout << "Press ENTER to continue\n";
+        std::cin.ignore();
     }}});
 
     roles.show();
@@ -57,7 +61,7 @@ void Interface::adminLogin() {
             std::cin >> password;
         }
     }
-    std::cout << "Too many tries! No admin for you. :^) Logging out...\n";
+    std::cout << "Too many tries! No admin for you.  Logging out...\n";
     exit(0);
 }
 
@@ -75,9 +79,9 @@ void Interface::userLogin() {
 bool Interface::readRole(const std::string &username) {
     std::string roleName{};
     Role role{};
-    for (const auto &i : username) {  // muito xanxo melhorar
-        if (isalpha(i)) roleName += i;  // ai isto ta xanxo que fode e nem funciona bem
-        else break;
+    for (const auto &i : username) {
+        if (isalpha(i)) roleName += i;  // TODO ai isto ta xanxo que fode e nem funciona bem
+        else break;                     // TODO apagar este comentário
     }
     if (roleName == "collab") role = collaborator;
     else if (roleName == "client") role = client;
@@ -195,7 +199,6 @@ std::string Interface::selectService(bool &running) {
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : services) {
         options.insert(std::pair<std::string, std::function<void()>>(i.first, [&selection, &i](){
-            std::cout << "Selected " << i.first << "\n";
             selection = i.first;
         }));
     }
@@ -236,10 +239,35 @@ void Interface::adminOperations(bool &running) {
         }
     }}, {"See HouseMaster finances", [&](){
         showFinances();
+    }}, {"Fire Collaborator", [&](){
+        // TODO
     }}});
     adminMenu.show();
     adminMenu.select();
     adminMenu.execute(running);
+}
+
+void Interface::readNewClientData() {
+    std::string name{}, premiumStr{};
+    unsigned nif{};
+
+    std::cout << "Name ? "; std::cin.ignore(9999, '\n'); std::getline(std::cin, name, '\n');
+
+    std::cout << "Premium ? [yes/no] "; std::cin >> premiumStr;
+    while (premiumStr != "yes" && premiumStr != "no") {
+        std::cout << R"(Invalid choice. Make sure you chose one of "yes" or "no" )" << std::endl;
+        std::cin >> premiumStr;
+    }
+
+    bool premium = premiumStr == "yes";
+
+    std::cout << "NIF ? "; std::cin >> nif; // TODO input validation
+
+    _houseMaster.addClient(nif, name, premium);
+    std::string username = (*_houseMaster.getClients().begin()).first;
+
+    std::cout << "Welcome, " << name << " you can now login with the username " << username << "\n";
+
 }
 
 void Interface::readNewCollaboratorData(bool &running) {
@@ -436,6 +464,8 @@ void Interface::showFinances() const {
     std::cout << "|________________________________|" << std::endl;
     std::cin.ignore();
 }
+
+
 
 
 

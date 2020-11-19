@@ -37,6 +37,7 @@ public:
     class NonexistentRole;
     HouseMaster getHouseMasterState() const;
     void showFinances() const;
+    void readNewClientData();
 private:
     HouseMaster _houseMaster;
     Individual *_user;
