@@ -1,8 +1,0 @@
-Service: Paint a room, from 12/12/2012  00:0 to 12/12/2012  02:30, to client client0 done by collab2, cost: 36
-
-Fri Nov 20 01:26:54 2020
-
-
-
-Fri Nov 20 01:26:58 2020
-

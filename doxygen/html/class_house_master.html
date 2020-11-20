@@ -77,11 +77,11 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_existent_service.html">ExistentService</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_inexistent_client.html">InexistentClient</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_inexistent_client.html">NonexistentClient</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_inexistent_collab.html">InexistentCollab</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_inexistent_collab.html">NonexistentCollab</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_inexistent_service.html">InexistentService</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_inexistent_service.html">NonexistentService</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_nonexistent_username.html">NonexistentUsername</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,7 +144,7 @@ std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * 
 std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAssociatedActiveInterventions</b> (const std::string &amp;id)</td></tr>
 <tr class="separator:a099088f959a1f4e05b312b3d3570382e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bbc426849e05f79dff7c1ccf9af6078"><td class="memItemLeft" align="right" valign="top"><a id="a9bbc426849e05f79dff7c1ccf9af6078"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>assignColaborator</b> (<a class="el" href="class_intervention.html">Intervention</a> *, const std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt;&gt; &amp;)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>assignCollaborator</b> (<a class="el" href="class_intervention.html">Intervention</a> *, const std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt;&gt; &amp;)</td></tr>
 <tr class="separator:a9bbc426849e05f79dff7c1ccf9af6078"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ac4d93180aab181c5d34b0669fdeec"><td class="memItemLeft" align="right" valign="top"><a id="a05ac4d93180aab181c5d34b0669fdeec"></a>
 std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>sortCollaboratorsByScore</b> ()</td></tr>
@@ -174,7 +174,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>writeInterventionsInf
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae3b3900bec21290dc4f6a84e74c4312a"><td class="memItemLeft" align="right" valign="top"><a id="ae3b3900bec21290dc4f6a84e74c4312a"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>changeinterventionState</b> (<a class="el" href="class_intervention.html">Intervention</a> *intervention, processState state)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>changeInterventionState</b> (<a class="el" href="class_intervention.html">Intervention</a> *intervention, processState state)</td></tr>
 <tr class="separator:ae3b3900bec21290dc4f6a84e74c4312a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05db6d382f28f401549fc327655f5802"><td class="memItemLeft" align="right" valign="top"><a id="a05db6d382f28f401549fc327655f5802"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>changeinterventionStatePayed</b> (<a class="el" href="class_intervention.html">Intervention</a> *intervention)</td></tr>

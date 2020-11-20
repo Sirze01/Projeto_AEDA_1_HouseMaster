@@ -15,46 +15,74 @@ class Interface {
 
 public:
     Interface() = default;
-    explicit Interface(HouseMaster houseMaster);
+
+    explicit Interface(const HouseMaster &houseMaster);
+
     void selectRole(bool &running);
-    void userLogin();
-    bool readRole(const std::string &username);
-    void adminLogin();
-    void clientOperations(bool &running);
-    void collaboratorOperations(bool &running);
-    date readInterventionDate();
-    std::string selectService(bool &running);
-    void show(const Service& service);
-    void show(const Collaborator& collaborator);
-    void show(Intervention& intervention);
-    void showPayment(Intervention* intervention);
-    Classification readClassification(bool &running);
-    void adminOperations(bool &running);
-    std::string selectCollab(bool &running);
-    void readNewCollaboratorData(bool &running);
-    std::string readNewServiceData(bool &running);
-    Intervention* selectActiveIntervention(bool &running);
-    class NonexistentRole;
-    bool isValidNif(unsigned nif);
-    class InvalidNif;
+
     HouseMaster getHouseMasterState() const;
-    void showFinances() const;
-    void readNewClientData();
-    unsigned readNumberOfRooms();
-    void showSortedCollabs();
+
 private:
+    void userLogin();
+
+    void readRole(const std::string &username);
+
+    void adminLogin();
+
+    void clientOperations(bool &running);
+
+    void collaboratorOperations(bool &running);
+
+    static Date readInterventionDate();
+
+    std::string selectService(bool &running);
+
+    static void show(const Service &service);
+
+    static void show(const Collaborator &collaborator);
+
+    void show(Intervention &intervention);
+
+    void showPayment(Intervention *intervention);
+
+    static Classification readClassification(bool &running);
+
+    void adminOperations(bool &running);
+
+    std::string selectCollab(bool &running);
+
+    void readNewCollaboratorData(bool &running);
+
+    std::string readNewServiceData(bool &running);
+
+    Intervention *selectActiveIntervention(bool &running);
+
+    class NonexistentRole;
+
+    static bool isValidNif(unsigned nif);
+
+    class InvalidNif;
+
+    void showFinances() const;
+
+    void readNewClientData();
+
+    static unsigned readNumberOfRooms();
+
+    void showSortedCollabs();
+
     HouseMaster _houseMaster;
-    Individual *_user;
-    Role _role;
+    Individual *_user{};
+    Role _role{};
 };
 
-class Interface::NonexistentRole: public std::logic_error{
+class Interface::NonexistentRole : public std::logic_error {
 public:
-    explicit NonexistentRole (const std::string &error_msg);
+    explicit NonexistentRole(const std::string &error_msg);
 };
 
 
-class Interface::InvalidNif: public std::invalid_argument{
+class Interface::InvalidNif : public std::invalid_argument {
 public:
     explicit InvalidNif(const std::string &error_msg);
 };

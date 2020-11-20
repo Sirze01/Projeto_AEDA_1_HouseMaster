@@ -17,10 +17,10 @@ endif (WIN32)
 include_directories(../src/)
 
 add_library(Projeto_AEDA_1_HouseMaster main.cpp HouseMaster.cpp HouseMaster.h Individual.cpp Individual.h
-            Services.cpp Services.h date.h date.cpp Menu.cpp Menu.h Interface.cpp Interface.h)
+            Services.cpp Services.h Date.h Date.cpp Menu.cpp Menu.h Interface.cpp Interface.h)
 
 add_executable(application main.cpp HouseMaster.cpp HouseMaster.h Individual.cpp Individual.h Services.cpp Services.h
-               date.h date.cpp Menu.cpp Menu.h Interface.cpp Interface.h)
+        Date.h Date.cpp Menu.cpp Menu.h Interface.cpp Interface.h)
 
 target_include_directories(Projeto_AEDA_1_HouseMaster PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

@@ -88,7 +88,7 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">bool</span> colComparer(std::pair&lt;std::string, Collaborator*&gt;&amp; a, std::pair&lt;std::string, Collaborator*&gt;&amp; b);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">bool</span> scoreComparer(std::pair&lt;std::string, Collaborator*&gt;&amp; a, std::pair&lt;std::string, Collaborator*&gt;&amp; b);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_house_master.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_house_master.html">HouseMaster</a> {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
@@ -126,7 +126,7 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> addIntervention(<span class="keyword">const</span> <a class="code" href="structdate.html">date</a>&amp; appointment, <span class="keyword">const</span> std::string&amp; type, <span class="keywordtype">bool</span> forcePro, <span class="keyword">const</span> std::string &amp;clientId);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> changeinterventionState(<a class="code" href="class_intervention.html">Intervention</a>* intervention, processState state);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> changeInterventionState(<a class="code" href="class_intervention.html">Intervention</a>* intervention, processState state);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> changeinterventionStatePayed(<a class="code" href="class_intervention.html">Intervention</a>* intervention);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
@@ -136,7 +136,7 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::vector&lt;Intervention*&gt; getAssociatedActiveInterventions(<span class="keyword">const</span> std::string&amp; <span class="keywordtype">id</span>);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> assignColaborator(<a class="code" href="class_intervention.html">Intervention</a>*, <span class="keyword">const</span> std::vector&lt;std::pair&lt;std::string, Collaborator*&gt;&gt;&amp;);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> assignCollaborator(<a class="code" href="class_intervention.html">Intervention</a>*, <span class="keyword">const</span> std::vector&lt;std::pair&lt;std::string, Collaborator*&gt;&gt;&amp;);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    std::vector&lt;std::pair&lt;std::string, Collaborator*&gt;&gt; sortCollaboratorsByScore();</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
@@ -146,13 +146,13 @@ $(function() {
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">class </span><a class="code" href="class_house_master_1_1_unavailable_appointment.html">UnavailableAppointment</a>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_service.html">InexistentService</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_service.html">NonexistentService</a>;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">class </span><a class="code" href="class_house_master_1_1_existent_service.html">ExistentService</a>;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_collab.html">InexistentCollab</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_collab.html">NonexistentCollab</a>;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_client.html">InexistentClient</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_client.html">NonexistentClient</a>;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">class </span><a class="code" href="class_house_master_1_1_existent_client.html">ExistentClient</a>;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
@@ -187,9 +187,9 @@ $(function() {
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_house_master_1_1_unavailable_appointment.html">UnavailableAppointment</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;};</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="class_house_master_1_1_inexistent_service.html">  119</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_service.html">HouseMaster::InexistentService</a> : <span class="keyword">public</span> std::out_of_range {</div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="class_house_master_1_1_inexistent_service.html">  119</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_service.html">HouseMaster::NonexistentService</a> : <span class="keyword">public</span> std::out_of_range {</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_house_master_1_1_inexistent_service.html">InexistentService</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_house_master_1_1_inexistent_service.html">NonexistentService</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;};</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="class_house_master_1_1_existent_service.html">  124</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_house_master_1_1_existent_service.html">HouseMaster::ExistentService</a> : <span class="keyword">public</span> std::out_of_range {</div>
@@ -197,14 +197,14 @@ $(function() {
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_house_master_1_1_existent_service.html">ExistentService</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;};</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="class_house_master_1_1_inexistent_collab.html">  129</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_collab.html">HouseMaster::InexistentCollab</a> : <span class="keyword">public</span> std::out_of_range{</div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="class_house_master_1_1_inexistent_collab.html">  129</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_collab.html">HouseMaster::NonexistentCollab</a> : <span class="keyword">public</span> std::out_of_range{</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_house_master_1_1_inexistent_collab.html">InexistentCollab</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_house_master_1_1_inexistent_collab.html">NonexistentCollab</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;};</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="class_house_master_1_1_inexistent_client.html">  134</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_client.html">HouseMaster::InexistentClient</a> : <span class="keyword">public</span> std::out_of_range{</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="class_house_master_1_1_inexistent_client.html">  134</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_house_master_1_1_inexistent_client.html">HouseMaster::NonexistentClient</a> : <span class="keyword">public</span> std::out_of_range{</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_house_master_1_1_inexistent_client.html">InexistentClient</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_house_master_1_1_inexistent_client.html">NonexistentClient</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;};</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
 <div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="class_house_master_1_1_existent_client.html">  139</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_house_master_1_1_existent_client.html">HouseMaster::ExistentClient</a> : <span class="keyword">public</span> std::out_of_range{</div>
@@ -235,11 +235,11 @@ $(function() {
 <div class="ttc" id="aclass_service_html"><div class="ttname"><a href="class_service.html">Service</a></div><div class="ttdef"><b>Definition:</b> Services.h:12</div></div>
 <div class="ttc" id="aclass_house_master_1_1_unavailable_appointment_html"><div class="ttname"><a href="class_house_master_1_1_unavailable_appointment.html">HouseMaster::UnavailableAppointment</a></div><div class="ttdef"><b>Definition:</b> HouseMaster.h:114</div></div>
 <div class="ttc" id="aclass_individual_html"><div class="ttname"><a href="class_individual.html">Individual</a></div><div class="ttdef"><b>Definition:</b> Individual.h:13</div></div>
-<div class="ttc" id="aclass_house_master_1_1_inexistent_service_html"><div class="ttname"><a href="class_house_master_1_1_inexistent_service.html">HouseMaster::InexistentService</a></div><div class="ttdef"><b>Definition:</b> HouseMaster.h:119</div></div>
-<div class="ttc" id="aclass_house_master_1_1_inexistent_collab_html"><div class="ttname"><a href="class_house_master_1_1_inexistent_collab.html">HouseMaster::InexistentCollab</a></div><div class="ttdef"><b>Definition:</b> HouseMaster.h:129</div></div>
+<div class="ttc" id="aclass_house_master_1_1_inexistent_service_html"><div class="ttname"><a href="class_house_master_1_1_inexistent_service.html">HouseMaster::NonexistentService</a></div><div class="ttdef"><b>Definition:</b> HouseMaster.h:119</div></div>
+<div class="ttc" id="aclass_house_master_1_1_inexistent_collab_html"><div class="ttname"><a href="class_house_master_1_1_inexistent_collab.html">HouseMaster::NonexistentCollab</a></div><div class="ttdef"><b>Definition:</b> HouseMaster.h:129</div></div>
 <div class="ttc" id="aclass_intervention_html"><div class="ttname"><a href="class_intervention.html">Intervention</a></div><div class="ttdef"><b>Definition:</b> Services.h:46</div></div>
 <div class="ttc" id="aclass_house_master_1_1_unable_to_write_file_html"><div class="ttname"><a href="class_house_master_1_1_unable_to_write_file.html">HouseMaster::UnableToWriteFile</a></div><div class="ttdef"><b>Definition:</b> HouseMaster.h:151</div></div>
-<div class="ttc" id="aclass_house_master_1_1_inexistent_client_html"><div class="ttname"><a href="class_house_master_1_1_inexistent_client.html">HouseMaster::InexistentClient</a></div><div class="ttdef"><b>Definition:</b> HouseMaster.h:134</div></div>
+<div class="ttc" id="aclass_house_master_1_1_inexistent_client_html"><div class="ttname"><a href="class_house_master_1_1_inexistent_client.html">HouseMaster::NonexistentClient</a></div><div class="ttdef"><b>Definition:</b> HouseMaster.h:134</div></div>
 <div class="ttc" id="astructdate_html"><div class="ttname"><a href="structdate.html">date</a></div><div class="ttdoc">A struct to assign dates and time. This struct sets the dates used during the interventions.</div><div class="ttdef"><b>Definition:</b> date.h:12</div></div>
 <div class="ttc" id="aclass_client_html"><div class="ttname"><a href="class_client.html">Client</a></div><div class="ttdef"><b>Definition:</b> Individual.h:98</div></div>
 <!-- start footer part -->
