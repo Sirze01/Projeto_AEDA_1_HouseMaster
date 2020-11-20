@@ -1,13 +1,14 @@
-Pest Control,yes,20,05h0,default
-Retouch painting job,no,17,01h30,painting
+Paint with invisible ink,no,3,02h0,painting
 Install central heating system,yes,20,04h0,painting
-Paint and decorate walls,yes,40,03h30,painting
-Assemble IKEA furniture,no,15,03h0,default
 Fix a water leak,yes,10,04h0,default
+Retouch painting job,no,17,01h30,painting
 Unclog a pipe,yes,7,02h0,default
+Assemble IKEA furniture,no,15,03h0,default
 Fix illumination system,yes,10,01h30,default
 Hang a picture,no,3,00h45,default
 Paint a room,no,30,02h30,painting
+Pest Control,yes,20,05h0,default
 Repair AC system,yes,2,30h0,default
 Change a lamp,no,2,01h30,default
-
+Paint and decorate walls,yes,40,03h30,painting
+Clean toilet,no,1,00h25,default

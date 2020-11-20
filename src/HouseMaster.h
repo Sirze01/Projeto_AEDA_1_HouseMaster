@@ -102,6 +102,9 @@ public:
     void writeServicesInfo();
     void writeInterventionsInfo();
     void writeFinantialInfo() const;
+
+    void addAvailablePaintService(const std::string &name, bool pro, float basePrice, duration duration);
+
 private:
     std::unordered_map<std::string, Service*> _availableServices;
     std::map<std::string, Client*> _clients;
@@ -110,7 +113,6 @@ private:
     std::vector<Intervention*> _interventions;
     float _earnings;
 
-    void addAvailablePaintService(const std::string &name, bool pro, float basePrice, duration duration);
 };
 
 // Must add in the cpp also the definition of the Client::requestIntervention method to complete the forward declaration

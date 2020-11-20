@@ -371,7 +371,7 @@ void Interface::readNewCollaboratorData(bool &running) {
 }
 
 std::string Interface::readNewServiceData(bool &running) {
-    std::string name{}, proStr{}, durationStr;
+    std::string name{}, proStr{}, durationStr{}, paintingStr{};
     float basePrice{};
     //duration duration{};
 
@@ -407,9 +407,20 @@ std::string Interface::readNewServiceData(bool &running) {
         }
     }
 
-    std::cout << "Mean duration : "; std::cin >> durationStr;
+    std::cout << "Mean duration ? "; std::cin >> durationStr;
     duration duration(durationStr);
-    _houseMaster.addAvailableService(name, pro, basePrice, duration);
+
+    std::cout << "Painting ? [yes/no] "; std::cin >> paintingStr;
+    while (paintingStr != "yes" && paintingStr != "no") {
+        std::cout << R"(Invalid choice. Make sure you chose one of "yes" or "no" )" << std::endl;
+        std::cin >> paintingStr;
+    }
+
+    if (paintingStr=="yes") {
+        _houseMaster.addAvailablePaintService(name,pro,basePrice,duration);
+    } else {
+        _houseMaster.addAvailableService(name, pro, basePrice, duration);
+    }
 
     return name;
 

@@ -1,2 +1,8 @@
 Service: Paint a room, from 12/12/2012  00:0 to 12/12/2012  02:30, to client client0 done by collab2, cost: 36
 
+
+
+Fri Nov 20 02:08:57 2020
+
+Service: Paint with invisible ink, from 12/12/2012  12:12 to 12/12/2012  14:12, to client client1 done by collab1, cost: 10.8
+Service: Paint with invisible ink, from 12/12/2012  12:12 to 12/12/2012  14:12, to client client0 done by collab1, cost: 14.4
