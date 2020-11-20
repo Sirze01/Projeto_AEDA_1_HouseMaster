@@ -1,5 +1,5 @@
 #ifndef SRC_DATE_H
-#define SRC_HOUSEMASTER_DATE_H
+#define SRC_DATE_H
 
 #include <string>
 #include <stdexcept>

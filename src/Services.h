@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <utility>
 
 #include "Date.h"
 #include "Services_Constants.h"
@@ -17,23 +18,33 @@ private:
     Duration _duration;
 public:
     Service();
-    Service(std::string name, bool pro, float basePrice, const Duration &duration);
+
+    Service(std::string name, bool pro, float basePrice, Duration duration);
+
     virtual ~Service() = default;
+
     std::string getName() const;
+
     bool getPro() const;
+
     float getBasePrice() const;
+
     Duration getDuration() const;
-    virtual float calculatePrice();
+
+    virtual float getPrice();
 };
 
-class Painting : public Service{
+class Painting : public Service {
 private:
     unsigned int _roomNumber;
 public:
     Painting(std::string name, bool pro, float basePrice, const Duration &duration, unsigned int nrOfRooms = 0);
+
     ~Painting() override = default;
+
     void setRoomNumber(unsigned int number);
-    float calculatePrice() override;
+
+    float getPrice() override;
 };
 
 
@@ -50,7 +61,7 @@ private:
     std::string _clientId;
     std::string _collabId;
     Date _startingTime;
-    Service* _type;
+    Service *_type;
     bool _forcePro;
     processState _state;
     float _cost;
@@ -58,13 +69,13 @@ private:
 
 public:
 
-    Intervention(const Date &appointment, Service* type, bool forcePro, unsigned int nrOfRooms = 0);
+    Intervention(Date appointment, Service *type, bool forcePro, unsigned int nrOfRooms = 0);
 
     ~Intervention();
 
     Date getStartingTime() const;
 
-    const Service* getService() const;
+    const Service *getService() const;
 
     bool getForcePro() const;
 
@@ -72,7 +83,7 @@ public:
 
     std::string getClientId() const;
 
-    void setCollabId(const std::string& collabId);
+    void setCollabId(const std::string &collabId);
 
     void setClientId(const std::string &clientId);
 
@@ -80,7 +91,7 @@ public:
 
     void setProcessState(processState state);
 
-    bool conflictsWith(Date start, Duration duration) const;
+    bool conflictsWith(const Date &start, const Duration &duration) const;
 
     void calculateCost(); // Calculates cost to the client, earnings to housemaster and collab
 

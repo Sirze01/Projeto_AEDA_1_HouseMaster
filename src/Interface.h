@@ -20,6 +20,8 @@ public:
 
     void selectRole(bool &running);
 
+    HouseMaster getHouseMasterState() const;
+
 private:
     void userLogin();
 
@@ -60,8 +62,6 @@ private:
     static bool isValidNif(unsigned nif);
 
     class InvalidNif;
-
-    HouseMaster getHouseMasterState() const;
 
     void showFinances() const;
 
