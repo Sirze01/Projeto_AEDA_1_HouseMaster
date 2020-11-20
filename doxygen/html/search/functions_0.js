@@ -1,7 +1,12 @@
 var searchData=
 [
-  ['date_58',['date',['../structdate.html#ace1e9bd1562330f4d03a385ee0cc2eba',1,'date::date()'],['../structdate.html#a36c64c558afc56c563aba26d2415dc26',1,'date::date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes)'],['../structdate.html#aa664e153b4552622241185ebd51c2def',1,'date::date(const std::string &amp;date)']]],
-  ['datetostr_59',['dateToStr',['../structdate.html#a12547c5f329782a555534cc90a68f129',1,'date']]],
-  ['duration_60',['duration',['../structduration.html#aadb3a941aa65bdd1b5d7a0134aec3341',1,'duration::duration()'],['../structduration.html#a7d5b0e73d302a60d2e6c3a36e5fbd237',1,'duration::duration(unsigned int hours, unsigned int minutes)'],['../structduration.html#aed06102b8c23c616a588f78a078fa1e4',1,'duration::duration(const std::string &amp;duration)']]],
-  ['durationtostr_61',['durationToStr',['../structduration.html#a92f8f416ce919b6d5e1e6e33e7a95e7d',1,'duration']]]
+  ['addavailablepaintservice_128',['addAvailablePaintService',['../class_house_master.html#ae6bff3439ded55883f80a4f65ffaf8d4',1,'HouseMaster']]],
+  ['addavailableservice_129',['addAvailableService',['../class_house_master.html#acf348ce4011537dbf6fc69c3fbb85599',1,'HouseMaster']]],
+  ['addclassification_130',['addClassification',['../class_collaborator.html#a1ef8ae3dd100349e2fa1543d9687c0b4',1,'Collaborator']]],
+  ['addclient_131',['addClient',['../class_house_master.html#a00d926f61b224fae7dd935194a4a9a51',1,'HouseMaster']]],
+  ['addcollaborator_132',['addCollaborator',['../class_house_master.html#a33dcb71b0a60f52b78bc72021fe562cd',1,'HouseMaster']]],
+  ['addintervention_133',['addIntervention',['../class_house_master.html#ab700aa5a42d161eeab2dd92f0c14c789',1,'HouseMaster']]],
+  ['addservice_134',['addService',['../class_collaborator.html#ac9588bdcca9a5daf25464e4bf8cf5701',1,'Collaborator']]],
+  ['assigncollaborator_135',['assignCollaborator',['../class_house_master.html#ad71a6fb1792f0b55039c8d25cdcbbecd',1,'HouseMaster']]],
+  ['assignedcollab_136',['AssignedCollab',['../class_house_master_1_1_assigned_collab.html#a936e19e1a1fe0e4c985549f3ca3deab4',1,'HouseMaster::AssignedCollab']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['hours_10',['hours',['../structdate.html#a2725d2efd5f2718d6f715902c0da66ae',1,'date']]],
-  ['housemaster_11',['HouseMaster',['../class_house_master.html',1,'']]]
+  ['findbyusername_26',['findByUsername',['../class_house_master.html#ab4f4ca3b8d3c8ab746c1308578e630a4',1,'HouseMaster']]]
 ];

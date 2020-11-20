@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['client_36',['Client',['../class_client.html',1,'']]],
-  ['collaborator_37',['Collaborator',['../class_collaborator.html',1,'']]]
+  ['assignedcollab_104',['AssignedCollab',['../class_house_master_1_1_assigned_collab.html',1,'HouseMaster']]]
 ];

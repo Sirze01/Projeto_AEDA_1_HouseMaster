@@ -1,0 +1,102 @@
+\hypertarget{class_duration}{}\doxysection{Duration Class Reference}
+\label{class_duration}\index{Duration@{Duration}}
+
+
+A class to represent durations, inherits from \mbox{\hyperlink{class_date}{Date}}.  
+
+
+
+
+{\ttfamily \#include $<$Date.\+h$>$}
+
+Inheritance diagram for Duration\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_duration}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_duration_1_1_invalid_duration}{Invalid\+Duration}}
+\begin{DoxyCompactList}\small\item\em This class is used to throw exceptions related to invalid durations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_duration_a688948a87d69e8982cf7e292c7fe4b0a}\label{class_duration_a688948a87d69e8982cf7e292c7fe4b0a}} 
+\mbox{\hyperlink{class_duration_a688948a87d69e8982cf7e292c7fe4b0a}{Duration}} ()
+\begin{DoxyCompactList}\small\item\em default duration \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_duration_ab3aa07e7af8b8b765e53934864c5e0c8}{Duration}} (unsigned int hours, unsigned int minutes)
+\begin{DoxyCompactList}\small\item\em Sets the duration with the integer numbers provided. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_duration_ac57ad12858ae3d363cfc56c6cc3c80c1}{Duration}} (const std\+::string \&duration)
+\begin{DoxyCompactList}\small\item\em Sets the duration with a given string. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_duration_a89a23d6ea88ee54051e716a75b3ba299}{get\+String}} () const override
+\begin{DoxyCompactList}\small\item\em Uses the format\+: H\+Hhmm. Useful to show during outputs. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_duration_ad34219cf568df3fcb357d5eae2b0b721}\label{class_duration_ad34219cf568df3fcb357d5eae2b0b721}} 
+void \mbox{\hyperlink{class_duration_ad34219cf568df3fcb357d5eae2b0b721}{check\+If\+Valid}} () const override
+\begin{DoxyCompactList}\small\item\em Sees if a duration is valid or not (hours, minutes in correct range), throwing adequate exception if not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A class to represent durations, inherits from \mbox{\hyperlink{class_date}{Date}}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_duration_ab3aa07e7af8b8b765e53934864c5e0c8}\label{class_duration_ab3aa07e7af8b8b765e53934864c5e0c8}} 
+\index{Duration@{Duration}!Duration@{Duration}}
+\index{Duration@{Duration}!Duration@{Duration}}
+\doxysubsubsection{\texorpdfstring{Duration()}{Duration()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Duration\+::\+Duration (\begin{DoxyParamCaption}\item[{unsigned int}]{hours,  }\item[{unsigned int}]{minutes }\end{DoxyParamCaption})}
+
+
+
+Sets the duration with the integer numbers provided. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hours} & sets the hours \\
+\hline
+{\em minutes} & sets the minutes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_duration_ac57ad12858ae3d363cfc56c6cc3c80c1}\label{class_duration_ac57ad12858ae3d363cfc56c6cc3c80c1}} 
+\index{Duration@{Duration}!Duration@{Duration}}
+\index{Duration@{Duration}!Duration@{Duration}}
+\doxysubsubsection{\texorpdfstring{Duration()}{Duration()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Duration\+::\+Duration (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Sets the duration with a given string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em duration} & sets the duration \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_duration_a89a23d6ea88ee54051e716a75b3ba299}\label{class_duration_a89a23d6ea88ee54051e716a75b3ba299}} 
+\index{Duration@{Duration}!getString@{getString}}
+\index{getString@{getString}!Duration@{Duration}}
+\doxysubsubsection{\texorpdfstring{getString()}{getString()}}
+{\footnotesize\ttfamily std\+::string Duration\+::get\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Uses the format\+: H\+Hhmm. Useful to show during outputs. 
+
+\begin{DoxyReturn}{Returns}
+A string with the corresponding duration 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_date_ada44562cf72ca67017af0446ce189e91}{Date}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/Date.\+h\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/Date.\+cpp\end{DoxyCompactItemize}

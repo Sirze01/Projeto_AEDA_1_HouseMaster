@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Projeto_AEDA_1_HouseMaster: HouseMaster Class Reference</title>
+<title>Projecto_AEDA_1_HouseMaster: HouseMaster Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Projeto_AEDA_1_HouseMaster
+   <div id="projectname">Projecto_AEDA_1_HouseMaster
    </div>
   </td>
  </tr>
@@ -70,18 +70,25 @@ $(function() {
 <div class="title">HouseMaster Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class manages the services, collaborators, clients and finances of <a class="el" href="class_house_master.html" title="This class manages the services, collaborators, clients and finances of HouseMaster.">HouseMaster</a>.  
+ <a href="class_house_master.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_house_master_8h_source.html">HouseMaster.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_assigned_collab.html">AssignedCollab</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_existent_client.html">ExistentClient</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_existent_service.html">ExistentService</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_inexistent_client.html">NonexistentClient</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_nonexistent_client.html">NonexistentClient</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_inexistent_collab.html">NonexistentCollab</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_nonexistent_collab.html">NonexistentCollab</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_inexistent_service.html">NonexistentService</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_nonexistent_service.html">NonexistentService</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master_1_1_nonexistent_username.html">NonexistentUsername</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -92,97 +99,842 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae3836006d020a7461ae6185a8c2c7bb9"><td class="memItemLeft" align="right" valign="top"><a id="ae3836006d020a7461ae6185a8c2c7bb9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HouseMaster</b> (std::ifstream collaborators, std::ifstream clients, std::ifstream services)</td></tr>
-<tr class="separator:ae3836006d020a7461ae6185a8c2c7bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a946b4e652e7c5cefe9cc1d80939f5f80"><td class="memItemLeft" align="right" valign="top"><a id="a946b4e652e7c5cefe9cc1d80939f5f80"></a>
-std::unordered_map&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCollaborators</b> ()</td></tr>
-<tr class="separator:a946b4e652e7c5cefe9cc1d80939f5f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05b448d2b9053634e8d241ab9bccf701"><td class="memItemLeft" align="right" valign="top"><a id="a05b448d2b9053634e8d241ab9bccf701"></a>
-std::unordered_map&lt; std::string, <a class="el" href="class_client.html">Client</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getClients</b> ()</td></tr>
-<tr class="separator:a05b448d2b9053634e8d241ab9bccf701"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77672db8bf2a2305480d31e31a55e7be"><td class="memItemLeft" align="right" valign="top"><a id="a77672db8bf2a2305480d31e31a55e7be"></a>
-std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getInterventions</b> ()</td></tr>
+<tr class="memitem:ac3fc8187884445ab31f13dc4ce04d601"><td class="memItemLeft" align="right" valign="top"><a id="ac3fc8187884445ab31f13dc4ce04d601"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#ac3fc8187884445ab31f13dc4ce04d601">HouseMaster</a> ()</td></tr>
+<tr class="memdesc:ac3fc8187884445ab31f13dc4ce04d601"><td class="mdescLeft">&#160;</td><td class="mdescRight">housemaster constructor <br /></td></tr>
+<tr class="separator:ac3fc8187884445ab31f13dc4ce04d601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add0a8d4300e0adb65546227e98472d26"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#add0a8d4300e0adb65546227e98472d26">HouseMaster</a> (std::ifstream collaborators, std::ifstream clients, std::ifstream services, std::ifstream earnings)</td></tr>
+<tr class="memdesc:add0a8d4300e0adb65546227e98472d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">housemaster constructor from files  <a href="class_house_master.html#add0a8d4300e0adb65546227e98472d26">More...</a><br /></td></tr>
+<tr class="separator:add0a8d4300e0adb65546227e98472d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9473c787ffa0dbc8b31bcb1d1a0275a6"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a9473c787ffa0dbc8b31bcb1d1a0275a6">getCollaborators</a> ()</td></tr>
+<tr class="memdesc:a9473c787ffa0dbc8b31bcb1d1a0275a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">getter  <a href="class_house_master.html#a9473c787ffa0dbc8b31bcb1d1a0275a6">More...</a><br /></td></tr>
+<tr class="separator:a9473c787ffa0dbc8b31bcb1d1a0275a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ba215a55396291fb0721b90ec6ef02"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="class_client.html">Client</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a02ba215a55396291fb0721b90ec6ef02">getClients</a> ()</td></tr>
+<tr class="memdesc:a02ba215a55396291fb0721b90ec6ef02"><td class="mdescLeft">&#160;</td><td class="mdescRight">getter  <a href="class_house_master.html#a02ba215a55396291fb0721b90ec6ef02">More...</a><br /></td></tr>
+<tr class="separator:a02ba215a55396291fb0721b90ec6ef02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77672db8bf2a2305480d31e31a55e7be"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a77672db8bf2a2305480d31e31a55e7be">getInterventions</a> ()</td></tr>
+<tr class="memdesc:a77672db8bf2a2305480d31e31a55e7be"><td class="mdescLeft">&#160;</td><td class="mdescRight">getter  <a href="class_house_master.html#a77672db8bf2a2305480d31e31a55e7be">More...</a><br /></td></tr>
 <tr class="separator:a77672db8bf2a2305480d31e31a55e7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef8ece9324b2b00f0ce6cf28be6cab7a"><td class="memItemLeft" align="right" valign="top"><a id="aef8ece9324b2b00f0ce6cf28be6cab7a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addAvailableService</b> (const std::string &amp;name, bool pro, float basePrice, <a class="el" href="structduration.html">duration</a> <a class="el" href="structduration.html">duration</a>)</td></tr>
-<tr class="separator:aef8ece9324b2b00f0ce6cf28be6cab7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a708274d2af0291ded0662d525a4ece3a"><td class="memItemLeft" align="right" valign="top"><a id="a708274d2af0291ded0662d525a4ece3a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeAvailableService</b> (const std::string &amp;serviceName)</td></tr>
-<tr class="separator:a708274d2af0291ded0662d525a4ece3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6190fe8b65e17415ef2d84436a471281"><td class="memItemLeft" align="right" valign="top"><a id="a6190fe8b65e17415ef2d84436a471281"></a>
-std::unordered_map&lt; std::string, <a class="el" href="class_service.html">Service</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getAvailableServices</b> ()</td></tr>
+<tr class="memitem:acf348ce4011537dbf6fc69c3fbb85599"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#acf348ce4011537dbf6fc69c3fbb85599">addAvailableService</a> (const std::string &amp;name, bool pro, float basePrice, const <a class="el" href="class_duration.html">Duration</a> &amp;duration)</td></tr>
+<tr class="memdesc:acf348ce4011537dbf6fc69c3fbb85599"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a service to the housemaster's catalogue  <a href="class_house_master.html#acf348ce4011537dbf6fc69c3fbb85599">More...</a><br /></td></tr>
+<tr class="separator:acf348ce4011537dbf6fc69c3fbb85599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a202e46fa47ea85f40defb90c69027ab2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a202e46fa47ea85f40defb90c69027ab2">removeAvailableService</a> (const std::string &amp;service)</td></tr>
+<tr class="memdesc:a202e46fa47ea85f40defb90c69027ab2"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes a service from housemaster's catalogue  <a href="class_house_master.html#a202e46fa47ea85f40defb90c69027ab2">More...</a><br /></td></tr>
+<tr class="separator:a202e46fa47ea85f40defb90c69027ab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6190fe8b65e17415ef2d84436a471281"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, <a class="el" href="class_service.html">Service</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a6190fe8b65e17415ef2d84436a471281">getAvailableServices</a> ()</td></tr>
+<tr class="memdesc:a6190fe8b65e17415ef2d84436a471281"><td class="mdescLeft">&#160;</td><td class="mdescRight">getter  <a href="class_house_master.html#a6190fe8b65e17415ef2d84436a471281">More...</a><br /></td></tr>
 <tr class="separator:a6190fe8b65e17415ef2d84436a471281"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7126c7a455377136cd410e82dcf10da"><td class="memItemLeft" align="right" valign="top"><a id="af7126c7a455377136cd410e82dcf10da"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addCollaborator</b> (<a class="el" href="class_collaborator.html">Collaborator</a> *collab)</td></tr>
-<tr class="separator:af7126c7a455377136cd410e82dcf10da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7239fc0902f4dc768e5419a4e267643"><td class="memItemLeft" align="right" valign="top"><a id="ae7239fc0902f4dc768e5419a4e267643"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeCollaborator</b> (const std::string &amp;collId)</td></tr>
+<tr class="memitem:ae7239fc0902f4dc768e5419a4e267643"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#ae7239fc0902f4dc768e5419a4e267643">removeCollaborator</a> (const std::string &amp;collId)</td></tr>
+<tr class="memdesc:ae7239fc0902f4dc768e5419a4e267643"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes a collaborator from housemaster  <a href="class_house_master.html#ae7239fc0902f4dc768e5419a4e267643">More...</a><br /></td></tr>
 <tr class="separator:ae7239fc0902f4dc768e5419a4e267643"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8e99d505a436b12ba2408dba9a32a51"><td class="memItemLeft" align="right" valign="top"><a id="ac8e99d505a436b12ba2408dba9a32a51"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addCollaborator</b> (const std::vector&lt; std::string &gt; &amp;functions, const std::string &amp;name, bool pro)</td></tr>
-<tr class="separator:ac8e99d505a436b12ba2408dba9a32a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae22c8791df686f80efc821ed2cf33050"><td class="memItemLeft" align="right" valign="top"><a id="ae22c8791df686f80efc821ed2cf33050"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addClient</b> (<a class="el" href="class_client.html">Client</a> *client)</td></tr>
-<tr class="separator:ae22c8791df686f80efc821ed2cf33050"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc1942a13f34dd5324378a96b660d669"><td class="memItemLeft" align="right" valign="top"><a id="acc1942a13f34dd5324378a96b660d669"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addClient</b> (unsigned int nif, const std::string &amp;name, bool premium)</td></tr>
-<tr class="separator:acc1942a13f34dd5324378a96b660d669"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81ca5dd5245ad560b25d7ced1b0eab94"><td class="memItemLeft" align="right" valign="top"><a id="a81ca5dd5245ad560b25d7ced1b0eab94"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeClient</b> (const std::string &amp;clientId)</td></tr>
+<tr class="memitem:a33dcb71b0a60f52b78bc72021fe562cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a33dcb71b0a60f52b78bc72021fe562cd">addCollaborator</a> (const std::vector&lt; std::string &gt; &amp;services, const std::string &amp;name, bool pro, float earnings=0, Classification score=newHere)</td></tr>
+<tr class="memdesc:a33dcb71b0a60f52b78bc72021fe562cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a new collaborator to the housemaster  <a href="class_house_master.html#a33dcb71b0a60f52b78bc72021fe562cd">More...</a><br /></td></tr>
+<tr class="separator:a33dcb71b0a60f52b78bc72021fe562cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00d926f61b224fae7dd935194a4a9a51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a00d926f61b224fae7dd935194a4a9a51">addClient</a> (unsigned long nif, const std::string &amp;name, bool premium)</td></tr>
+<tr class="memdesc:a00d926f61b224fae7dd935194a4a9a51"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a new client to the housemaster  <a href="class_house_master.html#a00d926f61b224fae7dd935194a4a9a51">More...</a><br /></td></tr>
+<tr class="separator:a00d926f61b224fae7dd935194a4a9a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81ca5dd5245ad560b25d7ced1b0eab94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a81ca5dd5245ad560b25d7ced1b0eab94">removeClient</a> (const std::string &amp;clientId)</td></tr>
+<tr class="memdesc:a81ca5dd5245ad560b25d7ced1b0eab94"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes a client from housemaster  <a href="class_house_master.html#a81ca5dd5245ad560b25d7ced1b0eab94">More...</a><br /></td></tr>
 <tr class="separator:a81ca5dd5245ad560b25d7ced1b0eab94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6758205d8006f2a66f9c709520191d6b"><td class="memItemLeft" align="right" valign="top"><a id="a6758205d8006f2a66f9c709520191d6b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addIntervention</b> (const <a class="el" href="structdate.html">date</a> &amp;appointment, const std::string &amp;type, bool forcePro, const std::string &amp;clientId)</td></tr>
-<tr class="separator:a6758205d8006f2a66f9c709520191d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a957c5c939d12395fb5a3735c3b522d"><td class="memItemLeft" align="right" valign="top"><a id="a0a957c5c939d12395fb5a3735c3b522d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processTransaction</b> (<a class="el" href="class_intervention.html">Intervention</a> *intervention)</td></tr>
+<tr class="memitem:ab700aa5a42d161eeab2dd92f0c14c789"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_intervention.html">Intervention</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#ab700aa5a42d161eeab2dd92f0c14c789">addIntervention</a> (const <a class="el" href="class_date.html">Date</a> &amp;start, const std::string &amp;service, bool forcePro, const std::string &amp;clientId, int nrOfRooms=0)</td></tr>
+<tr class="memdesc:ab700aa5a42d161eeab2dd92f0c14c789"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds an intervention  <a href="class_house_master.html#ab700aa5a42d161eeab2dd92f0c14c789">More...</a><br /></td></tr>
+<tr class="separator:ab700aa5a42d161eeab2dd92f0c14c789"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a957c5c939d12395fb5a3735c3b522d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a0a957c5c939d12395fb5a3735c3b522d">processTransaction</a> (<a class="el" href="class_intervention.html">Intervention</a> *intervention)</td></tr>
+<tr class="memdesc:a0a957c5c939d12395fb5a3735c3b522d"><td class="mdescLeft">&#160;</td><td class="mdescRight">processes the payment of an intervention  <a href="class_house_master.html#a0a957c5c939d12395fb5a3735c3b522d">More...</a><br /></td></tr>
 <tr class="separator:a0a957c5c939d12395fb5a3735c3b522d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98d2878743f0a93942ab0538974121d3"><td class="memItemLeft" align="right" valign="top"><a id="a98d2878743f0a93942ab0538974121d3"></a>
-std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAssociatedInterventions</b> (const std::string &amp;id)</td></tr>
+<tr class="memitem:a98d2878743f0a93942ab0538974121d3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a98d2878743f0a93942ab0538974121d3">getAssociatedInterventions</a> (const std::string &amp;id)</td></tr>
+<tr class="memdesc:a98d2878743f0a93942ab0538974121d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the interventions associated to an individual  <a href="class_house_master.html#a98d2878743f0a93942ab0538974121d3">More...</a><br /></td></tr>
 <tr class="separator:a98d2878743f0a93942ab0538974121d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a099088f959a1f4e05b312b3d3570382e"><td class="memItemLeft" align="right" valign="top"><a id="a099088f959a1f4e05b312b3d3570382e"></a>
-std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAssociatedActiveInterventions</b> (const std::string &amp;id)</td></tr>
+<tr class="memitem:a099088f959a1f4e05b312b3d3570382e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a099088f959a1f4e05b312b3d3570382e">getAssociatedActiveInterventions</a> (const std::string &amp;id)</td></tr>
+<tr class="memdesc:a099088f959a1f4e05b312b3d3570382e"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the active interventions associated to an individual  <a href="class_house_master.html#a099088f959a1f4e05b312b3d3570382e">More...</a><br /></td></tr>
 <tr class="separator:a099088f959a1f4e05b312b3d3570382e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bbc426849e05f79dff7c1ccf9af6078"><td class="memItemLeft" align="right" valign="top"><a id="a9bbc426849e05f79dff7c1ccf9af6078"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>assignCollaborator</b> (<a class="el" href="class_intervention.html">Intervention</a> *, const std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt;&gt; &amp;)</td></tr>
-<tr class="separator:a9bbc426849e05f79dff7c1ccf9af6078"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05ac4d93180aab181c5d34b0669fdeec"><td class="memItemLeft" align="right" valign="top"><a id="a05ac4d93180aab181c5d34b0669fdeec"></a>
-std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>sortCollaboratorsByScore</b> ()</td></tr>
+<tr class="memitem:ad71a6fb1792f0b55039c8d25cdcbbecd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#ad71a6fb1792f0b55039c8d25cdcbbecd">assignCollaborator</a> (<a class="el" href="class_intervention.html">Intervention</a> *intervention, const std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt;&gt; &amp;orderedCollabs)</td></tr>
+<tr class="memdesc:ad71a6fb1792f0b55039c8d25cdcbbecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">assigns a collaborator to an intervention  <a href="class_house_master.html#ad71a6fb1792f0b55039c8d25cdcbbecd">More...</a><br /></td></tr>
+<tr class="separator:ad71a6fb1792f0b55039c8d25cdcbbecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05ac4d93180aab181c5d34b0669fdeec"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a05ac4d93180aab181c5d34b0669fdeec">sortCollaboratorsByScore</a> ()</td></tr>
+<tr class="memdesc:a05ac4d93180aab181c5d34b0669fdeec"><td class="mdescLeft">&#160;</td><td class="mdescRight">sorts the collaborators based on their performance  <a href="class_house_master.html#a05ac4d93180aab181c5d34b0669fdeec">More...</a><br /></td></tr>
 <tr class="separator:a05ac4d93180aab181c5d34b0669fdeec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4f4ca3b8d3c8ab746c1308578e630a4"><td class="memItemLeft" align="right" valign="top"><a id="ab4f4ca3b8d3c8ab746c1308578e630a4"></a>
-<a class="el" href="class_individual.html">Individual</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>findByUsername</b> (const std::string &amp;name)</td></tr>
+<tr class="memitem:ab4f4ca3b8d3c8ab746c1308578e630a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_individual.html">Individual</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#ab4f4ca3b8d3c8ab746c1308578e630a4">findByUsername</a> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:ab4f4ca3b8d3c8ab746c1308578e630a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an individual by their username  <a href="class_house_master.html#ab4f4ca3b8d3c8ab746c1308578e630a4">More...</a><br /></td></tr>
 <tr class="separator:ab4f4ca3b8d3c8ab746c1308578e630a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e72964224fe36b247acf5b3685a981c"><td class="memItemLeft" align="right" valign="top"><a id="a2e72964224fe36b247acf5b3685a981c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>markAsComplete</b> (<a class="el" href="class_intervention.html">Intervention</a> *intervention)</td></tr>
-<tr class="separator:a2e72964224fe36b247acf5b3685a981c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acaa187c4180637218bb759ad1e9da69f"><td class="memItemLeft" align="right" valign="top"><a id="acaa187c4180637218bb759ad1e9da69f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addAvailableService</b> (<a class="el" href="class_service.html">Service</a> *service)</td></tr>
-<tr class="separator:acaa187c4180637218bb759ad1e9da69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f1df9b4669625e5c3c6eef36ec4fd33"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a6f1df9b4669625e5c3c6eef36ec4fd33">getEarnings</a> () const</td></tr>
+<tr class="memdesc:a6f1df9b4669625e5c3c6eef36ec4fd33"><td class="mdescLeft">&#160;</td><td class="mdescRight">getter  <a href="class_house_master.html#a6f1df9b4669625e5c3c6eef36ec4fd33">More...</a><br /></td></tr>
+<tr class="separator:a6f1df9b4669625e5c3c6eef36ec4fd33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a412c313b22cd45a37047417e3877e8"><td class="memItemLeft" align="right" valign="top"><a id="a1a412c313b22cd45a37047417e3877e8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>writeCollabsInfo</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a1a412c313b22cd45a37047417e3877e8">writeCollabsInfo</a> ()</td></tr>
+<tr class="memdesc:a1a412c313b22cd45a37047417e3877e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">saves the collaborators' info <br /></td></tr>
 <tr class="separator:a1a412c313b22cd45a37047417e3877e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0384c750d237e1935b85ebab81c8b600"><td class="memItemLeft" align="right" valign="top"><a id="a0384c750d237e1935b85ebab81c8b600"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>writeClientsInfo</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a0384c750d237e1935b85ebab81c8b600">writeClientsInfo</a> ()</td></tr>
+<tr class="memdesc:a0384c750d237e1935b85ebab81c8b600"><td class="mdescLeft">&#160;</td><td class="mdescRight">saves the clients' info <br /></td></tr>
 <tr class="separator:a0384c750d237e1935b85ebab81c8b600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93b2a00de8735aa33a83a3ba0c660d29"><td class="memItemLeft" align="right" valign="top"><a id="a93b2a00de8735aa33a83a3ba0c660d29"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>writeServicesInfo</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a93b2a00de8735aa33a83a3ba0c660d29">writeServicesInfo</a> ()</td></tr>
+<tr class="memdesc:a93b2a00de8735aa33a83a3ba0c660d29"><td class="mdescLeft">&#160;</td><td class="mdescRight">saves the services' info <br /></td></tr>
 <tr class="separator:a93b2a00de8735aa33a83a3ba0c660d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb21278023a3c427904967bb9bb35c55"><td class="memItemLeft" align="right" valign="top"><a id="adb21278023a3c427904967bb9bb35c55"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>writeInterventionsInfo</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#adb21278023a3c427904967bb9bb35c55">writeInterventionsInfo</a> ()</td></tr>
+<tr class="memdesc:adb21278023a3c427904967bb9bb35c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">saves the interventions' history info <br /></td></tr>
 <tr class="separator:adb21278023a3c427904967bb9bb35c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf1f6bfcf476552577379d1628b69962"><td class="memItemLeft" align="right" valign="top"><a id="aaf1f6bfcf476552577379d1628b69962"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#aaf1f6bfcf476552577379d1628b69962">writeFinancialInfo</a> () const</td></tr>
+<tr class="memdesc:aaf1f6bfcf476552577379d1628b69962"><td class="mdescLeft">&#160;</td><td class="mdescRight">saves the financial state of housemaster <br /></td></tr>
+<tr class="separator:aaf1f6bfcf476552577379d1628b69962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6bff3439ded55883f80a4f65ffaf8d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#ae6bff3439ded55883f80a4f65ffaf8d4">addAvailablePaintService</a> (const std::string &amp;name, bool pro, float basePrice, const <a class="el" href="class_duration.html">Duration</a> &amp;duration)</td></tr>
+<tr class="memdesc:ae6bff3439ded55883f80a4f65ffaf8d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a painting service to the housemaster's catalogue  <a href="class_house_master.html#ae6bff3439ded55883f80a4f65ffaf8d4">More...</a><br /></td></tr>
+<tr class="separator:ae6bff3439ded55883f80a4f65ffaf8d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ae3b3900bec21290dc4f6a84e74c4312a"><td class="memItemLeft" align="right" valign="top"><a id="ae3b3900bec21290dc4f6a84e74c4312a"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>changeInterventionState</b> (<a class="el" href="class_intervention.html">Intervention</a> *intervention, processState state)</td></tr>
-<tr class="separator:ae3b3900bec21290dc4f6a84e74c4312a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05db6d382f28f401549fc327655f5802"><td class="memItemLeft" align="right" valign="top"><a id="a05db6d382f28f401549fc327655f5802"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>changeinterventionStatePayed</b> (<a class="el" href="class_intervention.html">Intervention</a> *intervention)</td></tr>
-<tr class="separator:a05db6d382f28f401549fc327655f5802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8c513ac7ce5915103dfe2d3a79492e9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#aa8c513ac7ce5915103dfe2d3a79492e9">changeInterventionState</a> (<a class="el" href="class_intervention.html">Intervention</a> *intervention, processState state)</td></tr>
+<tr class="memdesc:aa8c513ac7ce5915103dfe2d3a79492e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">changes the intervention's state  <a href="class_house_master.html#aa8c513ac7ce5915103dfe2d3a79492e9">More...</a><br /></td></tr>
+<tr class="separator:aa8c513ac7ce5915103dfe2d3a79492e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e72964224fe36b247acf5b3685a981c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_house_master.html#a2e72964224fe36b247acf5b3685a981c">markAsComplete</a> (<a class="el" href="class_intervention.html">Intervention</a> *intervention)</td></tr>
+<tr class="memdesc:a2e72964224fe36b247acf5b3685a981c"><td class="mdescLeft">&#160;</td><td class="mdescRight">marks an intervention as complete  <a href="class_house_master.html#a2e72964224fe36b247acf5b3685a981c">More...</a><br /></td></tr>
+<tr class="separator:a2e72964224fe36b247acf5b3685a981c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class manages the services, collaborators, clients and finances of <a class="el" href="class_house_master.html" title="This class manages the services, collaborators, clients and finances of HouseMaster.">HouseMaster</a>. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="add0a8d4300e0adb65546227e98472d26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add0a8d4300e0adb65546227e98472d26">&#9670;&nbsp;</a></span>HouseMaster()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HouseMaster::HouseMaster </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream&#160;</td>
+          <td class="paramname"><em>collaborators</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::ifstream&#160;</td>
+          <td class="paramname"><em>clients</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::ifstream&#160;</td>
+          <td class="paramname"><em>services</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::ifstream&#160;</td>
+          <td class="paramname"><em>earnings</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>housemaster constructor from files </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">collaborators</td><td>collabs info </td></tr>
+    <tr><td class="paramname">clients</td><td>clients info </td></tr>
+    <tr><td class="paramname">services</td><td>services info </td></tr>
+    <tr><td class="paramname">earnings</td><td>earnings info </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae6bff3439ded55883f80a4f65ffaf8d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6bff3439ded55883f80a4f65ffaf8d4">&#9670;&nbsp;</a></span>addAvailablePaintService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::addAvailablePaintService </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>pro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>basePrice</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_duration.html">Duration</a> &amp;&#160;</td>
+          <td class="paramname"><em>duration</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>adds a painting service to the housemaster's catalogue </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the service </td></tr>
+    <tr><td class="paramname">pro</td><td>requires professional </td></tr>
+    <tr><td class="paramname">basePrice</td><td>base price </td></tr>
+    <tr><td class="paramname">duration</td><td>duration </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acf348ce4011537dbf6fc69c3fbb85599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf348ce4011537dbf6fc69c3fbb85599">&#9670;&nbsp;</a></span>addAvailableService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::addAvailableService </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>pro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>basePrice</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_duration.html">Duration</a> &amp;&#160;</td>
+          <td class="paramname"><em>duration</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>adds a service to the housemaster's catalogue </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the service </td></tr>
+    <tr><td class="paramname">pro</td><td>requires professional </td></tr>
+    <tr><td class="paramname">basePrice</td><td>base price </td></tr>
+    <tr><td class="paramname">duration</td><td>duration </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a00d926f61b224fae7dd935194a4a9a51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00d926f61b224fae7dd935194a4a9a51">&#9670;&nbsp;</a></span>addClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::addClient </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>nif</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>premium</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>adds a new client to the housemaster </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nif</td><td>tax id </td></tr>
+    <tr><td class="paramname">name</td><td>name </td></tr>
+    <tr><td class="paramname">premium</td><td>is premium </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a33dcb71b0a60f52b78bc72021fe562cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33dcb71b0a60f52b78bc72021fe562cd">&#9670;&nbsp;</a></span>addCollaborator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::addCollaborator </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>services</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>pro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>earnings</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Classification&#160;</td>
+          <td class="paramname"><em>score</em> = <code>newHere</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>adds a new collaborator to the housemaster </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">services</td><td>services that the collaborator can preform </td></tr>
+    <tr><td class="paramname">name</td><td>name of the collaborator </td></tr>
+    <tr><td class="paramname">pro</td><td>is professional </td></tr>
+    <tr><td class="paramname">earnings</td><td>the earnings </td></tr>
+    <tr><td class="paramname">score</td><td>the score </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab700aa5a42d161eeab2dd92f0c14c789"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab700aa5a42d161eeab2dd92f0c14c789">&#9670;&nbsp;</a></span>addIntervention()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_intervention.html">Intervention</a> * HouseMaster::addIntervention </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_date.html">Date</a> &amp;&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>service</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>forcePro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>clientId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nrOfRooms</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>adds an intervention </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>start of the intervention </td></tr>
+    <tr><td class="paramname">service</td><td>the service </td></tr>
+    <tr><td class="paramname">forcePro</td><td></td></tr>
+    <tr><td class="paramname">clientId</td><td>the clients id </td></tr>
+    <tr><td class="paramname">nrOfRooms</td><td>number of rooms in case of painting </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the intervention </dd></dl>
+
+</div>
+</div>
+<a id="ad71a6fb1792f0b55039c8d25cdcbbecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad71a6fb1792f0b55039c8d25cdcbbecd">&#9670;&nbsp;</a></span>assignCollaborator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::assignCollaborator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_intervention.html">Intervention</a> *&#160;</td>
+          <td class="paramname"><em>intervention</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>orderedCollabs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>assigns a collaborator to an intervention </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">intervention</td><td>the intervention </td></tr>
+    <tr><td class="paramname">orderedCollabs</td><td>the collaborators </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa8c513ac7ce5915103dfe2d3a79492e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8c513ac7ce5915103dfe2d3a79492e9">&#9670;&nbsp;</a></span>changeInterventionState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::changeInterventionState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_intervention.html">Intervention</a> *&#160;</td>
+          <td class="paramname"><em>intervention</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">processState&#160;</td>
+          <td class="paramname"><em>state</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>changes the intervention's state </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">intervention</td><td>the intervention </td></tr>
+    <tr><td class="paramname">state</td><td>the desired state </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab4f4ca3b8d3c8ab746c1308578e630a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4f4ca3b8d3c8ab746c1308578e630a4">&#9670;&nbsp;</a></span>findByUsername()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_individual.html">Individual</a> * HouseMaster::findByUsername </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>username</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>finds an individual by their username </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">username</td><td>the username </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the individual </dd></dl>
+
+</div>
+</div>
+<a id="a099088f959a1f4e05b312b3d3570382e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a099088f959a1f4e05b312b3d3570382e">&#9670;&nbsp;</a></span>getAssociatedActiveInterventions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * &gt; HouseMaster::getAssociatedActiveInterventions </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>gets the active interventions associated to an individual </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>the individual's id </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the interventions </dd></dl>
+
+</div>
+</div>
+<a id="a98d2878743f0a93942ab0538974121d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98d2878743f0a93942ab0538974121d3">&#9670;&nbsp;</a></span>getAssociatedInterventions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * &gt; HouseMaster::getAssociatedInterventions </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>gets the interventions associated to an individual </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>the individual's id </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the interventions </dd></dl>
+
+</div>
+</div>
+<a id="a6190fe8b65e17415ef2d84436a471281"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6190fe8b65e17415ef2d84436a471281">&#9670;&nbsp;</a></span>getAvailableServices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt; std::string, <a class="el" href="class_service.html">Service</a> * &gt; &amp; HouseMaster::getAvailableServices </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getter </p>
+<dl class="section return"><dt>Returns</dt><dd>available services </dd></dl>
+
+</div>
+</div>
+<a id="a02ba215a55396291fb0721b90ec6ef02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02ba215a55396291fb0721b90ec6ef02">&#9670;&nbsp;</a></span>getClients()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, <a class="el" href="class_client.html">Client</a> * &gt; &amp; HouseMaster::getClients </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getter </p>
+<dl class="section return"><dt>Returns</dt><dd>the clients </dd></dl>
+
+</div>
+</div>
+<a id="a9473c787ffa0dbc8b31bcb1d1a0275a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9473c787ffa0dbc8b31bcb1d1a0275a6">&#9670;&nbsp;</a></span>getCollaborators()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt; &amp; HouseMaster::getCollaborators </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getter </p>
+<dl class="section return"><dt>Returns</dt><dd>the collaborators </dd></dl>
+
+</div>
+</div>
+<a id="a6f1df9b4669625e5c3c6eef36ec4fd33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f1df9b4669625e5c3c6eef36ec4fd33">&#9670;&nbsp;</a></span>getEarnings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float HouseMaster::getEarnings </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getter </p>
+<dl class="section return"><dt>Returns</dt><dd>the earnings </dd></dl>
+
+</div>
+</div>
+<a id="a77672db8bf2a2305480d31e31a55e7be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77672db8bf2a2305480d31e31a55e7be">&#9670;&nbsp;</a></span>getInterventions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_intervention.html">Intervention</a> * &gt; &amp; HouseMaster::getInterventions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getter </p>
+<dl class="section return"><dt>Returns</dt><dd>the interventions </dd></dl>
+
+</div>
+</div>
+<a id="a2e72964224fe36b247acf5b3685a981c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e72964224fe36b247acf5b3685a981c">&#9670;&nbsp;</a></span>markAsComplete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::markAsComplete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_intervention.html">Intervention</a> *&#160;</td>
+          <td class="paramname"><em>intervention</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>marks an intervention as complete </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">intervention</td><td>the intervention </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0a957c5c939d12395fb5a3735c3b522d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a957c5c939d12395fb5a3735c3b522d">&#9670;&nbsp;</a></span>processTransaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::processTransaction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_intervention.html">Intervention</a> *&#160;</td>
+          <td class="paramname"><em>intervention</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>processes the payment of an intervention </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">intervention</td><td>the intervention </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a202e46fa47ea85f40defb90c69027ab2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a202e46fa47ea85f40defb90c69027ab2">&#9670;&nbsp;</a></span>removeAvailableService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::removeAvailableService </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>service</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>removes a service from housemaster's catalogue </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">service</td><td>name of the service </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a81ca5dd5245ad560b25d7ced1b0eab94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81ca5dd5245ad560b25d7ced1b0eab94">&#9670;&nbsp;</a></span>removeClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::removeClient </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>clientId</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>removes a client from housemaster </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clientId</td><td>the client to be removed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae7239fc0902f4dc768e5419a4e267643"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7239fc0902f4dc768e5419a4e267643">&#9670;&nbsp;</a></span>removeCollaborator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HouseMaster::removeCollaborator </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>removes a collaborator from housemaster </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>the id of the collaborator to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a05ac4d93180aab181c5d34b0669fdeec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ac4d93180aab181c5d34b0669fdeec">&#9670;&nbsp;</a></span>sortCollaboratorsByScore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt; std::string, <a class="el" href="class_collaborator.html">Collaborator</a> * &gt; &gt; HouseMaster::sortCollaboratorsByScore </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>sorts the collaborators based on their performance </p>
+<dl class="section return"><dt>Returns</dt><dd>the sorted collaborators </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="_house_master_8h_source.html">HouseMaster.h</a></li>
-<li>src/HouseMaster.cpp</li>
+<li>C:/Users/Sofia/Documents/GitHub/Projeto_AEDA_1_HouseMaster/src/<a class="el" href="_house_master_8h_source.html">HouseMaster.h</a></li>
+<li>C:/Users/Sofia/Documents/GitHub/Projeto_AEDA_1_HouseMaster/src/HouseMaster.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

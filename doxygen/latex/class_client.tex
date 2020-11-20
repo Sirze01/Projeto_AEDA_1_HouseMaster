@@ -9,33 +9,25 @@ Inheritance diagram for Client\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_client_a05f1795e3e58621056741a7bea50fa56}\label{class_client_a05f1795e3e58621056741a7bea50fa56}} 
-{\bfseries Client} (unsigned int nif, const std\+::string \&name, bool premium)
-\item 
-\mbox{\Hypertarget{class_client_acea7186df20208ee3c06f3a6062c6b6a}\label{class_client_acea7186df20208ee3c06f3a6062c6b6a}} 
-unsigned int {\bfseries get\+Nif} ()
-\item 
-\mbox{\Hypertarget{class_client_af77c74a396a63b45707e692c691e7b47}\label{class_client_af77c74a396a63b45707e692c691e7b47}} 
-bool {\bfseries is\+Premium} () const
-\item 
-\mbox{\Hypertarget{class_client_af32439d7d2f6328d36e13dd6185f6f6f}\label{class_client_af32439d7d2f6328d36e13dd6185f6f6f}} 
-std\+::string {\bfseries get\+Id} () const override
-\item 
-\mbox{\Hypertarget{class_client_a60106b21818397305ac4b0ee45519346}\label{class_client_a60106b21818397305ac4b0ee45519346}} 
-void {\bfseries request\+Intervention} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, const \mbox{\hyperlink{structdate}{date}} \&\+\_\+date, const std\+::string \&type, bool force\+Pro)
-\item 
-\mbox{\Hypertarget{class_client_a00b016e15629cbc05c449be7aca41f9a}\label{class_client_a00b016e15629cbc05c449be7aca41f9a}} 
-void {\bfseries classify\+Collaborator} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, const std\+::string \&collab\+Id, Classification classification)
-\item 
-\mbox{\Hypertarget{class_client_ad96ad90838611b279c0cd875f245bb89}\label{class_client_ad96ad90838611b279c0cd875f245bb89}} 
-bool {\bfseries operator==} (const \mbox{\hyperlink{class_client}{Client}} \&ind2) const
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_client_a05f1795e3e58621056741a7bea50fa56}{Client}} (unsigned int nif, const std\+::string \&name, bool premium)
+\begin{DoxyCompactList}\small\item\em client\textquotesingle{}s constructor \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{class_client_acea7186df20208ee3c06f3a6062c6b6a}{get\+Nif}} ()
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_client_af77c74a396a63b45707e692c691e7b47}{is\+Premium}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_client_af32439d7d2f6328d36e13dd6185f6f6f}{get\+Id}} () const override
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_client_afe14cff2c40ea67dfbfbd230855f79e1}{request\+Intervention}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, const \mbox{\hyperlink{class_date}{Date}} \&date, const std\+::string \&service, bool force\+Pro, unsigned int nr\+Of\+Rooms=0) const
+\begin{DoxyCompactList}\small\item\em requests and processes an intervention according to the client\textquotesingle{}s requirements \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_client_ad96ad90838611b279c0cd875f245bb89}{operator==}} (const \mbox{\hyperlink{class_client}{Client}} \&ind2) const
+\begin{DoxyCompactList}\small\item\em compares two clients \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_client_af8ab2fa8f23fdc3d539e316423375fc6}\label{class_client_af8ab2fa8f23fdc3d539e316423375fc6}} 
-static void {\bfseries cancel\+Intervention} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
-\end{DoxyCompactItemize}
+static void \mbox{\hyperlink{class_client_af8ab2fa8f23fdc3d539e316423375fc6}{cancel\+Intervention}} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\begin{DoxyCompactList}\small\item\em cancels an intervention \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_client_a00b016e15629cbc05c449be7aca41f9a}{classify\+Collaborator}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, const std\+::string \&collab\+Id, Classification classification)
+\begin{DoxyCompactList}\small\item\em adds a new classification to a collaborator \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -45,8 +37,151 @@ static unsigned int {\bfseries \+\_\+id\+Seq\+Clt} = 0
 \doxysubsection*{Additional Inherited Members}
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_client_a05f1795e3e58621056741a7bea50fa56}\label{class_client_a05f1795e3e58621056741a7bea50fa56}} 
+\index{Client@{Client}!Client@{Client}}
+\index{Client@{Client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily Client\+::\+Client (\begin{DoxyParamCaption}\item[{unsigned int}]{nif,  }\item[{const std\+::string \&}]{name,  }\item[{bool}]{premium }\end{DoxyParamCaption})}
+
+
+
+client\textquotesingle{}s constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nif} & tax id \\
+\hline
+{\em name} & the name \\
+\hline
+{\em premium} & is premium \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_client_af8ab2fa8f23fdc3d539e316423375fc6}\label{class_client_af8ab2fa8f23fdc3d539e316423375fc6}} 
+\index{Client@{Client}!cancelIntervention@{cancelIntervention}}
+\index{cancelIntervention@{cancelIntervention}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{cancelIntervention()}{cancelIntervention()}}
+{\footnotesize\ttfamily void Client\+::cancel\+Intervention (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$}]{intervention }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+cancels an intervention 
+
+
+\begin{DoxyParams}{Parameters}
+{\em intervention} & to cancel \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_a00b016e15629cbc05c449be7aca41f9a}\label{class_client_a00b016e15629cbc05c449be7aca41f9a}} 
+\index{Client@{Client}!classifyCollaborator@{classifyCollaborator}}
+\index{classifyCollaborator@{classifyCollaborator}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{classifyCollaborator()}{classifyCollaborator()}}
+{\footnotesize\ttfamily void Client\+::classify\+Collaborator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm,  }\item[{const std\+::string \&}]{collab\+Id,  }\item[{Classification}]{classification }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+adds a new classification to a collaborator 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hm} & the instance of housemaster \\
+\hline
+{\em collab\+Id} & the collaborator to classify \\
+\hline
+{\em classification} & the classification to give the collab \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_client_af32439d7d2f6328d36e13dd6185f6f6f}\label{class_client_af32439d7d2f6328d36e13dd6185f6f6f}} 
+\index{Client@{Client}!getId@{getId}}
+\index{getId@{getId}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily std\+::string Client\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+id 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_individual}{Individual}}.
+
+\mbox{\Hypertarget{class_client_acea7186df20208ee3c06f3a6062c6b6a}\label{class_client_acea7186df20208ee3c06f3a6062c6b6a}} 
+\index{Client@{Client}!getNif@{getNif}}
+\index{getNif@{getNif}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{getNif()}{getNif()}}
+{\footnotesize\ttfamily unsigned int Client\+::get\+Nif (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+nif 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_client_af77c74a396a63b45707e692c691e7b47}\label{class_client_af77c74a396a63b45707e692c691e7b47}} 
+\index{Client@{Client}!isPremium@{isPremium}}
+\index{isPremium@{isPremium}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{isPremium()}{isPremium()}}
+{\footnotesize\ttfamily bool Client\+::is\+Premium (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+premium 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_client_ad96ad90838611b279c0cd875f245bb89}\label{class_client_ad96ad90838611b279c0cd875f245bb89}} 
+\index{Client@{Client}!operator==@{operator==}}
+\index{operator==@{operator==}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Client\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_client}{Client}} \&}]{ind2 }\end{DoxyParamCaption}) const}
+
+
+
+compares two clients 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ind2} & the other client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if they\textquotesingle{}re the same false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_client_afe14cff2c40ea67dfbfbd230855f79e1}\label{class_client_afe14cff2c40ea67dfbfbd230855f79e1}} 
+\index{Client@{Client}!requestIntervention@{requestIntervention}}
+\index{requestIntervention@{requestIntervention}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{requestIntervention()}{requestIntervention()}}
+{\footnotesize\ttfamily void Client\+::request\+Intervention (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm,  }\item[{const \mbox{\hyperlink{class_date}{Date}} \&}]{date,  }\item[{const std\+::string \&}]{service,  }\item[{bool}]{force\+Pro,  }\item[{unsigned int}]{nr\+Of\+Rooms = {\ttfamily 0} }\end{DoxyParamCaption}) const}
+
+
+
+requests and processes an intervention according to the client\textquotesingle{}s requirements 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hm} & the instance of housemaster \\
+\hline
+{\em date} & the desired date \\
+\hline
+{\em service} & the service \\
+\hline
+{\em force\+Pro} & \\
+\hline
+{\em nr\+Of\+Rooms} & the number of rooms \\
+\hline
+\end{DoxyParams}
+
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/Individual.\+h\item 
-src/House\+Master.\+cpp\item 
-src/Individual.\+cpp\end{DoxyCompactItemize}
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/Individual.\+h\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/House\+Master.\+cpp\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/Individual.\+cpp\end{DoxyCompactItemize}

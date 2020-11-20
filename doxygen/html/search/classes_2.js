@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['existentclient_40',['ExistentClient',['../class_house_master_1_1_existent_client.html',1,'HouseMaster']]],
-  ['existentservice_41',['ExistentService',['../class_house_master_1_1_existent_service.html',1,'HouseMaster']]]
+  ['date_107',['Date',['../class_date.html',1,'']]],
+  ['duration_108',['Duration',['../class_duration.html',1,'']]]
 ];

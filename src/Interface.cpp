@@ -366,6 +366,13 @@ void Interface::readNewClientData() {
 
     std::cout << "NIF ? ";
     std::cin >> nif; // TODO input validation
+    while (std::cin.fail())
+    {
+        std::cin.clear();
+        std::cin.ignore();
+        std::cout << "This is an invalid NIF! Please try again:\nNIF ? ";
+        std::cin >> nif;
+    }
     bool done;
     do {
         try {

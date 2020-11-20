@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['date_38',['date',['../structdate.html',1,'']]],
-  ['duration_39',['duration',['../structduration.html',1,'']]]
+  ['client_105',['Client',['../class_client.html',1,'']]],
+  ['collaborator_106',['Collaborator',['../class_collaborator.html',1,'']]]
 ];

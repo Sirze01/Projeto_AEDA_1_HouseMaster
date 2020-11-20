@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['housemaster_42',['HouseMaster',['../class_house_master.html',1,'']]]
+  ['existentclient_109',['ExistentClient',['../class_house_master_1_1_existent_client.html',1,'HouseMaster']]],
+  ['existentservice_110',['ExistentService',['../class_house_master_1_1_existent_service.html',1,'HouseMaster']]]
 ];

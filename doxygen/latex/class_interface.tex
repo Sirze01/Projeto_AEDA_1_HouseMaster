@@ -3,62 +3,71 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+class \mbox{\hyperlink{class_interface_1_1_invalid_nif}{Invalid\+Nif}}
+\item 
 class \mbox{\hyperlink{class_interface_1_1_nonexistent_role}{Nonexistent\+Role}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_interface_a55b789f862126871532596a5a2731d65}\label{class_interface_a55b789f862126871532596a5a2731d65}} 
-{\bfseries Interface} (\mbox{\hyperlink{class_house_master}{House\+Master}} house\+Master)
-\item 
+\mbox{\hyperlink{class_interface_a1b49009bfebc9ebd96a8145b4495f12d}{Interface}} (const \mbox{\hyperlink{class_house_master}{House\+Master}} \&house\+Master)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_interface}{Interface}} constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_interface_a76e2782f2e571b171dba8e37946695a4}{select\+Role}} (bool \&running)
+\begin{DoxyCompactList}\small\item\em selects a role to interact with \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_house_master}{House\+Master}} \mbox{\hyperlink{class_interface_a47528ddc820040627d031a9e1b0a2598}{get\+House\+Master\+State}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_interface_a1b49009bfebc9ebd96a8145b4495f12d}\label{class_interface_a1b49009bfebc9ebd96a8145b4495f12d}} 
+\index{Interface@{Interface}!Interface@{Interface}}
+\index{Interface@{Interface}!Interface@{Interface}}
+\doxysubsubsection{\texorpdfstring{Interface()}{Interface()}}
+{\footnotesize\ttfamily Interface\+::\+Interface (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{house\+Master }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\mbox{\hyperlink{class_interface}{Interface}} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em house\+Master} & the housemaster to interact with \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_interface_a47528ddc820040627d031a9e1b0a2598}\label{class_interface_a47528ddc820040627d031a9e1b0a2598}} 
+\index{Interface@{Interface}!getHouseMasterState@{getHouseMasterState}}
+\index{getHouseMasterState@{getHouseMasterState}!Interface@{Interface}}
+\doxysubsubsection{\texorpdfstring{getHouseMasterState()}{getHouseMasterState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_house_master}{House\+Master}} Interface\+::get\+House\+Master\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+housemaster 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_interface_a76e2782f2e571b171dba8e37946695a4}\label{class_interface_a76e2782f2e571b171dba8e37946695a4}} 
-void {\bfseries select\+Role} (bool \&running)
-\item 
-\mbox{\Hypertarget{class_interface_af2d0d99e2e48f8685d22c117a5d10014}\label{class_interface_af2d0d99e2e48f8685d22c117a5d10014}} 
-void {\bfseries user\+Login} ()
-\item 
-\mbox{\Hypertarget{class_interface_a593b08c99fa1ff61908a7f8618561d52}\label{class_interface_a593b08c99fa1ff61908a7f8618561d52}} 
-bool {\bfseries read\+Role} (const std\+::string \&username)
-\item 
-\mbox{\Hypertarget{class_interface_aa72751fe5df819fef7e52a8c737a14e8}\label{class_interface_aa72751fe5df819fef7e52a8c737a14e8}} 
-void {\bfseries admin\+Login} ()
-\item 
-\mbox{\Hypertarget{class_interface_aa6d26956c36232b7db934e96316c5923}\label{class_interface_aa6d26956c36232b7db934e96316c5923}} 
-void {\bfseries client\+Opperations} (bool \&running)
-\item 
-\mbox{\Hypertarget{class_interface_a240b6f8afd30ed027b2025fffe6a0f24}\label{class_interface_a240b6f8afd30ed027b2025fffe6a0f24}} 
-\mbox{\hyperlink{structdate}{date}} {\bfseries read\+Intervention\+Date} ()
-\item 
-\mbox{\Hypertarget{class_interface_a23e53aaa39598b330c7e7669e1d8e92f}\label{class_interface_a23e53aaa39598b330c7e7669e1d8e92f}} 
-std\+::string {\bfseries select\+Service} (bool \&running)
-\item 
-\mbox{\Hypertarget{class_interface_aab654189ee3db65f96f98bcbfab1c527}\label{class_interface_aab654189ee3db65f96f98bcbfab1c527}} 
-void {\bfseries show} (const \mbox{\hyperlink{class_service}{Service}} \&service)
-\item 
-\mbox{\Hypertarget{class_interface_a37b78ee73ded3132038f59b653e8cdcb}\label{class_interface_a37b78ee73ded3132038f59b653e8cdcb}} 
-void {\bfseries show} (const \mbox{\hyperlink{class_collaborator}{Collaborator}} \&collaborator)
-\item 
-\mbox{\Hypertarget{class_interface_adb93b491e1f1ac5126a7ba2da6043e45}\label{class_interface_adb93b491e1f1ac5126a7ba2da6043e45}} 
-void {\bfseries show} (\mbox{\hyperlink{class_intervention}{Intervention}} \&intervention)
-\item 
-\mbox{\Hypertarget{class_interface_a8b8b8bf2912fd2f5894b9387f17a8a97}\label{class_interface_a8b8b8bf2912fd2f5894b9387f17a8a97}} 
-void {\bfseries admin\+Opperations} (bool \&running)
-\item 
-\mbox{\Hypertarget{class_interface_a8467e2fd9867675a5491fee8d2137b6c}\label{class_interface_a8467e2fd9867675a5491fee8d2137b6c}} 
-std\+::string {\bfseries select\+Collab} (bool \&running)
-\item 
-\mbox{\Hypertarget{class_interface_a582bb1d487060cf0607295f0ba87b4fc}\label{class_interface_a582bb1d487060cf0607295f0ba87b4fc}} 
-void {\bfseries read\+New\+Collaborator\+Data} (bool \&running)
-\item 
-\mbox{\Hypertarget{class_interface_a7355a6acf12163eefb516ea936b5b5ba}\label{class_interface_a7355a6acf12163eefb516ea936b5b5ba}} 
-std\+::string {\bfseries read\+New\+Service\+Data} (bool \&running)
-\item 
-\mbox{\Hypertarget{class_interface_ae8f0c2d6cd74371d7e2e859da6cddd2d}\label{class_interface_ae8f0c2d6cd74371d7e2e859da6cddd2d}} 
-\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ {\bfseries select\+Active\+Intervention} (bool \&running)
-\end{DoxyCompactItemize}
+\index{Interface@{Interface}!selectRole@{selectRole}}
+\index{selectRole@{selectRole}!Interface@{Interface}}
+\doxysubsubsection{\texorpdfstring{selectRole()}{selectRole()}}
+{\footnotesize\ttfamily void Interface\+::select\+Role (\begin{DoxyParamCaption}\item[{bool \&}]{running }\end{DoxyParamCaption})}
+
+
+
+selects a role to interact with 
+
+
+\begin{DoxyParams}{Parameters}
+{\em running} & \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/Interface.\+h\item 
-src/Interface.\+cpp\end{DoxyCompactItemize}
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/Interface.\+h\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/Interface.\+cpp\end{DoxyCompactItemize}

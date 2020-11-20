@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['menu_22',['Menu',['../class_menu.html',1,'']]],
-  ['minutes_23',['minutes',['../structdate.html#a4c3eaca10a0b5a970681d8146772d553',1,'date']]],
-  ['month_24',['month',['../structdate.html#ab4b74eab433de3016e91c86b4af9074b',1,'date']]]
+  ['hasqualificationtopreform_54',['hasQualificationToPreform',['../class_collaborator.html#a23b47f6816997bd40ede70441c8fe9c0',1,'Collaborator']]],
+  ['housemaster_55',['HouseMaster',['../class_house_master.html',1,'HouseMaster'],['../class_house_master.html#ac3fc8187884445ab31f13dc4ce04d601',1,'HouseMaster::HouseMaster()'],['../class_house_master.html#add0a8d4300e0adb65546227e98472d26',1,'HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services, std::ifstream earnings)']]]
 ];

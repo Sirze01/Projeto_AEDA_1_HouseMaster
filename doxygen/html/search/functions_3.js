@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['operator_2b_67',['operator+',['../structdate.html#a9bb4afd81745a7bb5ecf06a096048eb0',1,'date']]],
-  ['operator_3c_68',['operator&lt;',['../structdate.html#a7b328e0fc174a804f077af61e2eef588',1,'date']]],
-  ['operator_3d_3d_69',['operator==',['../structdate.html#a87ef11c9f38fbb3a52e0eafbd447fec7',1,'date']]],
-  ['operator_3e_70',['operator&gt;',['../structdate.html#a47c386b076fbf5d5b793798c46992f18',1,'date']]]
+  ['execute_151',['execute',['../class_menu.html#a2ee4318d20d172224edc147a1f587649',1,'Menu']]],
+  ['existentclient_152',['ExistentClient',['../class_house_master_1_1_existent_client.html#aef09e625a4c70f9467d25d24dc027106',1,'HouseMaster::ExistentClient']]],
+  ['existentservice_153',['ExistentService',['../class_house_master_1_1_existent_service.html#a9fa3815365088dc61cf3868fdc29847b',1,'HouseMaster::ExistentService']]]
 ];
