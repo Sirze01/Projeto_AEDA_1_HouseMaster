@@ -350,7 +350,7 @@ Intervention* HouseMaster::addIntervention(const date &appointment, const std::s
                                            const std::string &clientId, unsigned int nrOfRooms) {
     auto it = _availableServices.find(type);
     if (it != _availableServices.end()) {
-        auto newIntervention = new Intervention(appointment, *_availableServices[type], forcePro, nrOfRooms);
+        auto newIntervention = new Intervention(appointment, _availableServices[type], forcePro, nrOfRooms);
         newIntervention->setClientId(clientId);
         newIntervention->calculateCost();
         _interventions.push_back(newIntervention);
@@ -367,7 +367,6 @@ void HouseMaster::changeinterventionState(Intervention *intervention, processSta
 
 void HouseMaster::processTransaction(Intervention *intervention) {
     float hmEarnings;
-    intervention->calculateCost();
     hmEarnings = intervention->getCost() - (intervention->getCost() / float(1 + HouseMasterTax));
     getCollaborators()[intervention->getCollabId()]->calculateEarnings(hmEarnings);
     _earnings += hmEarnings;
