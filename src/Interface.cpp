@@ -3,6 +3,7 @@
 #include <utility>
 
 Interface::NonexistentRole::NonexistentRole(const std::string &error_msg) : std::logic_error(error_msg){}
+Interface::InvalidNif::InvalidNif(const std::string &error_msg) : invalid_argument(error_msg){}
 
 Interface::Interface(HouseMaster houseMaster) : _houseMaster(std::move(houseMaster)), _user(), _role() {
 
@@ -218,7 +219,6 @@ date Interface::readInterventionDate() {
         catch (const date::InvalidDate &e)
         {
             done = false;
-            std::cout << "Month: " << interventionDate.month << " Day: " << interventionDate.day << "\n";
             std::cout << e.what() << "\nInsert the desired intervention date in format DD/MM/YYYY HH:mm\n";
             std::getline(std::cin, dateString);
             date intDate(dateString);
@@ -289,6 +289,13 @@ void Interface::adminOperations(bool &running) {
     adminMenu.execute(running);
 }
 
+bool Interface::isValidNif(unsigned nif)
+{
+    if (nif/1000000000 > 0){throw InvalidNif("This is bigger than expected!");}
+    else if (nif/100000000 != 1 && nif/100000000 != 2 && nif/100000000 != 5 && nif/100000000 != 6 && nif/100000000 != 8 && nif/100000000 != 9){throw InvalidNif("This is an invalid NIF!");}
+    return true;
+}
+
 void Interface::readNewClientData() {
     std::string name{}, premiumStr{};
     unsigned nif{};
@@ -304,6 +311,21 @@ void Interface::readNewClientData() {
     bool premium = premiumStr == "yes";
 
     std::cout << "NIF ? "; std::cin >> nif; // TODO input validation
+    bool done;
+    do
+    {
+        try
+        {
+            done = true;
+            isValidNif(nif);
+        }
+        catch (const InvalidNif &e)
+        {
+            done = false;
+            std::cout << e.what() << "\nNIF ? ";
+            std::cin >> nif;
+        }
+    } while(!done);
 
     _houseMaster.addClient(nif, name, premium);
     std::string username = (*_houseMaster.getClients().rbegin()).first;
@@ -534,10 +556,3 @@ void Interface::showSortedCollabs() {
     std::cout << "|____________________________________________________|" << std::endl;
     std::cin.ignore();
 }
-
-
-
-
-
-
-
