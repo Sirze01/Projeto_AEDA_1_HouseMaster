@@ -10,4 +10,3 @@ Hang a picture,no,3,00h45,default
 Paint a room,no,30,02h30,painting
 Repair AC system,yes,2,30h0,default
 Change a lamp,no,2,01h30,default
-
