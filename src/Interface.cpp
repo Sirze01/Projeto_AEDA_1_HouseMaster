@@ -209,8 +209,6 @@ void Interface::collaboratorOperations(bool &running) {
                 if (!service.empty()) {
                     try
                     {
-                        bool new_t = collab->canPreform(service);
-                        std::cout << "Can Preform? " << new_t << "\n";
                         if (collab->canPreform(service))
                         {
                             throw Collaborator::AlreadyKnows("Impossible! ");
