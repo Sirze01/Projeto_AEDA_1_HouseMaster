@@ -54,11 +54,10 @@ unsigned int date::getDaysInMonth() const {
      * normal code flow it is unnecessary since throwing the exception will stop
      * the program, so by default we use it as false
      * \return Whether the duration is valid or invalid*/
-bool date::isValidDate(bool throwExcept) const {
-    if (day < 1 || day > getDaysInMonth() || month < 1 || month > 12 || hours > 23 || minutes > 59) {
-        if(throwExcept)
-            throw InvalidDate(dateToStr() + " isn't a valid date!");
-        return false;
+bool date::isValidDate() const {
+    if (day < 1 || day > getDaysInMonth() || month < 1 || month > 12 || hours > 23 || minutes > 59)
+    {
+        throw InvalidDate(dateToStr() + " isn't a valid date!");
     }
     return true;
 }
@@ -222,11 +221,9 @@ duration::InvalidDuration::InvalidDuration(const std::string &error_msg) : std::
      * normal code flow it is unnecessary since throwing the exception will stop
      * the program, so by default we use it as false
      * \return Whether the duration is valid or invalid*/
-bool duration::isValidDuration(bool throwExcept) const {
+bool duration::isValidDuration() const {
     if (hours > 23 || minutes > 59) {
-        if(throwExcept)
-            throw InvalidDuration(durationToStr() + " isn't a valid date!");
-        return false;
+        throw InvalidDuration(durationToStr() + " isn't a valid date!");
     }
     return true;
 }

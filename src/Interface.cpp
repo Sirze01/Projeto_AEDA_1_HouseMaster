@@ -61,7 +61,7 @@ void Interface::adminLogin() {
             std::cin >> password;
         }
     }
-    std::cout << "Too many tries! No admin for you.  Logging out...\n";
+    std::cout << "Too many tries! No admin for you. Logging out...\n";
     exit(0);
 }
 
@@ -185,15 +185,12 @@ void Interface::collaboratorOperations(bool &running) {
         }}, {"Add a new one", [&](){
             std::string serviceName = readNewServiceData(running);
             collab->addService(serviceName);
-
         }}});
-
         while (innerRunning) {
             pickServices.show();
             pickServices.select();
             pickServices.execute(innerRunning);
         }
-
     }}});
     collabsMenu.show();
     collabsMenu.select();
@@ -204,8 +201,28 @@ void Interface::collaboratorOperations(bool &running) {
 date Interface::readInterventionDate() {
     std::string dateString{};
     std::cin.ignore();
+    bool done;
     std::cout << "Insert the desired intervention date in format DD/MM/YYYY HH:mm\n"; std::getline(std::cin, dateString);
-    date interventionDate(dateString);
+    date interventionDate;
+    do
+    {
+        try
+        {
+            done = true;
+            date intDate(dateString);
+            interventionDate = intDate;
+            interventionDate.isValidDate();
+        }
+        catch (const date::InvalidDate &e)
+        {
+            done = false;
+            std::cout << "Month: " << interventionDate.month << " Day: " << interventionDate.day << "\n";
+            std::cout << e.what() << "\nInsert the desired intervention date in format DD/MM/YYYY HH:mm\n";
+            std::getline(std::cin, dateString);
+            date intDate(dateString);
+            interventionDate = intDate;
+        }
+    } while(!done);
     return interventionDate;
 }
 

@@ -45,7 +45,7 @@ struct date {
      * normal code flow it is unnecessary since throwing the exception will stop
      * the program, so by default we use it as false
      * \return Whether the duration is valid or invalid*/
-    bool isValidDate(bool throwExcept=false) const;
+    bool isValidDate() const;
     /**\class invalidDate
      * \brief Class used to throw an exception warning about Invalid Dates*/
     class InvalidDate;
@@ -79,7 +79,7 @@ struct duration: public date
      * normal code flow it is unnecessary since throwing the exception will stop
      * the program, so by default we use it as false
      * \return Whether the duration is valid or invalid*/
-    bool isValidDuration(bool throwExcept=false) const;
+    bool isValidDuration() const;
     /**\class invalidDate
      * \brief Class used to throw an exception warning about Invalid Dates*/
     class InvalidDuration;
