@@ -6,6 +6,9 @@
 #include <vector>
 #include <cmath>
 #include <numeric>
+#include <utility>
+#include <algorithm>
+#include <sstream>
 #include "Services.h"
 
 class HouseMaster;
@@ -21,12 +24,11 @@ public:
 
     virtual std::string getId() const = 0;
 
-    std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm) const;
+    std::vector<Intervention *> getAssociatedInterventions(HouseMaster &hm) const;
 
-    std::vector<Intervention*> getAssociatedActiveInterventions(HouseMaster &hm) const;
+    std::vector<Intervention *> getAssociatedActiveInterventions(HouseMaster &hm) const;
 
     std::string getName() const;
-
 
 
 protected:
@@ -49,8 +51,8 @@ enum Classification {
 
 class Collaborator : public Individual {
 public:
-    Collaborator(std::vector<std::string> functions, const std::string &name, bool pro, float earnings = 0,
-                 Classification score=newHere);
+    Collaborator(std::vector<std::string> services, const std::string &name, bool pro, float earnings = 0,
+                 Classification score = newHere);
 
     ~Collaborator() override = default;
 
@@ -58,23 +60,23 @@ public:
 
     bool isPro() const;
 
-    bool canPreform(const std::string& service);
+    bool canPreform(const std::string &service);
 
     static bool isAvailable(HouseMaster &hm, const std::string &collabId, Date start, Duration duration);
 
     bool hasQualificationToPreform(Intervention *intervention) const;
 
-    bool canDo(HouseMaster& hm, const std::string &collabId, Intervention *intervention);
+    bool canDo(HouseMaster &hm, const std::string &collabId, Intervention *intervention);
 
     int getScore() const;
 
     void addClassification(Classification classification);
 
-    void addService(const std::string& service);
+    void addService(const std::string &service);
 
-    static void markInterventionAsInProgress(Intervention* intervention);
+    static void markInterventionAsInProgress(Intervention *intervention);
 
-    static void markInterventionAsComplete(Intervention* intervention);
+    static void markInterventionAsComplete(Intervention *intervention);
 
     void updateScore();
 
@@ -82,15 +84,15 @@ public:
 
     float getEarnings() const;
 
-    float comissionByScore();
+    float commissionByScore();
 
     static unsigned int _idSeqCol;
 
     std::string getId() const override;
 
-    bool operator== (const Collaborator& ind2) const;
+    bool operator==(const Collaborator &ind2) const;
 
-    bool operator< (const Collaborator& col2) const;
+    bool operator<(const Collaborator &col2) const;
 
 
 private:
@@ -110,7 +112,7 @@ public:
 
     Client(unsigned int nif, const std::string &name, bool premium);
 
-    ~Client() override= default;
+    ~Client() override = default;
 
     unsigned int getNif();
 
@@ -118,13 +120,14 @@ public:
 
     std::string getId() const override;
 
-    void requestIntervention(HouseMaster &hm, const Date &date, const std::string &service, bool forcePro, int nrOfRooms=0) const;
+    void requestIntervention(HouseMaster &hm, const Date &date, const std::string &service, bool forcePro,
+                             int nrOfRooms = 0) const;
 
-    static void cancelIntervention(Intervention* intervention);
+    static void cancelIntervention(Intervention *intervention);
 
     static void classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification);
 
-    bool operator== (const Client& ind2) const;
+    bool operator==(const Client &ind2) const;
 
 private:
     unsigned int _nif;
