@@ -22,7 +22,7 @@ public:
     void adminLogin();
     void clientOperations(bool &running);
     void collaboratorOperations(bool &running);
-    date readInterventionDate();
+    Date readInterventionDate();
     std::string selectService(bool &running);
     void show(const Service& service);
     void show(const Collaborator& collaborator);

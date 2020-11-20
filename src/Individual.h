@@ -60,7 +60,7 @@ public:
 
     bool canPreform(const std::string& service);
 
-    static bool isAvailable(HouseMaster &hm, const std::string &collabId, date start, duration duration);
+    static bool isAvailable(HouseMaster &hm, const std::string &collabId, Date start, Duration duration);
 
     bool hasQualificationToPreform(Intervention *intervention) const;
 
@@ -118,7 +118,7 @@ public:
 
     std::string getId() const override;
 
-    void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int nrOfRooms=0) const;
+    void requestIntervention(HouseMaster &hm, const Date &_date, const std::string &type, bool forcePro, int nrOfRooms=0) const;
 
     static void cancelIntervention(Intervention* intervention);
 

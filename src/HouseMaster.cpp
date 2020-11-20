@@ -31,7 +31,7 @@ std::vector<Intervention*> Individual::getAssociatedActiveInterventions(HouseMas
     return hm.getAssociatedActiveInterventions(this->getId());
 }
 
-void Client::requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro, int nrOfRooms) const{
+void Client::requestIntervention(HouseMaster &hm, const Date &_date, const std::string &type, bool forcePro, int nrOfRooms) const{
     hm.assignColaborator(hm.addIntervention(_date, type, forcePro, this->getId(), nrOfRooms), hm.sortCollaboratorsByScore());
 }
 
@@ -43,7 +43,7 @@ void Client::classifyCollaborator(HouseMaster &hm, const std::string &collabId, 
     hm.getCollaborators()[collabId]->addClassification(classification);
 }
 
-bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, date start, duration duration) {
+bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, Date start, Duration duration) {
     for (const auto &intervention : hm.getAssociatedActiveInterventions(collabId)) {
         if (intervention->conflictsWith(start, duration)) {
             return false;
@@ -54,8 +54,8 @@ bool Collaborator::isAvailable(HouseMaster &hm, const std::string &collabId, dat
 
 bool Collaborator::canDo(HouseMaster& hm, const std::string &collabId, Intervention *intervention) {
     const Service *service = intervention->getService();
-    date start = intervention->getStartingTime();
-    duration duration = service->getDuration();
+    Date start = intervention->getStartingTime();
+    Duration duration = service->getDuration();
     return isAvailable(hm, collabId, start, duration) && canPreform(service->getName()) && hasQualificationToPreform(intervention);
 }
 
@@ -90,7 +90,7 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         // duration
         std::string durationStr;
         std::getline(lss, durationStr, ',');
-        duration duration(durationStr);
+        Duration duration(durationStr);
         // category
         std::string category{};
         std::getline(lss, category, ',');
@@ -161,7 +161,7 @@ std::vector<Intervention *> &HouseMaster::getInterventions() {
     return _interventions;
 }
 
-void HouseMaster::addAvailableService(const std::string &name, bool pro, float basePrice, duration duration) {
+void HouseMaster::addAvailableService(const std::string &name, bool pro, float basePrice, Duration duration) {
     if (_availableServices.find(name) != _availableServices.end())
         throw ExistentService("A service with the same name already exists!");
     else {
@@ -170,7 +170,7 @@ void HouseMaster::addAvailableService(const std::string &name, bool pro, float b
     }
 }
 
-void HouseMaster::addAvailablePaintService(const std::string &name, bool pro, float basePrice, duration duration) {
+void HouseMaster::addAvailablePaintService(const std::string &name, bool pro, float basePrice, Duration duration) {
     if (_availableServices.find(name) != _availableServices.end())
         throw ExistentService("A service with the same name already exists!");
     else {
@@ -350,7 +350,7 @@ Intervention* HouseMaster::addIntervention(const date &appointment, const std::s
 }
 */
 
-Intervention* HouseMaster::addIntervention(const date &appointment, const std::string &type, bool forcePro,
+Intervention* HouseMaster::addIntervention(const Date &appointment, const std::string &type, bool forcePro,
                                            const std::string &clientId, unsigned int nrOfRooms) {
     auto it = _availableServices.find(type);
     if (it != _availableServices.end()) {
@@ -488,7 +488,7 @@ void HouseMaster::writeServicesInfo() {
             auto pt = dynamic_cast<Painting*>(sv);
             servicesFile << service_it->second->getName() << ",";
             if (service_it->second->getPro()) {servicesFile << "yes";} else {servicesFile << "no";}
-            servicesFile << "," << service_it->second->getBasePrice() << "," << service_it->second->getDuration().durationToStr();
+            servicesFile << "," << service_it->second->getBasePrice() << "," << service_it->second->getDuration().getString();
             if (pt) {
                 servicesFile << ",painting";
             } else {
@@ -513,8 +513,8 @@ void HouseMaster::writeInterventionsInfo()
         auto int_it = _interventions.begin();
         while (int_it != _interventions.end())
         {
-            interventionsFile << "Service: " << (*int_it)->getService()->getName() << ", from " << (*int_it)->getStartingTime().dateToStr()
-            << " to " << (*int_it)->getEndTime().dateToStr() << ", to client " << (*int_it)->getClientId() << " done by " << (*int_it)->getCollabId()
+            interventionsFile << "Service: " << (*int_it)->getService()->getName() << ", from " << (*int_it)->getStartingTime().getString()
+                              << " to " << (*int_it)->getEndTime().getString() << ", to client " << (*int_it)->getClientId() << " done by " << (*int_it)->getCollabId()
             << ", cost: " << (*int_it)->getCost() << '\n';
             int_it++;
         }

@@ -6,7 +6,7 @@
 #include <sstream>
 #include <iostream>
 
-#include "date.h"
+#include "Date.h"
 #include "Services_Constants.h"
 
 class Service {
@@ -14,15 +14,15 @@ private:
     std::string _name;
     bool _pro;
     float _basePrice;
-    duration _duration;
+    Duration _duration;
 public:
     Service();
-    Service(std::string name, bool pro, float basePrice, const duration &duration);
+    Service(std::string name, bool pro, float basePrice, const Duration &duration);
     virtual ~Service() = default;
     std::string getName() const;
     bool getPro() const;
     float getBasePrice() const;
-    duration getDuration() const;
+    Duration getDuration() const;
     virtual float calculatePrice();
 };
 
@@ -30,7 +30,7 @@ class Painting : public Service{
 private:
     unsigned int _roomNumber;
 public:
-    Painting(std::string name, bool pro, float basePrice, const duration &duration, unsigned int nrOfRooms = 0);
+    Painting(std::string name, bool pro, float basePrice, const Duration &duration, unsigned int nrOfRooms = 0);
     ~Painting() override = default;
     void setRoomNumber(unsigned int number);
     float calculatePrice() override;
@@ -49,7 +49,7 @@ private:
 
     std::string _clientId;
     std::string _collabId;
-    date _startingTime;
+    Date _startingTime;
     Service* _type;
     bool _forcePro;
     processState _state;
@@ -58,11 +58,11 @@ private:
 
 public:
 
-    Intervention(const date &appointment, Service* type, bool forcePro, unsigned int nrOfRooms = 0);
+    Intervention(const Date &appointment, Service* type, bool forcePro, unsigned int nrOfRooms = 0);
 
     ~Intervention();
 
-    date getStartingTime() const;
+    Date getStartingTime() const;
 
     const Service* getService() const;
 
@@ -80,7 +80,7 @@ public:
 
     void setProcessState(processState state);
 
-    bool conflictsWith(date start, duration duration) const;
+    bool conflictsWith(Date start, Duration duration) const;
 
     void calculateCost(); // Calculates cost to the client, earnings to housemaster and collab
 
@@ -88,7 +88,7 @@ public:
 
     bool getPaid() const;
 
-    date getEndTime() const;
+    Date getEndTime() const;
 
     void pay();
 

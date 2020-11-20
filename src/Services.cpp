@@ -1,9 +1,9 @@
 #include "Services.h"
 #include <utility>
 
-Service::Service() : _name(), _pro(false), _basePrice(0), _duration(duration(0,0)) {}
+Service::Service() : _name(), _pro(false), _basePrice(0), _duration(Duration(0, 0)) {}
 
-Service::Service(std::string name, bool pro, float basePrice, const duration &duration) :
+Service::Service(std::string name, bool pro, float basePrice, const Duration &duration) :
         _name(std::move(name)), _pro(pro), _basePrice(basePrice), _duration(duration){}
 
 std::string Service::getName() const{
@@ -18,7 +18,7 @@ float Service::getBasePrice() const{
     return _basePrice;
 }
 
-duration Service::getDuration() const{
+Duration Service::getDuration() const{
     return _duration;
 }
 
@@ -26,7 +26,7 @@ float Service::calculatePrice() {
     return _basePrice;
 }
 
-Painting::Painting(std::string name, bool pro, float basePrice, const duration &duration, unsigned int nrOfRooms) :
+Painting::Painting(std::string name, bool pro, float basePrice, const Duration &duration, unsigned int nrOfRooms) :
                     Service(std::move(name), pro, basePrice, duration), _roomNumber(nrOfRooms) {}
 
 void Painting::setRoomNumber(unsigned int number) {
@@ -46,7 +46,7 @@ float Painting::calculatePrice() {
 }
 
 
-Intervention::Intervention(const date& appointment, Service* type, bool forcePro, unsigned int nrOfRooms) :
+Intervention::Intervention(const Date& appointment, Service* type, bool forcePro, unsigned int nrOfRooms) :
         _startingTime(appointment), _forcePro(forcePro), _state(Scheduled), _cost(), _paid(false){
 
     auto painting = dynamic_cast<Painting*>(type);
@@ -102,14 +102,14 @@ void Intervention::setClientId(const std::string& clientId) {
     _clientId = clientId;
 }
 
-date Intervention::getStartingTime() const {
+Date Intervention::getStartingTime() const {
     return _startingTime;
 }
 
-bool Intervention::conflictsWith(date start, duration duration) const{
+bool Intervention::conflictsWith(Date start, Duration duration) const{
 
-    date otherStart = start;
-    date otherEnd = start + duration;
+    Date otherStart = start;
+    Date otherEnd = start + duration;
 
     return (getEndTime() > otherStart && getStartingTime() < otherStart) ||
     (getStartingTime() < otherEnd && getEndTime() > otherEnd) ||
@@ -126,7 +126,7 @@ void Intervention::calculateCost() {
     }
 }
 
-date Intervention::getEndTime() const {
+Date Intervention::getEndTime() const {
     return _startingTime + _type->getDuration();
 }
 

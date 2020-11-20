@@ -1,5 +1,4 @@
 #include "Interface.h"
-#include <limits.h>
 
 #include <utility>
 
@@ -86,21 +85,6 @@ void Interface::userLogin() {
             std::cin >> username;
         }
     } while (!done);
-    done = true;
-    do
-    {
-        try {
-            done = true;
-            _user = _houseMaster.findByUsername(username);
-        }
-        catch (const HouseMaster::NonexistentUsername &e)
-        {
-            done = false;
-            std::cout << e.what() << " Please try again\n";
-            std::cout << "Username : ";
-            std::cin >> username;
-        }
-    } while (!done);
     _user = _houseMaster.findByUsername(username);
 }
 
@@ -127,7 +111,7 @@ void Interface::clientOperations(bool &running) {
         while (innerRunning) {
             std::string service = selectService(innerRunning);
             if (!service.empty()) {
-                date interventionDate = readInterventionDate();
+                Date interventionDate = readInterventionDate();
                 Service* sv = _houseMaster.getAvailableServices()[service];
                 if (dynamic_cast<Painting*>(sv)) {
                     unsigned numberOfRooms = readNumberOfRooms();
@@ -200,7 +184,6 @@ void Interface::collaboratorOperations(bool &running) {
                     if (!collab->canPreform(service)) collab->addService(service);
                     else std::cout << collab->getName() << " already knows " << service << "\n";
                 }
-                }
             }
         }}, {"Add a new one", [&](){
             std::string serviceName = readNewServiceData(running);
@@ -218,27 +201,27 @@ void Interface::collaboratorOperations(bool &running) {
 }
 
 
-date Interface::readInterventionDate() {
+Date Interface::readInterventionDate() {
     std::string dateString{};
     std::cin.ignore();
     bool done;
     std::cout << "Insert the desired intervention date in format DD/MM/YYYY HH:mm\n"; std::getline(std::cin, dateString);
-    date interventionDate;
+    Date interventionDate;
     do
     {
         try
         {
             done = true;
-            date intDate(dateString);
+            Date intDate(dateString);
             interventionDate = intDate;
-            interventionDate.isValidDate();
+            interventionDate.checkIfValid();
         }
-        catch (const date::InvalidDate &e)
+        catch (const Date::InvalidDate &e)
         {
             done = false;
             std::cout << e.what() << "\nInsert the desired intervention date in format DD/MM/YYYY HH:mm\n";
             std::getline(std::cin, dateString);
-            date intDate(dateString);
+            Date intDate(dateString);
             interventionDate = intDate;
         }
     } while(!done);
@@ -267,7 +250,7 @@ void Interface::show(const Service& service) {
     std::cout << "| " << std::setw(30) << std::right << service.getName() << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "| [" << "Base Price" << "] " << std::setw(16) << std::right << service.getBasePrice() << "€ |" << std::endl;
-    std::cout << "| [" << "Duration" << "] " << std::setw(19) << std::right << service.getDuration().durationToStr() << " |" << std::endl;
+    std::cout << "| [" << "Duration" << "] " << std::setw(19) << std::right << service.getDuration().getString() << " |" << std::endl;
     std::cout << "| [" << "Professional" << "] " << std::setw(15) << std::right << pro << " |" << std::endl;
     std::cout << "|                                |" << std::endl;
     std::cout << "| [Enter] Go Back                |" << std::endl;
@@ -308,7 +291,6 @@ void Interface::adminOperations(bool &running) {
 
 bool Interface::isValidNif(unsigned nif)
 {
-    if (nif >= INT_MAX) {throw InvalidNif ("This is bigger than expected!");}
     if (nif/1000000000 > 0){throw InvalidNif("This is bigger than expected!");}
     else if (nif/100000000 != 1 && nif/100000000 != 2 && nif/100000000 != 5 && nif/100000000 != 6 && nif/100000000 != 8 && nif/100000000 != 9){throw InvalidNif("This is an invalid NIF!");}
     return true;
@@ -328,8 +310,8 @@ void Interface::readNewClientData() {
 
     bool premium = premiumStr == "yes";
 
-    std::cout << "NIF ? "; std::cin >> nif;
-    bool done = true;
+    std::cout << "NIF ? "; std::cin >> nif; // TODO input validation
+    bool done;
     do
     {
         try
@@ -375,6 +357,7 @@ void Interface::readNewCollaboratorData(bool &running) {
     }}, {"Add a new one", [&](){
         std::string serviceName = readNewServiceData(running);
         if (!serviceName.empty()) services.push_back(serviceName);
+
     }}});
 
     while (innerRunning) {
@@ -424,28 +407,8 @@ std::string Interface::readNewServiceData(bool &running) {
         }
     }
 
-    std::cout << "Mean duration : "; std::cin >> durationStr;
-    duration duration;
-    bool done;
-    do
-    {
-        try {
-            done = true;
-            struct duration dur2(durationStr);
-            duration = dur2;
-            duration.isValidDuration();
-        }
-        catch (const duration::InvalidDuration& e)
-        {
-            done = false;
-            std::cout << e.what() << "\nMean duration : \n"; std::cin >> durationStr;
-            struct duration dur2(durationStr);
-            duration = dur2;
-        }
-    }while (!done);
-    _houseMaster.addAvailableService(name, pro, basePrice, duration);
     std::cout << "Mean duration ? "; std::cin >> durationStr;
-    duration duration(durationStr);
+    Duration duration(durationStr);
 
     std::cout << "Painting ? [yes/no] "; std::cin >> paintingStr;
     while (paintingStr != "yes" && paintingStr != "no") {
@@ -460,6 +423,7 @@ std::string Interface::readNewServiceData(bool &running) {
     }
 
     return name;
+
 }
 
 std::string Interface::selectCollab(bool &running) {
@@ -484,7 +448,8 @@ Intervention *Interface::selectActiveIntervention(bool &running) {
     std::map<std::string, std::function<void()>> options{};
     Intervention* selection{};
     for (const auto &i : activeInterventions) {
-        options.insert(std::pair<std::string, std::function<void()>>(i->getService()->getName() + " " + i->getStartingTime().dateToStr(), [&selection, &i](){
+        options.insert(std::pair<std::string, std::function<void()>>(i->getService()->getName() + " " +
+                                                                             i->getStartingTime().getString(), [&selection, &i](){
             selection = i;
         }));
     }
@@ -515,8 +480,8 @@ void Interface::show(Intervention &intervention) {
     std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
     std::cout << "| " << std::setw(49) << std::right << intervention.getService()->getName() << " |" << std::endl;
     std::cout << "|                                                     |" << std::endl;
-    std::cout << "| [" << "Starting at" << "] " << std::setw(36) << std::right << intervention.getStartingTime().dateToStr() << " |" << std::endl;
-    std::cout << "| [" << "Ending at" << "] " << std::setw(38) << std::right << intervention.getEndTime().dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Starting at" << "] " << std::setw(36) << std::right << intervention.getStartingTime().getString() << " |" << std::endl;
+    std::cout << "| [" << "Ending at" << "] " << std::setw(38) << std::right << intervention.getEndTime().getString() << " |" << std::endl;
     std::cout << "| [" << "Cost" << "] " << std::setw(40) << std::right << intervention.getCost() << " |" << std::endl;
     std::cout << "| [" << "Collaborator" << "] " << std::setw(36) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
     std::cout << "|                                                     |" << std::endl;

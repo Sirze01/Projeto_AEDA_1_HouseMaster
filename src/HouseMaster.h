@@ -42,7 +42,7 @@ public:
      * \return A vector with all the interventions ordered by the time of the request*/
     std::vector<Intervention *>& getInterventions();
     /**Void method to add a new Service to the HouseMaster's portfolio*/
-    void addAvailableService(const std::string& name, bool pro, float basePrice, duration duration);
+    void addAvailableService(const std::string& name, bool pro, float basePrice, Duration duration);
     /**Method to remove a Service from HouseMaster's portfolio
      * @param serviceName String containing the service to be removed*/
     void removeAvailableService(const std::string& serviceName);
@@ -77,7 +77,7 @@ public:
     /**Method to remove a Client from HouseMaster's database
      * @param clientId String containing the Client's ID*/
     void removeClient(const std::string& clientId);
-    Intervention* addIntervention(const date& appointment, const std::string& type, bool forcePro, const std::string &clientId, unsigned int nrOfRooms=0);
+    Intervention* addIntervention(const Date& appointment, const std::string& type, bool forcePro, const std::string &clientId, unsigned int nrOfRooms=0);
     static void changeinterventionState(Intervention* intervention, processState state);
     void processTransaction(Intervention *intervention);
     std::vector<Intervention*> getAssociatedInterventions(const std::string& id);
@@ -103,7 +103,7 @@ public:
     void writeInterventionsInfo();
     void writeFinantialInfo() const;
 
-    void addAvailablePaintService(const std::string &name, bool pro, float basePrice, duration duration);
+    void addAvailablePaintService(const std::string &name, bool pro, float basePrice, Duration duration);
 
 private:
     std::unordered_map<std::string, Service*> _availableServices;

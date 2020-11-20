@@ -12,13 +12,13 @@ TEST(HouseMasterTest, fileConstructor){
                              std::ifstream("../../data/services.txt"));
 
     std::vector<Service> svc;
-    svc.emplace_back("ajudar os amiguinhos com fisica", false, 3, duration(2,30));
-    svc.emplace_back("ajudar os amiguinhos com amat", false, 3, duration(3,0));
-    svc.emplace_back("jantar na cantina as 18h30", false, 2.70, duration(1,0));
-    svc.emplace_back("montar um carro do nada", false, 2.5, duration(10,0));
-    svc.emplace_back("desmontar um computador", false, 4, duration(2,0));
-    svc.emplace_back("canalizador", true, 5, duration(3,0));
-    svc.emplace_back("andar a correr atras de uma princesa ou la o que e", false, 1, duration(4,0));
+    svc.emplace_back("ajudar os amiguinhos com fisica", false, 3, Duration(2, 30));
+    svc.emplace_back("ajudar os amiguinhos com amat", false, 3, Duration(3, 0));
+    svc.emplace_back("jantar na cantina as 18h30", false, 2.70, Duration(1, 0));
+    svc.emplace_back("montar um carro do nada", false, 2.5, Duration(10, 0));
+    svc.emplace_back("desmontar um computador", false, 4, Duration(2, 0));
+    svc.emplace_back("canalizador", true, 5, Duration(3, 0));
+    svc.emplace_back("andar a correr atras de uma princesa ou la o que e", false, 1, Duration(4, 0));
     for(auto & i : svc){
         EXPECT_EQ(i.getName(), houseMaster1.getAvailableServices()[i.getName()]->getName());
         EXPECT_EQ(i.getPro(), houseMaster1.getAvailableServices()[i.getName()]->getPro());
@@ -90,11 +90,11 @@ TEST(HouseMasterTest, servicesManip){
     EXPECT_THROW(houseMaster1.removeAvailableService("ajudar os amiguinhos com fisica"),HouseMaster::InexistentService);
 
     // add service
-    houseMaster1.addAvailableService("ajudar os amiguinhos com fisica", false, 3, duration(2,30));
+    houseMaster1.addAvailableService("ajudar os amiguinhos com fisica", false, 3, Duration(2, 30));
     EXPECT_FALSE(houseMaster1.getAvailableServices().find("ajudar os amiguinhos com fisica") == houseMaster1.getAvailableServices().end());
 
     // Try to add existent service
-    EXPECT_THROW(houseMaster1.addAvailableService("ajudar os amiguinhos com fisica", false, 3, duration(2,30)),HouseMaster::ExistentService);
+    EXPECT_THROW(houseMaster1.addAvailableService("ajudar os amiguinhos com fisica", false, 3, Duration(2, 30)), HouseMaster::ExistentService);
 }
 
 
@@ -150,15 +150,15 @@ TEST(HouseMasterTest, interventionManip){
                              std::ifstream("../../data/services.txt"));
 
     // add Intervention
-    houseMaster1.addIntervention(date(12,05,2001,01,00), "desmontar um computador", true, "");
+    houseMaster1.addIntervention(Date(12, 05, 2001, 01, 00), "desmontar um computador", true, "");
     auto it =  std::find_if(houseMaster1.getInterventions().begin(), houseMaster1.getInterventions().end(), [](Intervention * intervention){
         if(intervention->getClientId() == "" && intervention->getService()->getName() == "desmontar um computador"){return true;}});
     EXPECT_FALSE(it == houseMaster1.getInterventions().end());
 
-    houseMaster1.getClients()["client3"]->requestIntervention(houseMaster1, date(12, 12, 2012, 21, 00), "canalizador",
+    houseMaster1.getClients()["client3"]->requestIntervention(houseMaster1, Date(12, 12, 2012, 21, 00), "canalizador",
                                                               false);
     it = std::find_if(houseMaster1.getInterventions().begin(), houseMaster1.getInterventions().end(), [](Intervention * intervention){
-        if(intervention->getClientId() == "client3" && intervention->getService()->getName() == "canalizador" && intervention->getStartingTime() == date(12,12,2012,21,00)){return true;}});
+        if(intervention->getClientId() == "client3" && intervention->getService()->getName() == "canalizador" && intervention->getStartingTime() == Date(12, 12, 2012, 21, 00)){return true;}});
     EXPECT_FALSE(it == houseMaster1.getInterventions().end());
 
 }
@@ -174,7 +174,7 @@ TEST(HouseMasterTest, usageTest){
     // Client requests intervention
 
     houseMaster1.getClients()["client3"]->requestIntervention(houseMaster1,
-                                                              date(12, 11, 2020, 12, 00), "desmontar um computador",
+                                                              Date(12, 11, 2020, 12, 00), "desmontar um computador",
                                                               false);
 
     // Client cancels it
@@ -182,13 +182,13 @@ TEST(HouseMasterTest, usageTest){
 
     // client requests another
     houseMaster1.getClients()["client2"]->requestIntervention(houseMaster1,
-                                                              date(12, 11, 2020, 12, 00),
+                                                              Date(12, 11, 2020, 12, 00),
                                                               "desmontar um computador",
                                                               false);
 
     // Client tries to assign another intervention for same time
 
-    EXPECT_THROW(houseMaster1.getClients()["client1"]->requestIntervention(houseMaster1, date(12,11,2020, 12,00),
+    EXPECT_THROW(houseMaster1.getClients()["client1"]->requestIntervention(houseMaster1, Date(12, 11, 2020, 12, 00),
                                                                            "desmontar um computador",
                                                                            false), HouseMaster::UnavailableAppointment);
 
