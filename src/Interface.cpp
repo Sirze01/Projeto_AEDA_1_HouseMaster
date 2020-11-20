@@ -1,4 +1,5 @@
 #include "Interface.h"
+#include <limits.h>
 
 #include <utility>
 
@@ -78,6 +79,21 @@ void Interface::userLogin() {
             readRole(username);
         }
         catch (const NonexistentRole &e)
+        {
+            done = false;
+            std::cout << e.what() << " Please try again\n";
+            std::cout << "Username : ";
+            std::cin >> username;
+        }
+    } while (!done);
+    done = true;
+    do
+    {
+        try {
+            done = true;
+            _user = _houseMaster.findByUsername(username);
+        }
+        catch (const HouseMaster::NonexistentUsername &e)
         {
             done = false;
             std::cout << e.what() << " Please try again\n";
@@ -183,6 +199,7 @@ void Interface::collaboratorOperations(bool &running) {
                 if (!service.empty()) {
                     if (!collab->canPreform(service)) collab->addService(service);
                     else std::cout << collab->getName() << " already knows " << service << "\n";
+                }
                 }
             }
         }}, {"Add a new one", [&](){
@@ -291,6 +308,7 @@ void Interface::adminOperations(bool &running) {
 
 bool Interface::isValidNif(unsigned nif)
 {
+    if (nif >= INT_MAX) {throw InvalidNif ("This is bigger than expected!");}
     if (nif/1000000000 > 0){throw InvalidNif("This is bigger than expected!");}
     else if (nif/100000000 != 1 && nif/100000000 != 2 && nif/100000000 != 5 && nif/100000000 != 6 && nif/100000000 != 8 && nif/100000000 != 9){throw InvalidNif("This is an invalid NIF!");}
     return true;
@@ -310,8 +328,8 @@ void Interface::readNewClientData() {
 
     bool premium = premiumStr == "yes";
 
-    std::cout << "NIF ? "; std::cin >> nif; // TODO input validation
-    bool done;
+    std::cout << "NIF ? "; std::cin >> nif;
+    bool done = true;
     do
     {
         try

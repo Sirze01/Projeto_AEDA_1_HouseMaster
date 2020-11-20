@@ -318,7 +318,6 @@ void HouseMaster::removeClient(const std::string &clientId) {
             _usernameMap.erase(UsernameIt);
         } else {
             throw NonexistentUsername("This username does not exist!");
-            //throws except
         }
 
     } else {
@@ -410,7 +409,6 @@ Individual *HouseMaster::findByUsername(const std::string &username) {
             return _clients[it->second];
     } else {
         throw NonexistentUsername("This username does not exist!");
-        // throw except
     }
     return nullptr;
 }
