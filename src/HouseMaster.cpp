@@ -107,15 +107,19 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
     for (std::string line; std::getline(collaborators, line);) {
         std::stringstream lss(line);
         // name
-        std::string name;
+        std::string name{};
         std::getline(lss, name, ',');
         // pro
-        std::string proStr;
+        std::string proStr{};
         std::getline(lss, proStr, ',');
         // earnings
-        std::string earnStr;
+        std::string earnStr{};
         std::getline(lss, earnStr, ',');
         float collabEarnings = std::stof(earnStr);
+        // score
+        std::string scoreStr{};
+        std::getline(lss, scoreStr, ',');
+        auto score = Classification(std::stoi(scoreStr));
         // services
         std::string serviceName{};
         std::vector<std::string> collabServices;
@@ -125,7 +129,7 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
 
         // check if everything is valid, if not throw an exception
 
-        addCollaborator(collabServices, name, proStr == "yes", collabEarnings);
+        addCollaborator(collabServices, name, proStr == "yes", collabEarnings, score);
     }
 
     // read clients.txt
@@ -203,23 +207,24 @@ void HouseMaster::addCollaborator(Collaborator *collab) {
     _usernameMap.insert({collab->getId(), collab->getId()});
 }
 
-void HouseMaster::addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro, float earnings) {
-    auto collab = new Collaborator(functions, name, pro, earnings);
+void HouseMaster::addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro, float earnings,
+                                  Classification score) {
+    auto collab = new Collaborator(functions, name, pro, earnings, score);
     _collaborators.insert({collab->getId(), collab});
     _usernameMap.insert({collab->getId(), collab->getId()});
 }
 
 void HouseMaster::removeCollaborator(const std::string &id) {
     auto it = _collaborators.find(id);
-    auto UsernameIt = std::find_if(_usernameMap.begin(), _usernameMap.end(),
+    auto usernameIt = std::find_if(_usernameMap.begin(), _usernameMap.end(),
                                    [&id](const std::pair<std::string, std::string> &mapped) {
                                        return mapped.second == id;
                                    });
     if (it != _collaborators.end()) {
-        if (UsernameIt != _usernameMap.end()) {
+        if (usernameIt != _usernameMap.end()) {
            if(getAssociatedActiveInterventions(id).empty()){
             _collaborators.erase(it);
-            _usernameMap.erase(UsernameIt);}
+            _usernameMap.erase(usernameIt);}
            else{
                throw AssignedCollab("Collaborator still has incomplete Interventions!");
            }
@@ -349,7 +354,7 @@ Intervention* HouseMaster::addIntervention(const date &appointment, const std::s
                                            const std::string &clientId, unsigned int nrOfRooms) {
     auto it = _availableServices.find(type);
     if (it != _availableServices.end()) {
-        auto newIntervention = new Intervention(appointment, *_availableServices[type], forcePro, nrOfRooms);
+        auto newIntervention = new Intervention(appointment, _availableServices[type], forcePro, nrOfRooms);
         newIntervention->setClientId(clientId);
         newIntervention->calculateCost();
         _interventions.push_back(newIntervention);
@@ -366,7 +371,6 @@ void HouseMaster::changeinterventionState(Intervention *intervention, processSta
 
 void HouseMaster::processTransaction(Intervention *intervention) {
     float hmEarnings;
-    intervention->calculateCost();
     hmEarnings = intervention->getCost() - (intervention->getCost() / float(1 + HouseMasterTax));
     getCollaborators()[intervention->getCollabId()]->calculateEarnings(hmEarnings);
     _earnings += hmEarnings;
@@ -441,7 +445,7 @@ void HouseMaster::writeCollabsInfo()
         {
             collabFile << collab_it->second->getName();
             if (collab_it->second->isPro()) { collabFile << ",yes,"; } else { collabFile << ",no,"; }
-            collabFile << collab_it->second->getEarnings() << ',';
+            collabFile << collab_it->second->getEarnings() << ',' << collab_it->second->getScore() << ',';
             for (size_t i = 0; i < collab_it->second->getServices().size(); i++)
             {
                 if (i == collab_it->second->getServices().size() - 1)

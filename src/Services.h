@@ -30,7 +30,7 @@ class Painting : public Service{
 private:
     unsigned int _roomNumber;
 public:
-    Painting(std::string name, bool pro, float basePrice, const duration &duration);
+    Painting(std::string name, bool pro, float basePrice, const duration &duration, unsigned int nrOfRooms = 0);
     ~Painting() override = default;
     void setRoomNumber(unsigned int number);
     float calculatePrice() override;
@@ -50,7 +50,7 @@ private:
     std::string _clientId;
     std::string _collabId;
     date _startingTime;
-    Service _type;
+    Service* _type;
     bool _forcePro;
     processState _state;
     float _cost;
@@ -58,9 +58,9 @@ private:
 
 public:
 
-    Intervention(const date &appointment, const Service& type, bool forcePro, unsigned int nrOfRooms = 0);
+    Intervention(const date &appointment, Service* type, bool forcePro, unsigned int nrOfRooms = 0);
 
-    ~Intervention() = default;
+    ~Intervention();
 
     date getStartingTime() const;
 

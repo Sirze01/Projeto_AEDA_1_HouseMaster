@@ -383,11 +383,12 @@ void Interface::readNewCollaboratorData(bool &running) {
         pickServices.execute(innerRunning);
     }
 
-    _houseMaster.addCollaborator(services, name, pro=="yes");
+    _houseMaster.addCollaborator(services, name, pro == "yes", 0);
+
 }
 
 std::string Interface::readNewServiceData(bool &running) {
-    std::string name{}, proStr{}, durationStr;
+    std::string name{}, proStr{}, durationStr{}, paintingStr{};
     float basePrice{};
     //duration duration{};
 
@@ -443,6 +444,21 @@ std::string Interface::readNewServiceData(bool &running) {
         }
     }while (!done);
     _houseMaster.addAvailableService(name, pro, basePrice, duration);
+    std::cout << "Mean duration ? "; std::cin >> durationStr;
+    duration duration(durationStr);
+
+    std::cout << "Painting ? [yes/no] "; std::cin >> paintingStr;
+    while (paintingStr != "yes" && paintingStr != "no") {
+        std::cout << R"(Invalid choice. Make sure you chose one of "yes" or "no" )" << std::endl;
+        std::cin >> paintingStr;
+    }
+
+    if (paintingStr=="yes") {
+        _houseMaster.addAvailablePaintService(name,pro,basePrice,duration);
+    } else {
+        _houseMaster.addAvailableService(name, pro, basePrice, duration);
+    }
+
     return name;
 }
 
@@ -571,7 +587,6 @@ unsigned Interface::readNumberOfRooms() {
 
 void Interface::showSortedCollabs() {
     std::vector<std::pair<std::string, Collaborator *>> sorted = _houseMaster.sortCollaboratorsByScore();
-    unsigned count = 1;
     unsigned back = sorted.size() + 1;
 
     std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
@@ -579,7 +594,7 @@ void Interface::showSortedCollabs() {
     std::cout << "|                                                    |" << std::endl;
 
     for (const auto &collab: sorted) {
-        std::cout << "| " << std::left << std::setw(49) << collab.second->getName() << collab.second->getScore() << " |" << std::endl;
+        std::cout << "| " << std::left << std::setw(48) << collab.second->getName() << std::setw(2) << collab.second->getScore() << " |" << std::endl;
     }
 
     std::cout << "|                                                    |" << std::endl;

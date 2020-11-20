@@ -3,7 +3,7 @@
 
 #define HouseMasterTax 0.20
 
-#define MinimumPricePerRoom 80
+#define MinimumPricePerRoom 32
 #define ROOM_DISCOUNT 0.95
 
 #define CommissionByScore_0  0.40

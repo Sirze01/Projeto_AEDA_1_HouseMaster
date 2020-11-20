@@ -26,7 +26,8 @@ float Service::calculatePrice() {
     return _basePrice;
 }
 
-Painting::Painting(std::string name, bool pro, float basePrice, const duration &duration) : Service(std::move(name), pro, basePrice, duration), _roomNumber(0) {}
+Painting::Painting(std::string name, bool pro, float basePrice, const duration &duration, unsigned int nrOfRooms) :
+                    Service(std::move(name), pro, basePrice, duration), _roomNumber(nrOfRooms) {}
 
 void Painting::setRoomNumber(unsigned int number) {
     _roomNumber = number;
@@ -45,18 +46,24 @@ float Painting::calculatePrice() {
 }
 
 
-Intervention::Intervention(const date& appointment, const Service& type, bool forcePro, unsigned int nrOfRooms) :
-        _startingTime(appointment), _type(type), _forcePro(forcePro), _state(Scheduled), _cost(), _paid(false){
+Intervention::Intervention(const date& appointment, Service* type, bool forcePro, unsigned int nrOfRooms) :
+        _startingTime(appointment), _forcePro(forcePro), _state(Scheduled), _cost(), _paid(false){
 
-    Service *sv = new Service(type);
-    Painting *painting = dynamic_cast<Painting*>(sv);
+    auto painting = dynamic_cast<Painting*>(type);
     if (painting) {
-        painting->setRoomNumber(nrOfRooms);
+        _type = new Painting(type->getName(), type->getPro(), type->getBasePrice(), type->getDuration(),nrOfRooms);
+    }
+    else{
+        _type = type;
     }
 }
 
+Intervention::~Intervention() {
+    delete _type;
+}
+
 const Service* Intervention::getService()const{
-    return &_type;
+    return _type;
 }
 
 processState Intervention::getProcessState() {
@@ -110,11 +117,17 @@ bool Intervention::conflictsWith(date start, duration duration) const{
 }
 
 void Intervention::calculateCost() {
-    _cost = float(1 + HouseMasterTax) * _type.calculatePrice();
+    auto painting = dynamic_cast<Painting*>(_type);
+    if(painting) {
+        _cost = float(1 + HouseMasterTax) * painting->calculatePrice();
+    }
+    else {
+        _cost = float(1 + HouseMasterTax) * _type->calculatePrice();
+    }
 }
 
 date Intervention::getEndTime() const {
-    return _startingTime + _type.getDuration();
+    return _startingTime + _type->getDuration();
 }
 
 void Intervention::pay() {
