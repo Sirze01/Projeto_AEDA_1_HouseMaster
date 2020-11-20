@@ -44,6 +44,10 @@ Collaborator::Collaborator(std::vector<std::string> services, const std::string 
     _id = _idSeqCol++;
 }
 
+
+Collaborator::AlreadyKnows::AlreadyKnows(const std::string &error_msg): std::logic_error(error_msg){};
+
+
 /**
  * @brief getter
  * @return the services

@@ -94,6 +94,7 @@ public:
 
     bool operator<(const Collaborator &col2) const;
 
+    class AlreadyKnows;
 
 private:
 
@@ -102,6 +103,12 @@ private:
     Classification _score;
     bool _pro;
     float _earnings;
+};
+
+class Collaborator::AlreadyKnows: public std::logic_error
+{
+public:
+    AlreadyKnows(const std::string &error_msg);
 };
 
 

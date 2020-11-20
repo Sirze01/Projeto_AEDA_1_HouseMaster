@@ -112,8 +112,8 @@ void Interface::readRole(const std::string &username) {
         throw NonexistentRole("This role does not exist!");
     }
     for (const auto &i : username) {
-        if (isalpha(i)) roleName += i;  // TODO ai isto ta xanxo que fode e nem funciona bem
-        else break;                     // TODO apagar este comentário
+        if (isalpha(i)) roleName += i;
+        else break;
     }
     if (roleName == "collab") role = collaborator;
     else if (roleName == "client") role = client;
@@ -207,10 +207,17 @@ void Interface::collaboratorOperations(bool &running) {
             while (running) {
                 std::string service = selectService(running);
                 if (!service.empty()) {
-                    if (!collab->canPreform(service))
-                        collab->addService(service);
-                    else
-                        std::cout<< collab->getName()<< " already knows "<< service << "\n";
+                    try
+                    {
+                        bool new_t = collab->canPreform(service);
+                        std::cout << "Can Preform? " << new_t << "\n";
+                        if (collab->canPreform(service))
+                        {
+                            throw Collaborator::AlreadyKnows("Impossible! ");
+                        } else { collab->addService(service); }
+                    } catch (const Collaborator::AlreadyKnows &e) {
+                            std::cout << e.what() << collab->getName()<< " already knows "<< service << "\n";
+                        }
                 }
             }
         }}, {"Add a new one", [&]() {
@@ -365,7 +372,7 @@ void Interface::readNewClientData() {
     bool premium = premiumStr == "yes";
 
     std::cout << "NIF ? ";
-    std::cin >> nif; // TODO input validation
+    std::cin >> nif;
     while (std::cin.fail())
     {
         std::cin.clear();
