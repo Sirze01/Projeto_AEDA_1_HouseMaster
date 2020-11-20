@@ -1,8 +1,15 @@
 #include "Interface.h"
 
-
+/**
+ * @brief exception for an Nonexistent Role
+ * @param error_msg to show
+ */
 Interface::NonexistentRole::NonexistentRole(const std::string &error_msg) : std::logic_error(error_msg) {}
 
+/**
+ * @brief exception for an invalid NIF number
+ * @param error_msg to show
+ */
 Interface::InvalidNif::InvalidNif(const std::string &error_msg) : invalid_argument(error_msg) {}
 
 /**

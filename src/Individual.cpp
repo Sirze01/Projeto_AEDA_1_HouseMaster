@@ -44,9 +44,16 @@ Collaborator::Collaborator(std::vector<std::string> services, const std::string 
     _id = _idSeqCol++;
 }
 
-
+/**
+ * @brief exception in case someone wants to add a service already known by the collaborator
+ * @param error_msg to show
+ */
 Collaborator::AlreadyKnows::AlreadyKnows(const std::string &error_msg): std::logic_error(error_msg){};
 
+/**
+ * @brief exception for a non professional collaborator wanting to learn a service that requires a professional
+ * @param error_msg to show
+ */
 Collaborator::ServiceRequiresPro::ServiceRequiresPro(const std::string &error_msg): std::logic_error(error_msg){};
 
 
