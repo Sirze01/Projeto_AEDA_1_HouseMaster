@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1112.57px" preserveAspectRatio="none" style="width:1820px;height:1112px;" version="1.1" viewBox="0 0 1820 1112" width="1820.44px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ahuejl9lb13e" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="1.42"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="2.84" dy="2.84" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[d694de1a4d3eb4abf36fc4a4dacd5966]
+class processState--><rect codeLine="4" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="75.2766" id="processState" style="stroke: #AAAAAA; stroke-width: 1.065;" width="82.36" x="470.02" y="843.48"/><ellipse cx="483.9715" cy="852.71" fill="#EB937F" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M481.8526,849.87 L485.8131,849.87 L485.8131,850.9461 L483.317,850.9461 L483.317,852 L485.6577,852 L485.6577,853.0872 L483.317,853.0872 L483.317,854.4739 L485.8907,854.4739 L485.8907,855.55 L481.8526,855.55 L481.8526,849.87 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="51.83" x="492.9885" y="855.4138">processState</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="470.73" x2="551.67" y1="861.94" y2="861.94"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="41.18" x="474.28" y="872.0294">Scheduled</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="73.84" x="474.28" y="881.1207">PaymentComplete</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="45.44" x="474.28" y="890.2121">InProgress,</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="38.34" x="474.28" y="899.3034">Complete</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="36.92" x="474.28" y="908.3947">Canceled</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="470.73" x2="551.67" y1="913.0766" y2="913.0766"/><!--MD5=[090baa0da4ff03e6b68a244d81271cc4]
+class classification--><rect codeLine="13" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="93.4593" id="classification" style="stroke: #AAAAAA; stroke-width: 1.065;" width="76.68" x="1527.21" y="834.25"/><ellipse cx="1538.925" cy="843.48" fill="#EB937F" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M1536.8061,840.64 L1540.7666,840.64 L1540.7666,841.7161 L1538.2705,841.7161 L1538.2705,842.77 L1540.6113,842.77 L1540.6113,843.8572 L1538.2705,843.8572 L1538.2705,845.2439 L1540.8442,845.2439 L1540.8442,846.32 L1536.8061,846.32 L1536.8061,840.64 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="51.12" x="1547.445" y="846.1838">classification</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="1527.92" x2="1603.18" y1="852.71" y2="852.71"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="59.64" x="1531.47" y="862.7994">unreliable = -2</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="48.28" x="1531.47" y="871.8907">clumsy = -1</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="52.54" x="1531.47" y="880.9821">newHere = 0</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="59.64" x="1531.47" y="890.0734">getsItDone = 1</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="68.16" x="1531.47" y="899.1647">hardWorking = 2</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="52.54" x="1531.47" y="908.2561">attentive = 3</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="41.89" x="1531.47" y="917.3474">savior = 4</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="1527.92" x2="1603.18" y1="922.0293" y2="922.0293"/><!--MD5=[795a4aacf1bde433470b0e5b01d3050a]
+class date--><rect codeLine="23" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="190.0526" id="date" style="stroke: #AAAAAA; stroke-width: 1.065;" width="438.78" x="6.39" y="785.97"/><ellipse cx="214.42" cy="795.2" fill="#FF8800" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M216.4612,797.6295 Q216.0508,797.8292 215.607,797.9402 Q215.1744,798.04 214.6973,798.04 Q213.2773,798.04 212.4453,797.2745 Q211.6133,796.5091 211.6133,795.2 Q211.6133,793.8798 212.4453,793.1255 Q213.2773,792.36 214.6973,792.36 Q215.1744,792.36 215.607,792.4709 Q216.0508,792.5708 216.4612,792.7705 L216.4612,793.902 Q216.0508,793.6469 215.6514,793.5248 Q215.252,793.3917 214.8194,793.3917 Q214.0317,793.3917 213.5769,793.8798 Q213.1331,794.3569 213.1331,795.2 Q213.1331,796.0431 213.5769,796.5202 Q214.0317,796.9972 214.8194,796.9972 Q215.252,796.9972 215.6514,796.8752 Q216.0508,796.742 216.4612,796.4869 L216.4612,797.6295 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="17.75" x="225.78" y="797.9038">date</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="7.1" x2="444.46" y1="804.43" y2="804.43"/><rect fill="#F24D5C" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="12.07" y="810.11"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="93.72" x="18.46" y="814.5194">bool isLeapYear() const</text><rect fill="#F24D5C" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="12.07" y="819.2013"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="145.55" x="18.46" y="823.6107">unsigned int getDaysInMonth() const</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="12.07" y="828.2927"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="71" x="18.46" y="832.7021">unsigned int _day</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="12.07" y="837.384"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="81.65" x="18.46" y="841.7934">unsigned int _month</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="12.07" y="846.4753"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="74.55" x="18.46" y="850.8847">unsigned int _year</text><line style="stroke: #AAAAAA; stroke-width: 0.71;" x1="7.1" x2="444.46" y1="855.5666" y2="855.5666"/><polygon fill="none" points="14.2,859.8266,17.04,862.6666,14.2,865.5066,11.36,862.6666" style="stroke: #B38D22; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="78.81" x="18.46" y="865.6561">unsigned int _hours</text><polygon fill="none" points="14.2,868.918,17.04,871.758,14.2,874.598,11.36,871.758" style="stroke: #B38D22; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="88.04" x="18.46" y="874.7474">unsigned int _minutes</text><line style="stroke: #AAAAAA; stroke-width: 0.71;" x1="7.1" x2="444.46" y1="879.4293" y2="879.4293"/><ellipse cx="14.2" cy="887.2393" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="26.98" x="18.46" y="889.5187">Date();</text><ellipse cx="14.2" cy="896.3306" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="422.45" x="18.46" y="898.61">Date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);</text><ellipse cx="14.2" cy="905.422" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="149.81" x="18.46" y="907.7014">explicit Date(const std::string &amp;date);</text><ellipse cx="14.2" cy="914.5133" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="112.18" x="18.46" y="916.7927">std::string getString() const;</text><ellipse cx="14.2" cy="923.6046" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="156.91" x="18.46" y="925.884">Date operator+(const Date &amp;d1) const;</text><ellipse cx="14.2" cy="932.6959" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="161.88" x="18.46" y="934.9754">bool operator==(const Date &amp;d2) const;</text><ellipse cx="14.2" cy="941.7873" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="155.49" x="18.46" y="944.0667">bool operator&lt;(const Date &amp;d2) const;</text><ellipse cx="14.2" cy="950.8786" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="155.49" x="18.46" y="953.158">bool operator&gt;(const Date &amp;d2) const;</text><ellipse cx="14.2" cy="959.9699" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="100.11" x="18.46" y="962.2493">void checkIfValid() const;</text><ellipse cx="14.2" cy="969.0613" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="70.29" x="18.46" y="971.3407">class InvalidDate;</text><!--MD5=[90eaa09046263e8c6658c78290042555]
+class duration--><rect codeLine="45" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="84.368" id="duration" style="stroke: #AAAAAA; stroke-width: 1.065;" width="222.94" x="246.37" y="1018.85"/><ellipse cx="338.67" cy="1028.08" fill="#FF8800" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M340.7113,1030.5095 Q340.3008,1030.7092 339.857,1030.8202 Q339.4244,1030.92 338.9473,1030.92 Q337.5273,1030.92 336.6953,1030.1545 Q335.8633,1029.3891 335.8633,1028.08 Q335.8633,1026.7598 336.6953,1026.0055 Q337.5273,1025.24 338.9473,1025.24 Q339.4244,1025.24 339.857,1025.3509 Q340.3008,1025.4508 340.7113,1025.6505 L340.7113,1026.782 Q340.3008,1026.5269 339.9014,1026.4048 Q339.502,1026.2717 339.0694,1026.2717 Q338.2817,1026.2717 337.8269,1026.7598 Q337.3831,1027.2369 337.3831,1028.08 Q337.3831,1028.9231 337.8269,1029.4002 Q338.2817,1029.8772 339.0694,1029.8772 Q339.502,1029.8772 339.9014,1029.7552 Q340.3008,1029.622 340.7113,1029.3669 L340.7113,1030.5095 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="33.37" x="350.03" y="1030.7838">duration</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="247.08" x2="468.6" y1="1037.31" y2="1037.31"/><ellipse cx="254.18" cy="1045.12" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="85.91" x="258.44" y="1047.3994">class InvalidDuration;</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="247.08" x2="468.6" y1="1052.0813" y2="1052.0813"/><ellipse cx="254.18" cy="1059.8913" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="42.6" x="258.44" y="1062.1707">Duration();</text><ellipse cx="254.18" cy="1068.9827" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="206.61" x="258.44" y="1071.2621">Duration(unsigned int hours, unsigned int minutes);</text><ellipse cx="254.18" cy="1078.074" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="181.05" x="258.44" y="1080.3534">explicit Duration(const std::string &amp;duration);</text><ellipse cx="254.18" cy="1087.1653" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="149.1" x="258.44" y="1089.4447">std::string getString() const override;</text><ellipse cx="254.18" cy="1096.2566" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="137.03" x="258.44" y="1098.5361">void checkIfValid() const override;</text><!--MD5=[dbb8b4f13c7b21394f9d757e58732f45]
+class Service--><rect codeLine="54" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="129.8246" id="Service" style="stroke: #AAAAAA; stroke-width: 1.065;" width="328.02" x="627.64" y="816.145"/><ellipse cx="774.255" cy="825.375" fill="#FF8800" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M776.2963,827.8045 Q775.8858,828.0042 775.442,828.1152 Q775.0094,828.215 774.5323,828.215 Q773.1123,828.215 772.2803,827.4495 Q771.4483,826.6841 771.4483,825.375 Q771.4483,824.0548 772.2803,823.3005 Q773.1123,822.535 774.5323,822.535 Q775.0094,822.535 775.442,822.6459 Q775.8858,822.7458 776.2963,822.9455 L776.2963,824.077 Q775.8858,823.8219 775.4864,823.6998 Q775.087,823.5667 774.6544,823.5667 Q773.8667,823.5667 773.4119,824.0548 Q772.9681,824.5319 772.9681,825.375 Q772.9681,826.2181 773.4119,826.6952 Q773.8667,827.1722 774.6544,827.1722 Q775.087,827.1722 775.4864,827.0502 Q775.8858,826.917 776.2963,826.6619 L776.2963,827.8045 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="29.82" x="785.615" y="828.0788">Service</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="628.35" x2="954.95" y1="834.605" y2="834.605"/><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="633.32" y="840.285"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="70.29" x="639.71" y="844.6944">std::string _name</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="633.32" y="849.3763"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="37.63" x="639.71" y="853.7857">bool _pro</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="633.32" y="858.4677"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="63.9" x="639.71" y="862.8771">float _basePrice</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="633.32" y="867.559"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="73.84" x="639.71" y="871.9684">duration _duration</text><line style="stroke: #AAAAAA; stroke-width: 0.71;" x1="628.35" x2="954.95" y1="876.6503" y2="876.6503"/><ellipse cx="635.45" cy="884.4603" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="35.5" x="639.71" y="886.7397">Service()</text><ellipse cx="635.45" cy="893.5516" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="311.69" x="639.71" y="895.8311">Service(std::string name, bool pro, float basePrice, const duration &amp;duration)</text><ellipse cx="635.45" cy="902.643" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="109.34" x="639.71" y="904.9224">std::string getName() const</text><ellipse cx="635.45" cy="911.7343" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="75.97" x="639.71" y="914.0137">bool getPro() const</text><ellipse cx="635.45" cy="920.8256" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="102.95" x="639.71" y="923.105">float getBasePrice() const</text><ellipse cx="635.45" cy="929.917" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="112.89" x="639.71" y="932.1964">duration getDuration() const</text><ellipse cx="635.45" cy="939.0083" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="58.93" x="639.71" y="941.2877">float getPrice()</text><!--MD5=[ccb6b53f2b3136c820d7801ae6f29901]
+class Painting--><rect codeLine="69" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="66.1853" id="Painting" style="stroke: #AAAAAA; stroke-width: 1.065;" width="330.15" x="626.575" y="1028.08"/><ellipse cx="773.19" cy="1037.31" fill="#FF8800" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M775.2312,1039.7395 Q774.8208,1039.9392 774.377,1040.0502 Q773.9444,1040.15 773.4673,1040.15 Q772.0473,1040.15 771.2153,1039.3845 Q770.3833,1038.6191 770.3833,1037.31 Q770.3833,1035.9898 771.2153,1035.2355 Q772.0473,1034.47 773.4673,1034.47 Q773.9444,1034.47 774.377,1034.5809 Q774.8208,1034.6808 775.2312,1034.8805 L775.2312,1036.012 Q774.8208,1035.7569 774.4214,1035.6348 Q774.022,1035.5017 773.5894,1035.5017 Q772.8017,1035.5017 772.3469,1035.9898 Q771.9031,1036.4669 771.9031,1037.31 Q771.9031,1038.1531 772.3469,1038.6302 Q772.8017,1039.1072 773.5894,1039.1072 Q774.022,1039.1072 774.4214,1038.9852 Q774.8208,1038.852 775.2312,1038.5969 L775.2312,1039.7395 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="31.95" x="784.55" y="1040.0138">Painting</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="627.285" x2="956.015" y1="1046.54" y2="1046.54"/><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="632.255" y="1052.22"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="109.34" x="638.645" y="1056.6294">unsigned int _roomNumber</text><line style="stroke: #AAAAAA; stroke-width: 0.71;" x1="627.285" x2="956.015" y1="1061.3113" y2="1061.3113"/><ellipse cx="634.385" cy="1069.1213" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="313.82" x="638.645" y="1071.4007">Painting(std::string name, bool pro, float basePrice, const duration &amp;duration)</text><ellipse cx="634.385" cy="1078.2127" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="137.03" x="638.645" y="1080.4921">void setRoomNumber(int number)</text><ellipse cx="634.385" cy="1087.304" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="95.85" x="638.645" y="1089.5834">float getPrice() override</text><!--MD5=[34fc254bc528b6b0fa50d673940a681f]
+class HouseMaster--><rect codeLine="77" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="429.8384" id="HouseMaster" style="stroke: #AAAAAA; stroke-width: 1.065;" width="619.83" x="703.255" y="4.97"/><ellipse cx="984.77" cy="14.2" fill="#FF8800" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M986.8113,16.6295 Q986.4008,16.8292 985.957,16.9402 Q985.5244,17.04 985.0473,17.04 Q983.6273,17.04 982.7953,16.2745 Q981.9633,15.5091 981.9633,14.2 Q981.9633,12.8798 982.7953,12.1255 Q983.6273,11.36 985.0473,11.36 Q985.5244,11.36 985.957,11.4709 Q986.4008,11.5708 986.8113,11.7705 L986.8113,12.902 Q986.4008,12.6469 986.0014,12.5248 Q985.602,12.3917 985.1694,12.3917 Q984.3817,12.3917 983.9269,12.8798 Q983.4831,13.3569 983.4831,14.2 Q983.4831,15.0431 983.9269,15.5202 Q984.3817,15.9972 985.1694,15.9972 Q985.602,15.9972 986.0014,15.8752 Q986.4008,15.742 986.8113,15.4869 L986.8113,16.6295 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="51.83" x="996.13" y="16.9038">HouseMaster</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="703.965" x2="1322.375" y1="23.43" y2="23.43"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="257.73" x="707.515" y="33.5194">std::unordered_map&lt;std::string, Service *&gt; _availableServices;</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="159.75" x="707.515" y="42.6107">std::map&lt;std::string, Client *&gt; _clients;</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="247.79" x="707.515" y="51.7021">std::unordered_map&lt;std::string, std::string&gt; _usernameMap;</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="213.71" x="707.515" y="60.7934">std::map&lt;std::string, Collaborator *&gt; _collaborators;</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="173.95" x="707.515" y="69.8847">std::vector&lt;Intervention *&gt; _interventions;</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="62.48" x="707.515" y="78.9761">float _earnings;</text><line style="stroke: #AAAAAA; stroke-width: 0.71;" x1="703.965" x2="1322.375" y1="83.658" y2="83.658"/><ellipse cx="711.065" cy="91.468" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="57.51" x="715.325" y="93.7474">HouseMaster()</text><ellipse cx="711.065" cy="100.5593" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="436.65" x="715.325" y="102.8387">HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services, std::ifstream earnings)</text><ellipse cx="711.065" cy="109.6506" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="63.9" x="715.325" y="111.93">~HouseMaster()</text><ellipse cx="711.065" cy="118.742" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="232.88" x="715.325" y="121.0214">std::map&lt;std::string, Collaborator *&gt; &amp;getCollaborators()</text><ellipse cx="711.065" cy="127.8333" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="178.92" x="715.325" y="130.1127">std::map&lt;std::string, Client *&gt; &amp;getClients()</text><ellipse cx="711.065" cy="136.9246" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="191.7" x="715.325" y="139.204">std::vector&lt;Intervention *&gt; &amp;getInterventions()</text><ellipse cx="711.065" cy="146.0159" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="414.64" x="715.325" y="148.2954">void addAvailableService(const std::string &amp;name, bool pro, float basePrice, const Duration &amp;duration)</text><ellipse cx="711.065" cy="155.1073" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="226.49" x="715.325" y="157.3867">void removeAvailableService(const std::string &amp;service)</text><ellipse cx="711.065" cy="164.1986" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="276.19" x="715.325" y="166.478">std::unordered_map&lt;std::string, Service *&gt; &amp;getAvailableServices()</text><ellipse cx="711.065" cy="173.2899" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="200.93" x="715.325" y="175.5693">void removeCollaborator(const std::string &amp;collId)</text><ellipse cx="711.065" cy="182.3813" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="603.5" x="715.325" y="184.6607">void addCollaborator(const std::vector&lt;std::string&gt; &amp;services, const std::string &amp;name, bool pro, float earnings = 0, Classification score = newHere)</text><ellipse cx="711.065" cy="191.4726" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="296.07" x="715.325" y="193.752">void addClient(unsigned long nif, const std::string &amp;name, bool premium)</text><ellipse cx="711.065" cy="200.5639" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="181.76" x="715.325" y="202.8433">void removeClient(const std::string &amp;clientId)</text><ellipse cx="711.065" cy="209.6552" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="554.51" x="715.325" y="211.9347">Intervention * addIntervention(const Date &amp;start, const std::string &amp;service, bool forcePro, const std::string &amp;clientId, int nrOfRooms = 0)</text><ellipse cx="711.065" cy="218.7466" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="307.43" x="715.325" y="221.026">void changeInterventionState(Intervention *intervention, processState state)</text><ellipse cx="711.065" cy="227.8379" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="207.32" x="715.325" y="230.1173">void processTransaction(Intervention *intervention)</text><ellipse cx="711.065" cy="236.9292" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="309.56" x="715.325" y="239.2086">std::vector&lt;Intervention *&gt; getAssociatedInterventions(const std::string &amp;id)</text><ellipse cx="711.065" cy="246.0205" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="334.41" x="715.325" y="248.3">std::vector&lt;Intervention *&gt; getAssociatedActiveInterventions(const std::string &amp;id)</text><ellipse cx="711.065" cy="255.1119" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="509.78" x="715.325" y="257.3913">void assignCollaborator(Intervention *intervention, const std::vector&lt;std::pair&lt;std::string, Collaborator *&gt;&gt; &amp;orderedCollabs)</text><ellipse cx="711.065" cy="264.2032" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="316.66" x="715.325" y="266.4826">std::vector&lt;std::pair&lt;std::string, Collaborator *&gt;&gt; sortCollaboratorsByScore()</text><ellipse cx="711.065" cy="273.2945" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="214.42" x="715.325" y="275.574">Individual *findByUsername(const std::string &amp;name)</text><ellipse cx="711.065" cy="282.3859" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="198.09" x="715.325" y="284.6653">void markAsComplete(Intervention *intervention)</text><ellipse cx="711.065" cy="291.4772" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="97.98" x="715.325" y="293.7566">float getEarnings() const</text><ellipse cx="711.065" cy="300.5685" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="120.7" x="715.325" y="302.8479">class UnavailableAppointment</text><ellipse cx="711.065" cy="309.6598" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="100.11" x="715.325" y="311.9393">class NonexistentService</text><ellipse cx="711.065" cy="318.7512" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="84.49" x="715.325" y="321.0306">class ExistentService</text><ellipse cx="711.065" cy="327.8425" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="95.14" x="715.325" y="330.1219">class NonexistentCollab</text><ellipse cx="711.065" cy="336.9338" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="83.78" x="715.325" y="339.2132">class AssignedCollab</text><ellipse cx="711.065" cy="346.0252" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="93.01" x="715.325" y="348.3046">class NonexistentClient</text><ellipse cx="711.065" cy="355.1165" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="77.39" x="715.325" y="357.3959">class ExistentClient</text><ellipse cx="711.065" cy="364.2078" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="111.47" x="715.325" y="366.4872">class NonexistentUsername</text><ellipse cx="711.065" cy="373.2991" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="95.14" x="715.325" y="375.5786">class UnableToWriteFile</text><ellipse cx="711.065" cy="382.3905" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="89.46" x="715.325" y="384.6699">void writeCollabsInfo()</text><ellipse cx="711.065" cy="391.4818" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="87.33" x="715.325" y="393.7612">void writeClientsInfo()</text><ellipse cx="711.065" cy="400.5731" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="94.43" x="715.325" y="402.8525">void writeServicesInfo()</text><ellipse cx="711.065" cy="409.6645" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="112.89" x="715.325" y="411.9439">void writeInterventionsInfo()</text><ellipse cx="711.065" cy="418.7558" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="119.28" x="715.325" y="421.0352">void writeFinancialInfo() const</text><ellipse cx="711.065" cy="427.8471" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="434.52" x="715.325" y="430.1265">void addAvailablePaintService(const std::string &amp;name, bool pro, float basePrice, const Duration &amp;duration)</text><!--MD5=[91506c20fa69d22eac57944020c826c2]
+class Intervention--><rect codeLine="125" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="229.8292" id="Intervention" style="stroke: #AAAAAA; stroke-width: 1.065;" width="310.27" x="395.115" y="495.225"/><ellipse cx="523.625" cy="504.455" fill="#FF8800" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M525.6663,506.8845 Q525.2558,507.0842 524.812,507.1952 Q524.3794,507.295 523.9023,507.295 Q522.4823,507.295 521.6503,506.5295 Q520.8183,505.7641 520.8183,504.455 Q520.8183,503.1348 521.6503,502.3805 Q522.4823,501.615 523.9023,501.615 Q524.3794,501.615 524.812,501.7259 Q525.2558,501.8258 525.6663,502.0255 L525.6663,503.157 Q525.2558,502.9019 524.8564,502.7798 Q524.457,502.6467 524.0244,502.6467 Q523.2367,502.6467 522.7819,503.1348 Q522.3381,503.6119 522.3381,504.455 Q522.3381,505.2981 522.7819,505.7752 Q523.2367,506.2522 524.0244,506.2522 Q524.457,506.2522 524.8564,506.1302 Q525.2558,505.997 525.6663,505.7419 L525.6663,506.8845 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="48.28" x="534.985" y="507.1588">Intervention</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="395.825" x2="704.675" y1="513.685" y2="513.685"/><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="400.795" y="519.365"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="75.97" x="407.185" y="523.7744">std::string _clientId</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="400.795" y="528.4563"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="78.1" x="407.185" y="532.8657">std::string _collabId</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="400.795" y="537.5477"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="75.26" x="407.185" y="541.9571">date _startingTime</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="400.795" y="546.639"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="58.93" x="407.185" y="551.0484">Service* _type</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="400.795" y="555.7303"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="53.96" x="407.185" y="560.1397">bool forcePro</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="400.795" y="564.8216"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="78.81" x="407.185" y="569.2311">processState _state</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="400.795" y="573.913"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="41.18" x="407.185" y="578.3224">float _cost</text><line style="stroke: #AAAAAA; stroke-width: 0.71;" x1="395.825" x2="704.675" y1="583.0043" y2="583.0043"/><ellipse cx="402.925" cy="590.8143" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="293.94" x="407.185" y="593.0937">void  Intervention(const date &amp;appointment, Service type, bool forcePro)</text><ellipse cx="402.925" cy="599.9056" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="142.71" x="407.185" y="602.185">const date *getStartingTime() const</text><ellipse cx="402.925" cy="608.997" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="133.48" x="407.185" y="611.2764">const Service* getService() const</text><ellipse cx="402.925" cy="618.0883" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="97.98" x="407.185" y="620.3677">bool getForcePro() const</text><ellipse cx="402.925" cy="627.1796" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="117.86" x="407.185" y="629.459">std::string getCollabId() const</text><ellipse cx="402.925" cy="636.2709" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="115.73" x="407.185" y="638.5504">std::string getClientId() const</text><ellipse cx="402.925" cy="645.3623" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="173.95" x="407.185" y="647.6417">void setCollabId(const std::string&amp; collabId)</text><ellipse cx="402.925" cy="654.4536" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="169.69" x="407.185" y="656.733">void setClientId(const std::string &amp;clientId)</text><ellipse cx="402.925" cy="663.5449" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="124.96" x="407.185" y="665.8243">processState getProcessState()</text><ellipse cx="402.925" cy="672.6363" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="164.01" x="407.185" y="674.9157">void setProcessState(processState state)</text><ellipse cx="402.925" cy="681.7276" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="190.28" x="407.185" y="684.007">bool conflictsWith(date start, duration duration)</text><ellipse cx="402.925" cy="690.8189" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="78.81" x="407.185" y="693.0983">void calculateCost()</text><ellipse cx="402.925" cy="699.9102" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="80.94" x="407.185" y="702.1897">float getCost() const</text><ellipse cx="402.925" cy="709.0016" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="97.98" x="407.185" y="711.281">date getEndTime() const</text><ellipse cx="402.925" cy="718.0929" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="80.94" x="407.185" y="720.3723">bool isActive() const</text><!--MD5=[3ada0b1ccda01f6af47785107eed7eb1]
+class Individual--><rect codeLine="152" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="102.5506" id="Individual" style="stroke: #AAAAAA; stroke-width: 1.065;" width="340.8" x="1371.72" y="168.625"/><ellipse cx="1520.465" cy="177.855" fill="#FF8800" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M1522.5063,180.2845 Q1522.0958,180.4842 1521.652,180.5952 Q1521.2194,180.695 1520.7423,180.695 Q1519.3223,180.695 1518.4903,179.9295 Q1517.6583,179.1641 1517.6583,177.855 Q1517.6583,176.5348 1518.4903,175.7805 Q1519.3223,175.015 1520.7423,175.015 Q1521.2194,175.015 1521.652,175.1259 Q1522.0958,175.2258 1522.5063,175.4255 L1522.5063,176.557 Q1522.0958,176.3019 1521.6964,176.1798 Q1521.297,176.0467 1520.8644,176.0467 Q1520.0767,176.0467 1519.6219,176.5348 Q1519.1781,177.0119 1519.1781,177.855 Q1519.1781,178.6981 1519.6219,179.1752 Q1520.0767,179.6522 1520.8644,179.6522 Q1521.297,179.6522 1521.6964,179.5302 Q1522.0958,179.397 1522.5063,179.1419 L1522.5063,180.2845 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="38.34" x="1531.825" y="180.5588">Individual</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="1372.43" x2="1711.81" y1="187.085" y2="187.085"/><polygon fill="none" points="1379.53,191.345,1382.37,194.185,1379.53,197.025,1376.69,194.185" style="stroke: #B38D22; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="99.4" x="1383.79" y="197.1744">std::string _displayName</text><polygon fill="none" points="1379.53,200.4363,1382.37,203.2763,1379.53,206.1163,1376.69,203.2763" style="stroke: #B38D22; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="63.19" x="1383.79" y="206.2657">unsigned int _id</text><line style="stroke: #AAAAAA; stroke-width: 0.71;" x1="1372.43" x2="1711.81" y1="210.9477" y2="210.9477"/><ellipse cx="1379.53" cy="218.7577" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="44.02" x="1383.79" y="221.0371">Individual()</text><ellipse cx="1379.53" cy="227.849" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="141.29" x="1383.79" y="230.1284">explicit Individual(std::string name)</text><ellipse cx="1379.53" cy="236.9403" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="93.01" x="1383.79" y="239.2197">std::string getId() const</text><ellipse cx="1379.53" cy="246.0316" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="296.78" x="1383.79" y="248.3111">std::vector&lt;Intervention*&gt;getAssociatedInterventions(HouseMaster &amp;hm)</text><ellipse cx="1379.53" cy="255.123" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="324.47" x="1383.79" y="257.4024">std::vector&lt;Intervention*&gt; getAssociatedActiveInterventions(HouseMaster &amp;hm)</text><ellipse cx="1379.53" cy="264.2143" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="109.34" x="1383.79" y="266.4937">std::string getName() const</text><!--MD5=[f483d6e5de34a60207b28a5563be5e8b]
+class Collaborator--><rect codeLine="164" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="266.1945" id="Collaborator" style="stroke: #AAAAAA; stroke-width: 1.065;" width="489.9" x="1320.6" y="477.12"/><ellipse cx="1538.215" cy="486.35" fill="#FF8800" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M1540.2563,488.7795 Q1539.8458,488.9792 1539.402,489.0902 Q1538.9694,489.19 1538.4923,489.19 Q1537.0723,489.19 1536.2403,488.4245 Q1535.4083,487.6591 1535.4083,486.35 Q1535.4083,485.0298 1536.2403,484.2755 Q1537.0723,483.51 1538.4923,483.51 Q1538.9694,483.51 1539.402,483.6209 Q1539.8458,483.7208 1540.2563,483.9205 L1540.2563,485.052 Q1539.8458,484.7969 1539.4464,484.6748 Q1539.047,484.5417 1538.6144,484.5417 Q1537.8267,484.5417 1537.3719,485.0298 Q1536.9281,485.5069 1536.9281,486.35 Q1536.9281,487.1931 1537.3719,487.6702 Q1537.8267,488.1472 1538.6144,488.1472 Q1539.047,488.1472 1539.4464,488.0252 Q1539.8458,487.892 1540.2563,487.6369 L1540.2563,488.7795 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="49.7" x="1549.575" y="489.0538">Collaborator</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="1321.31" x2="1809.79" y1="495.58" y2="495.58"/><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="1326.28" y="501.26"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="171.11" x="1332.67" y="505.6694">std::vector&lt;Classification&gt; _classifications</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="1326.28" y="510.3513"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="137.03" x="1332.67" y="514.7607">std::vector&lt;std::string&gt; _services</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="1326.28" y="519.4427"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="81.65" x="1332.67" y="523.8521">Classification _score</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="1326.28" y="528.534"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="37.63" x="1332.67" y="532.9434">bool _pro</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="1326.28" y="537.6253"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="59.64" x="1332.67" y="542.0347">float _earnings</text><line style="stroke: #AAAAAA; stroke-width: 0.71;" x1="1321.31" x2="1809.79" y1="546.7166" y2="546.7166"/><ellipse cx="1328.41" cy="554.5266" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="473.57" x="1332.67" y="556.8061">Collaborator(std::vector&lt;std::string&gt; services, const std::string &amp;name, bool pro, float earnings, Classification score)</text><ellipse cx="1328.41" cy="563.618" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="98.69" x="1332.67" y="565.8974">~Collaborator() override</text><ellipse cx="1328.41" cy="572.7093" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="151.94" x="1332.67" y="574.9887">std::vector&lt;std::string&gt; getServices()</text><ellipse cx="1328.41" cy="581.8006" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="69.58" x="1332.67" y="584.08">bool isPro() const</text><ellipse cx="1328.41" cy="590.892" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="175.37" x="1332.67" y="593.1714">bool canPreform(const std::string &amp;service)</text><ellipse cx="1328.41" cy="599.9833" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="374.17" x="1332.67" y="602.2627">bool isAvailable(HouseMaster &amp;hm, const std::string &amp;collabId, Date start, Duration duration)</text><ellipse cx="1328.41" cy="609.0746" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="259.86" x="1332.67" y="611.354">bool hasQualificationToPreform(Intervention *intervention) const</text><ellipse cx="1328.41" cy="618.1659" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="343.64" x="1332.67" y="620.4454">bool canDo(HouseMaster &amp;hm, const std::string &amp;collabId, Intervention *intervention)</text><ellipse cx="1328.41" cy="627.2573" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="78.1" x="1332.67" y="629.5367">int getScore() const</text><ellipse cx="1328.41" cy="636.3486" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="199.51" x="1332.67" y="638.628">void addClassification(Classification classification)</text><ellipse cx="1328.41" cy="645.4399" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="173.24" x="1332.67" y="647.7193">void addService(const std::string &amp;service)</text><ellipse cx="1328.41" cy="654.5313" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="250.63" x="1332.67" y="656.8107">void markInterventionAsInProgress(Intervention *intervention)</text><ellipse cx="1328.41" cy="663.6226" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="246.37" x="1332.67" y="665.902">void markInterventionAsComplete(Intervention *intervention)</text><ellipse cx="1328.41" cy="672.7139" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="75.97" x="1332.67" y="674.9933">void updateScore()</text><ellipse cx="1328.41" cy="681.8052" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="170.4" x="1332.67" y="684.0847">void calculateEarnings(float &amp;hmEarnings)</text><ellipse cx="1328.41" cy="690.8966" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="97.98" x="1332.67" y="693.176">float getEarnings() const</text><ellipse cx="1328.41" cy="699.9879" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="107.21" x="1332.67" y="702.2673">float commissionByScore()</text><ellipse cx="1328.41" cy="709.0792" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="90.88" x="1332.67" y="711.3586">unsigned int _idSeqCol</text><ellipse cx="1328.41" cy="718.1705" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="129.93" x="1332.67" y="720.45">std::string getId() const override</text><ellipse cx="1328.41" cy="727.2619" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="197.38" x="1332.67" y="729.5413">bool operator==(const Collaborator &amp;ind2) const</text><ellipse cx="1328.41" cy="736.3532" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="190.28" x="1332.67" y="738.6326">bool operator&lt;(const Collaborator &amp;col2) const</text><!--MD5=[ed6624c6556d5e7b1bd23032162d20b7]
+class Client--><rect codeLine="194" fill="#CCCCCC" filter="url(#f1ahuejl9lb13e)" height="148.0073" id="Client" style="stroke: #AAAAAA; stroke-width: 1.065;" width="565.16" x="730.59" y="536.405"/><ellipse cx="999.325" cy="545.635" fill="#FF8800" rx="5.68" ry="5.68" style="stroke: #AAAAAA; stroke-width: 0.71;"/><path d="M1001.3662,548.0645 Q1000.9558,548.2642 1000.512,548.3752 Q1000.0794,548.475 999.6023,548.475 Q998.1823,548.475 997.3503,547.7095 Q996.5183,546.9441 996.5183,545.635 Q996.5183,544.3148 997.3503,543.5605 Q998.1823,542.795 999.6023,542.795 Q1000.0794,542.795 1000.512,542.9059 Q1000.9558,543.0058 1001.3662,543.2055 L1001.3662,544.337 Q1000.9558,544.0819 1000.5564,543.9598 Q1000.157,543.8267 999.7244,543.8267 Q998.9367,543.8267 998.4819,544.3148 Q998.0381,544.7919 998.0381,545.635 Q998.0381,546.4781 998.4819,546.9552 Q998.9367,547.4322 999.7244,547.4322 Q1000.157,547.4322 1000.5564,547.3102 Q1000.9558,547.177 1001.3662,546.9219 L1001.3662,548.0645 Z "/><text fill="#000000" font-family="Verdana" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="22.72" x="1010.685" y="548.3388">Client</text><line style="stroke: #AAAAAA; stroke-width: 1.065;" x1="731.3" x2="1295.04" y1="554.865" y2="554.865"/><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="736.27" y="560.545"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="66.03" x="742.66" y="564.9544">unsigned int _nif</text><rect fill="none" height="4.26" style="stroke: #C82930; stroke-width: 0.71;" width="4.26" x="736.27" y="569.6363"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="60.35" x="742.66" y="574.0457">bool _premium</text><line style="stroke: #AAAAAA; stroke-width: 0.71;" x1="731.3" x2="1295.04" y1="578.7277" y2="578.7277"/><ellipse cx="738.4" cy="586.5377" fill="none" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="88.75" x="742.66" y="588.8171">unsigned int _idSeqClt</text><ellipse cx="738.4" cy="595.629" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="254.18" x="742.66" y="597.9084">Client(unsigned int nif, const std::string &amp;name, bool premium)</text><ellipse cx="738.4" cy="604.7203" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="111.47" x="742.66" y="606.9997">~Client() override = default</text><ellipse cx="738.4" cy="613.8116" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="80.94" x="742.66" y="616.0911">unsigned int getNif()</text><ellipse cx="738.4" cy="622.903" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="92.3" x="742.66" y="625.1824">bool isPremium() const</text><ellipse cx="738.4" cy="631.9943" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="129.93" x="742.66" y="634.2737">std::string getId() const override</text><ellipse cx="738.4" cy="641.0856" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="548.83" x="742.66" y="643.365">void requestIntervention(HouseMaster &amp;hm, const Date &amp;date, const std::string &amp;service, bool forcePro, unsigned int nrOfRooms) const</text><ellipse cx="738.4" cy="650.177" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="203.06" x="742.66" y="652.4564">void cancelIntervention(Intervention *intervention)</text><ellipse cx="738.4" cy="659.2683" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="401.15" x="742.66" y="661.5477">void classifyCollaborator(HouseMaster &amp;hm, const std::string &amp;collabId, Classification classification)</text><ellipse cx="738.4" cy="668.3596" fill="#84BE84" rx="2.13" ry="2.13" style="stroke: #038048; stroke-width: 0.71;"/><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="170.4" x="742.66" y="670.639">bool operator==(const Client &amp;ind2) const</text><text fill="#333333" font-family="sans-serif" font-size="7.81" lengthAdjust="spacingAndGlyphs" textLength="0" x="745.5" y="679.7304"/><!--MD5=[8d1d930e92d69d0f63c31789944ca4f0]
+reverse link Individual to Collaborator--><path codeLine="210" d="M1546.025,285.3206 C1549.1632,337.4204 1553.6717,412.3041 1557.5696,476.978 " fill="none" id="Individual-backto-Collaborator" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="none" points="1541.055,285.3916,1545.1588,270.9218,1550.9737,284.7952,1541.055,285.3916" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[f2f702391b19b694c366b89ff259a1c9]
+reverse link Individual to Client--><path codeLine="211" d="M1491.7952,281.9978 C1452.4044,327.6863 1394.5678,389.5983 1335.51,434.52 C1285.0148,472.9239 1225.0056,507.9482 1170.5344,536.3979 " fill="none" id="Individual-backto-Client" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="none" points="1488.1458,278.6111,1501.153,271.0425,1495.7073,285.065,1488.1458,278.6111" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[bfd708e79445d55f06d2a69bba87afd7]
+reverse link date to duration--><path codeLine="212" d="M304.1427,987.7804 C312.2012,998.6789 320.0041,1009.2295 327.0544,1018.7577 " fill="none" id="date-backto-duration" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="none" points="300.1241,990.7056,295.6795,976.3281,308.1187,984.7913,300.1241,990.7056" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[9b596b60bea1e93eaea4273809ede9f7]
+reverse link Service to Painting--><path codeLine="213" d="M791.65,960.5164 C791.65,984.3156 791.65,1009.1301 791.65,1028.0729 " fill="none" id="Service-backto-Painting" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="none" points="786.68,960.488,791.65,946.288,796.62,960.488,786.68,960.488" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[f7376124c70693f07b59c98ff50cd4a4]
+reverse link HouseMaster to Client--><path codeLine="214" d="M1013.17,444.0411 C1013.17,477.3117 1013.17,509.4179 1013.17,536.3624 " fill="none" id="HouseMaster-backto-Client" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="#FFFFFF" points="1013.17,434.6265,1010.33,438.8865,1013.17,443.1465,1016.01,438.8865,1013.17,434.6265" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[695a4985b4a856d73a05f6bd0c943d0c]
+reverse link HouseMaster to Collaborator--><path codeLine="215" d="M1324.8742,440.0083 C1342.681,452.554 1360.289,464.9506 1377.3858,476.9993 " fill="none" id="HouseMaster-backto-Collaborator" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="#FFFFFF" points="1317.2346,434.6265,1319.0821,439.4014,1324.2004,439.5325,1322.3528,434.7576,1317.2346,434.6265" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[7d871f9c8add411a0ead6405517479ed]
+reverse link HouseMaster to Intervention--><path codeLine="216" d="M751.109,440.7183 C728.8363,459.4339 706.9541,477.83 686.2931,495.1895 " fill="none" id="HouseMaster-backto-Intervention" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="#000000" points="758.351,434.6265,753.2627,435.1941,751.8296,440.1093,756.9179,439.5417,758.351,434.6265" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[d193e677350051aed924e61da77287e0]
+reverse link Collaborator to classification--><path codeLine="217" d="M1565.55,752.8556 C1565.55,782.2851 1565.55,811.246 1565.55,834.1222 " fill="none" id="Collaborator-backto-classification" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="#000000" points="1565.55,743.5049,1562.71,747.7649,1565.55,752.0249,1568.39,747.7649,1565.55,743.5049" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[5e74255e6548edae4a1e429487e00874]
+reverse link Intervention to Service--><path codeLine="218" d="M659.0078,732.3508 C684.8944,761.2478 711.5265,790.9684 734.069,816.1237 " fill="none" id="Intervention-backto-Service" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="#000000" points="652.8024,725.4212,653.5321,730.4888,658.4906,731.7643,657.7609,726.6967,652.8024,725.4212" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[abc7dc0627f78551ca2688d2e53e79d6]
+reverse link Intervention to processState--><path codeLine="219" d="M532.3296,734.6228 C526.5999,774.1343 520.6927,814.9167 516.5818,843.267 " fill="none" id="Intervention-backto-processState" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="#000000" points="533.6644,725.4212,530.2404,729.2277,532.4372,733.8524,535.8612,730.0458,533.6644,725.4212" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[19cc15c6f15d250ef131fff6f0bcead7]
+reverse link Intervention to date--><path codeLine="220" d="M405.2893,731.3355 C383.2935,749.5967 360.8717,768.22 339.6569,785.8351 " fill="none" id="Intervention-backto-date" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="#FFFFFF" points="412.4106,725.4212,407.3192,725.9609,405.8592,730.8682,410.9506,730.3285,412.4106,725.4212" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[f7d0d31f127bf78f22137b2acbf5d716]
+reverse link Intervention to duration--><path codeLine="221" d="M589.5698,734.4453 C605.8856,810.3869 611.5443,906.2227 564.45,976.25 C542.6175,1008.7112 505.8537,1028.6551 469.3384,1040.9026 " fill="none" id="Intervention-backto-duration" style="stroke: #000000; stroke-width: 0.71;"/><polygon fill="#000000" points="587.5321,725.2863,585.6873,730.0623,589.3863,733.6021,591.2311,728.8261,587.5321,725.2863" style="stroke: #000000; stroke-width: 0.71;"/><!--MD5=[9c4d6e5d704c91e4e05f40f567e75ed1]
+@startuml
+!define LIGHTORANGE
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
+
+ enum processState{
+    Scheduled
+    PaymentComplete
+    InProgress,
+    Complete
+    Canceled
+ }
+
+
+ enum classification{
+     unreliable = -2
+     clumsy = -1
+     newHere = 0
+     getsItDone = 1
+     hardWorking = 2
+     attentive = 3
+     savior = 4
+ }
+
+ class date{
+     - bool isLeapYear() const
+     - unsigned int getDaysInMonth() const
+     - unsigned int _day
+     - unsigned int _month
+     - unsigned int _year
+     - -
+     # unsigned int _hours
+     # unsigned int _minutes
+     - -
+     + Date();
+     + Date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
+     + explicit Date(const std::string &date);
+     + {abstract} std::string getString() const;
+     + Date operator+(const Date &d1) const;
+     + bool operator==(const Date &d2) const;
+     + bool operator<(const Date &d2) const;
+     + bool operator>(const Date &d2) const;
+     + {abstract} void checkIfValid() const;
+     + class InvalidDate;
+}
+
+class duration{
+     + Duration();
+     + Duration(unsigned int hours, unsigned int minutes);
+     + explicit Duration(const std::string &duration);
+     + {abstract} std::string getString() const override;
+     + {abstract} void checkIfValid() const override;
+     + class InvalidDuration;
+ }
+
+ class Service{
+    - std::string _name
+    - bool _pro
+    - float _basePrice
+    - duration _duration
+    - -
+    + Service()
+    + Service(std::string name, bool pro, float basePrice, const duration &duration)
+    + std::string getName() const
+    + bool getPro() const
+    + float getBasePrice() const
+    + duration getDuration() const
+    + {abstract} float getPrice()
+ }
+
+ class Painting{
+    - unsigned int _roomNumber
+    - -
+    + Painting(std::string name, bool pro, float basePrice, const duration &duration)
+    + void setRoomNumber(int number)
+    + {abstract} float getPrice() override
+ }
+
+class HouseMaster{
+    std::unordered_map<std::string, Service *> _availableServices;
+         std::map<std::string, Client *> _clients;
+         std::unordered_map<std::string, std::string> _usernameMap;
+         std::map<std::string, Collaborator *> _collaborators;
+         std::vector<Intervention *> _interventions;
+         float _earnings;
+    - -
+    + HouseMaster()
+    + HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services, std::ifstream earnings)
+    + ~HouseMaster()
+    + std::map<std::string, Collaborator *> &getCollaborators()
+    + std::map<std::string, Client *> &getClients()
+    + std::vector<Intervention *> &getInterventions()
+    + void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration)
+    + void removeAvailableService(const std::string &service)
+    + std::unordered_map<std::string, Service *> &getAvailableServices()
+    + void removeCollaborator(const std::string &collId)
+    + void addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro, float earnings = 0, Classification score = newHere)
+    + void addClient(unsigned long nif, const std::string &name, bool premium)
+    + void removeClient(const std::string &clientId)
+    + Intervention * addIntervention(const Date &start, const std::string &service, bool forcePro, const std::string &clientId, int nrOfRooms = 0)
+    + {static} void changeInterventionState(Intervention *intervention, processState state)
+    + void processTransaction(Intervention *intervention)
+    + std::vector<Intervention *> getAssociatedInterventions(const std::string &id)
+    + std::vector<Intervention *> getAssociatedActiveInterventions(const std::string &id)
+    + void assignCollaborator(Intervention *intervention, const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs)
+    + std::vector<std::pair<std::string, Collaborator *>> sortCollaboratorsByScore()
+    + Individual *findByUsername(const std::string &name)
+    + {static} void markAsComplete(Intervention *intervention)
+    + float getEarnings() const
+    + class UnavailableAppointment
+    + class NonexistentService
+    + class ExistentService
+    + class NonexistentCollab
+    + class AssignedCollab
+    + class NonexistentClient
+    + class ExistentClient
+    + class NonexistentUsername
+    + class UnableToWriteFile
+    + void writeCollabsInfo()
+    + void writeClientsInfo()
+    + void writeServicesInfo()
+    + void writeInterventionsInfo()
+    + void writeFinancialInfo() const
+    + void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration)
+}
+
+class Intervention{
+    - std::string _clientId
+    - std::string _collabId
+    - date _startingTime
+    - Service* _type
+    - bool forcePro
+    - processState _state
+    - float _cost
+    - -
+    + void  Intervention(const date &appointment, Service type, bool forcePro)
+    + const date *getStartingTime() const
+    + const Service* getService() const
+    + bool getForcePro() const
+    + std::string getCollabId() const
+    + std::string getClientId() const
+    + void setCollabId(const std::string& collabId)
+    + void setClientId(const std::string &clientId)
+    + processState getProcessState()
+    + void setProcessState(processState state)
+    + bool conflictsWith(date start, duration duration)
+    + void calculateCost()
+    + float getCost() const
+    + date getEndTime() const
+    + bool isActive() const
+}
+
+
+class Individual{
+    # std::string _displayName
+    # unsigned int _id
+    - -
+    + Individual()
+    + explicit Individual(std::string name)
+    + {abstract}std::string getId() const
+    + std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm)
+    + std::vector<Intervention*> getAssociatedActiveInterventions(HouseMaster &hm)
+    + std::string getName() const
+}
+
+class Collaborator{
+    - std::vector<Classification> _classifications
+    - std::vector<std::string> _services
+    - Classification _score
+    - bool _pro
+    - float _earnings
+    - -
+    + Collaborator(std::vector<std::string> services, const std::string &name, bool pro, float earnings, Classification score)
+    + ~Collaborator() override
+    + std::vector<std::string> getServices()
+    + bool isPro() const
+    + bool canPreform(const std::string &service)
+    + {static} bool isAvailable(HouseMaster &hm, const std::string &collabId, Date start, Duration duration)
+    + bool hasQualificationToPreform(Intervention *intervention) const
+    + bool canDo(HouseMaster &hm, const std::string &collabId, Intervention *intervention)
+    + int getScore() const
+    + void addClassification(Classification classification)
+    + void addService(const std::string &service)
+    + {static} void markInterventionAsInProgress(Intervention *intervention)
+    + {static} void markInterventionAsComplete(Intervention *intervention)
+    + void updateScore()
+    + void calculateEarnings(float &hmEarnings)
+    + float getEarnings() const
+    + float commissionByScore()
+    + {static} unsigned int _idSeqCol
+    + {abstract} std::string getId() const override
+    + bool operator==(const Collaborator &ind2) const
+    + bool operator<(const Collaborator &col2) const
+}
+
+class Client{
+    - unsigned int _nif
+    - bool _premium
+    - -
+    + {static} unsigned int _idSeqClt
+    + Client(unsigned int nif, const std::string &name, bool premium)
+    + ~Client() override = default
+    + unsigned int getNif()
+    + bool isPremium() const
+    + {abstract} std::string getId() const override
+    + void requestIntervention(HouseMaster &hm, const Date &date, const std::string &service, bool forcePro, unsigned int nrOfRooms) const
+    + {static} void cancelIntervention(Intervention *intervention)
+    + {static} void classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification)
+    + bool operator==(const Client &ind2) const
+
+}
+Individual <|- - Collaborator
+Individual <|- - Client
+date <|- - duration
+Service<|- - Painting
+HouseMaster o- - Client
+HouseMaster o- - Collaborator
+HouseMaster *- - Intervention
+Collaborator *- - classification
+Intervention *- - Service
+Intervention *- - processState
+Intervention o- - date
+Intervention *- - duration
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+
+
+
+skinparam stereotypeCBackgroundColor FF8800
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam actor {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor cccccc
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor FF8800
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor FF8800
+  endColor BB6600
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor FF8800
+  borderColor BB6600
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor aaa
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+ enum processState{
+    Scheduled
+    PaymentComplete
+    InProgress,
+    Complete
+    Canceled
+ }
+
+
+ enum classification{
+     unreliable = -2
+     clumsy = -1
+     newHere = 0
+     getsItDone = 1
+     hardWorking = 2
+     attentive = 3
+     savior = 4
+ }
+
+ class date{
+     - bool isLeapYear() const
+     - unsigned int getDaysInMonth() const
+     - unsigned int _day
+     - unsigned int _month
+     - unsigned int _year
+     - -
+     # unsigned int _hours
+     # unsigned int _minutes
+     - -
+     + Date();
+     + Date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
+     + explicit Date(const std::string &date);
+     + {abstract} std::string getString() const;
+     + Date operator+(const Date &d1) const;
+     + bool operator==(const Date &d2) const;
+     + bool operator<(const Date &d2) const;
+     + bool operator>(const Date &d2) const;
+     + {abstract} void checkIfValid() const;
+     + class InvalidDate;
+}
+
+class duration{
+     + Duration();
+     + Duration(unsigned int hours, unsigned int minutes);
+     + explicit Duration(const std::string &duration);
+     + {abstract} std::string getString() const override;
+     + {abstract} void checkIfValid() const override;
+     + class InvalidDuration;
+ }
+
+ class Service{
+    - std::string _name
+    - bool _pro
+    - float _basePrice
+    - duration _duration
+    - -
+    + Service()
+    + Service(std::string name, bool pro, float basePrice, const duration &duration)
+    + std::string getName() const
+    + bool getPro() const
+    + float getBasePrice() const
+    + duration getDuration() const
+    + {abstract} float getPrice()
+ }
+
+ class Painting{
+    - unsigned int _roomNumber
+    - -
+    + Painting(std::string name, bool pro, float basePrice, const duration &duration)
+    + void setRoomNumber(int number)
+    + {abstract} float getPrice() override
+ }
+
+class HouseMaster{
+    std::unordered_map<std::string, Service *> _availableServices;
+         std::map<std::string, Client *> _clients;
+         std::unordered_map<std::string, std::string> _usernameMap;
+         std::map<std::string, Collaborator *> _collaborators;
+         std::vector<Intervention *> _interventions;
+         float _earnings;
+    - -
+    + HouseMaster()
+    + HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services, std::ifstream earnings)
+    + ~HouseMaster()
+    + std::map<std::string, Collaborator *> &getCollaborators()
+    + std::map<std::string, Client *> &getClients()
+    + std::vector<Intervention *> &getInterventions()
+    + void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration)
+    + void removeAvailableService(const std::string &service)
+    + std::unordered_map<std::string, Service *> &getAvailableServices()
+    + void removeCollaborator(const std::string &collId)
+    + void addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro, float earnings = 0, Classification score = newHere)
+    + void addClient(unsigned long nif, const std::string &name, bool premium)
+    + void removeClient(const std::string &clientId)
+    + Intervention * addIntervention(const Date &start, const std::string &service, bool forcePro, const std::string &clientId, int nrOfRooms = 0)
+    + {static} void changeInterventionState(Intervention *intervention, processState state)
+    + void processTransaction(Intervention *intervention)
+    + std::vector<Intervention *> getAssociatedInterventions(const std::string &id)
+    + std::vector<Intervention *> getAssociatedActiveInterventions(const std::string &id)
+    + void assignCollaborator(Intervention *intervention, const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs)
+    + std::vector<std::pair<std::string, Collaborator *>> sortCollaboratorsByScore()
+    + Individual *findByUsername(const std::string &name)
+    + {static} void markAsComplete(Intervention *intervention)
+    + float getEarnings() const
+    + class UnavailableAppointment
+    + class NonexistentService
+    + class ExistentService
+    + class NonexistentCollab
+    + class AssignedCollab
+    + class NonexistentClient
+    + class ExistentClient
+    + class NonexistentUsername
+    + class UnableToWriteFile
+    + void writeCollabsInfo()
+    + void writeClientsInfo()
+    + void writeServicesInfo()
+    + void writeInterventionsInfo()
+    + void writeFinancialInfo() const
+    + void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration)
+}
+
+class Intervention{
+    - std::string _clientId
+    - std::string _collabId
+    - date _startingTime
+    - Service* _type
+    - bool forcePro
+    - processState _state
+    - float _cost
+    - -
+    + void  Intervention(const date &appointment, Service type, bool forcePro)
+    + const date *getStartingTime() const
+    + const Service* getService() const
+    + bool getForcePro() const
+    + std::string getCollabId() const
+    + std::string getClientId() const
+    + void setCollabId(const std::string& collabId)
+    + void setClientId(const std::string &clientId)
+    + processState getProcessState()
+    + void setProcessState(processState state)
+    + bool conflictsWith(date start, duration duration)
+    + void calculateCost()
+    + float getCost() const
+    + date getEndTime() const
+    + bool isActive() const
+}
+
+
+class Individual{
+    # std::string _displayName
+    # unsigned int _id
+    - -
+    + Individual()
+    + explicit Individual(std::string name)
+    + {abstract}std::string getId() const
+    + std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm)
+    + std::vector<Intervention*> getAssociatedActiveInterventions(HouseMaster &hm)
+    + std::string getName() const
+}
+
+class Collaborator{
+    - std::vector<Classification> _classifications
+    - std::vector<std::string> _services
+    - Classification _score
+    - bool _pro
+    - float _earnings
+    - -
+    + Collaborator(std::vector<std::string> services, const std::string &name, bool pro, float earnings, Classification score)
+    + ~Collaborator() override
+    + std::vector<std::string> getServices()
+    + bool isPro() const
+    + bool canPreform(const std::string &service)
+    + {static} bool isAvailable(HouseMaster &hm, const std::string &collabId, Date start, Duration duration)
+    + bool hasQualificationToPreform(Intervention *intervention) const
+    + bool canDo(HouseMaster &hm, const std::string &collabId, Intervention *intervention)
+    + int getScore() const
+    + void addClassification(Classification classification)
+    + void addService(const std::string &service)
+    + {static} void markInterventionAsInProgress(Intervention *intervention)
+    + {static} void markInterventionAsComplete(Intervention *intervention)
+    + void updateScore()
+    + void calculateEarnings(float &hmEarnings)
+    + float getEarnings() const
+    + float commissionByScore()
+    + {static} unsigned int _idSeqCol
+    + {abstract} std::string getId() const override
+    + bool operator==(const Collaborator &ind2) const
+    + bool operator<(const Collaborator &col2) const
+}
+
+class Client{
+    - unsigned int _nif
+    - bool _premium
+    - -
+    + {static} unsigned int _idSeqClt
+    + Client(unsigned int nif, const std::string &name, bool premium)
+    + ~Client() override = default
+    + unsigned int getNif()
+    + bool isPremium() const
+    + {abstract} std::string getId() const override
+    + void requestIntervention(HouseMaster &hm, const Date &date, const std::string &service, bool forcePro, unsigned int nrOfRooms) const
+    + {static} void cancelIntervention(Intervention *intervention)
+    + {static} void classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification)
+    + bool operator==(const Client &ind2) const
+
+}
+Individual <|- - Collaborator
+Individual <|- - Client
+date <|- - duration
+Service<|- - Painting
+HouseMaster o- - Client
+HouseMaster o- - Collaborator
+HouseMaster *- - Intervention
+Collaborator *- - classification
+Intervention *- - Service
+Intervention *- - processState
+Intervention o- - date
+Intervention *- - duration
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 16:10:01 WEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>
