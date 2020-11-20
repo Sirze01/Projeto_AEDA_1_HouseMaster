@@ -116,7 +116,7 @@ TEST(HouseMasterTest, collaboratorsManip){
     // add collaborator
     std::vector<std::string> functions;
     functions.push_back("montar um carro do nada"); functions.push_back("desmontar um computador");
-    houseMaster1.addCollaborator(functions, "Jose Retiros", false);
+    houseMaster1.addCollaborator(functions, "Jose Retiros", false, 0);
     EXPECT_FALSE(houseMaster1.getCollaborators().find("collab3") == houseMaster1.getCollaborators().end());
 
 }

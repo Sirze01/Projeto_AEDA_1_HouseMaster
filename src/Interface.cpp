@@ -366,7 +366,7 @@ void Interface::readNewCollaboratorData(bool &running) {
         pickServices.execute(innerRunning);
     }
 
-    _houseMaster.addCollaborator(services, name, pro=="yes");
+    _houseMaster.addCollaborator(services, name, pro == "yes", 0);
 
 }
 

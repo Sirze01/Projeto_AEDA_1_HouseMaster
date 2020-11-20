@@ -1,4 +1,6 @@
-aaaaaaaaaaaaaaaa,no,0,aaaaaaaaaaing
-Super Mario,yes,100.1,canalizador,andar a correr atras de uma princesa ou la o que e
-Jose Retiros,no,12,montar um carro do nada,desmontar um computador
-Miro Osvaldo,yes,14,ajudar os amiguinhos com fisica,ajudar os amiguinhos com amat,jantar na cantina as 18h30,Painting
+Giles Corey,yes,0,0,Fix illumination system,Install central heating system
+Samuel Paris,no,0,0,Hang a picture,Assemble IKEA furniture,Change a lamp,Retouch painting job
+John Proctor,yes,2.4,4,Paint a room,Paint and decorate walls,Retouch painting job
+Samuel Sewall,yes,0,0,Unclog a pipe,Fix a water leak
+John Hathorne,no,0,0,Hang a picture,Retouch painting job
+Dorothy Good,yes,0,0,Repair AC system,Pest Control
