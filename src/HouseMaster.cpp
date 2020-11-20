@@ -37,7 +37,7 @@ std::vector<Intervention *> Individual::getAssociatedActiveInterventions(HouseMa
  * @param nrOfRooms the number of rooms
  */
 void Client::requestIntervention(HouseMaster &hm, const Date &date, const std::string &service, bool forcePro,
-                                 int nrOfRooms) const {
+                                 unsigned int nrOfRooms) const {
     hm.assignCollaborator(hm.addIntervention(date, service, forcePro, this->getId(), nrOfRooms),
                           hm.sortCollaboratorsByScore());
 }

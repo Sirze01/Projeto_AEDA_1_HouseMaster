@@ -121,7 +121,7 @@ public:
     std::string getId() const override;
 
     void requestIntervention(HouseMaster &hm, const Date &date, const std::string &service, bool forcePro,
-                             int nrOfRooms = 0) const;
+                             unsigned int nrOfRooms = 0) const;
 
     static void cancelIntervention(Intervention *intervention);
 
