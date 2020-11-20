@@ -223,7 +223,7 @@ duration::InvalidDuration::InvalidDuration(const std::string &error_msg) : std::
      * \return Whether the duration is valid or invalid*/
 bool duration::isValidDuration() const {
     if (hours > 23 || minutes > 59) {
-        throw InvalidDuration(durationToStr() + " isn't a valid date!");
+        throw InvalidDuration(durationToStr() + " isn't a valid duration!");
     }
     return true;
 }

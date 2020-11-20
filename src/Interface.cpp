@@ -357,7 +357,6 @@ void Interface::readNewCollaboratorData(bool &running) {
     }}, {"Add a new one", [&](){
         std::string serviceName = readNewServiceData(running);
         if (!serviceName.empty()) services.push_back(serviceName);
-
     }}});
 
     while (innerRunning) {
@@ -367,7 +366,6 @@ void Interface::readNewCollaboratorData(bool &running) {
     }
 
     _houseMaster.addCollaborator(services, name, pro=="yes");
-
 }
 
 std::string Interface::readNewServiceData(bool &running) {
@@ -408,11 +406,26 @@ std::string Interface::readNewServiceData(bool &running) {
     }
 
     std::cout << "Mean duration : "; std::cin >> durationStr;
-    duration duration(durationStr);
+    duration duration;
+    bool done;
+    do
+    {
+        try {
+            done = true;
+            struct duration dur2(durationStr);
+            duration = dur2;
+            duration.isValidDuration();
+        }
+        catch (const duration::InvalidDuration& e)
+        {
+            done = false;
+            std::cout << e.what() << "\nMean duration : \n"; std::cin >> durationStr;
+            struct duration dur2(durationStr);
+            duration = dur2;
+        }
+    }while (!done);
     _houseMaster.addAvailableService(name, pro, basePrice, duration);
-
     return name;
-
 }
 
 std::string Interface::selectCollab(bool &running) {
