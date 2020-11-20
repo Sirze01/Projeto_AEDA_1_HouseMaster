@@ -3,114 +3,250 @@
 !includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
 
  enum processState{
-     WaitingPayment
-     Scheduled
-     InProgress
-     Concluded
+    Scheduled
+    PaymentComplete
+    InProgress,
+    Complete
+    Canceled
  }
 
 
  enum classification{
-     Unreliable
-     Clumsy
-     GetsItDone
-     HardWorker
-     Attentive
-     Savior
+     unreliable = -2
+     clumsy = -1
+     newHere = 0
+     getsItDone = 1
+     hardWorking = 2
+     attentive = 3
+     savior = 4
  }
 
 
- entity Service{
-     bool pro
-     string name
-     float price
+ class Service{
+    - std::string _name
+    - bool _pro
+    - float _basePrice
+    - duration _duration
+    ----
+    + Service()
+    + Service(std::string name, bool pro, float basePrice, const duration &duration)
+    + std::string getName() const
+    + bool getPro() const
+    + float getBasePrice() const
+    + duration getDuration() const
+    + virtual float getPrice()
  }
 
- entity date{
-     unsigned int day
-     unsigned int month
-     unsigned int year
-     unsigned int hours
-     unsigned int minutes
+ class Painting{
+    - unsigned int _roomNumber
+    ----
+    + Painting(std::string name, bool pro, float basePrice, const duration &duration)
+    + void setRoomNumber(int number)
+    + float getPrice() override
+ }
+
+ class date{
+     - unsigned int day
+     - unsigned int month
+     - unsigned int year
+     - unsigned int hours
+     - unsigned int minutes
+     ----
+     + date()
+     + date(const std::string &date)
+     + date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes)
+     + unsigned int getDaysInMonth() const
+     + std::string dateToStr() const
+     + date operator+(const date &d1) const
+     + bool operator==(const date &d2) const
+     + bool operator<(const date &d2) const
+     + bool operator>(const date &d2) const
+     + bool checkIfValid(bool throwExcept=false) const
+     + class InvalidDate
+}
+
+class date::InvalidDate{
+   + explicit InvalidDate(const std::string &error_msg)
+}
+
+class duration{
+     + duration()
+     + duration(unsigned int hours, unsigned int minutes)
+     + duration(const std::string &duration)
+     + std::string durationToStr() const
+     + bool isValidDuration(bool throwExcept=false) const
+     + class InvalidDuration
+ }
+
+ class duration::InvalidDuration{
+     + explicit InvalidDuration(const std::string &error_msg)
  }
 
 class HouseMaster{
-    - std::unordered_set<servicesType*> availableServices
-    - std::unordered_map<std::string, Individual*> usernames
-    - std::map<std::string, Collaborator*> collaborators
-    - std::unordered_map<std::string, Client*> clients
-    - std::unordered_set<intervention*> interventions
+    - std::unordered_map<std::string, Service*> _availableServices;
+    - std::unordered_map<std::string, Client*> _clients;
+    - std::unordered_map<std::string, std::string> _usernameMap;
+    - std::unordered_map<std::string, Collaborator*> _collaborators;
+    - std::vector<Intervention*> _interventions;
+    - float _earnings
     ----
-    + void houseMaster()
-    
-    + int getAvailableServices()
-    - int addAvailableServices(service toAdd)
-    - int removeAvailableServices(service toRemove)
-    
-    + int getCollaborators()
-    - int addCollaborator(string name, vector<servicesType*> functions, Availability)
-    - int removeCollaborator(unsigned int id)
-    
-    + int getClients()
-    - int addClient(string name)
-    - int removeClient(unsigned int id)
+    + HouseMaster()
+    + HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services);
+    + std::unordered_map<std::string, Collaborator *>& getCollaborators();
+    + std::unordered_map<std::string, Client *>& getClients();
+    + std::vector<Intervention *>& getInterventions();
+    + void addAvailableService(const std::string& name, bool pro, float basePrice, duration duration);
+    + void removeAvailableService(const std::string& serviceName);
+    + std::unordered_map<std::string, Service*>& getAvailableServices();
+    + void addCollaborator(Collaborator *collab);
+    + //void addCollaborator(const std::string& username, Collaborator* collaborator);
+    + void removeCollaborator(const std::string& collId);
+    + void addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro);
+    + //void deleteCollaborator(const std::string& collId);
+    + void addClient(Client *client);
+    + void addClient(unsigned int nif, const std::string &name, bool premium);
+    + void removeClient(const std::string& clientId);
+    + void addIntervention(const date& appointment, const std::string& type, bool forcePro, const std::string &clientId);
+    + static void changeInterventionState(Intervention* intervention, processState state);
+    + static void changeinterventionStatePayed(Intervention* intervention);
+    + void processTransaction(Intervention *intervention);
+    + std::vector<Intervention*> getAssociatedInterventions(const std::string& id);
+    + std::vector<Intervention*> getAssociatedActiveInterventions(const std::string& id);
+    + void assignCollaborator(Intervention*, const std::vector<std::pair<std::string, Collaborator*>>&);
+    + std::vector<std::pair<std::string, Collaborator*>> sortCollaboratorsByScore();
+    + Individual* findByUsername(const std::string &name);
+    + void markAsComplete(Intervention* intervention);
+    + class UnavailableAppointment;
+    + class NonexistentService;
+    + class ExistentService;
+    + class NonexistentCollab;
+    + class NonexistentClient;
+    + class ExistentClient;
+    + class NonexistentUsername;
+    + class UnableToWriteFile;
+    + void addAvailableService(Service *service);
+    + void writeCollabsInfo();
+    + void writeClientsInfo();
+    + void writeServicesInfo();
+    + void writeInterventionsInfo();
+}
 
-    + int getInterventions()
-    + int addIntervention(servicesType type, date appointment)
-    + int removeIntervention(unsigned int id)
-    
-    + int assignCollaborator(intervention toAssignTo)
-    + int calculateCost(intervention toCalculateFrom)
+class HouseMaster::UnavailableAppointment {
+    + explicit UnavailableAppointment(const std::string &error_msg)
+}
+
+class HouseMaster::NonexistentService {
+    + explicit NonexistentService(const std::string &error_msg)
+}
+
+class HouseMaster::ExistentService {
+    + explicit ExistentService(const std::string &error_msg)
+}
+
+class HouseMaster::NonexistentCollab {
+    explicit NonexistentCollab(const std::string &error_msg)
+}
+
+class HouseMaster::NonexistentClient {
+    + explicit NonexistentClient(const std::string &error_msg);
+}
+
+class HouseMaster::ExistentClient {
+    explicit ExistentClient(const std::string &error_msg)
 }
 
 
+class HouseMaster::NonexistentUsername {
+    + explicit NonexistentUsername(const std::string &error_msg)
+}
+
+class HouseMaster::UnableToWriteFile {
+    + explicit UnableToWriteFile(const std::string &error_msg)
+}
+
 class Intervention{
-    - unsigned int id
-    - date appointment
-    - servicesType type
+    - std::string _clientId
+    - std::string _collabId
+    - date _startingTime
+    - Service* _type
     - bool forcePro
-    - collaborator assigned
-    - processState state
-    - float price
+    - processState _state
+    - float _cost
     ----
-    + void intervention(date appointment, servicesType type, bool forcePro)
-    + int getService()
-    + int getProcessState()
-    + int getCost()
+    + void  Intervention(const date &appointment, Service type, bool forcePro)
+    + const date *getStartingTime() const
+    + const Service* getService() const
+    + bool getForcePro() const
+    + std::string getCollabId() const
+    + std::string getClientId() const
+    + void setCollabId(const std::string& collabId)
+    + void setClientId(const std::string &clientId)
+    + processState getProcessState()
+    + void setProcessState(processState state)
+    + bool conflictsWith(date start, duration duration)
+    + void calculateCost()
+    + float getCost() const
+    + date getEndTime() const
+    + bool isActive() const
 }
 
 
 class Individual{
-    # string name
-    # unsigned int id
-    # vector<interventions*> associatedInterventions
+    # std::string _displayName
+    # unsigned int _id
     ----
-    + individual(string name)
-    + unsigned int getId()
-    + string getName()
-    + bool operator== (const individual& right)
+    + Individual()
+    + explicit Individual(std::string name)
+    + virtual std::string getId() const = 0
+    + std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm)
+    + std::vector<Intervention*> getAssociatedActiveInterventions(HouseMaster &hm)
+    + std::string getName() const
 }
 
 class Collaborator{
-    - vector<servicesType*> functions
-    - classification score
-    - Availability
+    - std::vector<Classification> _classifications
+    - std::vector<std::string> _services
+    - Classification _score
+    - bool _pro
+    - float _earnings
     ----
-    + void collaborator(vector<servicesType*> functions)
-    + int getFunctions()
-    + int getScore()
-    + int getAvailability()
+    + Collaborator(std::vector<std::string> functions, const std::string &name, bool pro)
+    + std::vector<std::string> getServices()
+    + bool isPro() const
+    + bool canPreform(const std::string& service)
+    + static bool isAvailable(HouseMaster &hm, const std::string &collabId, date start, duration duration)
+    + bool hasQualificationToPreform(Intervention *intervention) const
+    + bool canDo(HouseMaster& hm, const std::string &collabId, Intervention *intervention)
+    + int getScore() const
+    + void addClassification(Classification classification)
+    + static void markInterventionAsInProgress(Intervention* intervention)
+    + static void markInterventionAsComplete(Intervention* intervention)
+    + void updateScore()
+    + void calculateEarnings(float &hmEarnings)
+    + float commissionByScore()
+    + static unsigned int _idSeqCol
+    + std::string getId() const override
+    + bool operator== (const Collaborator& ind2) const
+    + bool operator< (const Collaborator& col2) const
 }
 
 class Client{
-    - unsigned int nif
+    - unsigned int _nif;
+    - bool _premium;
     ----
-    + void client(string nif)
+    + static unsigned int _idSeqClt;
+    + Client(unsigned int nif, const std::string &name, bool premium);
     + unsigned int getNif()
-    + int requestIntervention(date appointment, servicesType type, bool forcePro)
+    + bool isPremium() const
+    + std::string getId() const override
+    + void requestIntervention(HouseMaster &hm, const date &_date, const std::string &type, bool forcePro)
+    + static void cancelIntervention(Intervention* intervention)
+    + void classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification)
+    + bool operator== (const Client& ind2) const
 }
 Individual <|-- Collaborator
 Individual <|-- Client
+date <|-- duration
 HouseMaster o-- Client
 HouseMaster *-- Collaborator
 HouseMaster *-- Intervention
