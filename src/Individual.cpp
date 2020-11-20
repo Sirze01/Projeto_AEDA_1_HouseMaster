@@ -47,6 +47,8 @@ Collaborator::Collaborator(std::vector<std::string> services, const std::string 
 
 Collaborator::AlreadyKnows::AlreadyKnows(const std::string &error_msg): std::logic_error(error_msg){};
 
+Collaborator::ServiceRequiresPro::ServiceRequiresPro(const std::string &error_msg): std::logic_error(error_msg){};
+
 
 /**
  * @brief getter

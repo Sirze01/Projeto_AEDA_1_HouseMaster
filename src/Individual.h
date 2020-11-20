@@ -96,6 +96,8 @@ public:
 
     class AlreadyKnows;
 
+    class ServiceRequiresPro;
+
 private:
 
     std::vector<Classification> _classifications;
@@ -109,6 +111,12 @@ class Collaborator::AlreadyKnows: public std::logic_error
 {
 public:
     AlreadyKnows(const std::string &error_msg);
+};
+
+class Collaborator::ServiceRequiresPro: public std::logic_error
+{
+public:
+    ServiceRequiresPro(const std::string &error_msg);
 };
 
 

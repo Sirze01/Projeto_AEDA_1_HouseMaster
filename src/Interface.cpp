@@ -212,7 +212,22 @@ void Interface::collaboratorOperations(bool &running) {
                         if (collab->canPreform(service))
                         {
                             throw Collaborator::AlreadyKnows("Impossible! ");
-                        } else { collab->addService(service); }
+                        } else
+                        {
+                            try
+                            {
+                                if (!collab->isPro() && _houseMaster.getAvailableServices().find(service)->second->getPro())
+                                {
+                                    throw Collaborator::ServiceRequiresPro("Impossible! ");
+                                }
+                                else {
+                                    collab->addService(service);
+                                }
+                            } catch (const Collaborator::ServiceRequiresPro &e)
+                            {
+                                std::cout << e.what() << "Sorry " << collab->getName() << " This service requires a professional collaborator!\n";
+                            }
+                        }
                     } catch (const Collaborator::AlreadyKnows &e) {
                             std::cout << e.what() << collab->getName()<< " already knows "<< service << "\n";
                         }
