@@ -87,7 +87,7 @@ TEST(HouseMasterTest, servicesManip){
     EXPECT_EQ(houseMaster1.getAvailableServices().find("ajudar os amiguinhos com fisica"), houseMaster1.getAvailableServices().end());
 
     // Try to remove inexistent service
-    EXPECT_THROW(houseMaster1.removeAvailableService("ajudar os amiguinhos com fisica"),HouseMaster::InexistentService);
+    EXPECT_THROW(houseMaster1.removeAvailableService("ajudar os amiguinhos com fisica"),HouseMaster::NonexistentService);
 
     // add service
     houseMaster1.addAvailableService("ajudar os amiguinhos com fisica", false, 3, Duration(2, 30));
@@ -111,7 +111,7 @@ TEST(HouseMasterTest, collaboratorsManip){
     EXPECT_EQ(houseMaster1.getCollaborators().find("collab1"), houseMaster1.getCollaborators().end());
 
     // remove already removed collaborator
-    EXPECT_THROW(houseMaster1.removeCollaborator("collab1"), HouseMaster::InexistentCollab);
+    EXPECT_THROW(houseMaster1.removeCollaborator("collab1"), HouseMaster::NonexistentCollab);
 
     // add collaborator
     std::vector<std::string> functions;
@@ -132,7 +132,7 @@ TEST(HouseMasterTest, clientsManip){
     // remove client
     houseMaster1.removeClient("client0");
     EXPECT_EQ(houseMaster1.getClients().find("client0"), houseMaster1.getClients().end());
-    EXPECT_THROW(houseMaster1.removeClient("client0"), HouseMaster::InexistentClient);
+    EXPECT_THROW(houseMaster1.removeClient("client0"), HouseMaster::NonexistentClient);
 
     // add client
     houseMaster1.addClient(1111232, "mafarrico", false);

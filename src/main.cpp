@@ -20,6 +20,6 @@ int main() {
     h1.writeServicesInfo();
     h1.writeCollabsInfo();
     h1.writeInterventionsInfo();
-    h1.writeFinantialInfo();
+    h1.writeFinancialInfo();
     return 0;
 }
