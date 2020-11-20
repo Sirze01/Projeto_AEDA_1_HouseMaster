@@ -20,8 +20,9 @@ std::string Individual::getName() const{
 
 // Collaborator associated methods
 
-Collaborator::Collaborator(std::vector<std::string> functions, const std::string &name, bool pro, float earnings) : Individual(name),
-                            _services(std::move(functions)), _score(newHere), _pro(pro), _earnings(earnings) {
+Collaborator::Collaborator(std::vector<std::string> functions, const std::string &name, bool pro, float earnings,
+                           Classification score) : Individual(name),
+                                                   _services(std::move(functions)), _score(score), _pro(pro), _earnings(earnings) {
     _id = _idSeqCol++;
 }
 

@@ -3,6 +3,7 @@
 #include <utility>
 
 Interface::NonexistentRole::NonexistentRole(const std::string &error_msg) : std::logic_error(error_msg){}
+Interface::InvalidNif::InvalidNif(const std::string &error_msg) : invalid_argument(error_msg){}
 
 Interface::Interface(HouseMaster houseMaster) : _houseMaster(std::move(houseMaster)), _user(), _role() {
 
@@ -61,7 +62,7 @@ void Interface::adminLogin() {
             std::cin >> password;
         }
     }
-    std::cout << "Too many tries! No admin for you.  Logging out...\n";
+    std::cout << "Too many tries! No admin for you. Logging out...\n";
     exit(0);
 }
 
@@ -90,23 +91,15 @@ void Interface::userLogin() {
 bool Interface::readRole(const std::string &username) {
     std::string roleName{};
     Role role{};
+    if (username == "client") {std::cout << "You need to be more specific! Example: 'client123'. ";throw NonexistentRole("This role does not exist!");}
+    else if (username == "collab") {std::cout << "You need to be more specific! Example: 'collab123'. ";throw NonexistentRole("This role does not exist!");}
     for (const auto &i : username) {
         if (isalpha(i)) roleName += i;  // TODO ai isto ta xanxo que fode e nem funciona bem
         else break;                     // TODO apagar este comentário
     }
     if (roleName == "collab") role = collaborator;
     else if (roleName == "client") role = client;
-    else {
-        try
-        {
-            throw NonexistentRole("Role does not exist!");
-        }
-        catch (...)
-        {
-            std::cout << "You inserted an invalid role, please try again:\n";
-            userLogin();
-        }
-    }
+    else throw NonexistentRole("This role does not exist!");
     _role = role;
     return true;
 }
@@ -131,16 +124,18 @@ void Interface::clientOperations(bool &running) {
     }}, {"Browse Services", [&]() {
         while (innerRunning) {
             std::string serviceName = selectService(innerRunning);
-            Service *service = _houseMaster.getAvailableServices()[serviceName];
-            if (!serviceName.empty()) show(*service);
-            std::cin.ignore();
+            if (!serviceName.empty()) {
+                Service *service = _houseMaster.getAvailableServices()[serviceName];
+                show(*service);
+                std::cin.ignore();
+            }
         }
     }}, {"See active interventions", [&](){
         while (innerRunning) {
             Intervention* intervention = selectActiveIntervention(innerRunning);
             if (intervention) {
                 Menu activeInterventionMenu("Active intervention", {{"Mark as done", [&](){
-                    _houseMaster.markAsComplete(intervention);
+                    HouseMaster::markAsComplete(intervention);
                     showPayment(intervention);
                     std::cin.ignore();
                     _houseMaster.processTransaction(intervention);
@@ -149,7 +144,7 @@ void Interface::clientOperations(bool &running) {
                 }},{"Cancel Intervention", [&](){
                     Client::cancelIntervention(intervention);
                 }}, {"See details", [&](){
-                    if (!intervention->getService()->getName().empty()) show(*intervention);
+                    if (intervention->getService()) show(*intervention);
                     std::cin.ignore();
                 }}});
                 activeInterventionMenu.show();
@@ -193,15 +188,12 @@ void Interface::collaboratorOperations(bool &running) {
         }}, {"Add a new one", [&](){
             std::string serviceName = readNewServiceData(running);
             collab->addService(serviceName);
-
         }}});
-
         while (innerRunning) {
             pickServices.show();
             pickServices.select();
             pickServices.execute(innerRunning);
         }
-
     }}});
     collabsMenu.show();
     collabsMenu.select();
@@ -212,8 +204,27 @@ void Interface::collaboratorOperations(bool &running) {
 date Interface::readInterventionDate() {
     std::string dateString{};
     std::cin.ignore();
+    bool done;
     std::cout << "Insert the desired intervention date in format DD/MM/YYYY HH:mm\n"; std::getline(std::cin, dateString);
-    date interventionDate(dateString);
+    date interventionDate;
+    do
+    {
+        try
+        {
+            done = true;
+            date intDate(dateString);
+            interventionDate = intDate;
+            interventionDate.isValidDate();
+        }
+        catch (const date::InvalidDate &e)
+        {
+            done = false;
+            std::cout << e.what() << "\nInsert the desired intervention date in format DD/MM/YYYY HH:mm\n";
+            std::getline(std::cin, dateString);
+            date intDate(dateString);
+            interventionDate = intDate;
+        }
+    } while(!done);
     return interventionDate;
 }
 
@@ -269,10 +280,20 @@ void Interface::adminOperations(bool &running) {
         if (!collabName.empty()) {
             _houseMaster.removeCollaborator(collabName);
         }
+    }}, {"Show collaborators' performance", [&](){
+        showSortedCollabs();
+        std::cin.ignore();
     }}});
     adminMenu.show();
     adminMenu.select();
     adminMenu.execute(running);
+}
+
+bool Interface::isValidNif(unsigned nif)
+{
+    if (nif/1000000000 > 0){throw InvalidNif("This is bigger than expected!");}
+    else if (nif/100000000 != 1 && nif/100000000 != 2 && nif/100000000 != 5 && nif/100000000 != 6 && nif/100000000 != 8 && nif/100000000 != 9){throw InvalidNif("This is an invalid NIF!");}
+    return true;
 }
 
 void Interface::readNewClientData() {
@@ -290,6 +311,21 @@ void Interface::readNewClientData() {
     bool premium = premiumStr == "yes";
 
     std::cout << "NIF ? "; std::cin >> nif; // TODO input validation
+    bool done;
+    do
+    {
+        try
+        {
+            done = true;
+            isValidNif(nif);
+        }
+        catch (const InvalidNif &e)
+        {
+            done = false;
+            std::cout << e.what() << "\nNIF ? ";
+            std::cin >> nif;
+        }
+    } while(!done);
 
     _houseMaster.addClient(nif, name, premium);
     std::string username = (*_houseMaster.getClients().rbegin()).first;
@@ -330,7 +366,7 @@ void Interface::readNewCollaboratorData(bool &running) {
         pickServices.execute(innerRunning);
     }
 
-    _houseMaster.addCollaborator(services, name, pro=="yes");
+    _houseMaster.addCollaborator(services, name, pro == "yes", 0);
 
 }
 
@@ -415,12 +451,12 @@ Intervention *Interface::selectActiveIntervention(bool &running) {
 void Interface::show(const Collaborator &collaborator) {
     std::string pro = collaborator.isPro() ? "yes" : "no";
     std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
-    std::cout << "| " << std::setw(30) << std::right << collaborator.getName() << " |" << std::endl;
+    std::cout << "| " << std::setw(50) << std::right << collaborator.getName() << " |" << std::endl;
     std::cout << "|                                                    |" << std::endl;
-    std::cout << "| [" << "ID" << "] " << std::setw(36) << std::right << collaborator.getId() << " |" << std::endl;
-    std::cout << "| [" << "Score" << "] " << std::setw(39) << std::right << collaborator.getScore() << " |" << std::endl;
+    std::cout << "| [" << "ID" << "] " << std::setw(45) << std::right << collaborator.getId() << " |" << std::endl;
+    std::cout << "| [" << "Score" << "] " << std::setw(42) << std::right << collaborator.getScore() << " |" << std::endl;
     std::cout << "| [" << "Professional" << "] " << std::setw(35) << std::right << pro << " |" << std::endl;
-    std::cout << "| [" << "Earnings" << "] " << std::setw(35) << std::right << collaborator.getEarnings() << " |" << std::endl;
+    std::cout << "| [" << "Earnings" << "] " << std::setw(39) << std::right << collaborator.getEarnings() << " |" << std::endl;
     std::cout << "|                                                    |" << std::endl;
     std::cout << "| [Enter] Go Back                                    |" << std::endl;
     std::cout << "|____________________________________________________|" << std::endl;
@@ -430,12 +466,12 @@ void Interface::show(const Collaborator &collaborator) {
 
 void Interface::show(Intervention &intervention) {
     std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
-    std::cout << "| " << std::setw(50) << std::right << intervention.getService()->getName() << " |" << std::endl;
+    std::cout << "| " << std::setw(49) << std::right << intervention.getService()->getName() << " |" << std::endl;
     std::cout << "|                                                     |" << std::endl;
     std::cout << "| [" << "Starting at" << "] " << std::setw(36) << std::right << intervention.getStartingTime().dateToStr() << " |" << std::endl;
-    std::cout << "| [" << "Ending at" << "] " << std::setw(36) << std::right << intervention.getEndTime().dateToStr() << " |" << std::endl;
-    std::cout << "| [" << "Cost" << "] " << std::setw(39) << std::right << intervention.getCost() << " |" << std::endl;
-    std::cout << "| [" << "Collaborator" << "] " << std::setw(35) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
+    std::cout << "| [" << "Ending at" << "] " << std::setw(38) << std::right << intervention.getEndTime().dateToStr() << " |" << std::endl;
+    std::cout << "| [" << "Cost" << "] " << std::setw(40) << std::right << intervention.getCost() << " |" << std::endl;
+    std::cout << "| [" << "Collaborator" << "] " << std::setw(36) << std::right << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
     std::cout << "|                                                     |" << std::endl;
     std::cout << "| [Enter] Go Back                                     |" << std::endl;
     std::cout << "|_____________________________________________________|" << std::endl;
@@ -446,9 +482,9 @@ void Interface::showPayment(Intervention *intervention) {
     float cost = intervention->getCost();
     auto *client = dynamic_cast<Client*> (_user);
     std::cout << " ___________________HOUSE MASTER____________________ " << std::endl;
-    std::cout << "| " << std::setw(50) << std::right << intervention->getService()->getName() << " |" << std::endl;
-    std::cout << "|                                |" << std::endl;
-    std::cout << "| [" << "Client Name" << "] " << std::setw(36) << std::right << client->getName() << " |" << std::endl;
+    std::cout << "| " << std::setw(49) << std::right << intervention->getService()->getName() << " |" << std::endl;
+    std::cout << "|                                                   |" << std::endl;
+    std::cout << "| [" << "Client Name" << "] " << std::setw(35) << std::right << client->getName() << " |" << std::endl;
     std::cout << "| [" << "Client NIF" << "] " << std::setw(36) << std::right << client->getNif() << " |" << std::endl;
     std::cout << "| [" << "Total cost" << "] " << std::setw(36) << std::right << cost << " |" << std::endl;
     std::cout << "|                                                   |" << std::endl;
@@ -502,9 +538,21 @@ unsigned Interface::readNumberOfRooms() {
     return rooms;
 }
 
+void Interface::showSortedCollabs() {
+    std::vector<std::pair<std::string, Collaborator *>> sorted = _houseMaster.sortCollaboratorsByScore();
+    unsigned count = 1;
+    unsigned back = sorted.size() + 1;
 
+    std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
+    std::cout << "| " << std::setw(50) << std::right << "Collaborators" << " |" << std::endl;
+    std::cout << "|                                                    |" << std::endl;
 
+    for (const auto &collab: sorted) {
+        std::cout << "| " << std::left << std::setw(49) << collab.second->getName() << collab.second->getScore() << " |" << std::endl;
+    }
 
-
-
-
+    std::cout << "|                                                    |" << std::endl;
+    std::cout << "| [0] EXIT (no save)" << "                      [" << std::setw(2) << std::right << back << "] BACK  |" << std::endl;
+    std::cout << "|____________________________________________________|" << std::endl;
+    std::cin.ignore();
+}

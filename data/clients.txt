@@ -1,7 +1,5 @@
-outro xanxo,234234,no
-xanxo,123123,no
-cliente de teste,323432234,no
-aaaaaaa,23421234,yes
-socorro,453455323,no
-sonso,22331122,no
-sarda,123123123,yes
+Sarah Wildes,207317925,no
+Elizabeth Proctor,283147881,yes
+Jonathan Corwin,216692199,no
+Sir William Phips,260456730,yes
+Cotton Mather,245722750,no

@@ -61,7 +61,9 @@ public:
      * @param functions Vector of strings containing the names of the Services the Collaborator can preform
      * @param name String with the name of the new Collaborator
      * @param pro Boolean describing if the Collaborator has professional credentials*/
-    void addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro, float earnings=0);
+    void
+    addCollaborator(const std::vector<std::string> &functions, const std::string &name, bool pro, float earnings = 0,
+                    Classification score=newHere);
     //void deleteCollaborator(const std::string& collId);
     /**Void method to add a new Client to the database
      * @param client* Pointer to the new Client*/

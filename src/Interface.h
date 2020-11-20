@@ -35,10 +35,13 @@ public:
     std::string readNewServiceData(bool &running);
     Intervention* selectActiveIntervention(bool &running);
     class NonexistentRole;
+    bool isValidNif(unsigned nif);
+    class InvalidNif;
     HouseMaster getHouseMasterState() const;
     void showFinances() const;
     void readNewClientData();
     unsigned readNumberOfRooms();
+    void showSortedCollabs();
 private:
     HouseMaster _houseMaster;
     Individual *_user;
@@ -50,5 +53,10 @@ public:
     explicit NonexistentRole (const std::string &error_msg);
 };
 
+
+class Interface::InvalidNif: public std::invalid_argument{
+public:
+    explicit InvalidNif(const std::string &error_msg);
+};
 
 #endif //PROJETO_AEDA_1_HOUSEMASTER_INTERFACE_H
