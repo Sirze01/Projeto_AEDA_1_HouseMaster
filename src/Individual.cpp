@@ -61,7 +61,7 @@ void Collaborator::updateScore() {
         std::for_each(_classifications.begin(), _classifications.end(), [&] (int n) {
             sum += n;
         });
-        average = sum / static_cast<double>(_classifications.size());
+        average = (int(_score) + sum / static_cast<double>(_classifications.size()))/2;
         _score = static_cast<Classification>(round(average));
     }
 }

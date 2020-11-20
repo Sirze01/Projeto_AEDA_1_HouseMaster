@@ -540,7 +540,6 @@ unsigned Interface::readNumberOfRooms() {
 
 void Interface::showSortedCollabs() {
     std::vector<std::pair<std::string, Collaborator *>> sorted = _houseMaster.sortCollaboratorsByScore();
-    unsigned count = 1;
     unsigned back = sorted.size() + 1;
 
     std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
@@ -548,7 +547,7 @@ void Interface::showSortedCollabs() {
     std::cout << "|                                                    |" << std::endl;
 
     for (const auto &collab: sorted) {
-        std::cout << "| " << std::left << std::setw(49) << collab.second->getName() << collab.second->getScore() << " |" << std::endl;
+        std::cout << "| " << std::left << std::setw(48) << collab.second->getName() << std::setw(2) << collab.second->getScore() << " |" << std::endl;
     }
 
     std::cout << "|                                                    |" << std::endl;

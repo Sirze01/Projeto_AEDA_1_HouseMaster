@@ -1,6 +1,6 @@
 Giles Corey,yes,0,0,Fix illumination system,Install central heating system
 Samuel Paris,no,0,0,Hang a picture,Assemble IKEA furniture,Change a lamp,Retouch painting job
-John Proctor,yes,2.4,4,Paint a room,Paint and decorate walls,Retouch painting job
+John Proctor,yes,13.2,3,Paint a room,Paint and decorate walls,Retouch painting job
 Samuel Sewall,yes,0,0,Unclog a pipe,Fix a water leak
 John Hathorne,no,0,0,Hang a picture,Retouch painting job
 Dorothy Good,yes,0,0,Repair AC system,Pest Control
