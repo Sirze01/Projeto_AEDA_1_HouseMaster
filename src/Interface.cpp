@@ -690,7 +690,6 @@ unsigned Interface::readNumberOfRooms() {
     unsigned rooms{};
     std::cout << "How many rooms to paint?\n";
     std::cin >> rooms;
-    // TODO input validation eewwwwww
     return rooms;
 }
 

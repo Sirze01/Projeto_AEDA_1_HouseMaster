@@ -154,8 +154,6 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         } else if (category == "painting") {
             addAvailablePaintService(name, pro, price, duration);
         }
-
-        // check if everything is valid, if not throw an exception
     }
 
     // read collaborators.txt
