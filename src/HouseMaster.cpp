@@ -386,7 +386,7 @@ std::map<std::string, Client *> &HouseMaster::getClients() {
  * @return the intervention
  */
 Intervention *HouseMaster::addIntervention(const Date &start, const std::string &service, bool forcePro,
-                                           const std::string &clientId, int nrOfRooms) {
+                                           const std::string &clientId, unsigned int nrOfRooms) {
     auto it = _availableServices.find(service);
     if (it == _availableServices.end()) throw NonexistentService("There's no such service!");
     auto newIntervention = new Intervention(start, _availableServices[service], forcePro, nrOfRooms);

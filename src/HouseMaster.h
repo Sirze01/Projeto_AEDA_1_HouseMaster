@@ -53,7 +53,7 @@ public:
 
     Intervention *
     addIntervention(const Date &start, const std::string &service, bool forcePro, const std::string &clientId,
-                    int nrOfRooms = 0);
+                    unsigned int nrOfRooms = 0);
 
     static void changeInterventionState(Intervention *intervention, processState state);
 
