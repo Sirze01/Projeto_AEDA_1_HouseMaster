@@ -104,6 +104,8 @@ public:
 
     void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration);
 
+    std::vector<Intervention *> getAssociatedPastInterventions(const std::string &id);
+
 private:
     std::unordered_map<std::string, Service *> _availableServices;
     std::map<std::string, Client *> _clients;

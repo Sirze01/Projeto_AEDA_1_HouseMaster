@@ -89,20 +89,26 @@ std::string Date::getString() const {
  * @return A final date corresponding to the addition of two dates or a date and a duration
  */
 Date Date::operator+(const Date &d1) const {
-    Date resultDate(_day + d1._day, _month + d1._month, _year + d1._year,
-                    (_hours + d1._hours + ((_minutes + d1._minutes) / 60)) % 24, (_minutes + d1._minutes) % 60);
+
+    Date service_date;
+    service_date._minutes = (_minutes + d1._minutes) % 60;
+    service_date._hours = (_hours + d1._hours + ((_minutes + d1._minutes) / 60)) % 24;
+    service_date._day = _day + d1._day;
+    service_date._month = _month + d1._month;
+    service_date._year = _year + d1._year;
     if (((_hours + d1._hours + ((_minutes + d1._minutes) / 60)) / 24) != 0) {
-        resultDate._day++;
-        while (resultDate._day > resultDate.getDaysInMonth()) {
-            resultDate._day -= resultDate.getDaysInMonth();
-            resultDate._month += 1;
-            if (resultDate._month > 12) {
-                resultDate._month = 1;
-                resultDate._year += 1;
+        service_date._day += 1;
+        while (service_date._day > service_date.getDaysInMonth()) {
+            service_date._day -= service_date.getDaysInMonth();
+            service_date._month += 1;
+            if (service_date._month > 12) {
+                service_date._month = 1;
+                service_date._year += 1;
             }
         }
     }
-    return resultDate;
+    return service_date;
+
 }
 
 /**
@@ -111,8 +117,8 @@ Date Date::operator+(const Date &d1) const {
  * @return Whether a date is equal to another
  */
 bool Date::operator==(const Date &d2) const {
-    return _day != d2._day || _month != d2._month || _year != d2._year || _hours != d2._hours ||
-           _minutes != d2._minutes;
+    return !(_day != d2._day || _month != d2._month || _year != d2._year || _hours != d2._hours ||
+           _minutes != d2._minutes);
 }
 
 
@@ -124,7 +130,7 @@ bool Date::operator<(const Date &d2) const {
     if (_month != d2._month) return (_month < d2._month);
     if (_day != d2._day) return (_day < d2._day);
     if (_hours != d2._hours) return (_hours < d2._hours);
-    if (_minutes != d2._hours) return (_minutes < d2._minutes);
+    if (_minutes != d2._minutes) return (_minutes < d2._minutes);
     return false;
 }
 

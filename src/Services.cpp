@@ -102,7 +102,7 @@ float Painting::getPrice() {
  * @param nrOfRooms number of rooms to paint in case of painting service
  */
 Intervention::Intervention(Date appointment, Service *type, bool forcePro, unsigned int nrOfRooms) :
-        _startingTime(std::move(appointment)), _forcePro(forcePro), _state(Scheduled), _cost(), _paid(false) {
+        _startingTime(std::move(appointment)), _forcePro(forcePro), _state(Active), _cost(), _paid(false) {
 
     auto painting = dynamic_cast<Painting *>(type);
     if (painting) {
