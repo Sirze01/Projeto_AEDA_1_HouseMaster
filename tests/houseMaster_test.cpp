@@ -4,15 +4,17 @@
 #include <unordered_map>
 using testing::Eq;
 
-
+/*
 TEST(HouseMasterTest, fileConstructor){
     std::stringstream out;
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"));
+                             std::ifstream("../../data/services.txt"),
+                             std::ifstream("../../data/finances.txt"));
 
-    std::vector<Service> svc;
-    svc.emplace_back("ajudar os amiguinhos com fisica", false, 3, Duration(2, 30));
+    std::vector<Service*> svc;
+    svc.push_back(new Painting("Install central heating system,yes,20,04h0,painting", true, 20, Duration(4, 0)));
+    svc.push_back(new Painting("Install central heating system,yes,20,04h0,painting", true, 20, Duration(4, 0)));
     svc.emplace_back("ajudar os amiguinhos com amat", false, 3, Duration(3, 0));
     svc.emplace_back("jantar na cantina as 18h30", false, 2.70, Duration(1, 0));
     svc.emplace_back("montar um carro do nada", false, 2.5, Duration(10, 0));
@@ -20,10 +22,10 @@ TEST(HouseMasterTest, fileConstructor){
     svc.emplace_back("canalizador", true, 5, Duration(3, 0));
     svc.emplace_back("andar a correr atras de uma princesa ou la o que e", false, 1, Duration(4, 0));
     for(auto & i : svc){
-        EXPECT_EQ(i.getName(), houseMaster1.getAvailableServices()[i.getName()]->getName());
-        EXPECT_EQ(i.getPro(), houseMaster1.getAvailableServices()[i.getName()]->getPro());
-        EXPECT_EQ(i.getDuration(), houseMaster1.getAvailableServices()[i.getName()]->getDuration());
-        EXPECT_EQ(i.getBasePrice(), houseMaster1.getAvailableServices()[i.getName()]->getBasePrice());
+        EXPECT_EQ(i->getName(), houseMaster1.getAvailableServices()[i->getName()]->getName());
+        EXPECT_EQ(i->getPro(), houseMaster1.getAvailableServices()[i->getName()]->getPro());
+        EXPECT_EQ(i->getDuration(), houseMaster1.getAvailableServices()[i->getName()]->getDuration());
+        EXPECT_EQ(i->getBasePrice(), houseMaster1.getAvailableServices()[i->getName()]->getBasePrice());
     }
 
 
@@ -72,14 +74,15 @@ TEST(HouseMasterTest, fileConstructor){
     }
 
 }
-
+*/
 
 TEST(HouseMasterTest, servicesManip){
     Collaborator::_idSeqCol = 0;
     Client::_idSeqClt = 0;
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"));
+                             std::ifstream("../../data/services.txt"),
+                             std::ifstream("../../data/finances.txt"));
 
 
     // remove service
@@ -103,7 +106,8 @@ TEST(HouseMasterTest, collaboratorsManip){
     Client::_idSeqClt = 0;
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"));
+                             std::ifstream("../../data/services.txt"),
+                             std::ifstream("../../data/finances.txt"));
 
 
     // remove collaborator
@@ -127,7 +131,8 @@ TEST(HouseMasterTest, clientsManip){
     Client::_idSeqClt = 0;
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"));
+                             std::ifstream("../../data/services.txt"),
+                             std::ifstream("../../data/finances.txt"));
 
     // remove client
     houseMaster1.removeClient("client0");
@@ -147,7 +152,8 @@ TEST(HouseMasterTest, interventionManip){
     Client::_idSeqClt = 0;
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"));
+                             std::ifstream("../../data/services.txt"),
+                             std::ifstream("../../data/finances.txt"));
 
     // add Intervention
     houseMaster1.addIntervention(Date(12, 05, 2001, 01, 00), "desmontar um computador", true, "");
@@ -169,7 +175,8 @@ TEST(HouseMasterTest, usageTest){
     Client::_idSeqClt = 0;
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"));
+                             std::ifstream("../../data/services.txt"),
+                             std::ifstream("../../data/finances.txt"));
 
     // Client requests intervention
 

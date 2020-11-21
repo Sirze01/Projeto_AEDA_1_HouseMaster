@@ -87,11 +87,12 @@ void Interface::userLogin() {
     std::string username{};
     std::cout << "Username : ";
     std::cin >> username;
-    bool done;
-    do {
+    bool done = false;
+    while (!done) {
         try {
             done = true;
             readRole(username);
+            _user = _houseMaster.findByUsername(username);
         }
         catch (const NonexistentRole &e) {
             done = false;
@@ -99,8 +100,14 @@ void Interface::userLogin() {
             std::cout << "Username : ";
             std::cin >> username;
         }
-    } while (!done);
-    _user = _houseMaster.findByUsername(username);
+        catch (const HouseMaster::NonexistentUsername &e) {
+            done = false;
+            std::cout << e.what() << " Please try again\n";
+            std::cout << "Username : ";
+            std::cin >> username;
+        }
+    }
+
 }
 
 /**
@@ -110,13 +117,8 @@ void Interface::userLogin() {
 void Interface::readRole(const std::string &username) {
     std::string roleName{};
     Role role;
-    if (username == "client") {
-        std::cout << "You need to be more specific! Example: 'client123'. ";
-        throw NonexistentRole("This role does not exist!");
-    }
-    else if (username == "collab") {
-        std::cout << "You need to be more specific! Example: 'collab123'. ";
-        throw NonexistentRole("This role does not exist!");
+    if (username == "client" || username == "collab") {
+        throw NonexistentRole("Invalid username!");
     }
     for (const auto &i : username) {
         if (isalpha(i)) roleName += i;
@@ -180,6 +182,12 @@ void Interface::clientOperations(bool &running) {
                 activeInterventionMenu.select();
                 activeInterventionMenu.execute(running);
             }
+        }
+    }},{"See complete interventions",[&](){
+        while (innerRunning) {
+            Intervention *intervention = selectCompleteIntervention(innerRunning);
+            if (intervention) show(*intervention);
+            std::cin.ignore();
         }
     }}});
     clientMenu.show();
@@ -551,18 +559,39 @@ std::string Interface::selectCollab(bool &running) {
 }
 
 /**
- * @brief selects an active intervention for a user
+ * @brief shows and selects an active intervention for a user
  * @param running
  * @return the intervention
  */
 Intervention *Interface::selectActiveIntervention(bool &running) {
-    auto interventions = _houseMaster.getInterventions();
     std::vector<Intervention *> activeInterventions = _houseMaster.getAssociatedActiveInterventions(_user->getId());
     std::map<std::string, std::function<void()>> options{};
     Intervention *selection{};
     for (const auto &i : activeInterventions) {
         options.insert(std::pair<std::string, std::function<void()>>(i->getService()->getName() + " " +
         i->getStartingTime().getString(),[&selection, &i]() {selection = i;}));
+    }
+    Menu activeInterventionsMenu("Select an intervention", options);
+    activeInterventionsMenu.show();
+    activeInterventionsMenu.select();
+    activeInterventionsMenu.execute(running);
+    return selection;
+}
+
+/**
+ * @brief shows and selects a non active intervention for a user
+ * @param running
+ * @return the intervention
+ */
+Intervention *Interface::selectCompleteIntervention(bool &running) {
+    std::vector<Intervention *> nonActiveInterventions = _houseMaster.getAssociatedPastInterventions(_user->getId());
+    std::map<std::string, std::function<void()>> options{};
+    Intervention *selection{};
+    for (const auto &i : nonActiveInterventions) {
+        options.insert(std::pair<std::string, std::function<void()>>(i->getService()->getName() + " " +
+                                                                     i->getStartingTime().getString(),[&selection, &i]() {
+            selection = i;
+        }));
     }
     Menu activeInterventionsMenu("Select an intervention", options);
     activeInterventionsMenu.show();
@@ -597,19 +626,33 @@ void Interface::show(const Collaborator &collaborator) {
  * @param intervention the intervention
  */
 void Interface::show(Intervention &intervention) {
+    std::string statusName{};
+    switch (intervention.getProcessState()) {
+        case Active:
+            statusName = "Active";
+            break;
+        case Complete:
+            statusName = "Complete";
+            break;
+        case Canceled:
+            statusName = "Canceled";
+            break;
+    }
     std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
-    std::cout << "| " << std::setw(49) << std::right << intervention.getService()->getName() << " |" << std::endl;
-    std::cout << "|                                                     |" << std::endl;
+    std::cout << "| " << std::setw(50) << std::right << intervention.getService()->getName() << " |" << std::endl;
+    std::cout << "|                                                    |" << std::endl;
     std::cout << "| [" << "Starting at" << "] " << std::setw(36) << std::right
               << intervention.getStartingTime().getString() << " |" << std::endl;
     std::cout << "| [" << "Ending at" << "] " << std::setw(38) << std::right << intervention.getEndTime().getString()
               << " |" << std::endl;
-    std::cout << "| [" << "Cost" << "] " << std::setw(40) << std::right << intervention.getCost() << " |" << std::endl;
-    std::cout << "| [" << "Collaborator" << "] " << std::setw(36) << std::right
+    std::cout << "| [" << "Cost" << "] " << std::setw(43) << std::right << intervention.getCost() << " |" << std::endl;
+    std::cout << "| [" << "Collaborator" << "] " << std::setw(35) << std::right
               << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
-    std::cout << "|                                                     |" << std::endl;
-    std::cout << "| [Enter] Go Back                                     |" << std::endl;
-    std::cout << "|_____________________________________________________|" << std::endl;
+    std::cout << "| [" << "Status" << "] " << std::setw(41) << std::right
+              << statusName << " |" << std::endl;
+    std::cout << "|                                                    |" << std::endl;
+    std::cout << "| [Enter] Go Back                                    |" << std::endl;
+    std::cout << "|____________________________________________________|" << std::endl;
     std::cin.ignore();
 }
 

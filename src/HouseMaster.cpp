@@ -92,13 +92,6 @@ bool Collaborator::canDo(HouseMaster &hm, const std::string &collabId, Intervent
            hasQualificationToPreform(intervention);
 }
 
-/**
- * @brief marks intervention as in progress
- * @param intervention in progress
- */
-void Collaborator::markInterventionAsInProgress(Intervention *intervention) {
-    HouseMaster::changeInterventionState(intervention, InProgress);
-}
 
 /**
  * @brief marks an intervention as completed
@@ -441,6 +434,20 @@ std::vector<Intervention *> HouseMaster::getAssociatedActiveInterventions(const 
     std::vector<Intervention *> retVec;
     for (const auto &intervention : _interventions) {
         if ((intervention->getClientId() == id || intervention->getCollabId() == id) && intervention->isActive())
+            retVec.push_back(intervention);
+    }
+    return retVec;
+}
+
+/**
+ * @brief gets the non active interventions associated to an individual
+ * @param id the individual's id
+ * @return the interventions
+ */
+std::vector<Intervention *> HouseMaster::getAssociatedPastInterventions(const std::string &id) {
+    std::vector<Intervention *> retVec;
+    for (const auto &intervention : _interventions) {
+        if ((intervention->getClientId() == id || intervention->getCollabId() == id) && !intervention->isActive())
             retVec.push_back(intervention);
     }
     return retVec;

@@ -33,14 +33,13 @@ public:
 
     class InvalidDate;
 
+    unsigned int getDaysInMonth() const;
+
 protected:
     unsigned int _hours{};
     unsigned int _minutes{};
 private:
     bool isLeapYear() const;
-
-    unsigned int getDaysInMonth() const;
-
     unsigned int _day{};
     unsigned int _month{};
     unsigned int _year{};

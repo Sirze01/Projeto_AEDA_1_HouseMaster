@@ -49,8 +49,7 @@ public:
 
 
 enum processState {
-    Scheduled,
-    InProgress,
+    Active,
     Complete,
     Canceled
 };

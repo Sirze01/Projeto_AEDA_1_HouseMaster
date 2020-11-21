@@ -74,6 +74,8 @@ private:
     HouseMaster _houseMaster;
     Individual *_user{};
     Role _role{};
+
+    Intervention *selectCompleteIntervention(bool &running);
 };
 
 class Interface::NonexistentRole : public std::logic_error {
