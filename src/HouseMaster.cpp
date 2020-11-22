@@ -15,7 +15,7 @@ bool scoreComparer(std::pair<std::string, Collaborator *> &a, std::pair<std::str
  * @param hm the instance of housemaster
  * @return the interventions
  */
-std::vector<Intervention *> Individual::getAssociatedInterventions(HouseMaster &hm) const {
+std::unordered_set<Intervention*> Individual::getAssociatedInterventions(HouseMaster &hm) const {
     return hm.getAssociatedInterventions(this->getId());
 }
 
@@ -24,7 +24,7 @@ std::vector<Intervention *> Individual::getAssociatedInterventions(HouseMaster &
  * @param hm the instance of housemaster
  * @return the active interventions
  */
-std::vector<Intervention *> Individual::getAssociatedActiveInterventions(HouseMaster &hm) const {
+std::unordered_set<Intervention*> Individual::getAssociatedActiveInterventions(HouseMaster &hm) const {
     return hm.getAssociatedActiveInterventions(this->getId());
 }
 
@@ -38,15 +38,8 @@ std::vector<Intervention *> Individual::getAssociatedActiveInterventions(HouseMa
  */
 void Client::requestIntervention(HouseMaster &hm, const Date &date, const std::string &service, bool forcePro,
                                  unsigned int nrOfRooms) const {
-    try
-    {
-        hm.assignCollaborator(hm.addIntervention(date, service, forcePro, this->getId(), nrOfRooms),
-                              hm.sortCollaboratorsByScore());
-    }
-    catch (const HouseMaster::UnavailableAppointment &e)
-    {
-        std::cout << e.what() << "\n";
-    }
+    hm.assignCollaborator(hm.addIntervention(date, service, forcePro, this->getId(), nrOfRooms),
+                          hm.sortCollaboratorsByScore());
 }
 
 /**
@@ -438,11 +431,11 @@ void HouseMaster::processTransaction(Intervention *intervention) {
  * @param id the individual's id
  * @return the interventions
  */
-std::vector<Intervention *> HouseMaster::getAssociatedInterventions(const std::string &id) {
-    std::vector<Intervention *> interventions;
+std::unordered_set<Intervention *> HouseMaster::getAssociatedInterventions(const std::string &id) {
+    std::unordered_set<Intervention *> interventions;
     for (const auto &intervention : _interventions) {
         if (intervention->getClientId() == id || intervention->getCollabId() == id)
-            interventions.push_back(intervention);
+            interventions.insert(intervention);
     }
     return interventions;
 }
@@ -453,11 +446,11 @@ std::vector<Intervention *> HouseMaster::getAssociatedInterventions(const std::s
  * @param id the individual's id
  * @return the interventions
  */
-std::vector<Intervention *> HouseMaster::getAssociatedActiveInterventions(const std::string &id) {
-    std::vector<Intervention *> retVec;
+std::unordered_set<Intervention *> HouseMaster::getAssociatedActiveInterventions(const std::string &id) {
+    std::unordered_set<Intervention *> retVec;
     for (const auto &intervention : _interventions) {
         if ((intervention->getClientId() == id || intervention->getCollabId() == id) && intervention->isActive())
-            retVec.push_back(intervention);
+            retVec.insert(intervention);
     }
     return retVec;
 }
@@ -467,11 +460,11 @@ std::vector<Intervention *> HouseMaster::getAssociatedActiveInterventions(const 
  * @param id the individual's id
  * @return the interventions
  */
-std::vector<Intervention *> HouseMaster::getAssociatedPastInterventions(const std::string &id) {
-    std::vector<Intervention *> retVec;
+std::unordered_set<Intervention *> HouseMaster::getAssociatedPastInterventions(const std::string &id) {
+    std::unordered_set<Intervention *> retVec;
     for (const auto &intervention : _interventions) {
         if ((intervention->getClientId() == id || intervention->getCollabId() == id) && !intervention->isActive())
-            retVec.push_back(intervention);
+            retVec.insert(intervention);
     }
     return retVec;
 }
@@ -592,7 +585,7 @@ void HouseMaster::writeServicesInfo() {
  * @brief saves the interventions' history info
  */
 void HouseMaster::writeInterventionsInfo() {
-    std::ofstream interventionsFile("../data/history.txt", std::ios_base::app);
+    std::ofstream interventionsFile("../data/history.txt");
     time_t timeToday;
     time(&timeToday);
     interventionsFile << '@' << asctime(localtime(&timeToday));
@@ -643,10 +636,10 @@ float HouseMaster::getEarnings() const {
  * @brief getter
  * @return all active interventions
  */
-std::vector<Intervention *> HouseMaster::getAllActiveInterventions() {
-    std::vector<Intervention *> result{};
+std::unordered_set<Intervention *> HouseMaster::getAllActiveInterventions() {
+    std::unordered_set<Intervention *> result{};
     for (const auto &intervention : _interventions) {
-        if (intervention->isActive()) result.push_back(intervention);
+        if (intervention->isActive()) result.insert(intervention);
     }
     return result;
 }
@@ -655,10 +648,10 @@ std::vector<Intervention *> HouseMaster::getAllActiveInterventions() {
  * @brief getter
  * @return all past interventions
  */
-std::vector<Intervention *> HouseMaster::getAllPastInterventions() {
-    std::vector<Intervention *> result{};
+std::unordered_set<Intervention *> HouseMaster::getAllPastInterventions() {
+    std::unordered_set<Intervention *> result{};
     for (const auto &intervention : _interventions) {
-        if (!intervention->isActive()) result.push_back(intervention);
+        if (!intervention->isActive()) result.insert(intervention);
     }
     return result;
 }
