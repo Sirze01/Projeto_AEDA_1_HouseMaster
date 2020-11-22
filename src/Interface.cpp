@@ -91,6 +91,7 @@ void Interface::userLogin() {
     while (!done) {
         try {
             done = true;
+
             readRole(username);
             _user = _houseMaster.findByUsername(username);
         }
@@ -192,6 +193,11 @@ void Interface::clientOperations(bool &running) {
             Intervention *intervention = selectPastIntervention(innerRunning);
             if (intervention) show(*intervention);
             std::cin.ignore();
+        }
+    }},{"Change username", [&](){
+        try{_user->changeUsername(_houseMaster, readNewUsername());}
+        catch (const HouseMaster::UsernameAlreadyInUse &e) {
+            std::cout << e.what() << std::endl;
         }
     }}});
     clientMenu.show();
@@ -576,6 +582,17 @@ std::string Interface::selectCollab(bool &running) {
     collabsMenu.select();
     collabsMenu.execute(running);
     return selection;
+}
+
+/**
+ * @brief Reads a new username
+ * @return The new successfully read username
+ */
+std::string Interface::readNewUsername() {
+    std::string newUsername{};
+    std::cout << "New Username: ";
+    std::getline(std::cin, newUsername, '\n');
+    return newUsername;
 }
 
 /**

@@ -24,6 +24,8 @@ public:
 
     virtual std::string getId() const = 0;
 
+    void changeUsername(HouseMaster &hm, std::string newUsername);
+
     std::unordered_set<Intervention *> getAssociatedInterventions(HouseMaster &hm) const;
 
     std::unordered_set<Intervention *> getAssociatedActiveInterventions(HouseMaster &hm) const;

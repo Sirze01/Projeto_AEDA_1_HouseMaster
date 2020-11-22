@@ -29,6 +29,14 @@ std::unordered_set<Intervention*> Individual::getAssociatedActiveInterventions(H
 }
 
 /**
+ * @brief Changes username in username map
+ * @param hm, the instance of housemaster
+ */
+void Individual::changeUsername(HouseMaster &hm, std::string newUsername) {
+    hm.usernameMapChanger(this->getId(), newUsername);
+}
+
+/**
  * @brief requests and processes an intervention according to the client's requirements
  * @param hm the instance of housemaster
  * @param date the desired date
@@ -107,7 +115,7 @@ void Collaborator::markInterventionAsComplete(Intervention *intervention) {
 /**
  * @brief housemaster constructor
  */
-HouseMaster::HouseMaster() : _availableServices(), _clients(), _collaborators(), _interventions(), _earnings() {
+HouseMaster::HouseMaster() : _availableServices(), _clients(), _usernameMap(), _collaborators(), _interventions(), _earnings(){
 
 }
 
@@ -118,7 +126,7 @@ HouseMaster::HouseMaster() : _availableServices(), _clients(), _collaborators(),
  * @param services services info
  * @param earnings earnings info
  */
-HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services,
+HouseMaster::HouseMaster(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients, std::ifstream services,
                          std::ifstream earnings, std::ifstream history) {
 
     // read services.txt
@@ -189,6 +197,16 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         std::getline(lss, premiumStr, ',');
 
         addClient(std::stoul(nifStr), name, premiumStr == "yes");
+    }
+
+    // read usernames.txt
+    for (std::string line; std::getline(usernames, line);) {
+        std::stringstream lss(line);
+        std::string username;
+        std::string id;
+        std::getline(lss, username, ',');
+        std::getline(lss, id, ',');
+        _usernameMap.emplace(std::pair<std::string, std::string>(username, id));
     }
 
     // read earnings.txt
@@ -289,6 +307,33 @@ void HouseMaster::removeAvailableService(const std::string &service) {
  */
 std::unordered_map<std::string, Service *> &HouseMaster::getAvailableServices() {
     return _availableServices;
+}
+
+/**
+ * @brief Manipulates the username map
+ * @param string with the user id
+ */
+void HouseMaster::usernameMapChanger(std::string id, std::string newUsername) {
+    auto user = std::find_if(_usernameMap.begin(),_usernameMap.end(),
+                             [&id](const std::pair<std::string, std::string>& mapElem){
+       return mapElem.second == id;
+    });
+
+    if(user != _usernameMap.end()){
+        auto alreadyInUse = std::find_if_not(_usernameMap.begin(), _usernameMap.end(),
+                         [&newUsername](const std::pair<std::string, std::string> &username){
+            return newUsername != username.first;
+        });
+
+        if(alreadyInUse == _usernameMap.end()){
+            _usernameMap.erase(user);
+            _usernameMap.emplace(std::pair<std::string, std::string>(newUsername, id));
+        }
+        else{
+            throw UsernameAlreadyInUse("Username in use, choose another!");
+        }
+    }
+    else {}
 }
 
 /**
@@ -512,6 +557,20 @@ void HouseMaster::assignCollaborator(Intervention *intervention,
     else throw UnavailableAppointment("No collaborators available to the desired date!");
 }
 
+/**
+ * @brief Saves usernameMap
+ */
+void HouseMaster::writeUsernameMap() {
+    std::ofstream usernameMapFile("../data/usernames.txt");
+    if (usernameMapFile.is_open()) {
+        auto usernameIt = _usernameMap.begin();
+        while (usernameIt != _usernameMap.end()) {
+            usernameMapFile << usernameIt->first << ',' << usernameIt->second << std::endl;
+            usernameIt++;
+        }
+        usernameMapFile.close();
+    } else throw UnableToWriteFile("Unable to write in usernames' file");
+}
 
 /**
  * @brief saves the collaborators' info
@@ -534,7 +593,7 @@ void HouseMaster::writeCollabsInfo() {
             collab_it++;
         }
         collabFile.close();
-    } else throw UnableToWriteFile("Unable to write in clients' file");
+    } else throw UnableToWriteFile("Unable to write in collabs' file");
 }
 
 /**
@@ -675,6 +734,12 @@ HouseMaster::NonexistentService::NonexistentService(const std::string &error_msg
  * @param error_msg to show
  */
 HouseMaster::ExistentService::ExistentService(const std::string &error_msg) : std::out_of_range(error_msg) {}
+
+/**
+ * @brirf Exception thrown when trying to change username to another already in use
+ * @param error_msg to show
+ */
+HouseMaster::UsernameAlreadyInUse::UsernameAlreadyInUse(const std::string &error_msg) : std::logic_error(error_msg){};
 
 /**
  * @brief the exception for a nonexistent collaborator

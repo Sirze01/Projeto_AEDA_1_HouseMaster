@@ -6,7 +6,8 @@
 
 int main() {
 
-    HouseMaster h1(std::ifstream("../data/collabs.txt"),
+    HouseMaster h1(std::ifstream("../data/usernames.txt"),
+                   std::ifstream("../data/collabs.txt"),
                    std::ifstream("../data/clients.txt"),
                    std::ifstream("../data/services.txt"),
                    std::ifstream("../data/finances.txt"),
@@ -19,6 +20,7 @@ int main() {
     h1 = i1.getHouseMasterState();
     try
     {
+        h1.writeUsernameMap();
         h1.writeClientsInfo();
         h1.writeServicesInfo();
         h1.writeCollabsInfo();

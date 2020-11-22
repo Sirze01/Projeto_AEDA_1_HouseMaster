@@ -26,7 +26,7 @@ public:
 
     HouseMaster();
 
-    HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services,
+    HouseMaster(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients, std::ifstream services,
                 std::ifstream earnings, std::ifstream history);
 
     ~HouseMaster() = default;
@@ -42,6 +42,8 @@ public:
     void removeAvailableService(const std::string &service);
 
     std::unordered_map<std::string, Service *> &getAvailableServices();
+
+    void usernameMapChanger(std::string id, std::string newUsername);
 
     void removeCollaborator(const std::string &collId);
 
@@ -87,6 +89,8 @@ public:
 
     class ExistentService;
 
+    class UsernameAlreadyInUse;
+
     class NonexistentCollab;
 
     class AssignedCollab;
@@ -98,6 +102,8 @@ public:
     class NonexistentUsername;
 
     class UnableToWriteFile;
+
+    void writeUsernameMap();
 
     void writeCollabsInfo();
 
@@ -137,6 +143,11 @@ public:
 class HouseMaster::ExistentService : public std::out_of_range {
 public:
     explicit ExistentService(const std::string &error_msg);
+};
+
+class HouseMaster::UsernameAlreadyInUse : public std::logic_error{
+public:
+    explicit UsernameAlreadyInUse(const std::string &error_msg);
 };
 
 class HouseMaster::NonexistentCollab : public std::out_of_range {

@@ -51,6 +51,8 @@ private:
 
     std::string selectCollab(bool &running);
 
+    std::string readNewUsername();
+
     void readNewCollaboratorData(bool &running);
 
     std::string readNewServiceData();
