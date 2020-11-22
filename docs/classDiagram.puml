@@ -210,7 +210,7 @@
 
  Individual <|-- Collaborator
  Individual <|-- Client
- date <|-- duration
+ Date <|-- Duration
  Service<|-- Painting
  HouseMaster o-- Client
  HouseMaster o-- Collaborator
