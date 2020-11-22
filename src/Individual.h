@@ -24,9 +24,9 @@ public:
 
     virtual std::string getId() const = 0;
 
-    std::vector<Intervention *> getAssociatedInterventions(HouseMaster &hm) const;
+    std::unordered_set<Intervention *> getAssociatedInterventions(HouseMaster &hm) const;
 
-    std::vector<Intervention *> getAssociatedActiveInterventions(HouseMaster &hm) const;
+    std::unordered_set<Intervention *> getAssociatedActiveInterventions(HouseMaster &hm) const;
 
     std::string getName() const;
 

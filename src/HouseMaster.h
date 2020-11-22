@@ -60,15 +60,15 @@ public:
 
     void processTransaction(Intervention *intervention);
 
-    std::vector<Intervention *> getAssociatedInterventions(const std::string &id);
+    std::unordered_set<Intervention *> getAssociatedInterventions(const std::string &id);
 
-    std::vector<Intervention *> getAssociatedActiveInterventions(const std::string &id);
+    std::unordered_set<Intervention *> getAssociatedActiveInterventions(const std::string &id);
 
-    std::vector<Intervention *> getAssociatedPastInterventions(const std::string &id);
+    std::unordered_set<Intervention *> getAssociatedPastInterventions(const std::string &id);
 
-    std::vector<Intervention *> getAllPastInterventions();
+    std::unordered_set<Intervention *> getAllPastInterventions();
 
-    std::vector<Intervention *> getAllActiveInterventions();
+    std::unordered_set<Intervention *> getAllActiveInterventions();
 
     void assignCollaborator(Intervention *intervention,
                             const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs);

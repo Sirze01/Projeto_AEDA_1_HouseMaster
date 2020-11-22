@@ -17,10 +17,17 @@ int main() {
         i1.selectRole(running);
     }
     h1 = i1.getHouseMasterState();
-    h1.writeClientsInfo();
-    h1.writeServicesInfo();
-    h1.writeCollabsInfo();
-    h1.writeInterventionsInfo();
-    h1.writeFinancialInfo();
+    try
+    {
+        h1.writeClientsInfo();
+        h1.writeServicesInfo();
+        h1.writeCollabsInfo();
+        h1.writeInterventionsInfo();
+        h1.writeFinancialInfo();
+    }
+    catch (const HouseMaster::UnableToWriteFile &e)
+    {
+        std::cout << e.what();
+    }
     return 0;
 }

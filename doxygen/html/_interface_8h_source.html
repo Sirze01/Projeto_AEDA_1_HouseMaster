@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="House Master4.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projeto_AEDA_1_HouseMaster
    </div>
@@ -116,7 +117,7 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> showPayment(<a class="code" href="class_intervention.html">Intervention</a> *intervention);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">static</span> Classification readClassification(<span class="keywordtype">bool</span> &amp;running);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">static</span> Classification readClassification(<span class="keywordtype">bool</span> &amp;running, std::string &amp;collabName);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> adminOperations(<span class="keywordtype">bool</span> &amp;running);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
@@ -124,7 +125,7 @@ $(function() {
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> readNewCollaboratorData(<span class="keywordtype">bool</span> &amp;running);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::string readNewServiceData(<span class="keywordtype">bool</span> &amp;running);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::string readNewServiceData();</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="class_intervention.html">Intervention</a> *selectActiveIntervention(<span class="keywordtype">bool</span> &amp;running);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
@@ -145,32 +146,34 @@ $(function() {
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="class_house_master.html">HouseMaster</a> _houseMaster;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="class_individual.html">Individual</a> *_user{};</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    Role _role{};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="class_interface_1_1_nonexistent_role.html">   79</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_interface_1_1_nonexistent_role.html">Interface::NonexistentRole</a> : <span class="keyword">public</span> std::logic_error {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_interface_1_1_nonexistent_role.html#a2fa262b3b1d3696c910afc87bed0bccb">NonexistentRole</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_interface_1_1_invalid_nif.html">   85</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_interface_1_1_invalid_nif.html">Interface::InvalidNif</a> : <span class="keyword">public</span> std::invalid_argument {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_interface_1_1_invalid_nif.html#a64d93dbca0467ab4cab2e066f1a4f20c">InvalidNif</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif //PROJETO_AEDA_1_HOUSEMASTER_INTERFACE_H</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="class_intervention.html">Intervention</a> *selectPastIntervention(<span class="keywordtype">bool</span> &amp;running);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="class_interface_1_1_nonexistent_role.html">   81</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_interface_1_1_nonexistent_role.html">Interface::NonexistentRole</a> : <span class="keyword">public</span> std::logic_error {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_interface_1_1_nonexistent_role.html#a2fa262b3b1d3696c910afc87bed0bccb">NonexistentRole</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="class_interface_1_1_invalid_nif.html">   87</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_interface_1_1_invalid_nif.html">Interface::InvalidNif</a> : <span class="keyword">public</span> std::invalid_argument {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_interface_1_1_invalid_nif.html#a64d93dbca0467ab4cab2e066f1a4f20c">InvalidNif</a>(<span class="keyword">const</span> std::string &amp;error_msg);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif //PROJETO_AEDA_1_HOUSEMASTER_INTERFACE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_house_master_html"><div class="ttname"><a href="class_house_master.html">HouseMaster</a></div><div class="ttdoc">This class manages the services, collaborators, clients and finances of HouseMaster.</div><div class="ttdef"><b>Definition:</b> HouseMaster.h:24</div></div>
 <div class="ttc" id="aclass_collaborator_html"><div class="ttname"><a href="class_collaborator.html">Collaborator</a></div><div class="ttdef"><b>Definition:</b> Individual.h:52</div></div>
-<div class="ttc" id="aclass_interface_html_a47528ddc820040627d031a9e1b0a2598"><div class="ttname"><a href="class_interface.html#a47528ddc820040627d031a9e1b0a2598">Interface::getHouseMasterState</a></div><div class="ttdeci">HouseMaster getHouseMasterState() const</div><div class="ttdoc">getter</div><div class="ttdef"><b>Definition:</b> Interface.cpp:666</div></div>
-<div class="ttc" id="aclass_interface_1_1_invalid_nif_html"><div class="ttname"><a href="class_interface_1_1_invalid_nif.html">Interface::InvalidNif</a></div><div class="ttdef"><b>Definition:</b> Interface.h:85</div></div>
+<div class="ttc" id="aclass_interface_html_a47528ddc820040627d031a9e1b0a2598"><div class="ttname"><a href="class_interface.html#a47528ddc820040627d031a9e1b0a2598">Interface::getHouseMasterState</a></div><div class="ttdeci">HouseMaster getHouseMasterState() const</div><div class="ttdoc">getter</div><div class="ttdef"><b>Definition:</b> Interface.cpp:737</div></div>
+<div class="ttc" id="aclass_interface_1_1_invalid_nif_html"><div class="ttname"><a href="class_interface_1_1_invalid_nif.html">Interface::InvalidNif</a></div><div class="ttdef"><b>Definition:</b> Interface.h:87</div></div>
 <div class="ttc" id="aclass_service_html"><div class="ttname"><a href="class_service.html">Service</a></div><div class="ttdef"><b>Definition:</b> Services.h:13</div></div>
 <div class="ttc" id="aclass_interface_1_1_invalid_nif_html_a64d93dbca0467ab4cab2e066f1a4f20c"><div class="ttname"><a href="class_interface_1_1_invalid_nif.html#a64d93dbca0467ab4cab2e066f1a4f20c">Interface::InvalidNif::InvalidNif</a></div><div class="ttdeci">InvalidNif(const std::string &amp;error_msg)</div><div class="ttdoc">exception for an invalid NIF number</div><div class="ttdef"><b>Definition:</b> Interface.cpp:13</div></div>
 <div class="ttc" id="aclass_individual_html"><div class="ttname"><a href="class_individual.html">Individual</a></div><div class="ttdef"><b>Definition:</b> Individual.h:16</div></div>
-<div class="ttc" id="aclass_intervention_html"><div class="ttname"><a href="class_intervention.html">Intervention</a></div><div class="ttdef"><b>Definition:</b> Services.h:58</div></div>
+<div class="ttc" id="aclass_intervention_html"><div class="ttname"><a href="class_intervention.html">Intervention</a></div><div class="ttdef"><b>Definition:</b> Services.h:59</div></div>
 <div class="ttc" id="aclass_interface_html_a76e2782f2e571b171dba8e37946695a4"><div class="ttname"><a href="class_interface.html#a76e2782f2e571b171dba8e37946695a4">Interface::selectRole</a></div><div class="ttdeci">void selectRole(bool &amp;running)</div><div class="ttdoc">selects a role to interact with</div><div class="ttdef"><b>Definition:</b> Interface.cpp:27</div></div>
 <div class="ttc" id="aclass_interface_html"><div class="ttname"><a href="class_interface.html">Interface</a></div><div class="ttdef"><b>Definition:</b> Interface.h:14</div></div>
-<div class="ttc" id="aclass_interface_1_1_nonexistent_role_html"><div class="ttname"><a href="class_interface_1_1_nonexistent_role.html">Interface::NonexistentRole</a></div><div class="ttdef"><b>Definition:</b> Interface.h:79</div></div>
+<div class="ttc" id="aclass_interface_1_1_nonexistent_role_html"><div class="ttname"><a href="class_interface_1_1_nonexistent_role.html">Interface::NonexistentRole</a></div><div class="ttdef"><b>Definition:</b> Interface.h:81</div></div>
 <div class="ttc" id="aclass_interface_1_1_nonexistent_role_html_a2fa262b3b1d3696c910afc87bed0bccb"><div class="ttname"><a href="class_interface_1_1_nonexistent_role.html#a2fa262b3b1d3696c910afc87bed0bccb">Interface::NonexistentRole::NonexistentRole</a></div><div class="ttdeci">NonexistentRole(const std::string &amp;error_msg)</div><div class="ttdoc">exception for an Nonexistent Role</div><div class="ttdef"><b>Definition:</b> Interface.cpp:7</div></div>
 <div class="ttc" id="aclass_date_html"><div class="ttname"><a href="class_date.html">Date</a></div><div class="ttdoc">A class to represent dates.</div><div class="ttdef"><b>Definition:</b> Date.h:12</div></div>
 <!-- start footer part -->

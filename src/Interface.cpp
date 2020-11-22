@@ -584,7 +584,7 @@ std::string Interface::selectCollab(bool &running) {
  * @return the intervention
  */
 Intervention *Interface::selectActiveIntervention(bool &running) {
-    std::vector<Intervention *> activeInterventions = _role != admin ? _houseMaster.getAssociatedActiveInterventions(_user->getId())
+    std::unordered_set<Intervention *> activeInterventions = _role != admin ? _houseMaster.getAssociatedActiveInterventions(_user->getId())
             : _houseMaster.getAllActiveInterventions();
     std::map<std::string, std::function<void()>> options{};
     Intervention *selection{};
@@ -605,7 +605,7 @@ Intervention *Interface::selectActiveIntervention(bool &running) {
  * @return the intervention
  */
 Intervention *Interface::selectPastIntervention(bool &running) {
-    std::vector<Intervention *> nonActiveInterventions = _role != admin ?_houseMaster.getAssociatedPastInterventions(_user->getId())
+    std::unordered_set<Intervention *> nonActiveInterventions = _role != admin ?_houseMaster.getAssociatedPastInterventions(_user->getId())
             : _houseMaster.getAllPastInterventions();
     std::map<std::string, std::function<void()>> options{};
     Intervention *selection{};

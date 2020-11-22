@@ -42,7 +42,9 @@ bool \mbox{\hyperlink{class_date_ad4c3a7d178ca086d04316f953d919ced}{operator$>$}
 \begin{DoxyCompactList}\small\item\em Checks whether the first date is after the second. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_date_a37f92c3e74b0377cfefc2cd3c7c90586}\label{class_date_a37f92c3e74b0377cfefc2cd3c7c90586}} 
 virtual void \mbox{\hyperlink{class_date_a37f92c3e74b0377cfefc2cd3c7c90586}{check\+If\+Valid}} () const
-\begin{DoxyCompactList}\small\item\em Sees if a date is valid or not (year, month, day in correct range), throwing adequate exception if not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Sees if a date is valid or not (year, month, day in correct range), throwing adequate exception if not. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{class_date_ac616efc12151ef95ec4aed76c9b73f18}{get\+Days\+In\+Month}} () const
+\begin{DoxyCompactList}\small\item\em Searches for the number of days that a month has. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -99,6 +101,19 @@ Sets the date with a given string.
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_date_ac616efc12151ef95ec4aed76c9b73f18}\label{class_date_ac616efc12151ef95ec4aed76c9b73f18}} 
+\index{Date@{Date}!getDaysInMonth@{getDaysInMonth}}
+\index{getDaysInMonth@{getDaysInMonth}!Date@{Date}}
+\doxysubsubsection{\texorpdfstring{getDaysInMonth()}{getDaysInMonth()}}
+{\footnotesize\ttfamily unsigned int Date\+::get\+Days\+In\+Month (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Searches for the number of days that a month has. 
+
+\begin{DoxyReturn}{Returns}
+The number of days of a specific month 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_date_ada44562cf72ca67017af0446ce189e91}\label{class_date_ada44562cf72ca67017af0446ce189e91}} 
 \index{Date@{Date}!getString@{getString}}
 \index{getString@{getString}!Date@{Date}}
