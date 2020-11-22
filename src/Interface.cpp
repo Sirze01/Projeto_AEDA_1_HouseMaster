@@ -649,8 +649,14 @@ void Interface::show(Intervention &intervention) {
     std::cout << "| [" << "Ending at" << "] " << std::setw(38) << std::right << intervention.getEndTime().getString()
               << " |" << std::endl;
     std::cout << "| [" << "Cost" << "] " << std::setw(43) << std::right << intervention.getCost() << " |" << std::endl;
-    std::cout << "| [" << "Collaborator" << "] " << std::setw(35) << std::right
-              << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
+    if (_role != collaborator) {
+        std::cout << "| [" << "Collaborator" << "] " << std::setw(35) << std::right
+                  << _houseMaster.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
+    }
+    if (_role != client) {
+        std::cout << "| [" << "Client" << "] " << std::setw(41) << std::right
+                  << _houseMaster.getClients()[intervention.getClientId()]->getName() << " |" << std::endl;
+    }
     std::cout << "| [" << "Status" << "] " << std::setw(41) << std::right
               << statusName << " |" << std::endl;
     std::cout << "|                                                    |" << std::endl;
