@@ -24,12 +24,12 @@ void Menu::show() {
     std::cout << "|                                                    |" << std::endl;
 
     for (const auto &option : _options) {
-        std::cout << "| [" << count << "] " << std::setw(47) << std::left << option.first << "|" << std::endl;
+        std::cout << "| [" << std::right << std::setw(2) << count << "] " << std::setw(46) << std::left << option.first << "|" << std::endl;
         count++;
     }
 
     std::cout << "|                                                    |" << std::endl;
-    std::cout << "| [0] EXIT (no save)" << "                      [" << std::setw(2) << std::right << back
+    std::cout << "| [ 0] EXIT (no save)" << "                     [" << std::setw(2) << std::right << back
               << "] BACK  |" << std::endl;
     std::cout << "|____________________________________________________|" << std::endl;
 }
