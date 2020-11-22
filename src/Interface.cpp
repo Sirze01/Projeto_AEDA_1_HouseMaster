@@ -252,7 +252,15 @@ void Interface::collaboratorOperations(bool &running) {
         }}, {"Add a new one", [&]() {
             std::string serviceName = readNewServiceData();
             Service* service = _houseMaster.getAvailableServices()[serviceName];
-            collab->addService(service);
+            try {
+                collab->addService(service);
+            } catch (const Collaborator::AlreadyKnows &e) {
+                std::cout << e.what() << std::endl;
+                std::cin.ignore();
+            } catch (const Collaborator::ServiceRequiresPro &e) {
+                std::cout << e.what() << std::endl;
+                std::cin.ignore();
+            }
         }}});
         while (innerRunning) {
             pickServices.show();
