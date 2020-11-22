@@ -91,8 +91,8 @@ void Interface::userLogin() {
     while (!done) {
         try {
             done = true;
-
-            readRole(username);
+            std::string id = _houseMaster.findByUsername(username)->getId();
+            readRole(id);
             _user = _houseMaster.findByUsername(username);
         }
         catch (const NonexistentRole &e) {
@@ -591,6 +591,7 @@ std::string Interface::selectCollab(bool &running) {
 std::string Interface::readNewUsername() {
     std::string newUsername{};
     std::cout << "New Username: ";
+    std::cin.ignore();
     std::getline(std::cin, newUsername, '\n');
     return newUsername;
 }
