@@ -38,8 +38,15 @@ std::vector<Intervention *> Individual::getAssociatedActiveInterventions(HouseMa
  */
 void Client::requestIntervention(HouseMaster &hm, const Date &date, const std::string &service, bool forcePro,
                                  unsigned int nrOfRooms) const {
-    hm.assignCollaborator(hm.addIntervention(date, service, forcePro, this->getId(), nrOfRooms),
-                          hm.sortCollaboratorsByScore());
+    try
+    {
+        hm.assignCollaborator(hm.addIntervention(date, service, forcePro, this->getId(), nrOfRooms),
+                              hm.sortCollaboratorsByScore());
+    }
+    catch (const HouseMaster::UnavailableAppointment &e)
+    {
+        std::cout << e.what() << "\n";
+    }
 }
 
 /**

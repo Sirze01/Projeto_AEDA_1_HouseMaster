@@ -3,14 +3,14 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_intervention_a7655a36a1e926d44aa1e3900eeccda00}{Intervention}} (\mbox{\hyperlink{class_date}{Date}} appointment, \mbox{\hyperlink{class_service}{Service}} $\ast$type, bool force\+Pro, unsigned int nr\+Of\+Rooms=0)
+\mbox{\hyperlink{class_intervention_a245514d4372198fcfa2751fabf534e35}{Intervention}} (\mbox{\hyperlink{class_date}{Date}} start, \mbox{\hyperlink{class_service}{Service}} $\ast$service, bool force\+Pro, unsigned int nr\+Of\+Rooms, process\+State state, float cost, std\+::string collab\+Id, std\+::string client\+Id)
 \begin{DoxyCompactList}\small\item\em intervention\textquotesingle{}s constructor \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_intervention_af1236b661cb09811ee79657b89488758}\label{class_intervention_af1236b661cb09811ee79657b89488758}} 
 \mbox{\hyperlink{class_intervention_af1236b661cb09811ee79657b89488758}{$\sim$\+Intervention}} ()
 \begin{DoxyCompactList}\small\item\em intervention destructor \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_date}{Date}} \mbox{\hyperlink{class_intervention_a946e1e4bd4837dc0c75f6d9fdbe745b5}{get\+Starting\+Time}} () const
 \begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{class_service}{Service}} $\ast$ \mbox{\hyperlink{class_intervention_a2a8deaf4ddf3d65cd8d5664492175ff2}{get\+Service}} () const
+\mbox{\hyperlink{class_service}{Service}} $\ast$ \mbox{\hyperlink{class_intervention_a0e9be03c376a759b93a554b9b4d61a31}{get\+Service}} () const
 \begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_intervention_a4161493515554c78270fbbb78f76667f}{get\+Force\+Pro}} () const
 \begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
@@ -33,23 +33,24 @@ void \mbox{\hyperlink{class_intervention_aa0d5dec96a4f8102d47a4eb67dc197de}{calc
 \begin{DoxyCompactList}\small\item\em calculates the cost \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{class_intervention_a3d340fab082de3cf5f3e41b3c0aef7ca}{get\+Cost}} () const
 \begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_intervention_a37f876f1911d780f8071f4e1536af0ec}{get\+Paid}} () const
-\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_intervention_a37f876f1911d780f8071f4e1536af0ec}\label{class_intervention_a37f876f1911d780f8071f4e1536af0ec}} 
+bool {\bfseries get\+Paid} () const
+\item 
 \mbox{\hyperlink{class_date}{Date}} \mbox{\hyperlink{class_intervention_a2f7a35f5462ce8e2ef9782aba46950e0}{get\+End\+Time}} () const
 \begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_intervention_a2b709a8aac4825371fb7ffe053df18a1}\label{class_intervention_a2b709a8aac4825371fb7ffe053df18a1}} 
-void \mbox{\hyperlink{class_intervention_a2b709a8aac4825371fb7ffe053df18a1}{pay}} ()
-\begin{DoxyCompactList}\small\item\em pay an interverntion \end{DoxyCompactList}\item 
+void {\bfseries pay} ()
+\item 
 bool \mbox{\hyperlink{class_intervention_aeb99f30b2fa5d858ce720d3bf53d348d}{is\+Active}} () const
 \begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_intervention_a7655a36a1e926d44aa1e3900eeccda00}\label{class_intervention_a7655a36a1e926d44aa1e3900eeccda00}} 
+\mbox{\Hypertarget{class_intervention_a245514d4372198fcfa2751fabf534e35}\label{class_intervention_a245514d4372198fcfa2751fabf534e35}} 
 \index{Intervention@{Intervention}!Intervention@{Intervention}}
 \index{Intervention@{Intervention}!Intervention@{Intervention}}
 \doxysubsubsection{\texorpdfstring{Intervention()}{Intervention()}}
-{\footnotesize\ttfamily Intervention\+::\+Intervention (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_date}{Date}}}]{appointment,  }\item[{\mbox{\hyperlink{class_service}{Service}} $\ast$}]{type,  }\item[{bool}]{force\+Pro,  }\item[{unsigned int}]{nr\+Of\+Rooms = {\ttfamily 0} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Intervention\+::\+Intervention (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_date}{Date}}}]{start,  }\item[{\mbox{\hyperlink{class_service}{Service}} $\ast$}]{service,  }\item[{bool}]{force\+Pro,  }\item[{unsigned int}]{nr\+Of\+Rooms,  }\item[{process\+State}]{state,  }\item[{float}]{cost,  }\item[{std\+::string}]{collab\+Id,  }\item[{std\+::string}]{client\+Id }\end{DoxyParamCaption})}
 
 
 
@@ -57,9 +58,9 @@ intervention\textquotesingle{}s constructor
 
 
 \begin{DoxyParams}{Parameters}
-{\em appointment} & starting \\
+{\em start} & starting \\
 \hline
-{\em type} & name \\
+{\em service} & name \\
 \hline
 {\em force\+Pro} & \\
 \hline
@@ -154,19 +155,6 @@ getter
 \begin{DoxyReturn}{Returns}
 forcepro 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_intervention_a37f876f1911d780f8071f4e1536af0ec}\label{class_intervention_a37f876f1911d780f8071f4e1536af0ec}} 
-\index{Intervention@{Intervention}!getPaid@{getPaid}}
-\index{getPaid@{getPaid}!Intervention@{Intervention}}
-\doxysubsubsection{\texorpdfstring{getPaid()}{getPaid()}}
-{\footnotesize\ttfamily bool Intervention\+::get\+Paid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
-
-
-
-getter 
-
-\begin{DoxyReturn}{Returns}
-is paid 
-\end{DoxyReturn}
 \mbox{\Hypertarget{class_intervention_ac60e43d12bd5370142cfc0d5139cac89}\label{class_intervention_ac60e43d12bd5370142cfc0d5139cac89}} 
 \index{Intervention@{Intervention}!getProcessState@{getProcessState}}
 \index{getProcessState@{getProcessState}!Intervention@{Intervention}}
@@ -180,11 +168,11 @@ getter
 \begin{DoxyReturn}{Returns}
 state 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_intervention_a2a8deaf4ddf3d65cd8d5664492175ff2}\label{class_intervention_a2a8deaf4ddf3d65cd8d5664492175ff2}} 
+\mbox{\Hypertarget{class_intervention_a0e9be03c376a759b93a554b9b4d61a31}\label{class_intervention_a0e9be03c376a759b93a554b9b4d61a31}} 
 \index{Intervention@{Intervention}!getService@{getService}}
 \index{getService@{getService}!Intervention@{Intervention}}
 \doxysubsubsection{\texorpdfstring{getService()}{getService()}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{class_service}{Service}} $\ast$ Intervention\+::get\+Service (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_service}{Service}} $\ast$ Intervention\+::get\+Service (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 
 
