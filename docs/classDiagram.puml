@@ -87,6 +87,7 @@
     + void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration)
     + void removeAvailableService(const std::string &service)
     + std::unordered_map<std::string, Service *> &getAvailableServices()
+    + void usernameMapChanger(std::string id, std::string newUsername)
     + void removeCollaborator(const std::string &collId)
     + void addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro, float earnings = 0, Classification score = newHere)
     + void addClient(unsigned long nif, const std::string &name, bool premium)
@@ -155,6 +156,7 @@
     + Individual()
     + explicit Individual(std::string name)
     + {abstract}std::string getId() const
+    + void changeUsername(HouseMaster &hm, std::string newUsername)
     + std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm) const
     + std::vector<Intervention*> getAssociatedActiveInterventions(HouseMaster &hm) const
     + std::string getName() const
@@ -216,6 +218,6 @@
  Collaborator *-- classification
  Intervention *-- Service
  Intervention *-- processState
- Intervention o-- date
- Intervention *-- duration
+ Intervention o-- Date
+ Intervention *-- Duration
 @enduml
