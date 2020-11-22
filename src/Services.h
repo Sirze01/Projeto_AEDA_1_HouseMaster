@@ -44,6 +44,8 @@ public:
 
     void setRoomNumber(unsigned int number);
 
+    unsigned int getRoomNumber() const;
+
     float getPrice() override;
 };
 
@@ -64,17 +66,17 @@ private:
     bool _forcePro;
     processState _state;
     float _cost;
-    bool _paid;
 
 public:
 
-    Intervention(Date appointment, Service *type, bool forcePro, unsigned int nrOfRooms = 0);
+    Intervention(Date start, Service *service, bool forcePro, unsigned int nrOfRooms, processState state,
+                 float cost, std::string collabId, std::string clientId);
 
     ~Intervention();
 
     Date getStartingTime() const;
 
-    const Service *getService() const;
+    Service * getService() const;
 
     bool getForcePro() const;
 

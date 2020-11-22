@@ -165,12 +165,16 @@ void Interface::clientOperations(bool &running) {
             Intervention *intervention = selectActiveIntervention(innerRunning);
             if (intervention) {
                 Menu activeInterventionMenu("Active intervention",{{"Mark as done",[&]() {
-                    HouseMaster::markAsComplete(intervention);
                     showPayment(intervention);
                     std::cin.ignore();
                     _houseMaster.processTransaction(intervention);
-                    Classification classification = readClassification(innerRunning);
-                    _houseMaster.getCollaborators()[intervention->getCollabId()]->addClassification(classification);
+                    std::string collabName{};
+                    collabName = _houseMaster.getCollaborators()[intervention->getCollabId()]->getName();
+                    Classification classification = readClassification(innerRunning, collabName);
+                    if (innerRunning) {
+                        _houseMaster.getCollaborators()[intervention->getCollabId()]->addClassification(classification);
+                        HouseMaster::markAsComplete(intervention);
+                    }
                 }},{"Cancel Intervention", [&]() {
                     Client::cancelIntervention(intervention);
                 }}, {"See details", [&]() {
@@ -249,7 +253,7 @@ void Interface::collaboratorOperations(bool &running) {
                 }
             }
         }}, {"Add a new one", [&]() {
-            std::string serviceName = readNewServiceData(running);
+            std::string serviceName = readNewServiceData();
             collab->addService(serviceName);
         }}});
         while (innerRunning) {
@@ -455,7 +459,7 @@ void Interface::readNewCollaboratorData(bool &running) {
             if (!service.empty()) services.push_back(service);
         }
     }},{"Add a new one", [&]() {
-        std::string serviceName = readNewServiceData(running);
+        std::string serviceName = readNewServiceData();
         if (!serviceName.empty()) services.push_back(serviceName);
     }}});
 
@@ -471,10 +475,9 @@ void Interface::readNewCollaboratorData(bool &running) {
 
 /**
  * @brief reads a new service's data
- * @param running
  * @return the service's name
  */
-std::string Interface::readNewServiceData(bool &running) {
+std::string Interface::readNewServiceData() {
     std::string name{}, proStr{}, durationStr{}, paintingStr{};
     float basePrice{};
     //duration duration{};
@@ -681,9 +684,9 @@ void Interface::showPayment(Intervention *intervention) {
  * @param running
  * @return the classification
  */
-Classification Interface::readClassification(bool &running) {
+Classification Interface::readClassification(bool &running, std::string &collabName) {
     Classification classification{};
-    Menu classifications("Review intervention", {{"Unreliable",   [&classification]() {
+    Menu classifications("Review " + collabName + "'s performance", {{"Unreliable",   [&classification]() {
         classification = unreliable;
     }},{"Clumsy", [&classification]() {
         classification = clumsy;
@@ -731,8 +734,28 @@ void Interface::showFinances() const {
  */
 unsigned Interface::readNumberOfRooms() {
     unsigned rooms{};
-    std::cout << "How many rooms to paint?\n";
+    std::cout << "How many rooms?\n";
     std::cin >> rooms;
+    while (true) {
+        if (std::cin.fail() || std::cin.peek() != '\n') {
+            if (std::cin.eof()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "User chose to close the input.\n";
+                break;
+            } else {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Make sure you are entering a valid number: " << std::endl;
+                std::cin >> rooms;
+            }
+        } else if (rooms == 0) {
+            std::cout << "Choose at least 1 room: " << std::endl;
+            std::cin >> rooms;
+        } else {
+            break;
+        }
+    }
     return rooms;
 }
 

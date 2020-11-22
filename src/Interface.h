@@ -45,7 +45,7 @@ private:
 
     void showPayment(Intervention *intervention);
 
-    static Classification readClassification(bool &running);
+    static Classification readClassification(bool &running, std::string &collabName);
 
     void adminOperations(bool &running);
 
@@ -53,7 +53,7 @@ private:
 
     void readNewCollaboratorData(bool &running);
 
-    std::string readNewServiceData(bool &running);
+    std::string readNewServiceData();
 
     Intervention *selectActiveIntervention(bool &running);
 

@@ -26,7 +26,8 @@ public:
 
     HouseMaster();
 
-    HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services, std::ifstream earnings);
+    HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services,
+                std::ifstream earnings, std::ifstream history);
 
     ~HouseMaster() = default;
 
@@ -34,7 +35,7 @@ public:
 
     std::map<std::string, Client *> &getClients();
 
-    std::vector<Intervention *> &getInterventions();
+    std::unordered_set<Intervention *> & getInterventions();
 
     void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration);
 
@@ -111,7 +112,7 @@ private:
     std::map<std::string, Client *> _clients;
     std::unordered_map<std::string, std::string> _usernameMap;
     std::map<std::string, Collaborator *> _collaborators;
-    std::vector<Intervention *> _interventions;
+    std::unordered_set<Intervention *> _interventions;
     float _earnings;
 
 };

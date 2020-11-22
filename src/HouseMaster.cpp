@@ -119,7 +119,7 @@ HouseMaster::HouseMaster() : _availableServices(), _clients(), _collaborators(),
  * @param earnings earnings info
  */
 HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services,
-                         std::ifstream earnings) {
+                         std::ifstream earnings, std::ifstream history) {
 
     // read services.txt
     for (std::string line; std::getline(services, line);) {
@@ -175,8 +175,6 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
             collabServices.push_back(serviceName);
         }
 
-        // check if everything is valid, if not throw an exception
-
         addCollaborator(collabServices, name, proStr == "yes", collabEarnings, score);
     }
 
@@ -190,8 +188,6 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
         std::getline(lss, nifStr, ',');
         std::getline(lss, premiumStr, ',');
 
-        // check if everything is valid, if not throw an exception
-
         addClient(std::stoul(nifStr), name, premiumStr == "yes");
     }
 
@@ -199,6 +195,28 @@ HouseMaster::HouseMaster(std::ifstream collaborators, std::ifstream clients, std
     for (std::string line; std::getline(earnings, line);) {
         _earnings = std::stof(line);
     }
+
+    // read history.txt
+    for (std::string line; std::getline(history, line);) {
+        if (line.front() == '@') continue;
+        else if (line.front() == ' ') break;
+        std::stringstream lineStream(line);
+        std::string serviceStr{}, clientId{}, collabId{}, start{}, forcePro{}, state{}, cost{}, nrRooms{};
+        std::getline(lineStream, serviceStr, ',');
+        Service *service = _availableServices[serviceStr];
+        std::getline(lineStream, clientId, ',');
+        std::getline(lineStream, collabId, ',');
+        std::getline(lineStream, start, ',');
+        std::getline(lineStream, forcePro, ',');
+        std::getline(lineStream, state, ',');
+        std::getline(lineStream, cost, ',');
+        std::getline(lineStream, nrRooms, ',');
+        auto * intervention = new Intervention(Date(start), service, forcePro == "1", std::stoi(nrRooms),
+                                               processState(std::stoi(state)), std::stof(cost),
+                                               collabId, clientId);
+        _interventions.insert(intervention);
+    }
+
 }
 
 /**
@@ -213,7 +231,7 @@ std::map<std::string, Collaborator *> &HouseMaster::getCollaborators() {
  * @brief getter
  * @return the interventions
  */
-std::vector<Intervention *> &HouseMaster::getInterventions() {
+std::unordered_set<Intervention *> &HouseMaster::getInterventions() {
     return _interventions;
 }
 
@@ -382,10 +400,9 @@ Intervention *HouseMaster::addIntervention(const Date &start, const std::string 
                                            const std::string &clientId, unsigned int nrOfRooms) {
     auto it = _availableServices.find(service);
     if (it == _availableServices.end()) throw NonexistentService("There's no such service!");
-    auto newIntervention = new Intervention(start, _availableServices[service], forcePro, nrOfRooms);
-    newIntervention->setClientId(clientId);
-    newIntervention->calculateCost();
-    _interventions.push_back(newIntervention);
+    auto newIntervention = new Intervention(start, _availableServices[service], forcePro, nrOfRooms, Active, 0, "",
+                                            clientId);
+    _interventions.insert(newIntervention);
     return newIntervention;
 }
 
@@ -407,7 +424,6 @@ void HouseMaster::processTransaction(Intervention *intervention) {
     hmEarnings = intervention->getCost() - (intervention->getCost() / float(1 + HouseMasterTax));
     getCollaborators()[intervention->getCollabId()]->calculateEarnings(hmEarnings);
     _earnings += hmEarnings;
-    intervention->pay();
 }
 
 /**
@@ -572,15 +588,24 @@ void HouseMaster::writeInterventionsInfo() {
     std::ofstream interventionsFile("../../data/history.txt", std::ios_base::app);
     time_t timeToday;
     time(&timeToday);
-    interventionsFile << "\n\n" << asctime(localtime(&timeToday)) << "\n";
+    interventionsFile << '@' << asctime(localtime(&timeToday));
     if (interventionsFile.is_open()) {
         auto int_it = _interventions.begin();
         while (int_it != _interventions.end()) {
+            /*
             interventionsFile << "Service: " << (*int_it)->getService()->getName() << ", from "
                               << (*int_it)->getStartingTime().getString()
                               << " to " << (*int_it)->getEndTime().getString() << ", to client "
                               << (*int_it)->getClientId() << " done by " << (*int_it)->getCollabId()
                               << ", cost: " << (*int_it)->getCost() << '\n';
+                              */
+            interventionsFile << (*int_it)->getService()->getName() << ',' << (*int_it)->getClientId() << ','
+            << (*int_it)->getCollabId() << ',' << (*int_it)->getStartingTime().getString() << ','
+            << (*int_it)->getForcePro() << ',' << (*int_it)->getProcessState() << ',' << (*int_it)->getCost();
+            auto *service = (*int_it)->getService();
+            auto painting = dynamic_cast<Painting*>(service);
+            if (painting) interventionsFile << ',' << painting->getRoomNumber(); else interventionsFile << ",0";
+            interventionsFile << '\n';
             int_it++;
         }
         interventionsFile.close();

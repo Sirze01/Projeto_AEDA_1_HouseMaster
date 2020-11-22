@@ -82,7 +82,7 @@ TEST(HouseMasterTest, servicesManip){
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
                              std::ifstream("../../data/services.txt"),
-                             std::ifstream("../../data/finances.txt"));
+                             std::ifstream("../../data/finances.txt"), std::ifstream());
 
 
     // remove service
@@ -107,7 +107,7 @@ TEST(HouseMasterTest, collaboratorsManip){
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
                              std::ifstream("../../data/services.txt"),
-                             std::ifstream("../../data/finances.txt"));
+                             std::ifstream("../../data/finances.txt"), std::ifstream());
 
 
     // remove collaborator
@@ -132,7 +132,7 @@ TEST(HouseMasterTest, clientsManip){
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
                              std::ifstream("../../data/services.txt"),
-                             std::ifstream("../../data/finances.txt"));
+                             std::ifstream("../../data/finances.txt"), std::ifstream());
 
     // remove client
     houseMaster1.removeClient("client0");
@@ -153,7 +153,7 @@ TEST(HouseMasterTest, interventionManip){
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
                              std::ifstream("../../data/services.txt"),
-                             std::ifstream("../../data/finances.txt"));
+                             std::ifstream("../../data/finances.txt"), std::ifstream());
 
     // add Intervention
     houseMaster1.addIntervention(Date(12, 05, 2001, 01, 00), "desmontar um computador", true, "");
@@ -176,7 +176,7 @@ TEST(HouseMasterTest, usageTest){
     HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
                              std::ifstream("../../data/clients.txt"),
                              std::ifstream("../../data/services.txt"),
-                             std::ifstream("../../data/finances.txt"));
+                             std::ifstream("../../data/finances.txt"), std::ifstream());
 
     // Client requests intervention
 

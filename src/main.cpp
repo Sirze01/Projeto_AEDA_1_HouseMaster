@@ -9,7 +9,8 @@ int main() {
     HouseMaster h1(std::ifstream("../../data/collabs.txt"),
                    std::ifstream("../../data/clients.txt"),
                    std::ifstream("../../data/services.txt"),
-                   std::ifstream("../../data/finances.txt"));
+                   std::ifstream("../../data/finances.txt"),
+                   std::ifstream("../../data/history.txt"));
     Interface i1(h1);
     bool running = true;
     while (running) {

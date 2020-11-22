@@ -1,5 +1,7 @@
 #include "Services.h"
 
+#include <utility>
+
 /**
  * @brief service's constructor
  */
@@ -94,22 +96,29 @@ float Painting::getPrice() {
     return sum;
 }
 
+unsigned int Painting::getRoomNumber() const {
+    return _roomNumber;
+}
+
 /**
  * @brief intervention's constructor
- * @param appointment starting
- * @param type name
+ * @param start starting
+ * @param service name
  * @param forcePro
  * @param nrOfRooms number of rooms to paint in case of painting service
  */
-Intervention::Intervention(Date appointment, Service *type, bool forcePro, unsigned int nrOfRooms) :
-        _startingTime(std::move(appointment)), _forcePro(forcePro), _state(Active), _cost(), _paid(false) {
+Intervention::Intervention(Date start, Service *service, bool forcePro, unsigned int nrOfRooms, processState state,
+                           float cost, std::string collabId, std::string clientId) :
+                           _clientId(std::move(clientId)), _collabId(std::move(collabId)), _startingTime(std::move(start)),
+                           _forcePro(forcePro), _state(state), _cost(cost) {
 
-    auto painting = dynamic_cast<Painting *>(type);
+    auto painting = dynamic_cast<Painting *>(service);
     if (painting) {
-        _type = new Painting(type->getName(), type->getPro(), type->getBasePrice(), type->getDuration(), nrOfRooms);
+        _type = new Painting(service->getName(), service->getPro(), service->getBasePrice(), service->getDuration(), nrOfRooms);
     } else {
-        _type = type;
+        _type = service;
     }
+    if (cost == 0) calculateCost();
 }
 
 /**
@@ -123,7 +132,7 @@ Intervention::~Intervention() {
  * @brief getter
  * @return service
  */
-const Service *Intervention::getService() const {
+Service* Intervention::getService() const {
     return _type;
 }
 
@@ -159,13 +168,6 @@ float Intervention::getCost() const {
     return _cost;
 }
 
-/**
- * @brief getter
- * @return is paid
- */
-bool Intervention::getPaid() const {
-    return _paid;
-}
 
 /**
  * @brief getter
@@ -244,12 +246,6 @@ Date Intervention::getEndTime() const {
     return _startingTime + _type->getDuration();
 }
 
-/**
- * @brief pay an interverntion
- */
-void Intervention::pay() {
-    _paid = true;
-}
 
 /**
  * @brief getter
