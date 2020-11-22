@@ -226,30 +226,23 @@ void Interface::collaboratorOperations(bool &running) {
             while (running) {
                 std::string service = selectService(running);
                 if (!service.empty()) {
-                    try
-                    {
-                        if (collab->canPreform(service))
-                        {
+                    try {
+                        if (collab->canPreform(service)) {
                             throw Collaborator::AlreadyKnows("Impossible! ");
-                        } else
-                        {
-                            try
-                            {
-                                if (!collab->isPro() && _houseMaster.getAvailableServices().find(service)->second->getPro())
-                                {
+                        } else {
+                            try {
+                                if (!collab->isPro() && _houseMaster.getAvailableServices().find(service)->second->getPro()) {
                                     throw Collaborator::ServiceRequiresPro("Impossible! ");
-                                }
-                                else {
+                                } else {
                                     collab->addService(service);
                                 }
-                            } catch (const Collaborator::ServiceRequiresPro &e)
-                            {
+                            } catch (const Collaborator::ServiceRequiresPro &e) {
                                 std::cout << e.what() << "Sorry " << collab->getName() << " This service requires a professional collaborator!\n";
                             }
                         }
                     } catch (const Collaborator::AlreadyKnows &e) {
-                            std::cout << e.what() << collab->getName()<< " already knows "<< service << "\n";
-                        }
+                        std::cout << e.what() << collab->getName()<< " already knows "<< service << "\n";
+                    }
                 }
             }
         }}, {"Add a new one", [&]() {
