@@ -188,8 +188,10 @@ bool Collaborator::operator<(const Collaborator &col2) const {
  * @brief adds a service to the collaborator's services
  * @param service the service
  */
-void Collaborator::addService(const std::string &service) {
-    _services.push_back(service);
+void Collaborator::addService(Service *service) {
+    if (canPreform(service->getName())) throw AlreadyKnows("This collaborator already knows this service");
+    if(!isPro() && service->getPro()) throw ServiceRequiresPro("This collaborator can't preform professional service");
+    _services.push_back(service->getName());
 }
 
 

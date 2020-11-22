@@ -74,7 +74,7 @@ public:
 
     void addClassification(Classification classification);
 
-    void addService(const std::string &service);
+    void addService(Service *service);
 
     static void markInterventionAsComplete(Intervention *intervention);
 

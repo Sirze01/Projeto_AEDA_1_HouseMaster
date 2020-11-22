@@ -225,8 +225,7 @@ void Interface::collaboratorOperations(bool &running) {
         Intervention *intervention = selectActiveIntervention(innerRunning);
         if (intervention) {
             Menu activeInterventionMenu("Active intervention",{{"See details", [&]() {
-                if (!intervention->getService()->getName().empty())
-                    show(*intervention);
+                if (!intervention->getService()->getName().empty()) show(*intervention);
                 std::cin.ignore();
             }}});
             activeInterventionMenu.show();
@@ -236,30 +235,24 @@ void Interface::collaboratorOperations(bool &running) {
     }},{"Learn a service", [&]() {
         Menu pickServices("Learn a service",{{"Choose from the HouseMaster services", [&]() {
             while (running) {
-                std::string service = selectService(running);
-                if (!service.empty()) {
+                std::string serviceName = selectService(running);
+                if (!serviceName.empty()) {
+                    Service* service = _houseMaster.getAvailableServices()[serviceName];
                     try {
-                        if (collab->canPreform(service)) {
-                            throw Collaborator::AlreadyKnows("Impossible! ");
-                        } else {
-                            try {
-                                if (!collab->isPro() && _houseMaster.getAvailableServices().find(service)->second->getPro()) {
-                                    throw Collaborator::ServiceRequiresPro("Impossible! ");
-                                } else {
-                                    collab->addService(service);
-                                }
-                            } catch (const Collaborator::ServiceRequiresPro &e) {
-                                std::cout << e.what() << "Sorry " << collab->getName() << " This service requires a professional collaborator!\n";
-                            }
-                        }
+                        collab->addService(service);
                     } catch (const Collaborator::AlreadyKnows &e) {
-                        std::cout << e.what() << collab->getName()<< " already knows "<< service << "\n";
+                        std::cout << e.what() << std::endl;
+                        std::cin.ignore();
+                    } catch (const Collaborator::ServiceRequiresPro &e) {
+                        std::cout << e.what() << std::endl;
+                        std::cin.ignore();
                     }
                 }
             }
         }}, {"Add a new one", [&]() {
             std::string serviceName = readNewServiceData();
-            collab->addService(serviceName);
+            Service* service = _houseMaster.getAvailableServices()[serviceName];
+            collab->addService(service);
         }}});
         while (innerRunning) {
             pickServices.show();
@@ -275,13 +268,15 @@ void Interface::collaboratorOperations(bool &running) {
     }},{"Change username", [&](){
         bool done = true;
         do{
-            try{_user->changeUsername(_houseMaster, readNewUsername());
-                done = true;}
+            try{
+                _user->changeUsername(_houseMaster, readNewUsername());
+                done = true;
+            }
             catch (const HouseMaster::UsernameAlreadyInUse &e) {
                 done = false;
                 std::cout << e.what() << std::endl;
             }
-        }while(!done);
+        } while(!done);
     }}});
     collabsMenu.show();
     collabsMenu.select();
@@ -464,9 +459,7 @@ void Interface::readNewClientData() {
     } while (!done);
 
     _houseMaster.addClient(nif, name, premium);
-    std::string username = (*_houseMaster.getClients().rbegin()).first;
 
-    std::cout << "Welcome, " << name << " you can now login with the username " << username << "\n";
 
 }
 
@@ -491,15 +484,39 @@ void Interface::readNewCollaboratorData(bool &running) {
     }
 
     bool innerRunning = true;
+    _houseMaster.addCollaborator(services, name, pro == "yes", 0);
+    Collaborator* newCollab = (*_houseMaster.getCollaborators().rbegin()).second;
 
     Menu pickServices("Pick your services", {{"Choose from the HouseMaster services", [&]() {
         while (running) {
-            std::string service = selectService(running);
-            if (!service.empty()) services.push_back(service);
+            std::string serviceName = selectService(running);
+            Service* service = _houseMaster.getAvailableServices()[serviceName];
+            if (!serviceName.empty()) {
+                try {
+                    newCollab->addService(service);
+                } catch (const Collaborator::ServiceRequiresPro &e) {
+                    std::cout << e.what() << std::endl;
+                    std::cin.ignore();
+                } catch (const Collaborator::AlreadyKnows &e) {
+                    std::cout << e.what() << std::endl;
+                    std::cin.ignore();
+                }
+            }
         }
     }},{"Add a new one", [&]() {
-        std::string serviceName = readNewServiceData();
-        if (!serviceName.empty()) services.push_back(serviceName);
+        std::string serviceName = selectService(running);
+        Service* service = _houseMaster.getAvailableServices()[serviceName];
+        if (!serviceName.empty()) {
+            try {
+                newCollab->addService(service);
+            } catch (const Collaborator::ServiceRequiresPro &e) {
+                std::cout << e.what() << std::endl;
+                std::cin.ignore();
+            } catch (const Collaborator::AlreadyKnows &e) {
+                std::cout << e.what() << std::endl;
+                std::cin.ignore();
+            }
+        }
     }}});
 
     while (innerRunning) {
@@ -508,7 +525,9 @@ void Interface::readNewCollaboratorData(bool &running) {
         pickServices.execute(innerRunning);
     }
 
-    _houseMaster.addCollaborator(services, name, pro == "yes", 0);
+    std::string username = (*_houseMaster.getCollaborators().rbegin()).first;
+    std::cout << "Welcome, " << name << " you can now login with the username " << username << "\n";
+    std::cin.ignore();
 
 }
 
