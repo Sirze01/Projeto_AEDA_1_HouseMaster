@@ -3,10 +3,8 @@
 !includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master/style.puml
 
  enum processState{
-    Scheduled
-    PaymentComplete
-    InProgress,
-    Complete
+    Active,
+    Complete,
     Canceled
  }
 
@@ -21,13 +19,10 @@
      savior = 4
  }
 
- class date{
-     - bool isLeapYear() const
-     - unsigned int getDaysInMonth() const
-     - unsigned int _day
-     - unsigned int _month
-     - unsigned int _year
-     --
+ class Date{
+     - unsigned int _day{};
+     - unsigned int _month{};
+     - unsigned int _year{};
      # unsigned int _hours
      # unsigned int _minutes
      --
@@ -40,10 +35,11 @@
      + bool operator<(const Date &d2) const;
      + bool operator>(const Date &d2) const;
      + {abstract} void checkIfValid() const;
+     - bool isLeapYear() const;
      + class InvalidDate;
-}
+ }
 
-class duration{
+ class Duration{
      + Duration();
      + Duration(unsigned int hours, unsigned int minutes);
      + explicit Duration(const std::string &duration);
@@ -71,24 +67,23 @@ class duration{
     - unsigned int _roomNumber
     --
     + Painting(std::string name, bool pro, float basePrice, const duration &duration)
-    + void setRoomNumber(int number)
     + {abstract} float getPrice() override
  }
 
-class HouseMaster{
-    std::unordered_map<std::string, Service *> _availableServices;
-         std::map<std::string, Client *> _clients;
-         std::unordered_map<std::string, std::string> _usernameMap;
-         std::map<std::string, Collaborator *> _collaborators;
-         std::vector<Intervention *> _interventions;
-         float _earnings;
+ class HouseMaster{
+    std::unordered_map<std::string, Service *> _availableServices
+    std::map<std::string, Client *> _clients
+    std::unordered_map<std::string, std::string> _usernameMap
+    std::map<std::string, Collaborator *> _collaborators
+    std::unordered_set<Intervention *> _interventions
+    float _earnings
     --
     + HouseMaster()
-    + HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services, std::ifstream earnings)
-    + ~HouseMaster()
+    + HouseMaster(std::ifstream collaborators, std::ifstream clients, std::ifstream services, std::ifstream earnings, std::ifstream history)
+    + ~HouseMaster() = default
     + std::map<std::string, Collaborator *> &getCollaborators()
     + std::map<std::string, Client *> &getClients()
-    + std::vector<Intervention *> &getInterventions()
+    + std::unordered_set<Intervention *> & getInterventions()
     + void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration)
     + void removeAvailableService(const std::string &service)
     + std::unordered_map<std::string, Service *> &getAvailableServices()
@@ -96,11 +91,14 @@ class HouseMaster{
     + void addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro, float earnings = 0, Classification score = newHere)
     + void addClient(unsigned long nif, const std::string &name, bool premium)
     + void removeClient(const std::string &clientId)
-    + Intervention * addIntervention(const Date &start, const std::string &service, bool forcePro, const std::string &clientId, int nrOfRooms = 0)
+    + Intervention * addIntervention(const Date &start, const std::string &service, bool forcePro, const std::string &clientId, unsigned int nrOfRooms = 0)
     + {static} void changeInterventionState(Intervention *intervention, processState state)
     + void processTransaction(Intervention *intervention)
     + std::vector<Intervention *> getAssociatedInterventions(const std::string &id)
     + std::vector<Intervention *> getAssociatedActiveInterventions(const std::string &id)
+    + std::vector<Intervention *> getAssociatedPastInterventions(const std::string &id)
+    + std::vector<Intervention *> getAllPastInterventions()
+    + std::vector<Intervention *> getAllActiveInterventions()
     + void assignCollaborator(Intervention *intervention, const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs)
     + std::vector<std::pair<std::string, Collaborator *>> sortCollaboratorsByScore()
     + Individual *findByUsername(const std::string &name)
@@ -121,48 +119,48 @@ class HouseMaster{
     + void writeInterventionsInfo()
     + void writeFinancialInfo() const
     + void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration)
-}
+ }
 
-class Intervention{
+ class Intervention{
     - std::string _clientId
     - std::string _collabId
-    - date _startingTime
+    - Date _startingTime
     - Service* _type
     - bool forcePro
     - processState _state
     - float _cost
     --
-    + void  Intervention(const date &appointment, Service type, bool forcePro)
-    + const date *getStartingTime() const
-    + const Service* getService() const
+    + Intervention(Date start, Service *service, bool forcePro, unsigned int nrOfRooms, processState state, float cost, std::string collabId, std::string clientId)
+    + ~Intervention()
+    + Date getStartingTime() const
+    + Service * getService() const
     + bool getForcePro() const
     + std::string getCollabId() const
     + std::string getClientId() const
-    + void setCollabId(const std::string& collabId)
+    + void setCollabId(const std::string &collabId)
     + void setClientId(const std::string &clientId)
     + processState getProcessState()
     + void setProcessState(processState state)
-    + bool conflictsWith(date start, duration duration)
+    + bool conflictsWith(const Date &start, const Duration &duration) const
     + void calculateCost()
     + float getCost() const
-    + date getEndTime() const
+    + Date getEndTime() const
     + bool isActive() const
-}
+ }
 
-
-class Individual{
+ class Individual{
     # std::string _displayName
     # unsigned int _id
     --
     + Individual()
     + explicit Individual(std::string name)
     + {abstract}std::string getId() const
-    + std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm)
-    + std::vector<Intervention*> getAssociatedActiveInterventions(HouseMaster &hm)
+    + std::vector<Intervention*>getAssociatedInterventions(HouseMaster &hm) const
+    + std::vector<Intervention*> getAssociatedActiveInterventions(HouseMaster &hm) const
     + std::string getName() const
-}
+ }
 
-class Collaborator{
+ class Collaborator{
     - std::vector<Classification> _classifications
     - std::vector<std::string> _services
     - Classification _score
@@ -180,7 +178,6 @@ class Collaborator{
     + int getScore() const
     + void addClassification(Classification classification)
     + void addService(const std::string &service)
-    + {static} void markInterventionAsInProgress(Intervention *intervention)
     + {static} void markInterventionAsComplete(Intervention *intervention)
     + void updateScore()
     + void calculateEarnings(float &hmEarnings)
@@ -190,9 +187,9 @@ class Collaborator{
     + {abstract} std::string getId() const override
     + bool operator==(const Collaborator &ind2) const
     + bool operator<(const Collaborator &col2) const
-}
+ }
 
-class Client{
+ class Client{
     - unsigned int _nif
     - bool _premium
     --
@@ -206,18 +203,19 @@ class Client{
     + {static} void cancelIntervention(Intervention *intervention)
     + {static} void classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification)
     + bool operator==(const Client &ind2) const
+ }
 
-}
-Individual <|-- Collaborator
-Individual <|-- Client
-date <|-- duration
-Service<|-- Painting
-HouseMaster o-- Client
-HouseMaster o-- Collaborator
-HouseMaster *-- Intervention
-Collaborator *-- classification
-Intervention *-- Service
-Intervention *-- processState
-Intervention o-- date
-Intervention *-- duration
+
+ Individual <|-- Collaborator
+ Individual <|-- Client
+ date <|-- duration
+ Service<|-- Painting
+ HouseMaster o-- Client
+ HouseMaster o-- Collaborator
+ HouseMaster *-- Intervention
+ Collaborator *-- classification
+ Intervention *-- Service
+ Intervention *-- processState
+ Intervention o-- date
+ Intervention *-- duration
 @enduml

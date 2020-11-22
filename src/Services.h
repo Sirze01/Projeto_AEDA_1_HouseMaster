@@ -98,11 +98,7 @@ public:
 
     float getCost() const;
 
-    bool getPaid() const;
-
     Date getEndTime() const;
-
-    void pay();
 
     bool isActive() const;
 

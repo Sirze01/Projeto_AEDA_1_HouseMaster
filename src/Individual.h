@@ -74,8 +74,6 @@ public:
 
     void addService(const std::string &service);
 
-    static void markInterventionAsInProgress(Intervention *intervention);
-
     static void markInterventionAsComplete(Intervention *intervention);
 
     void updateScore();
@@ -110,13 +108,13 @@ private:
 class Collaborator::AlreadyKnows: public std::logic_error
 {
 public:
-    AlreadyKnows(const std::string &error_msg);
+    explicit AlreadyKnows(const std::string &error_msg);
 };
 
 class Collaborator::ServiceRequiresPro: public std::logic_error
 {
 public:
-    ServiceRequiresPro(const std::string &error_msg);
+    explicit ServiceRequiresPro(const std::string &error_msg);
 };
 
 
