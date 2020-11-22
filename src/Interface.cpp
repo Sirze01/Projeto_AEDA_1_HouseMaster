@@ -86,7 +86,8 @@ void Interface::adminLogin() {
 void Interface::userLogin() {
     std::string username{};
     std::cout << "Username : ";
-    std::cin >> username;
+    std::cin.ignore();
+    std::getline(std::cin, username);
     bool done = false;
     while (!done) {
         try {
@@ -195,10 +196,15 @@ void Interface::clientOperations(bool &running) {
             std::cin.ignore();
         }
     }},{"Change username", [&](){
-        try{_user->changeUsername(_houseMaster, readNewUsername());}
-        catch (const HouseMaster::UsernameAlreadyInUse &e) {
-            std::cout << e.what() << std::endl;
-        }
+        bool done = true;
+        do{
+            try{_user->changeUsername(_houseMaster, readNewUsername());
+            done = true;}
+            catch (const HouseMaster::UsernameAlreadyInUse &e) {
+                done = false;
+                std::cout << e.what() << std::endl;
+            }
+        }while(!done);
     }}});
     clientMenu.show();
     clientMenu.select();
@@ -266,6 +272,16 @@ void Interface::collaboratorOperations(bool &running) {
             if (intervention) show(*intervention);
             std::cin.ignore();
         }
+    }},{"Change username", [&](){
+        bool done = true;
+        do{
+            try{_user->changeUsername(_houseMaster, readNewUsername());
+                done = true;}
+            catch (const HouseMaster::UsernameAlreadyInUse &e) {
+                done = false;
+                std::cout << e.what() << std::endl;
+            }
+        }while(!done);
     }}});
     collabsMenu.show();
     collabsMenu.select();
