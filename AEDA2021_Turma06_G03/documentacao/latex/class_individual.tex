@@ -1,0 +1,128 @@
+\hypertarget{class_individual}{}\doxysection{Individual Class Reference}
+\label{class_individual}\index{Individual@{Individual}}
+Inheritance diagram for Individual\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_individual}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_individual_a375e27b7b7cac8008991b690e7967a0f}\label{class_individual_a375e27b7b7cac8008991b690e7967a0f}} 
+\mbox{\hyperlink{class_individual_a375e27b7b7cac8008991b690e7967a0f}{Individual}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_individual}{Individual}} constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_individual_a3e2734d8626f38e3d0384c8beba1769b}{Individual}} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_individual}{Individual}} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_individual_a5dc436e98831642206cb2e5e70e2d8ae}\label{class_individual_a5dc436e98831642206cb2e5e70e2d8ae}} 
+virtual std\+::string {\bfseries get\+Id} () const =0
+\item 
+void \mbox{\hyperlink{class_individual_adbf7e7f8b59a4b1aa52e7927560ab189}{change\+Username}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, std\+::string new\+Username)
+\begin{DoxyCompactList}\small\item\em Changes username in username map. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_individual_a7387a9fb6b428c6085c60f70611913ce}{get\+Associated\+Interventions}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm) const
+\begin{DoxyCompactList}\small\item\em gets an individual\textquotesingle{}s interventions \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_individual_ad2fc12633cad939e43c7aef94908d38e}{get\+Associated\+Active\+Interventions}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm) const
+\begin{DoxyCompactList}\small\item\em gets an individual\textquotesingle{}s active interventions \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_individual_a768db1e0ad8769d834a03d7a7d3b2a7c}{get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_individual_a1984cf02208727ad566e7fac76e9b50c}\label{class_individual_a1984cf02208727ad566e7fac76e9b50c}} 
+std\+::string {\bfseries \+\_\+display\+Name}
+\item 
+\mbox{\Hypertarget{class_individual_aed5a117910e69190b330683f69b88645}\label{class_individual_aed5a117910e69190b330683f69b88645}} 
+unsigned int {\bfseries \+\_\+id}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_individual_a3e2734d8626f38e3d0384c8beba1769b}\label{class_individual_a3e2734d8626f38e3d0384c8beba1769b}} 
+\index{Individual@{Individual}!Individual@{Individual}}
+\index{Individual@{Individual}!Individual@{Individual}}
+\doxysubsubsection{\texorpdfstring{Individual()}{Individual()}}
+{\footnotesize\ttfamily Individual\+::\+Individual (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\mbox{\hyperlink{class_individual}{Individual}} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & individual\textquotesingle{}s name \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_individual_adbf7e7f8b59a4b1aa52e7927560ab189}\label{class_individual_adbf7e7f8b59a4b1aa52e7927560ab189}} 
+\index{Individual@{Individual}!changeUsername@{changeUsername}}
+\index{changeUsername@{changeUsername}!Individual@{Individual}}
+\doxysubsubsection{\texorpdfstring{changeUsername()}{changeUsername()}}
+{\footnotesize\ttfamily void Individual\+::change\+Username (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm,  }\item[{std\+::string}]{new\+Username }\end{DoxyParamCaption})}
+
+
+
+Changes username in username map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hm,the} & instance of housemaster \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_individual_ad2fc12633cad939e43c7aef94908d38e}\label{class_individual_ad2fc12633cad939e43c7aef94908d38e}} 
+\index{Individual@{Individual}!getAssociatedActiveInterventions@{getAssociatedActiveInterventions}}
+\index{getAssociatedActiveInterventions@{getAssociatedActiveInterventions}!Individual@{Individual}}
+\doxysubsubsection{\texorpdfstring{getAssociatedActiveInterventions()}{getAssociatedActiveInterventions()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ Individual\+::get\+Associated\+Active\+Interventions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm }\end{DoxyParamCaption}) const}
+
+
+
+gets an individual\textquotesingle{}s active interventions 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hm} & the instance of housemaster \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the active interventions 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_individual_a7387a9fb6b428c6085c60f70611913ce}\label{class_individual_a7387a9fb6b428c6085c60f70611913ce}} 
+\index{Individual@{Individual}!getAssociatedInterventions@{getAssociatedInterventions}}
+\index{getAssociatedInterventions@{getAssociatedInterventions}!Individual@{Individual}}
+\doxysubsubsection{\texorpdfstring{getAssociatedInterventions()}{getAssociatedInterventions()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ Individual\+::get\+Associated\+Interventions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm }\end{DoxyParamCaption}) const}
+
+
+
+gets an individual\textquotesingle{}s interventions 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hm} & the instance of housemaster \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the interventions 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_individual_a768db1e0ad8769d834a03d7a7d3b2a7c}\label{class_individual_a768db1e0ad8769d834a03d7a7d3b2a7c}} 
+\index{Individual@{Individual}!getName@{getName}}
+\index{getName@{getName}!Individual@{Individual}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily std\+::string Individual\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+the individual\textquotesingle{}s name 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/Individual.\+h\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/House\+Master.\+cpp\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/Individual.\+cpp\end{DoxyCompactItemize}

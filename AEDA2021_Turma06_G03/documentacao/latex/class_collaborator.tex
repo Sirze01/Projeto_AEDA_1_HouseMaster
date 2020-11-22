@@ -1,0 +1,361 @@
+\hypertarget{class_collaborator}{}\doxysection{Collaborator Class Reference}
+\label{class_collaborator}\index{Collaborator@{Collaborator}}
+Inheritance diagram for Collaborator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_collaborator}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_collaborator_1_1_already_knows}{Already\+Knows}}
+\item 
+class \mbox{\hyperlink{class_collaborator_1_1_service_requires_pro}{Service\+Requires\+Pro}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_collaborator_a0adc9a1f2b2cccd94c667d0dac0c29aa}{Collaborator}} (std\+::vector$<$ std\+::string $>$ services, const std\+::string \&name, bool pro, float earnings=0, Classification score=new\+Here)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_collaborator}{Collaborator}}\textquotesingle{}s constructor. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_collaborator_ad18fb0d5477582acae7ae3c234c45e7f}{get\+Services}} ()
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_collaborator_a6e1f2c60f0cf673ce4acfc4ee64b1859}{is\+Pro}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_collaborator_a780481471beff54f17a35637d142cdad}{can\+Preform}} (const std\+::string \&service)
+\begin{DoxyCompactList}\small\item\em checks if a collaborator can preform a service \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_collaborator_a23b47f6816997bd40ede70441c8fe9c0}{has\+Qualification\+To\+Preform}} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention) const
+\begin{DoxyCompactList}\small\item\em checks if a collaborator has the qualification to preform an intervention \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_collaborator_a5d87e0f9f6bd1f0efd8aa4bb1beb1d3e}{can\+Do}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, const std\+::string \&collab\+Id, \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\begin{DoxyCompactList}\small\item\em checks if a collaborator an do an intervention \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_collaborator_a5830072a64d9c3cfb4a3b09e56b600a8}{get\+Score}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_collaborator_a1ef8ae3dd100349e2fa1543d9687c0b4}{add\+Classification}} (Classification classification)
+\begin{DoxyCompactList}\small\item\em add a classification to the collaborator \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_collaborator_ac9588bdcca9a5daf25464e4bf8cf5701}{add\+Service}} (const std\+::string \&service)
+\begin{DoxyCompactList}\small\item\em adds a service to the collaborator\textquotesingle{}s services \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_collaborator_af9de92550ebbf6eb8869e2abea56ed49}\label{class_collaborator_af9de92550ebbf6eb8869e2abea56ed49}} 
+void \mbox{\hyperlink{class_collaborator_af9de92550ebbf6eb8869e2abea56ed49}{update\+Score}} ()
+\begin{DoxyCompactList}\small\item\em updates the collaborator\textquotesingle{}s score \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_collaborator_af2c4dcb54f03d7be8f012f56361e2d2f}{calculate\+Earnings}} (float \&hm\+Earnings)
+\begin{DoxyCompactList}\small\item\em calculates the collaborator\textquotesingle{}s earnings \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_collaborator_a29dc4eecf7002207fc94f68237f1be30}{get\+Earnings}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_collaborator_af266e66f82188e79021a631f626d57f7}{commission\+By\+Score}} ()
+\begin{DoxyCompactList}\small\item\em gets the collaborator\textquotesingle{}s commission according to their score \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_collaborator_a9b8a4cf6e0b8b55f2cf0e4692b085af0}{get\+Id}} () const override
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_collaborator_a26a9dd5bb9cfee5d2f685cd38de7b75e}{operator==}} (const \mbox{\hyperlink{class_collaborator}{Collaborator}} \&ind2) const
+\begin{DoxyCompactList}\small\item\em checks if two collaborators are the same \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_collaborator_aee435d4c932ee9012a82c9ecdd57031a}{operator$<$}} (const \mbox{\hyperlink{class_collaborator}{Collaborator}} \&col2) const
+\begin{DoxyCompactList}\small\item\em checks if a collaborator has less score than other \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{class_collaborator_a4a133b6aa1ae855e105ee72e8a4af82f}{is\+Available}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, const std\+::string \&collab\+Id, \mbox{\hyperlink{class_date}{Date}} start, \mbox{\hyperlink{class_duration}{Duration}} duration)
+\begin{DoxyCompactList}\small\item\em checks if a collaborator is available for a service \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_collaborator_af527e9e3115eed7202daf55627455ed0}{mark\+Intervention\+As\+Complete}} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\begin{DoxyCompactList}\small\item\em marks an intervention as completed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_collaborator_a76af07739580e004f73f49d58e6469db}\label{class_collaborator_a76af07739580e004f73f49d58e6469db}} 
+static unsigned int {\bfseries \+\_\+id\+Seq\+Col} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_collaborator_a0adc9a1f2b2cccd94c667d0dac0c29aa}\label{class_collaborator_a0adc9a1f2b2cccd94c667d0dac0c29aa}} 
+\index{Collaborator@{Collaborator}!Collaborator@{Collaborator}}
+\index{Collaborator@{Collaborator}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{Collaborator()}{Collaborator()}}
+{\footnotesize\ttfamily Collaborator\+::\+Collaborator (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{services,  }\item[{const std\+::string \&}]{name,  }\item[{bool}]{pro,  }\item[{float}]{earnings = {\ttfamily 0},  }\item[{Classification}]{score = {\ttfamily newHere} }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_collaborator}{Collaborator}}\textquotesingle{}s constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em services} & the services the collaborator can preform \\
+\hline
+{\em name} & the collaborator\textquotesingle{}s name \\
+\hline
+{\em pro} & is professional \\
+\hline
+{\em earnings} & the earnings \\
+\hline
+{\em score} & the score \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_collaborator_a1ef8ae3dd100349e2fa1543d9687c0b4}\label{class_collaborator_a1ef8ae3dd100349e2fa1543d9687c0b4}} 
+\index{Collaborator@{Collaborator}!addClassification@{addClassification}}
+\index{addClassification@{addClassification}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{addClassification()}{addClassification()}}
+{\footnotesize\ttfamily void Collaborator\+::add\+Classification (\begin{DoxyParamCaption}\item[{Classification}]{classification }\end{DoxyParamCaption})}
+
+
+
+add a classification to the collaborator 
+
+
+\begin{DoxyParams}{Parameters}
+{\em classification} & the classification \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_collaborator_ac9588bdcca9a5daf25464e4bf8cf5701}\label{class_collaborator_ac9588bdcca9a5daf25464e4bf8cf5701}} 
+\index{Collaborator@{Collaborator}!addService@{addService}}
+\index{addService@{addService}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{addService()}{addService()}}
+{\footnotesize\ttfamily void Collaborator\+::add\+Service (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{service }\end{DoxyParamCaption})}
+
+
+
+adds a service to the collaborator\textquotesingle{}s services 
+
+
+\begin{DoxyParams}{Parameters}
+{\em service} & the service \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_collaborator_af2c4dcb54f03d7be8f012f56361e2d2f}\label{class_collaborator_af2c4dcb54f03d7be8f012f56361e2d2f}} 
+\index{Collaborator@{Collaborator}!calculateEarnings@{calculateEarnings}}
+\index{calculateEarnings@{calculateEarnings}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{calculateEarnings()}{calculateEarnings()}}
+{\footnotesize\ttfamily void Collaborator\+::calculate\+Earnings (\begin{DoxyParamCaption}\item[{float \&}]{hm\+Earnings }\end{DoxyParamCaption})}
+
+
+
+calculates the collaborator\textquotesingle{}s earnings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hm\+Earnings} & the total earnings \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_collaborator_a5d87e0f9f6bd1f0efd8aa4bb1beb1d3e}\label{class_collaborator_a5d87e0f9f6bd1f0efd8aa4bb1beb1d3e}} 
+\index{Collaborator@{Collaborator}!canDo@{canDo}}
+\index{canDo@{canDo}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{canDo()}{canDo()}}
+{\footnotesize\ttfamily bool Collaborator\+::can\+Do (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm,  }\item[{const std\+::string \&}]{collab\+Id,  }\item[{\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$}]{intervention }\end{DoxyParamCaption})}
+
+
+
+checks if a collaborator an do an intervention 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hm} & the instance of housemaster \\
+\hline
+{\em collab\+Id} & the collaborator\textquotesingle{}s id \\
+\hline
+{\em intervention} & the intervention \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if can do false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collaborator_a780481471beff54f17a35637d142cdad}\label{class_collaborator_a780481471beff54f17a35637d142cdad}} 
+\index{Collaborator@{Collaborator}!canPreform@{canPreform}}
+\index{canPreform@{canPreform}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{canPreform()}{canPreform()}}
+{\footnotesize\ttfamily bool Collaborator\+::can\+Preform (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{service }\end{DoxyParamCaption})}
+
+
+
+checks if a collaborator can preform a service 
+
+
+\begin{DoxyParams}{Parameters}
+{\em service} & the service to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if can preform false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collaborator_af266e66f82188e79021a631f626d57f7}\label{class_collaborator_af266e66f82188e79021a631f626d57f7}} 
+\index{Collaborator@{Collaborator}!commissionByScore@{commissionByScore}}
+\index{commissionByScore@{commissionByScore}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{commissionByScore()}{commissionByScore()}}
+{\footnotesize\ttfamily float Collaborator\+::commission\+By\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+gets the collaborator\textquotesingle{}s commission according to their score 
+
+\begin{DoxyReturn}{Returns}
+the value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collaborator_a29dc4eecf7002207fc94f68237f1be30}\label{class_collaborator_a29dc4eecf7002207fc94f68237f1be30}} 
+\index{Collaborator@{Collaborator}!getEarnings@{getEarnings}}
+\index{getEarnings@{getEarnings}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{getEarnings()}{getEarnings()}}
+{\footnotesize\ttfamily float Collaborator\+::get\+Earnings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+the collaborator\textquotesingle{}s earnings 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collaborator_a9b8a4cf6e0b8b55f2cf0e4692b085af0}\label{class_collaborator_a9b8a4cf6e0b8b55f2cf0e4692b085af0}} 
+\index{Collaborator@{Collaborator}!getId@{getId}}
+\index{getId@{getId}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily std\+::string Collaborator\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+id 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_individual}{Individual}}.
+
+\mbox{\Hypertarget{class_collaborator_a5830072a64d9c3cfb4a3b09e56b600a8}\label{class_collaborator_a5830072a64d9c3cfb4a3b09e56b600a8}} 
+\index{Collaborator@{Collaborator}!getScore@{getScore}}
+\index{getScore@{getScore}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{getScore()}{getScore()}}
+{\footnotesize\ttfamily int Collaborator\+::get\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+score 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collaborator_ad18fb0d5477582acae7ae3c234c45e7f}\label{class_collaborator_ad18fb0d5477582acae7ae3c234c45e7f}} 
+\index{Collaborator@{Collaborator}!getServices@{getServices}}
+\index{getServices@{getServices}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{getServices()}{getServices()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ Collaborator\+::get\+Services (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+the services 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collaborator_a23b47f6816997bd40ede70441c8fe9c0}\label{class_collaborator_a23b47f6816997bd40ede70441c8fe9c0}} 
+\index{Collaborator@{Collaborator}!hasQualificationToPreform@{hasQualificationToPreform}}
+\index{hasQualificationToPreform@{hasQualificationToPreform}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{hasQualificationToPreform()}{hasQualificationToPreform()}}
+{\footnotesize\ttfamily bool Collaborator\+::has\+Qualification\+To\+Preform (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$}]{intervention }\end{DoxyParamCaption}) const}
+
+
+
+checks if a collaborator has the qualification to preform an intervention 
+
+
+\begin{DoxyParams}{Parameters}
+{\em intervention} & the intervention \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the collaborator has qualifications false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collaborator_a4a133b6aa1ae855e105ee72e8a4af82f}\label{class_collaborator_a4a133b6aa1ae855e105ee72e8a4af82f}} 
+\index{Collaborator@{Collaborator}!isAvailable@{isAvailable}}
+\index{isAvailable@{isAvailable}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{isAvailable()}{isAvailable()}}
+{\footnotesize\ttfamily bool Collaborator\+::is\+Available (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm,  }\item[{const std\+::string \&}]{collab\+Id,  }\item[{\mbox{\hyperlink{class_date}{Date}}}]{start,  }\item[{\mbox{\hyperlink{class_duration}{Duration}}}]{duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+checks if a collaborator is available for a service 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hm} & the instance of housemaster \\
+\hline
+{\em collab\+Id} & the id of the collaborator \\
+\hline
+{\em start} & of intervention \\
+\hline
+{\em duration} & of intervention \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if available otherwise false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collaborator_a6e1f2c60f0cf673ce4acfc4ee64b1859}\label{class_collaborator_a6e1f2c60f0cf673ce4acfc4ee64b1859}} 
+\index{Collaborator@{Collaborator}!isPro@{isPro}}
+\index{isPro@{isPro}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{isPro()}{isPro()}}
+{\footnotesize\ttfamily bool Collaborator\+::is\+Pro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+true if professional false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collaborator_af527e9e3115eed7202daf55627455ed0}\label{class_collaborator_af527e9e3115eed7202daf55627455ed0}} 
+\index{Collaborator@{Collaborator}!markInterventionAsComplete@{markInterventionAsComplete}}
+\index{markInterventionAsComplete@{markInterventionAsComplete}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{markInterventionAsComplete()}{markInterventionAsComplete()}}
+{\footnotesize\ttfamily void Collaborator\+::mark\+Intervention\+As\+Complete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$}]{intervention }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+marks an intervention as completed 
+
+
+\begin{DoxyParams}{Parameters}
+{\em intervention} & to be completed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_collaborator_aee435d4c932ee9012a82c9ecdd57031a}\label{class_collaborator_aee435d4c932ee9012a82c9ecdd57031a}} 
+\index{Collaborator@{Collaborator}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Collaborator\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_collaborator}{Collaborator}} \&}]{col2 }\end{DoxyParamCaption}) const}
+
+
+
+checks if a collaborator has less score than other 
+
+
+\begin{DoxyParams}{Parameters}
+{\em col2} & other collaborator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the score is less than the other false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_collaborator_a26a9dd5bb9cfee5d2f685cd38de7b75e}\label{class_collaborator_a26a9dd5bb9cfee5d2f685cd38de7b75e}} 
+\index{Collaborator@{Collaborator}!operator==@{operator==}}
+\index{operator==@{operator==}!Collaborator@{Collaborator}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Collaborator\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_collaborator}{Collaborator}} \&}]{ind2 }\end{DoxyParamCaption}) const}
+
+
+
+checks if two collaborators are the same 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ind2} & other collaborator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if they\textquotesingle{}re the same false otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/Individual.\+h\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/House\+Master.\+cpp\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/Individual.\+cpp\end{DoxyCompactItemize}

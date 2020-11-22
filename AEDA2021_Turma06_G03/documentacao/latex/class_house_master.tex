@@ -1,0 +1,559 @@
+\hypertarget{class_house_master}{}\doxysection{House\+Master Class Reference}
+\label{class_house_master}\index{HouseMaster@{HouseMaster}}
+
+
+This class manages the services, collaborators, clients and finances of \mbox{\hyperlink{class_house_master}{House\+Master}}.  
+
+
+
+
+{\ttfamily \#include $<$House\+Master.\+h$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_assigned_collab}{Assigned\+Collab}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_existent_client}{Existent\+Client}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_existent_service}{Existent\+Service}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_nonexistent_client}{Nonexistent\+Client}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_nonexistent_collab}{Nonexistent\+Collab}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_nonexistent_service}{Nonexistent\+Service}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_nonexistent_username}{Nonexistent\+Username}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_unable_to_write_file}{Unable\+To\+Write\+File}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_unavailable_appointment}{Unavailable\+Appointment}}
+\item 
+class \mbox{\hyperlink{class_house_master_1_1_username_already_in_use}{Username\+Already\+In\+Use}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_house_master_ac3fc8187884445ab31f13dc4ce04d601}\label{class_house_master_ac3fc8187884445ab31f13dc4ce04d601}} 
+\mbox{\hyperlink{class_house_master_ac3fc8187884445ab31f13dc4ce04d601}{House\+Master}} ()
+\begin{DoxyCompactList}\small\item\em housemaster constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_house_master_ae90f91705826222837220f80f7785324}{House\+Master}} (std\+::ifstream usernames, std\+::ifstream collaborators, std\+::ifstream clients, std\+::ifstream services, std\+::ifstream earnings, std\+::ifstream history)
+\begin{DoxyCompactList}\small\item\em housemaster constructor from files \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_collaborator}{Collaborator}} $\ast$ $>$ \& \mbox{\hyperlink{class_house_master_a9473c787ffa0dbc8b31bcb1d1a0275a6}{get\+Collaborators}} ()
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_client}{Client}} $\ast$ $>$ \& \mbox{\hyperlink{class_house_master_a02ba215a55396291fb0721b90ec6ef02}{get\+Clients}} ()
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \& \mbox{\hyperlink{class_house_master_a629d7d4f056446b437d7be8eb24a39eb}{get\+Interventions}} ()
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_house_master_acf348ce4011537dbf6fc69c3fbb85599}{add\+Available\+Service}} (const std\+::string \&name, bool pro, float base\+Price, const \mbox{\hyperlink{class_duration}{Duration}} \&duration)
+\begin{DoxyCompactList}\small\item\em adds a service to the housemaster\textquotesingle{}s catalogue \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_house_master_a202e46fa47ea85f40defb90c69027ab2}{remove\+Available\+Service}} (const std\+::string \&service)
+\begin{DoxyCompactList}\small\item\em removes a service from housemaster\textquotesingle{}s catalogue \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{class_service}{Service}} $\ast$ $>$ \& \mbox{\hyperlink{class_house_master_a6190fe8b65e17415ef2d84436a471281}{get\+Available\+Services}} ()
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_house_master_a53afff41332cb910f89abe741fbe5f11}{username\+Map\+Changer}} (std\+::string id, std\+::string new\+Username)
+\begin{DoxyCompactList}\small\item\em Manipulates the username map. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_house_master_ae7239fc0902f4dc768e5419a4e267643}{remove\+Collaborator}} (const std\+::string \&coll\+Id)
+\begin{DoxyCompactList}\small\item\em removes a collaborator from housemaster \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_house_master_a33dcb71b0a60f52b78bc72021fe562cd}{add\+Collaborator}} (const std\+::vector$<$ std\+::string $>$ \&services, const std\+::string \&name, bool pro, float earnings=0, Classification score=new\+Here)
+\begin{DoxyCompactList}\small\item\em adds a new collaborator to the housemaster \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_house_master_a00d926f61b224fae7dd935194a4a9a51}{add\+Client}} (unsigned long nif, const std\+::string \&name, bool premium)
+\begin{DoxyCompactList}\small\item\em adds a new client to the housemaster \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_house_master_a81ca5dd5245ad560b25d7ced1b0eab94}{remove\+Client}} (const std\+::string \&client\+Id)
+\begin{DoxyCompactList}\small\item\em removes a client from housemaster \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ \mbox{\hyperlink{class_house_master_a2bc30f1631850e067a361f6f50b60aa6}{add\+Intervention}} (const \mbox{\hyperlink{class_date}{Date}} \&start, const std\+::string \&service, bool force\+Pro, const std\+::string \&client\+Id, unsigned int nr\+Of\+Rooms=0)
+\begin{DoxyCompactList}\small\item\em adds an intervention \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_house_master_a0a957c5c939d12395fb5a3735c3b522d}{process\+Transaction}} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\begin{DoxyCompactList}\small\item\em processes the payment of an intervention \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_house_master_a7fd1e308cd2d88d09b2fd67d214b9de1}{get\+Associated\+Interventions}} (const std\+::string \&id)
+\begin{DoxyCompactList}\small\item\em gets the interventions associated to an individual \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_house_master_a1c31f4a1bbd20830e6b160d8311aef1c}{get\+Associated\+Active\+Interventions}} (const std\+::string \&id)
+\begin{DoxyCompactList}\small\item\em gets the active interventions associated to an individual \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_house_master_a33f9edd9d1b9f449a3dcdadfe50164cd}{get\+Associated\+Past\+Interventions}} (const std\+::string \&id)
+\begin{DoxyCompactList}\small\item\em gets the non active interventions associated to an individual \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_house_master_a235a34a24cac92027619ff066dfc6d65}{get\+All\+Past\+Interventions}} ()
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_house_master_a74c4ec21d2e2162cf4cdc17cb147326c}{get\+All\+Active\+Interventions}} ()
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_house_master_ad71a6fb1792f0b55039c8d25cdcbbecd}{assign\+Collaborator}} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention, const std\+::vector$<$ std\+::pair$<$ std\+::string, \mbox{\hyperlink{class_collaborator}{Collaborator}} $\ast$ $>$$>$ \&ordered\+Collabs)
+\begin{DoxyCompactList}\small\item\em assigns a collaborator to an intervention \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ std\+::string, \mbox{\hyperlink{class_collaborator}{Collaborator}} $\ast$ $>$ $>$ \mbox{\hyperlink{class_house_master_a05ac4d93180aab181c5d34b0669fdeec}{sort\+Collaborators\+By\+Score}} ()
+\begin{DoxyCompactList}\small\item\em sorts the collaborators based on their performance \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_individual}{Individual}} $\ast$ \mbox{\hyperlink{class_house_master_ab4f4ca3b8d3c8ab746c1308578e630a4}{find\+By\+Username}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em finds an individual by their username \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_house_master_a6f1df9b4669625e5c3c6eef36ec4fd33}{get\+Earnings}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_house_master_a2c6326abc1d3b652e9e7e31804d60d58}\label{class_house_master_a2c6326abc1d3b652e9e7e31804d60d58}} 
+void \mbox{\hyperlink{class_house_master_a2c6326abc1d3b652e9e7e31804d60d58}{write\+Username\+Map}} ()
+\begin{DoxyCompactList}\small\item\em Saves username\+Map. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_house_master_a1a412c313b22cd45a37047417e3877e8}\label{class_house_master_a1a412c313b22cd45a37047417e3877e8}} 
+void \mbox{\hyperlink{class_house_master_a1a412c313b22cd45a37047417e3877e8}{write\+Collabs\+Info}} ()
+\begin{DoxyCompactList}\small\item\em saves the collaborators\textquotesingle{} info \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_house_master_a0384c750d237e1935b85ebab81c8b600}\label{class_house_master_a0384c750d237e1935b85ebab81c8b600}} 
+void \mbox{\hyperlink{class_house_master_a0384c750d237e1935b85ebab81c8b600}{write\+Clients\+Info}} ()
+\begin{DoxyCompactList}\small\item\em saves the clients\textquotesingle{} info \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_house_master_a93b2a00de8735aa33a83a3ba0c660d29}\label{class_house_master_a93b2a00de8735aa33a83a3ba0c660d29}} 
+void \mbox{\hyperlink{class_house_master_a93b2a00de8735aa33a83a3ba0c660d29}{write\+Services\+Info}} ()
+\begin{DoxyCompactList}\small\item\em saves the services\textquotesingle{} info \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_house_master_adb21278023a3c427904967bb9bb35c55}\label{class_house_master_adb21278023a3c427904967bb9bb35c55}} 
+void \mbox{\hyperlink{class_house_master_adb21278023a3c427904967bb9bb35c55}{write\+Interventions\+Info}} ()
+\begin{DoxyCompactList}\small\item\em saves the interventions\textquotesingle{} history info \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_house_master_aaf1f6bfcf476552577379d1628b69962}\label{class_house_master_aaf1f6bfcf476552577379d1628b69962}} 
+void \mbox{\hyperlink{class_house_master_aaf1f6bfcf476552577379d1628b69962}{write\+Financial\+Info}} () const
+\begin{DoxyCompactList}\small\item\em saves the financial state of housemaster \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_house_master_ae6bff3439ded55883f80a4f65ffaf8d4}{add\+Available\+Paint\+Service}} (const std\+::string \&name, bool pro, float base\+Price, const \mbox{\hyperlink{class_duration}{Duration}} \&duration)
+\begin{DoxyCompactList}\small\item\em adds a painting service to the housemaster\textquotesingle{}s catalogue \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_house_master_aa8c513ac7ce5915103dfe2d3a79492e9}{change\+Intervention\+State}} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention, process\+State state)
+\begin{DoxyCompactList}\small\item\em changes the intervention\textquotesingle{}s state \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_house_master_a2e72964224fe36b247acf5b3685a981c}{mark\+As\+Complete}} (\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$intervention)
+\begin{DoxyCompactList}\small\item\em marks an intervention as complete \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class manages the services, collaborators, clients and finances of \mbox{\hyperlink{class_house_master}{House\+Master}}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_house_master_ae90f91705826222837220f80f7785324}\label{class_house_master_ae90f91705826222837220f80f7785324}} 
+\index{HouseMaster@{HouseMaster}!HouseMaster@{HouseMaster}}
+\index{HouseMaster@{HouseMaster}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{HouseMaster()}{HouseMaster()}}
+{\footnotesize\ttfamily House\+Master\+::\+House\+Master (\begin{DoxyParamCaption}\item[{std\+::ifstream}]{usernames,  }\item[{std\+::ifstream}]{collaborators,  }\item[{std\+::ifstream}]{clients,  }\item[{std\+::ifstream}]{services,  }\item[{std\+::ifstream}]{earnings,  }\item[{std\+::ifstream}]{history }\end{DoxyParamCaption})}
+
+
+
+housemaster constructor from files 
+
+
+\begin{DoxyParams}{Parameters}
+{\em collaborators} & collabs info \\
+\hline
+{\em clients} & clients info \\
+\hline
+{\em services} & services info \\
+\hline
+{\em earnings} & earnings info \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_house_master_ae6bff3439ded55883f80a4f65ffaf8d4}\label{class_house_master_ae6bff3439ded55883f80a4f65ffaf8d4}} 
+\index{HouseMaster@{HouseMaster}!addAvailablePaintService@{addAvailablePaintService}}
+\index{addAvailablePaintService@{addAvailablePaintService}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{addAvailablePaintService()}{addAvailablePaintService()}}
+{\footnotesize\ttfamily void House\+Master\+::add\+Available\+Paint\+Service (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{bool}]{pro,  }\item[{float}]{base\+Price,  }\item[{const \mbox{\hyperlink{class_duration}{Duration}} \&}]{duration }\end{DoxyParamCaption})}
+
+
+
+adds a painting service to the housemaster\textquotesingle{}s catalogue 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the service \\
+\hline
+{\em pro} & requires professional \\
+\hline
+{\em base\+Price} & base price \\
+\hline
+{\em duration} & duration \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_acf348ce4011537dbf6fc69c3fbb85599}\label{class_house_master_acf348ce4011537dbf6fc69c3fbb85599}} 
+\index{HouseMaster@{HouseMaster}!addAvailableService@{addAvailableService}}
+\index{addAvailableService@{addAvailableService}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{addAvailableService()}{addAvailableService()}}
+{\footnotesize\ttfamily void House\+Master\+::add\+Available\+Service (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{bool}]{pro,  }\item[{float}]{base\+Price,  }\item[{const \mbox{\hyperlink{class_duration}{Duration}} \&}]{duration }\end{DoxyParamCaption})}
+
+
+
+adds a service to the housemaster\textquotesingle{}s catalogue 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the service \\
+\hline
+{\em pro} & requires professional \\
+\hline
+{\em base\+Price} & base price \\
+\hline
+{\em duration} & duration \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_a00d926f61b224fae7dd935194a4a9a51}\label{class_house_master_a00d926f61b224fae7dd935194a4a9a51}} 
+\index{HouseMaster@{HouseMaster}!addClient@{addClient}}
+\index{addClient@{addClient}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{addClient()}{addClient()}}
+{\footnotesize\ttfamily void House\+Master\+::add\+Client (\begin{DoxyParamCaption}\item[{unsigned long}]{nif,  }\item[{const std\+::string \&}]{name,  }\item[{bool}]{premium }\end{DoxyParamCaption})}
+
+
+
+adds a new client to the housemaster 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nif} & tax id \\
+\hline
+{\em name} & name \\
+\hline
+{\em premium} & is premium \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_a33dcb71b0a60f52b78bc72021fe562cd}\label{class_house_master_a33dcb71b0a60f52b78bc72021fe562cd}} 
+\index{HouseMaster@{HouseMaster}!addCollaborator@{addCollaborator}}
+\index{addCollaborator@{addCollaborator}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{addCollaborator()}{addCollaborator()}}
+{\footnotesize\ttfamily void House\+Master\+::add\+Collaborator (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{services,  }\item[{const std\+::string \&}]{name,  }\item[{bool}]{pro,  }\item[{float}]{earnings = {\ttfamily 0},  }\item[{Classification}]{score = {\ttfamily newHere} }\end{DoxyParamCaption})}
+
+
+
+adds a new collaborator to the housemaster 
+
+
+\begin{DoxyParams}{Parameters}
+{\em services} & services that the collaborator can preform \\
+\hline
+{\em name} & name of the collaborator \\
+\hline
+{\em pro} & is professional \\
+\hline
+{\em earnings} & the earnings \\
+\hline
+{\em score} & the score \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_a2bc30f1631850e067a361f6f50b60aa6}\label{class_house_master_a2bc30f1631850e067a361f6f50b60aa6}} 
+\index{HouseMaster@{HouseMaster}!addIntervention@{addIntervention}}
+\index{addIntervention@{addIntervention}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{addIntervention()}{addIntervention()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ House\+Master\+::add\+Intervention (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_date}{Date}} \&}]{start,  }\item[{const std\+::string \&}]{service,  }\item[{bool}]{force\+Pro,  }\item[{const std\+::string \&}]{client\+Id,  }\item[{unsigned int}]{nr\+Of\+Rooms = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+adds an intervention 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & start of the intervention \\
+\hline
+{\em service} & the service \\
+\hline
+{\em force\+Pro} & \\
+\hline
+{\em client\+Id} & the clients id \\
+\hline
+{\em nr\+Of\+Rooms} & number of rooms in case of painting \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the intervention 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_ad71a6fb1792f0b55039c8d25cdcbbecd}\label{class_house_master_ad71a6fb1792f0b55039c8d25cdcbbecd}} 
+\index{HouseMaster@{HouseMaster}!assignCollaborator@{assignCollaborator}}
+\index{assignCollaborator@{assignCollaborator}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{assignCollaborator()}{assignCollaborator()}}
+{\footnotesize\ttfamily void House\+Master\+::assign\+Collaborator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$}]{intervention,  }\item[{const std\+::vector$<$ std\+::pair$<$ std\+::string, \mbox{\hyperlink{class_collaborator}{Collaborator}} $\ast$ $>$$>$ \&}]{ordered\+Collabs }\end{DoxyParamCaption})}
+
+
+
+assigns a collaborator to an intervention 
+
+
+\begin{DoxyParams}{Parameters}
+{\em intervention} & the intervention \\
+\hline
+{\em ordered\+Collabs} & the collaborators \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_aa8c513ac7ce5915103dfe2d3a79492e9}\label{class_house_master_aa8c513ac7ce5915103dfe2d3a79492e9}} 
+\index{HouseMaster@{HouseMaster}!changeInterventionState@{changeInterventionState}}
+\index{changeInterventionState@{changeInterventionState}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{changeInterventionState()}{changeInterventionState()}}
+{\footnotesize\ttfamily void House\+Master\+::change\+Intervention\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$}]{intervention,  }\item[{process\+State}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+changes the intervention\textquotesingle{}s state 
+
+
+\begin{DoxyParams}{Parameters}
+{\em intervention} & the intervention \\
+\hline
+{\em state} & the desired state \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_ab4f4ca3b8d3c8ab746c1308578e630a4}\label{class_house_master_ab4f4ca3b8d3c8ab746c1308578e630a4}} 
+\index{HouseMaster@{HouseMaster}!findByUsername@{findByUsername}}
+\index{findByUsername@{findByUsername}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{findByUsername()}{findByUsername()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_individual}{Individual}} $\ast$ House\+Master\+::find\+By\+Username (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{username }\end{DoxyParamCaption})}
+
+
+
+finds an individual by their username 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & the username \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the individual 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a74c4ec21d2e2162cf4cdc17cb147326c}\label{class_house_master_a74c4ec21d2e2162cf4cdc17cb147326c}} 
+\index{HouseMaster@{HouseMaster}!getAllActiveInterventions@{getAllActiveInterventions}}
+\index{getAllActiveInterventions@{getAllActiveInterventions}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{getAllActiveInterventions()}{getAllActiveInterventions()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ House\+Master\+::get\+All\+Active\+Interventions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+all active interventions 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a235a34a24cac92027619ff066dfc6d65}\label{class_house_master_a235a34a24cac92027619ff066dfc6d65}} 
+\index{HouseMaster@{HouseMaster}!getAllPastInterventions@{getAllPastInterventions}}
+\index{getAllPastInterventions@{getAllPastInterventions}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{getAllPastInterventions()}{getAllPastInterventions()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ House\+Master\+::get\+All\+Past\+Interventions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+all past interventions 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a1c31f4a1bbd20830e6b160d8311aef1c}\label{class_house_master_a1c31f4a1bbd20830e6b160d8311aef1c}} 
+\index{HouseMaster@{HouseMaster}!getAssociatedActiveInterventions@{getAssociatedActiveInterventions}}
+\index{getAssociatedActiveInterventions@{getAssociatedActiveInterventions}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{getAssociatedActiveInterventions()}{getAssociatedActiveInterventions()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ House\+Master\+::get\+Associated\+Active\+Interventions (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id }\end{DoxyParamCaption})}
+
+
+
+gets the active interventions associated to an individual 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the individual\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the interventions 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a7fd1e308cd2d88d09b2fd67d214b9de1}\label{class_house_master_a7fd1e308cd2d88d09b2fd67d214b9de1}} 
+\index{HouseMaster@{HouseMaster}!getAssociatedInterventions@{getAssociatedInterventions}}
+\index{getAssociatedInterventions@{getAssociatedInterventions}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{getAssociatedInterventions()}{getAssociatedInterventions()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ House\+Master\+::get\+Associated\+Interventions (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id }\end{DoxyParamCaption})}
+
+
+
+gets the interventions associated to an individual 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the individual\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the interventions 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a33f9edd9d1b9f449a3dcdadfe50164cd}\label{class_house_master_a33f9edd9d1b9f449a3dcdadfe50164cd}} 
+\index{HouseMaster@{HouseMaster}!getAssociatedPastInterventions@{getAssociatedPastInterventions}}
+\index{getAssociatedPastInterventions@{getAssociatedPastInterventions}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{getAssociatedPastInterventions()}{getAssociatedPastInterventions()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ House\+Master\+::get\+Associated\+Past\+Interventions (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id }\end{DoxyParamCaption})}
+
+
+
+gets the non active interventions associated to an individual 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the individual\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the interventions 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a6190fe8b65e17415ef2d84436a471281}\label{class_house_master_a6190fe8b65e17415ef2d84436a471281}} 
+\index{HouseMaster@{HouseMaster}!getAvailableServices@{getAvailableServices}}
+\index{getAvailableServices@{getAvailableServices}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{getAvailableServices()}{getAvailableServices()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{class_service}{Service}} $\ast$ $>$ \& House\+Master\+::get\+Available\+Services (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+available services 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a02ba215a55396291fb0721b90ec6ef02}\label{class_house_master_a02ba215a55396291fb0721b90ec6ef02}} 
+\index{HouseMaster@{HouseMaster}!getClients@{getClients}}
+\index{getClients@{getClients}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{getClients()}{getClients()}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, \mbox{\hyperlink{class_client}{Client}} $\ast$ $>$ \& House\+Master\+::get\+Clients (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+the clients 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a9473c787ffa0dbc8b31bcb1d1a0275a6}\label{class_house_master_a9473c787ffa0dbc8b31bcb1d1a0275a6}} 
+\index{HouseMaster@{HouseMaster}!getCollaborators@{getCollaborators}}
+\index{getCollaborators@{getCollaborators}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{getCollaborators()}{getCollaborators()}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, \mbox{\hyperlink{class_collaborator}{Collaborator}} $\ast$ $>$ \& House\+Master\+::get\+Collaborators (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+the collaborators 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a6f1df9b4669625e5c3c6eef36ec4fd33}\label{class_house_master_a6f1df9b4669625e5c3c6eef36ec4fd33}} 
+\index{HouseMaster@{HouseMaster}!getEarnings@{getEarnings}}
+\index{getEarnings@{getEarnings}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{getEarnings()}{getEarnings()}}
+{\footnotesize\ttfamily float House\+Master\+::get\+Earnings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+the earnings 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a629d7d4f056446b437d7be8eb24a39eb}\label{class_house_master_a629d7d4f056446b437d7be8eb24a39eb}} 
+\index{HouseMaster@{HouseMaster}!getInterventions@{getInterventions}}
+\index{getInterventions@{getInterventions}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{getInterventions()}{getInterventions()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \& House\+Master\+::get\+Interventions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+the interventions 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a2e72964224fe36b247acf5b3685a981c}\label{class_house_master_a2e72964224fe36b247acf5b3685a981c}} 
+\index{HouseMaster@{HouseMaster}!markAsComplete@{markAsComplete}}
+\index{markAsComplete@{markAsComplete}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{markAsComplete()}{markAsComplete()}}
+{\footnotesize\ttfamily void House\+Master\+::mark\+As\+Complete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$}]{intervention }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+marks an intervention as complete 
+
+
+\begin{DoxyParams}{Parameters}
+{\em intervention} & the intervention \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_a0a957c5c939d12395fb5a3735c3b522d}\label{class_house_master_a0a957c5c939d12395fb5a3735c3b522d}} 
+\index{HouseMaster@{HouseMaster}!processTransaction@{processTransaction}}
+\index{processTransaction@{processTransaction}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{processTransaction()}{processTransaction()}}
+{\footnotesize\ttfamily void House\+Master\+::process\+Transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_intervention}{Intervention}} $\ast$}]{intervention }\end{DoxyParamCaption})}
+
+
+
+processes the payment of an intervention 
+
+
+\begin{DoxyParams}{Parameters}
+{\em intervention} & the intervention \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_a202e46fa47ea85f40defb90c69027ab2}\label{class_house_master_a202e46fa47ea85f40defb90c69027ab2}} 
+\index{HouseMaster@{HouseMaster}!removeAvailableService@{removeAvailableService}}
+\index{removeAvailableService@{removeAvailableService}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{removeAvailableService()}{removeAvailableService()}}
+{\footnotesize\ttfamily void House\+Master\+::remove\+Available\+Service (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{service }\end{DoxyParamCaption})}
+
+
+
+removes a service from housemaster\textquotesingle{}s catalogue 
+
+
+\begin{DoxyParams}{Parameters}
+{\em service} & name of the service \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_a81ca5dd5245ad560b25d7ced1b0eab94}\label{class_house_master_a81ca5dd5245ad560b25d7ced1b0eab94}} 
+\index{HouseMaster@{HouseMaster}!removeClient@{removeClient}}
+\index{removeClient@{removeClient}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{removeClient()}{removeClient()}}
+{\footnotesize\ttfamily void House\+Master\+::remove\+Client (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{client\+Id }\end{DoxyParamCaption})}
+
+
+
+removes a client from housemaster 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & the client to be removed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_ae7239fc0902f4dc768e5419a4e267643}\label{class_house_master_ae7239fc0902f4dc768e5419a4e267643}} 
+\index{HouseMaster@{HouseMaster}!removeCollaborator@{removeCollaborator}}
+\index{removeCollaborator@{removeCollaborator}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{removeCollaborator()}{removeCollaborator()}}
+{\footnotesize\ttfamily void House\+Master\+::remove\+Collaborator (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id }\end{DoxyParamCaption})}
+
+
+
+removes a collaborator from housemaster 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & the id of the collaborator to remove \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_house_master_a05ac4d93180aab181c5d34b0669fdeec}\label{class_house_master_a05ac4d93180aab181c5d34b0669fdeec}} 
+\index{HouseMaster@{HouseMaster}!sortCollaboratorsByScore@{sortCollaboratorsByScore}}
+\index{sortCollaboratorsByScore@{sortCollaboratorsByScore}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{sortCollaboratorsByScore()}{sortCollaboratorsByScore()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::pair$<$ std\+::string, \mbox{\hyperlink{class_collaborator}{Collaborator}} $\ast$ $>$ $>$ House\+Master\+::sort\+Collaborators\+By\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+sorts the collaborators based on their performance 
+
+\begin{DoxyReturn}{Returns}
+the sorted collaborators 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_house_master_a53afff41332cb910f89abe741fbe5f11}\label{class_house_master_a53afff41332cb910f89abe741fbe5f11}} 
+\index{HouseMaster@{HouseMaster}!usernameMapChanger@{usernameMapChanger}}
+\index{usernameMapChanger@{usernameMapChanger}!HouseMaster@{HouseMaster}}
+\doxysubsubsection{\texorpdfstring{usernameMapChanger()}{usernameMapChanger()}}
+{\footnotesize\ttfamily void House\+Master\+::username\+Map\+Changer (\begin{DoxyParamCaption}\item[{std\+::string}]{id,  }\item[{std\+::string}]{new\+Username }\end{DoxyParamCaption})}
+
+
+
+Manipulates the username map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & with the user id \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/House\+Master.\+h\item 
+C\+:/\+Users/\+Sofia/\+Documents/\+Git\+Hub/\+Projeto\+\_\+\+A\+E\+D\+A\+\_\+1\+\_\+\+House\+Master/src/House\+Master.\+cpp\end{DoxyCompactItemize}
