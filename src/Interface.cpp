@@ -189,7 +189,7 @@ void Interface::clientOperations(bool &running) {
         }
     }},{"See complete interventions",[&](){
         while (innerRunning) {
-            Intervention *intervention = selectCompleteIntervention(innerRunning);
+            Intervention *intervention = selectPastIntervention(innerRunning);
             if (intervention) show(*intervention);
             std::cin.ignore();
         }
@@ -260,6 +260,12 @@ void Interface::collaboratorOperations(bool &running) {
             pickServices.show();
             pickServices.select();
             pickServices.execute(innerRunning);
+        }
+    }}, {"See past interventions", [&](){
+        while (innerRunning) {
+            Intervention *intervention = selectPastIntervention(innerRunning);
+            if (intervention) show(*intervention);
+            std::cin.ignore();
         }
     }}});
     collabsMenu.show();
@@ -365,6 +371,24 @@ void Interface::adminOperations(bool &running) {
     }},{"Show collaborators' performance", [&]() {
         showSortedCollabs();
         std::cin.ignore();
+    }}, {"Show active interventions", [&](){
+        Intervention *intervention = selectActiveIntervention(innerRunning);
+        if (intervention) {
+            Menu activeInterventionMenu("Active intervention",{{"See details", [&]() {
+                if (!intervention->getService()->getName().empty())
+                    show(*intervention);
+                std::cin.ignore();
+            }}});
+            activeInterventionMenu.show();
+            activeInterventionMenu.select();
+            activeInterventionMenu.execute(running);
+        }
+    }}, {"Show past interventions", [&](){
+        while (innerRunning) {
+            Intervention *intervention = selectPastIntervention(innerRunning);
+            if (intervention) show(*intervention);
+            std::cin.ignore();
+        }
     }}});
     adminMenu.show();
     adminMenu.select();
@@ -567,7 +591,8 @@ std::string Interface::selectCollab(bool &running) {
  * @return the intervention
  */
 Intervention *Interface::selectActiveIntervention(bool &running) {
-    std::vector<Intervention *> activeInterventions = _houseMaster.getAssociatedActiveInterventions(_user->getId());
+    std::vector<Intervention *> activeInterventions = _role != admin ? _houseMaster.getAssociatedActiveInterventions(_user->getId())
+            : _houseMaster.getAllActiveInterventions();
     std::map<std::string, std::function<void()>> options{};
     Intervention *selection{};
     for (const auto &i : activeInterventions) {
@@ -586,8 +611,9 @@ Intervention *Interface::selectActiveIntervention(bool &running) {
  * @param running
  * @return the intervention
  */
-Intervention *Interface::selectCompleteIntervention(bool &running) {
-    std::vector<Intervention *> nonActiveInterventions = _houseMaster.getAssociatedPastInterventions(_user->getId());
+Intervention *Interface::selectPastIntervention(bool &running) {
+    std::vector<Intervention *> nonActiveInterventions = _role != admin ?_houseMaster.getAssociatedPastInterventions(_user->getId())
+            : _houseMaster.getAllPastInterventions();
     std::map<std::string, std::function<void()>> options{};
     Intervention *selection{};
     for (const auto &i : nonActiveInterventions) {

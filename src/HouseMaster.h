@@ -64,6 +64,12 @@ public:
 
     std::vector<Intervention *> getAssociatedActiveInterventions(const std::string &id);
 
+    std::vector<Intervention *> getAssociatedPastInterventions(const std::string &id);
+
+    std::vector<Intervention *> getAllPastInterventions();
+
+    std::vector<Intervention *> getAllActiveInterventions();
+
     void assignCollaborator(Intervention *intervention,
                             const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs);
 
@@ -105,7 +111,6 @@ public:
 
     void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration);
 
-    std::vector<Intervention *> getAssociatedPastInterventions(const std::string &id);
 
 private:
     std::unordered_map<std::string, Service *> _availableServices;

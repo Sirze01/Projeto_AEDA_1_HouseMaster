@@ -592,13 +592,6 @@ void HouseMaster::writeInterventionsInfo() {
     if (interventionsFile.is_open()) {
         auto int_it = _interventions.begin();
         while (int_it != _interventions.end()) {
-            /*
-            interventionsFile << "Service: " << (*int_it)->getService()->getName() << ", from "
-                              << (*int_it)->getStartingTime().getString()
-                              << " to " << (*int_it)->getEndTime().getString() << ", to client "
-                              << (*int_it)->getClientId() << " done by " << (*int_it)->getCollabId()
-                              << ", cost: " << (*int_it)->getCost() << '\n';
-                              */
             interventionsFile << (*int_it)->getService()->getName() << ',' << (*int_it)->getClientId() << ','
             << (*int_it)->getCollabId() << ',' << (*int_it)->getStartingTime().getString() << ','
             << (*int_it)->getForcePro() << ',' << (*int_it)->getProcessState() << ',' << (*int_it)->getCost();
@@ -638,6 +631,31 @@ void HouseMaster::markAsComplete(Intervention *intervention) {
 float HouseMaster::getEarnings() const {
     return _earnings;
 }
+
+/**
+ * @brief getter
+ * @return all active interventions
+ */
+std::vector<Intervention *> HouseMaster::getAllActiveInterventions() {
+    std::vector<Intervention *> result{};
+    for (const auto &intervention : _interventions) {
+        if (intervention->isActive()) result.push_back(intervention);
+    }
+    return result;
+}
+
+/**
+ * @brief getter
+ * @return all past interventions
+ */
+std::vector<Intervention *> HouseMaster::getAllPastInterventions() {
+    std::vector<Intervention *> result{};
+    for (const auto &intervention : _interventions) {
+        if (!intervention->isActive()) result.push_back(intervention);
+    }
+    return result;
+}
+
 
 /**
  * @brief exception for an impossible appointment

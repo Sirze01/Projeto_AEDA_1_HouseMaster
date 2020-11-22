@@ -75,7 +75,7 @@ private:
     Individual *_user{};
     Role _role{};
 
-    Intervention *selectCompleteIntervention(bool &running);
+    Intervention *selectPastIntervention(bool &running);
 };
 
 class Interface::NonexistentRole : public std::logic_error {
