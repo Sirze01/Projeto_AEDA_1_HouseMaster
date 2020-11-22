@@ -518,7 +518,7 @@ void HouseMaster::assignCollaborator(Intervention *intervention,
  */
 void HouseMaster::writeCollabsInfo() {
     std::ofstream collabFile;
-    collabFile.open("../../data/collabs.txt");
+    collabFile.open("../data/collabs.txt");
     if (collabFile.is_open()) {
         auto collab_it = _collaborators.begin();
         while (collab_it != _collaborators.end()) {
@@ -541,7 +541,7 @@ void HouseMaster::writeCollabsInfo() {
  * @brief saves the clients' info
  */
 void HouseMaster::writeClientsInfo() {
-    std::ofstream clientsFile("../../data/clients.txt");
+    std::ofstream clientsFile("../data/clients.txt");
     if (clientsFile.is_open()) {
         auto client_it = _clients.begin();
         while (client_it != _clients.end()) {
@@ -558,7 +558,7 @@ void HouseMaster::writeClientsInfo() {
  * @brief saves the services' info
  */
 void HouseMaster::writeServicesInfo() {
-    std::ofstream servicesFile("../../data/services.txt");
+    std::ofstream servicesFile("../data/services.txt");
     if (servicesFile.is_open()) {
         auto service_it = _availableServices.begin();
         while (service_it != _availableServices.end()) {
@@ -585,7 +585,7 @@ void HouseMaster::writeServicesInfo() {
  * @brief saves the interventions' history info
  */
 void HouseMaster::writeInterventionsInfo() {
-    std::ofstream interventionsFile("../../data/history.txt", std::ios_base::app);
+    std::ofstream interventionsFile("../data/history.txt", std::ios_base::app);
     time_t timeToday;
     time(&timeToday);
     interventionsFile << '@' << asctime(localtime(&timeToday));
@@ -609,7 +609,7 @@ void HouseMaster::writeInterventionsInfo() {
  * @brief saves the financial state of housemaster
  */
 void HouseMaster::writeFinancialInfo() const {
-    std::ofstream finantialInfo("../../data/finances.txt", std::ios_base::trunc);
+    std::ofstream finantialInfo("../data/finances.txt", std::ios_base::trunc);
     if (finantialInfo.is_open()) {
         finantialInfo << _earnings << std::endl;
         finantialInfo.close();
