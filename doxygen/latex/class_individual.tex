@@ -17,9 +17,11 @@ Inheritance diagram for Individual\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_individual_a5dc436e98831642206cb2e5e70e2d8ae}\label{class_individual_a5dc436e98831642206cb2e5e70e2d8ae}} 
 virtual std\+::string {\bfseries get\+Id} () const =0
 \item 
-std\+::vector$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_individual_a9db44df3d302742cc81ec827e348fff7}{get\+Associated\+Interventions}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm) const
+void \mbox{\hyperlink{class_individual_adbf7e7f8b59a4b1aa52e7927560ab189}{change\+Username}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm, std\+::string new\+Username)
+\begin{DoxyCompactList}\small\item\em Changes username in username map. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_individual_a7387a9fb6b428c6085c60f70611913ce}{get\+Associated\+Interventions}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm) const
 \begin{DoxyCompactList}\small\item\em gets an individual\textquotesingle{}s interventions \end{DoxyCompactList}\item 
-std\+::vector$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_individual_aadc61538bf64a5fc7c941dcb75286d2b}{get\+Associated\+Active\+Interventions}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm) const
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ \mbox{\hyperlink{class_individual_ad2fc12633cad939e43c7aef94908d38e}{get\+Associated\+Active\+Interventions}} (\mbox{\hyperlink{class_house_master}{House\+Master}} \&hm) const
 \begin{DoxyCompactList}\small\item\em gets an individual\textquotesingle{}s active interventions \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{class_individual_a768db1e0ad8769d834a03d7a7d3b2a7c}{get\+Name}} () const
 \begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -53,11 +55,26 @@ unsigned int {\bfseries \+\_\+id}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_individual_aadc61538bf64a5fc7c941dcb75286d2b}\label{class_individual_aadc61538bf64a5fc7c941dcb75286d2b}} 
+\mbox{\Hypertarget{class_individual_adbf7e7f8b59a4b1aa52e7927560ab189}\label{class_individual_adbf7e7f8b59a4b1aa52e7927560ab189}} 
+\index{Individual@{Individual}!changeUsername@{changeUsername}}
+\index{changeUsername@{changeUsername}!Individual@{Individual}}
+\doxysubsubsection{\texorpdfstring{changeUsername()}{changeUsername()}}
+{\footnotesize\ttfamily void Individual\+::change\+Username (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm,  }\item[{std\+::string}]{new\+Username }\end{DoxyParamCaption})}
+
+
+
+Changes username in username map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hm,the} & instance of housemaster \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_individual_ad2fc12633cad939e43c7aef94908d38e}\label{class_individual_ad2fc12633cad939e43c7aef94908d38e}} 
 \index{Individual@{Individual}!getAssociatedActiveInterventions@{getAssociatedActiveInterventions}}
 \index{getAssociatedActiveInterventions@{getAssociatedActiveInterventions}!Individual@{Individual}}
 \doxysubsubsection{\texorpdfstring{getAssociatedActiveInterventions()}{getAssociatedActiveInterventions()}}
-{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ Individual\+::get\+Associated\+Active\+Interventions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ Individual\+::get\+Associated\+Active\+Interventions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm }\end{DoxyParamCaption}) const}
 
 
 
@@ -71,11 +88,11 @@ gets an individual\textquotesingle{}s active interventions
 \begin{DoxyReturn}{Returns}
 the active interventions 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_individual_a9db44df3d302742cc81ec827e348fff7}\label{class_individual_a9db44df3d302742cc81ec827e348fff7}} 
+\mbox{\Hypertarget{class_individual_a7387a9fb6b428c6085c60f70611913ce}\label{class_individual_a7387a9fb6b428c6085c60f70611913ce}} 
 \index{Individual@{Individual}!getAssociatedInterventions@{getAssociatedInterventions}}
 \index{getAssociatedInterventions@{getAssociatedInterventions}!Individual@{Individual}}
 \doxysubsubsection{\texorpdfstring{getAssociatedInterventions()}{getAssociatedInterventions()}}
-{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ Individual\+::get\+Associated\+Interventions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_intervention}{Intervention}} $\ast$ $>$ Individual\+::get\+Associated\+Interventions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_house_master}{House\+Master}} \&}]{hm }\end{DoxyParamCaption}) const}
 
 
 
