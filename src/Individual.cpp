@@ -255,3 +255,25 @@ std::string Client::getId() const {
 bool Client::operator==(const Client &ind2) const {
     return _id == ind2._id;
 }
+
+
+/**
+ * @brief admin's constructor
+ * @param name the name
+ * @param affiliate the affiliate
+ */
+Admin::Admin(const std::string &name, std::string affiliate = "") : Individual(name), _affiliate(std::move(affiliate)){}
+
+std::string Admin::getAffiliate() const {
+    return _affiliate;
+}
+
+/**
+ * @brief getter
+ * @return id
+ */
+std::string Admin::getId() const {
+    std::stringstream outStr;
+    outStr << "admin" << _id;
+    return outStr.str();
+}

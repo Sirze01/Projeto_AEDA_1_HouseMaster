@@ -152,4 +152,20 @@ private:
     bool _premium;
 };
 
+
+
+// Admin code
+class Admin : public Individual {
+public:
+    Admin(const std::string &name, std::string affiliate = "");
+    ~Admin() override = default;
+    std::string getAffiliate() const;
+    static unsigned int _idSeqAdmins;
+    std::string getId() const override;
+
+private:
+    std::string _affiliate;
+};
+
+
 #endif
