@@ -16,7 +16,7 @@ Interface::InvalidNif::InvalidNif(const std::string &error_msg) : invalid_argume
  * @brief Interface constructor
  * @param houseMaster the housemaster to interact with
  */
-Interface::Interface(const HouseMaster &houseMaster) : _houseMaster(houseMaster), _user(), _role() {
+Interface::Interface(const HouseMasterAffiliate &houseMaster) : _houseMaster(houseMaster), _user(), _role() {
 
 }
 
@@ -102,7 +102,7 @@ void Interface::userLogin() {
             std::cout << "Username : ";
             std::cin >> username;
         }
-        catch (const HouseMaster::NonexistentUsername &e) {
+        catch (const HouseMasterAffiliate::NonexistentUsername &e) {
             done = false;
             std::cout << e.what() << " Please try again\n";
             std::cout << "Username : ";
@@ -175,7 +175,7 @@ void Interface::clientOperations(bool &running) {
                     Classification classification = readClassification(innerRunning, collabName);
                     if (innerRunning) {
                         _houseMaster.getCollaborators()[intervention->getCollabId()]->addClassification(classification);
-                        HouseMaster::markAsComplete(intervention);
+                        HouseMasterAffiliate::markAsComplete(intervention);
                     }
                 }},{"Cancel Intervention", [&]() {
                     Client::cancelIntervention(intervention);
@@ -200,7 +200,7 @@ void Interface::clientOperations(bool &running) {
         do{
             try{_user->changeUsername(_houseMaster, readNewUsername());
             done = true;}
-            catch (const HouseMaster::UsernameAlreadyInUse &e) {
+            catch (const HouseMasterAffiliate::UsernameAlreadyInUse &e) {
                 done = false;
                 std::cout << e.what() << std::endl;
             }
@@ -280,7 +280,7 @@ void Interface::collaboratorOperations(bool &running) {
                 _user->changeUsername(_houseMaster, readNewUsername());
                 done = true;
             }
-            catch (const HouseMaster::UsernameAlreadyInUse &e) {
+            catch (const HouseMasterAffiliate::UsernameAlreadyInUse &e) {
                 done = false;
                 std::cout << e.what() << std::endl;
             }
@@ -795,7 +795,7 @@ Classification Interface::readClassification(bool &running, std::string &collabN
  * @brief getter
  * @return housemaster
  */
-HouseMaster Interface::getHouseMasterState() const {
+HouseMasterAffiliate Interface::getHouseMasterState() const {
     return _houseMaster;
 }
 

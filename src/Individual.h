@@ -11,7 +11,7 @@
 #include <sstream>
 #include "Services.h"
 
-class HouseMaster;
+class HouseMasterAffiliate;
 
 class Individual {
 public:
@@ -24,11 +24,11 @@ public:
 
     virtual std::string getId() const = 0;
 
-    void changeUsername(HouseMaster &hm, std::string newUsername);
+    void changeUsername(HouseMasterAffiliate &hm, std::string newUsername);
 
-    std::unordered_set<Intervention *> getAssociatedInterventions(HouseMaster &hm) const;
+    std::unordered_set<Intervention *> getAssociatedInterventions(HouseMasterAffiliate &hm) const;
 
-    std::unordered_set<Intervention *> getAssociatedActiveInterventions(HouseMaster &hm) const;
+    std::unordered_set<Intervention *> getAssociatedActiveInterventions(HouseMasterAffiliate &hm) const;
 
     std::string getName() const;
 
@@ -64,11 +64,11 @@ public:
 
     bool canPreform(const std::string &service);
 
-    static bool isAvailable(HouseMaster &hm, const std::string &collabId, Date start, Duration duration);
+    static bool isAvailable(HouseMasterAffiliate &hm, const std::string &collabId, Date start, Duration duration);
 
     bool hasQualificationToPreform(Intervention *intervention) const;
 
-    bool canDo(HouseMaster &hm, const std::string &collabId, Intervention *intervention);
+    bool canDo(HouseMasterAffiliate &hm, const std::string &collabId, Intervention *intervention);
 
     int getScore() const;
 
@@ -135,12 +135,12 @@ public:
 
     std::string getId() const override;
 
-    void requestIntervention(HouseMaster &hm, const Date &date, const std::string &service, bool forcePro,
+    void requestIntervention(HouseMasterAffiliate &hm, const Date &date, const std::string &service, bool forcePro,
                              unsigned int nrOfRooms = 0) const;
 
     static void cancelIntervention(Intervention *intervention);
 
-    static void classifyCollaborator(HouseMaster &hm, const std::string &collabId, Classification classification);
+    static void classifyCollaborator(HouseMasterAffiliate &hm, const std::string &collabId, Classification classification);
 
     bool operator==(const Client &ind2) const;
 

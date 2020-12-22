@@ -6,7 +6,7 @@
 
 int main() {
 
-    HouseMaster h1(std::ifstream("../data/usernames.txt"),
+    HouseMasterAffiliate h1(std::ifstream("../data/usernames.txt"),
                    std::ifstream("../data/collabs.txt"),
                    std::ifstream("../data/clients.txt"),
                    std::ifstream("../data/services.txt"),
@@ -27,7 +27,7 @@ int main() {
         h1.writeInterventionsInfo();
         h1.writeFinancialInfo();
     }
-    catch (const HouseMaster::UnableToWriteFile &e)
+    catch (const HouseMasterAffiliate::UnableToWriteFile &e)
     {
         std::cout << e.what();
     }

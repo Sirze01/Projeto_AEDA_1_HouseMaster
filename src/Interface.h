@@ -16,11 +16,11 @@ class Interface {
 public:
     Interface() = default;
 
-    explicit Interface(const HouseMaster &houseMaster);
+    explicit Interface(const HouseMasterAffiliate &houseMaster);
 
     void selectRole(bool &running);
 
-    HouseMaster getHouseMasterState() const;
+    HouseMasterAffiliate getHouseMasterState() const;
 
 private:
     void userLogin();
@@ -73,7 +73,7 @@ private:
 
     void showSortedCollabs();
 
-    HouseMaster _houseMaster;
+    HouseMasterAffiliate _houseMaster;
     Individual *_user{};
     Role _role{};
 
