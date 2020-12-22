@@ -14,6 +14,7 @@
 #include <iostream>
 #include "Individual.h"
 #include "Services.h"
+#include "bst.h"
 
 
 bool scoreComparer(std::pair<std::string, Collaborator *> &a, std::pair<std::string, Collaborator *> &b);
@@ -36,6 +37,8 @@ public:
     std::map<std::string, Client *> &getClients();
 
     std::unordered_set<Intervention *> & getInterventions();
+
+    BST<HouseMasterAffiliate *> &getAffiliates();
 
     void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration);
 
@@ -125,6 +128,7 @@ private:
     std::map<std::string, Collaborator *> _collaborators;
     std::unordered_set<Intervention *> _interventions;
     float _earnings;
+    BST<HouseMasterAffiliate *> _affiliates;
 
 };
 

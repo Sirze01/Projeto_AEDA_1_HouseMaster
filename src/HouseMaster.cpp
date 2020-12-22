@@ -254,6 +254,15 @@ std::unordered_set<Intervention *> &HouseMaster::getInterventions() {
 }
 
 /**
+ * @brief getter
+ * @return the affiliates
+ */
+BST<HouseMasterAffiliate *> &HouseMaster::getAffiliates()
+{
+    return _affiliates;
+}
+
+/**
  * @brief adds a service to the housemaster's catalogue
  * @param name name of the service
  * @param pro requires professional
