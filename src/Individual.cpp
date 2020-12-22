@@ -1,5 +1,7 @@
 #include "Individual.h"
 
+#include <utility>
+
 
 unsigned int Collaborator::_idSeqCol = 0;
 unsigned int Client::_idSeqClt = 0;
@@ -36,11 +38,12 @@ std::string Individual::getName() const {
  * @param pro is professional
  * @param earnings the earnings
  * @param score the score
+ * @param affiliate the affiliate's name
  */
 Collaborator::Collaborator(std::vector<std::string> services, const std::string &name, bool pro, float earnings,
-                           Classification score) : Individual(name),
+                           Classification score, std::string affiliate) : Individual(name),
                                                    _services(std::move(services)), _score(score), _pro(pro),
-                                                   _earnings(earnings) {
+                                                   _earnings(earnings), _affiliate(std::move(affiliate)) {
     _id = _idSeqCol++;
 }
 
@@ -100,6 +103,15 @@ bool Collaborator::hasQualificationToPreform(Intervention *intervention) const {
  */
 int Collaborator::getScore() const {
     return _score;
+}
+
+/**
+ * @brief getter
+ * @return affiliate
+ */
+std::string Collaborator::getAffiliate() const
+{
+    return _affiliate;
 }
 
 /**

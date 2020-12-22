@@ -54,7 +54,7 @@ enum Classification {
 class Collaborator : public Individual {
 public:
     Collaborator(std::vector<std::string> services, const std::string &name, bool pro, float earnings = 0,
-                 Classification score = newHere);
+                 Classification score = newHere, std::string affiliate = "");
 
     ~Collaborator() override = default;
 
@@ -71,6 +71,8 @@ public:
     bool canDo(HouseMasterAffiliate &hm, const std::string &collabId, Intervention *intervention);
 
     int getScore() const;
+
+    std::string getAffiliate() const;
 
     void addClassification(Classification classification);
 
@@ -105,6 +107,7 @@ private:
     Classification _score;
     bool _pro;
     float _earnings;
+    std::string _affiliate;
 };
 
 class Collaborator::AlreadyKnows: public std::logic_error
