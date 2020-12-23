@@ -5,6 +5,7 @@
 
 unsigned int Collaborator::_idSeqCol = 0;
 unsigned int Client::_idSeqClt = 0;
+unsigned int Admin::_idSeqAdmins = 0;
 
 /**
  * @brief Individual constructor

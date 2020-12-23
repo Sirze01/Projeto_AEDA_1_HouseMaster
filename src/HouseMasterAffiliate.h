@@ -75,6 +75,10 @@ public:
 
     std::string getAffiliateName();
 
+    Admin getAdmin();
+
+    std::string getLocality();
+
     void assignCollaborator(Intervention *intervention,
                             const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs);
 
@@ -131,6 +135,8 @@ private:
     std::unordered_set<Intervention *> _interventions;
     float _earnings;
     std::string _name;
+    Admin _admin;
+    std::string _locality;
 
 };
 

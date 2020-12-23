@@ -735,6 +735,25 @@ std::string HouseMasterAffiliate::getAffiliateName()
 }
 
 /**
+ * @brief getter
+ * @return admin
+ */
+Admin HouseMasterAffiliate::getAdmin()
+{
+    return _admin;
+}
+
+/**
+ * @brief getter
+ * @return locality
+ */
+std::string HouseMasterAffiliate::getLocality()
+{
+    return _locality;
+}
+
+
+/**
  * @brief exception for an impossible appointment
  * @param error_msg to show
  */
@@ -794,3 +813,15 @@ HouseMasterAffiliate::NonexistentUsername::NonexistentUsername(const std::string
  * @param error_msg to show
  */
 HouseMasterAffiliate::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) : std::ifstream::failure(error_msg) {}
+
+
+bool HouseMasterAffiliate::operator<(HouseMasterAffiliate &hma)
+{
+    if(_admin.getName() == hma.getAdmin().getName())
+    {
+        if (getClients().size() == hma.getClients().size())
+        {
+            return (_locality < hma.getLocality());
+        } else return (_clients.size() < hma.getClients().size());
+    } else return (_admin.getName() < hma.getAdmin().getName());
+}
