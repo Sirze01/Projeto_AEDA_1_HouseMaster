@@ -147,9 +147,14 @@ public:
 
     bool operator==(const Client &ind2) const;
 
+    std::string getEmail() const;
+
+    void setEmail(const std::string &email);
+
 private:
     unsigned int _nif;
     bool _premium;
+    std::string _email;
 };
 
 
@@ -157,7 +162,7 @@ private:
 // Admin code
 class Admin : public Individual {
 public:
-    Admin(const std::string &name, const std::string &affiliate);
+    Admin(const std::string &name, std::string affiliate);
     ~Admin() override = default;
     std::string getAffiliate() const;
     static unsigned int _idSeqAdmins;

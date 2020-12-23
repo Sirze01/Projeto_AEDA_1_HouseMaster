@@ -19,16 +19,20 @@
 
 bool scoreComparer(std::pair<std::string, Collaborator *> &a, std::pair<std::string, Collaborator *> &b);
 
+
+
 /**
  * @brief This class manages the services, collaborators, clients and finances of HouseMaster
  */
 class HouseMasterAffiliate {
 public:
 
+
+
     HouseMasterAffiliate();
 
     HouseMasterAffiliate(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients, std::ifstream services,
-                std::ifstream earnings, std::ifstream history);
+                std::ifstream earnings, std::ifstream history, std::string location, std::string responsible);
 
     ~HouseMasterAffiliate() = default;
 
@@ -118,9 +122,6 @@ public:
 
     void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration);
 
-    bool operator< (HouseMasterAffiliate &hma);
-
-
 private:
     std::unordered_map<std::string, Service *> _availableServices;
     std::map<std::string, Client *> _clients;
@@ -128,7 +129,8 @@ private:
     std::map<std::string, Collaborator *> _collaborators;
     std::unordered_set<Intervention *> _interventions;
     float _earnings;
-
+    std::string _location;
+    std::string _responsible;  // TODO: make this a Admin
 };
 
 // Must add in the cpp also the definition of the Client::requestIntervention method to complete the forward declaration
@@ -183,5 +185,6 @@ class HouseMasterAffiliate::UnableToWriteFile : public std::ios_base::failure {
 public:
     explicit UnableToWriteFile(const std::string &error_msg);
 };
+
 
 #endif //PROJETO_AEDA_1_HOUSEMASTER_HOUSEMASTERAFFILIATE_H

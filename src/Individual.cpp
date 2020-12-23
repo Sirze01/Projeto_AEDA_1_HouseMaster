@@ -219,6 +219,9 @@ void Collaborator::addService(Service *service) {
 Client::Client(unsigned int nif, const std::string &name, bool premium)
         : Individual(name), _nif(nif), _premium(premium) {
     _id = _idSeqClt++;
+    std::stringstream m{};
+    m << "client" << _id << "@housemaster.pt";
+    _email = m.str();
 }
 
 /**
@@ -256,13 +259,21 @@ bool Client::operator==(const Client &ind2) const {
     return _id == ind2._id;
 }
 
+std::string Client::getEmail() const {
+    return _email;
+}
+
+void Client::setEmail(const std::string &email) {
+    _email = email;
+}
+
 
 /**
  * @brief admin's constructor
  * @param name the name
  * @param affiliate the affiliate
  */
-Admin::Admin(const std::string &name, const std::string &affiliate) : Individual(name), _affiliate(affiliate){}
+Admin::Admin(const std::string &name, std::string affiliate) : Individual(name), _affiliate(std::move(affiliate)){}
 
 std::string Admin::getAffiliate() const {
     return _affiliate;
