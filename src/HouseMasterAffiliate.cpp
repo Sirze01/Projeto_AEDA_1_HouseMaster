@@ -164,29 +164,36 @@ HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstrea
     for (std::string line; std::getline(collaborators, line);) {
         std::stringstream lss(line);
 
-        // name
-        std::string name{};
-        std::getline(lss, name, ',');
-        // pro
-        std::string proStr{};
-        std::getline(lss, proStr, ',');
-        // earnings
-        std::string earnStr{};
-        std::getline(lss, earnStr, ',');
-        float collabEarnings = std::stof(earnStr);
-        // score
-        std::string scoreStr{};
-        std::getline(lss, scoreStr, ',');
-        auto score = Classification(std::stoi(scoreStr));
-        // services
-        std::string serviceName{};
-        std::vector<std::string> collabServices;
+        //check if a collaborator works for that affiliate
+        std::string affiliate_name{};
+        std::getline(lss, affiliate_name, ',');
+        if (affiliate_name == getAffiliateName())
+        {
+            // name
+            std::string name{};
+            std::getline(lss, name, ',');
+            // pro
+            std::string proStr{};
+            std::getline(lss, proStr, ',');
+            // earnings
+            std::string earnStr{};
+            std::getline(lss, earnStr, ',');
+            float collabEarnings = std::stof(earnStr);
+            // score
+            std::string scoreStr{};
+            std::getline(lss, scoreStr, ',');
+            auto score = Classification(std::stoi(scoreStr));
+            // services
+            std::string serviceName{};
+            std::vector<std::string> collabServices;
 
-        while (std::getline(lss, serviceName, ',')) {
-            collabServices.push_back(serviceName);
-        }
+            while (std::getline(lss, serviceName, ','))
+            {
+                collabServices.push_back(serviceName);
+            }
 
-        addCollaborator(collabServices, name, proStr == "yes", collabEarnings, score);
+            addCollaborator(collabServices, name, proStr == "yes", collabEarnings, score);
+        } else continue;
     }
 
     // read clients.txt
@@ -718,6 +725,14 @@ std::unordered_set<Intervention *> HouseMasterAffiliate::getAllPastInterventions
     return result;
 }
 
+/**
+ * @brief getter
+ * @return affiliate's name
+ */
+std::string HouseMasterAffiliate::getAffiliateName()
+{
+    return _name;
+}
 
 /**
  * @brief exception for an impossible appointment

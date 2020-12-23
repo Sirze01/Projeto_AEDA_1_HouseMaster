@@ -73,6 +73,8 @@ public:
 
     std::unordered_set<Intervention *> getAllActiveInterventions();
 
+    std::string getAffiliateName();
+
     void assignCollaborator(Intervention *intervention,
                             const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs);
 
@@ -128,6 +130,7 @@ private:
     std::map<std::string, Collaborator *> _collaborators;
     std::unordered_set<Intervention *> _interventions;
     float _earnings;
+    std::string _name;
 
 };
 
