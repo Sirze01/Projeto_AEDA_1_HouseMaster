@@ -1,5 +1,5 @@
-Sarah Wildes,207317925,no
-Elizabeth Proctor,283147881,yes
-Jonathan Corwin,216692199,no
-Sir William Phips,260456730,yes
-Cotton Mather,245722750,no
+affiliate1,Sarah Wildes,207317925,no
+affiliate2,Elizabeth Proctor,283147881,yes
+affiliate3,Jonathan Corwin,216692199,no
+affiliate3,Sir William Phips,260456730,yes
+affiliate2,Cotton Mather,245722750,no

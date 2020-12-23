@@ -49,9 +49,9 @@ public:
     void removeCollaborator(const std::string &collId);
 
     void addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro, float earnings = 0,
-                         Classification score = newHere);
+                         Classification score = newHere, std::string affiliate = "");
 
-    void addClient(unsigned long nif, const std::string &name, bool premium);
+    void addClient(unsigned long nif, const std::string &name, bool premium, std::string affiliate);
 
     void removeClient(const std::string &clientId);
 

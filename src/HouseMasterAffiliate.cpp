@@ -192,21 +192,28 @@ HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstrea
                 collabServices.push_back(serviceName);
             }
 
-            addCollaborator(collabServices, name, proStr == "yes", collabEarnings, score);
+            addCollaborator(collabServices, name, proStr == "yes", collabEarnings, score, affiliate_name);
         } else continue;
     }
 
     // read clients.txt
     for (std::string line; std::getline(clients, line);) {
         std::stringstream lss(line);
-        std::string name;
-        std::string nifStr{};
-        std::string premiumStr{};
-        std::getline(lss, name, ',');
-        std::getline(lss, nifStr, ',');
-        std::getline(lss, premiumStr, ',');
 
-        addClient(std::stoul(nifStr), name, premiumStr == "yes");
+        //check if it is a affiliate's client
+        std::string affiliate_name{};
+        std::getline(lss, affiliate_name, ',');
+        if (affiliate_name == getAffiliateName())
+        {
+            std::string name;
+            std::string nifStr{};
+            std::string premiumStr{};
+            std::getline(lss, name, ',');
+            std::getline(lss, nifStr, ',');
+            std::getline(lss, premiumStr, ',');
+
+            addClient(std::stoul(nifStr), name, premiumStr == "yes", affiliate_name);
+        } else continue;
     }
 
     // read usernames.txt
@@ -353,10 +360,11 @@ void HouseMasterAffiliate::usernameMapChanger(std::string id, std::string newUse
  * @param pro is professional
  * @param earnings the earnings
  * @param score the score
+ * @param affiliate the affiliate's name
  */
 void HouseMasterAffiliate::addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
                                   float earnings,
-                                  Classification score) {
+                                  Classification score, std::string affiliate) {
     auto collab = new Collaborator(services, name, pro, earnings, score);
     _collaborators.insert({collab->getId(), collab});
     _usernameMap.insert({collab->getId(), collab->getId()});
@@ -395,12 +403,12 @@ void HouseMasterAffiliate::removeCollaborator(const std::string &id) {
  * @param name name
  * @param premium is premium
  */
-void HouseMasterAffiliate::addClient(unsigned long nif, const std::string &name, bool premium) {
+void HouseMasterAffiliate::addClient(unsigned long nif, const std::string &name, bool premium, std::string affiliate) {
     auto it = std::find_if(_clients.begin(), _clients.end(), [&nif](const std::pair<std::string, Client *> &pair) {
         return pair.second->getNif() == nif;
     });
     if (it == _clients.end()) {
-        auto client = new Client(nif, name, premium);
+        auto client = new Client(nif, name, premium, affiliate);
         _clients.insert({client->getId(), client});
         _usernameMap.insert({client->getId(), client->getId()});
     } else {

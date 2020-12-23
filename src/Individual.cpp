@@ -215,10 +215,11 @@ void Collaborator::addService(Service *service) {
  * @brief client's constructor
  * @param nif tax id
  * @param name the name
+ * @param affiliate the affiliate's name
  * @param premium is premium
  */
-Client::Client(unsigned int nif, const std::string &name, bool premium)
-        : Individual(name), _nif(nif), _premium(premium) {
+Client::Client(unsigned int nif, const std::string &name, bool premium, std::string affiliate)
+        : Individual(name), _nif(nif), _premium(premium), _affiliate(affiliate) {
     _id = _idSeqClt++;
 }
 
@@ -228,6 +229,15 @@ Client::Client(unsigned int nif, const std::string &name, bool premium)
  */
 unsigned int Client::getNif() {
     return (_nif);
+}
+
+/**
+ * @brief getter
+ * @return affiliate
+ */
+std::string Client::getAffiliate()
+{
+    return _affiliate;
 }
 
 /**
