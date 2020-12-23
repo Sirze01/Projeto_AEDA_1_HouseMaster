@@ -429,7 +429,7 @@ bool Interface::isValidNif(unsigned nif) {
  * @brief reads a new client's data
  */
 void Interface::readNewClientData() {
-    std::string name{}, premiumStr{};
+    std::string name{}, premiumStr{}, affiliate{};
     unsigned nif{};
 
     std::cout << "Name ? ";
@@ -477,8 +477,9 @@ void Interface::readNewClientData() {
  */
 void Interface::readNewCollaboratorData(bool &running) {
 
-    std::string name{}, pro{};
+    std::string name{}, pro{}, affiliate{};
     std::vector<std::string> services{};
+    Classification classification{};
 
     std::cout << "Name ? ";
     std::cin.ignore(9999, '\n');
@@ -492,7 +493,7 @@ void Interface::readNewCollaboratorData(bool &running) {
     }
 
     bool innerRunning = true;
-    _houseMaster.addCollaborator(services, name, pro == "yes", 0, affiliate);
+    _houseMaster.addCollaborator(services, name, pro == "yes", 0, classification, affiliate);
     Collaborator* newCollab = (*_houseMaster.getCollaborators().rbegin()).second;
 
     Menu pickServices("Pick your services", {{"Choose from the HouseMaster services", [&]() {
