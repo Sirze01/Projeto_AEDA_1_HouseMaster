@@ -118,7 +118,7 @@ void Collaborator::markInterventionAsComplete(Intervention *intervention) {
 /**
  * @brief housemaster constructor
  */
-HouseMasterAffiliate::HouseMasterAffiliate() : _availableServices(), _clients(), _usernameMap(), _collaborators(), _interventions(), _earnings(){
+HouseMasterAffiliate::HouseMasterAffiliate() : _availableServices(), _clients(), _usernameMap(), _collaborators(), _interventions(), _earnings(), _admin(){
 
 }
 
@@ -365,7 +365,7 @@ void HouseMasterAffiliate::usernameMapChanger(std::string id, std::string newUse
 void HouseMasterAffiliate::addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
                                   float earnings,
                                   Classification score, std::string affiliate) {
-    auto collab = new Collaborator(services, name, pro, earnings, score);
+    auto collab = new Collaborator(services, name, pro, earnings, score, std::move(affiliate));
     _collaborators.insert({collab->getId(), collab});
     _usernameMap.insert({collab->getId(), collab->getId()});
 }

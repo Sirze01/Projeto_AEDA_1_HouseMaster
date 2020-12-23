@@ -466,7 +466,7 @@ void Interface::readNewClientData() {
         }
     } while (!done);
 
-    _houseMaster.addClient(nif, name, premium);
+    _houseMaster.addClient(nif, name, premium, affiliate);
 
 
 }
@@ -492,7 +492,7 @@ void Interface::readNewCollaboratorData(bool &running) {
     }
 
     bool innerRunning = true;
-    _houseMaster.addCollaborator(services, name, pro == "yes", 0);
+    _houseMaster.addCollaborator(services, name, pro == "yes", 0, affiliate);
     Collaborator* newCollab = (*_houseMaster.getCollaborators().rbegin()).second;
 
     Menu pickServices("Pick your services", {{"Choose from the HouseMaster services", [&]() {

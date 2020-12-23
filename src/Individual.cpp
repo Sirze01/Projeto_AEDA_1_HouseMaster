@@ -270,10 +270,16 @@ bool Client::operator==(const Client &ind2) const {
 
 /**
  * @brief admin's constructor
+ * */
+Admin::Admin() : Individual(), _affiliate() {};
+
+
+/**
+ * @brief admin's constructor
  * @param name the name
  * @param affiliate the affiliate
  */
-Admin::Admin(const std::string &name, const std::string &affiliate) : Individual(name), _affiliate(affiliate){}
+Admin::Admin(const std::string &name, std::string affiliate) : Individual(name), _affiliate(std::move(affiliate)){}
 
 std::string Admin::getAffiliate() const {
     return _affiliate;

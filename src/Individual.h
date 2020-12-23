@@ -160,7 +160,8 @@ private:
 // Admin code
 class Admin : public Individual {
 public:
-    Admin(const std::string &name, const std::string &affiliate);
+    Admin();
+    Admin(const std::string &name, std::string affiliate);
     ~Admin() override = default;
     std::string getAffiliate() const;
     static unsigned int _idSeqAdmins;
