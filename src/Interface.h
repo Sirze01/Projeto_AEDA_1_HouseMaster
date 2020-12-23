@@ -2,7 +2,7 @@
 #ifndef PROJETO_AEDA_1_HOUSEMASTER_INTERFACE_H
 #define PROJETO_AEDA_1_HOUSEMASTER_INTERFACE_H
 
-#include "HouseMaster.h"
+#include "HouseMasterAffiliate.h"
 #include "Menu.h"
 
 enum Role {

@@ -1,5 +1,7 @@
 #include "HouseMasterAffiliate.h"
 
+#include <utility>
+
 
 /**
  * @brief compares two collaborators' score
@@ -33,8 +35,8 @@ std::unordered_set<Intervention*> Individual::getAssociatedActiveInterventions(H
  * @brief Changes username in username map
  * @param hm, the instance of housemaster
  */
-void Individual::changeUsername(HouseMasterAffiliate &hm, std::string newUsername) {
-    hm.usernameMapChanger(this->getId(), newUsername);
+void Individual::changeUsername(HouseMasterAffiliate &hm, std::string newUsername) const {
+    hm.usernameMapChanger(this->getId(), std::move(newUsername));
 }
 
 /**
@@ -395,7 +397,7 @@ void HouseMasterAffiliate::addClient(unsigned long nif, const std::string &name,
         _clients.insert({client->getId(), client});
         _usernameMap.insert({client->getId(), client->getId()});
     } else {
-        throw HouseMaster::ExistentClient("Client already registred!");
+        throw HouseMasterAffiliate::ExistentClient("Client already registred!");
     }
 }
 

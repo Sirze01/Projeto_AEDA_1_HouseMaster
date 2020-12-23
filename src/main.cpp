@@ -3,7 +3,6 @@
 #include "Interface.h"
 
 
-
 int main() {
 
     HouseMasterAffiliate h1(std::ifstream("../data/usernames.txt"),

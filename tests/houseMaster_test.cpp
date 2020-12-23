@@ -79,10 +79,7 @@ TEST(HouseMasterTest, fileConstructor){
 TEST(HouseMasterTest, servicesManip){
     Collaborator::_idSeqCol = 0;
     Client::_idSeqClt = 0;
-    HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
-                             std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"),
-                             std::ifstream("../../data/finances.txt"), std::ifstream());
+    HouseMaster houseMaster1(BST<HouseMasterAffiliate *>(<#initializer#>));
 
 
     // remove service
@@ -104,10 +101,7 @@ TEST(HouseMasterTest, servicesManip){
 TEST(HouseMasterTest, collaboratorsManip){
     Collaborator::_idSeqCol = 0;
     Client::_idSeqClt = 0;
-    HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
-                             std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"),
-                             std::ifstream("../../data/finances.txt"), std::ifstream());
+    HouseMaster houseMaster1(BST<HouseMasterAffiliate *>(<#initializer#>));
 
 
     // remove collaborator
@@ -129,10 +123,7 @@ TEST(HouseMasterTest, collaboratorsManip){
 TEST(HouseMasterTest, clientsManip){
     Collaborator::_idSeqCol = 0;
     Client::_idSeqClt = 0;
-    HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
-                             std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"),
-                             std::ifstream("../../data/finances.txt"), std::ifstream());
+    HouseMaster houseMaster1(BST<HouseMasterAffiliate *>(<#initializer#>));
 
     // remove client
     houseMaster1.removeClient("client0");
@@ -150,10 +141,7 @@ TEST(HouseMasterTest, clientsManip){
 TEST(HouseMasterTest, interventionManip){
     Collaborator::_idSeqCol = 0;
     Client::_idSeqClt = 0;
-    HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
-                             std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"),
-                             std::ifstream("../../data/finances.txt"), std::ifstream());
+    HouseMaster houseMaster1(BST<HouseMasterAffiliate *>(<#initializer#>));
 
     // add Intervention
     houseMaster1.addIntervention(Date(12, 05, 2001, 01, 00), "desmontar um computador", true, "");
@@ -173,10 +161,7 @@ TEST(HouseMasterTest, interventionManip){
 TEST(HouseMasterTest, usageTest){
     Collaborator::_idSeqCol = 0;
     Client::_idSeqClt = 0;
-    HouseMaster houseMaster1(std::ifstream("../../data/collabs.txt"),
-                             std::ifstream("../../data/clients.txt"),
-                             std::ifstream("../../data/services.txt"),
-                             std::ifstream("../../data/finances.txt"), std::ifstream());
+    HouseMaster houseMaster1(BST<HouseMasterAffiliate *>(<#initializer#>));
 
     // Client requests intervention
 

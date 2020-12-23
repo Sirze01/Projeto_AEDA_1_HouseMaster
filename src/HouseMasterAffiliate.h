@@ -15,14 +15,14 @@
 #include <iostream>
 #include "Individual.h"
 #include "Services.h"
-#include "HouseMaster.h"
+
 
 bool scoreComparer(std::pair<std::string, Collaborator *> &a, std::pair<std::string, Collaborator *> &b);
 
 /**
  * @brief This class manages the services, collaborators, clients and finances of HouseMaster
  */
-class HouseMasterAffiliate : public HouseMaster {
+class HouseMasterAffiliate {
 public:
 
     HouseMasterAffiliate();

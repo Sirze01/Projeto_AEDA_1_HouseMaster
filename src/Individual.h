@@ -24,7 +24,7 @@ public:
 
     virtual std::string getId() const = 0;
 
-    void changeUsername(HouseMasterAffiliate &hm, std::string newUsername);
+    void changeUsername(HouseMasterAffiliate &hm, std::string newUsername) const;
 
     std::unordered_set<Intervention *> getAssociatedInterventions(HouseMasterAffiliate &hm) const;
 
@@ -157,7 +157,7 @@ private:
 // Admin code
 class Admin : public Individual {
 public:
-    Admin(const std::string &name, std::string affiliate = "");
+    Admin(const std::string &name, const std::string &affiliate);
     ~Admin() override = default;
     std::string getAffiliate() const;
     static unsigned int _idSeqAdmins;
