@@ -221,6 +221,9 @@ void Collaborator::addService(Service *service) {
 Client::Client(unsigned int nif, const std::string &name, bool premium, std::string affiliate)
         : Individual(name), _nif(nif), _premium(premium), _affiliate(affiliate) {
     _id = _idSeqClt++;
+    std::stringstream m{};
+    m << "client" << _id << "@housemaster.pt";
+    _email = m.str();
 }
 
 /**
@@ -265,6 +268,14 @@ std::string Client::getId() const {
  */
 bool Client::operator==(const Client &ind2) const {
     return _id == ind2._id;
+}
+
+std::string Client::getEmail() const {
+    return _email;
+}
+
+void Client::setEmail(const std::string &email) {
+    _email = email;
 }
 
 

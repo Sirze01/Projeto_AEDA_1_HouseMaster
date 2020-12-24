@@ -1,16 +1,24 @@
 #include <iostream>
 
 #include "Interface.h"
+#include "HouseMaster.h"
 
 
 int main() {
 
-    HouseMasterAffiliate h1(std::ifstream("../data/usernames.txt"),
+    auto h1 = new HouseMasterAffiliate(std::ifstream("../data/usernames.txt"),
                    std::ifstream("../data/collabs.txt"),
                    std::ifstream("../data/clients.txt"),
                    std::ifstream("../data/services.txt"),
                    std::ifstream("../data/finances.txt"),
-                   std::ifstream("../data/history.txt"));
+                   std::ifstream("../data/history.txt"),
+                   "Lamego", "Gajo");
+    HouseMaster hm{};
+    hm.registerAffiliate(h1);
+    for (const auto & i : hm.getContacts()) {
+        std::cout << i->getName() << " " << i->getEmail() << "\n";
+    }
+    /*
     Interface i1(h1);
     bool running = true;
     while (running) {
@@ -31,4 +39,5 @@ int main() {
         std::cout << e.what();
     }
     return 0;
+     */
 }

@@ -130,7 +130,8 @@ HouseMasterAffiliate::HouseMasterAffiliate() : _availableServices(), _clients(),
  * @param earnings earnings info
  */
 HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients, std::ifstream services,
-                         std::ifstream earnings, std::ifstream history) {
+                         std::ifstream earnings, std::ifstream history, std::string location, std::string responsible)
+                         : _location(std::move(location)), _responsible(std::move(responsible)){
 
     // read services.txt
     for (std::string line; std::getline(services, line);) {
