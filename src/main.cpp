@@ -6,17 +6,10 @@
 
 int main() {
 
-    auto h1 = new HouseMasterAffiliate(std::ifstream("../data/usernames.txt"),
-                   std::ifstream("../data/collabs.txt"),
-                   std::ifstream("../data/clients.txt"),
-                   std::ifstream("../data/services.txt"),
-                   std::ifstream("../data/finances.txt"),
-                   std::ifstream("../data/history.txt"),
-                   "Lamego", "Gajo");
-    HouseMaster hm{};
-    hm.registerAffiliate(h1);
+    HouseMaster hm(std::ifstream("../data/affiliates.txt"));
+
     for (const auto & i : hm.getContacts()) {
-        std::cout << i->getName() << " " << i->getEmail() << "\n";
+        std::cout << i->getAffiliate() <<  " " << i->getName() << " " << i->getEmail() << "\n";
     }
     /*
     Interface i1(h1);

@@ -28,13 +28,14 @@ public:
     HouseMasterAffiliate();
 
     HouseMasterAffiliate(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients, std::ifstream services,
-                std::ifstream earnings, std::ifstream history);
+                                               std::ifstream earnings, std::ifstream history, std::string location, const std::string& responsible,
+                         const std::string& hmName);
 
     ~HouseMasterAffiliate() = default;
 
     std::map<std::string, Collaborator *> &getCollaborators();
 
-    std::map<std::string, Client *> &getClients();
+    std::map<std::string, Client *> getClients() const;
 
     std::unordered_set<Intervention *> & getInterventions();
 
@@ -73,11 +74,11 @@ public:
 
     std::unordered_set<Intervention *> getAllActiveInterventions();
 
-    std::string getAffiliateName();
+    std::string getAffiliateName() const;
 
-    Admin getAdmin();
+    Admin getAdmin() const;
 
-    std::string getLocality();
+    std::string getLocation() const;
 
     void assignCollaborator(Intervention *intervention,
                             const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs);
@@ -124,8 +125,9 @@ public:
 
     void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration);
 
-    bool operator< (HouseMasterAffiliate &hma);
+    bool operator<(const HouseMasterAffiliate &hma) const;
 
+    static unsigned int _idSeqAffiliate;
 
 private:
     std::unordered_map<std::string, Service *> _availableServices;
@@ -135,9 +137,10 @@ private:
     std::unordered_set<Intervention *> _interventions;
     float _earnings;
     std::string _name;
-    Admin _admin;
-    std::string _locality;
-
+    std::string _location;
+    unsigned int _id{};
+    Admin _responsible;  // TODO discuss if need admin class
+    // std::string _responsible;  // TODO: make this a Admin
 };
 
 // Must add in the cpp also the definition of the Client::requestIntervention method to complete the forward declaration

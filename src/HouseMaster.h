@@ -26,6 +26,8 @@ public:
 
     HouseMaster();
 
+    explicit HouseMaster(std::ifstream affiliates);
+
     ~HouseMaster() = default;
 
     BST<HouseMasterAffiliate *> &getAffiliates();
@@ -35,6 +37,8 @@ public:
     void registerClient(Client * client);
 
     clientHT getContacts() const;
+
+    void writeAffiliatesInfo();
 
 private:
     BST<HouseMasterAffiliate *> _affiliates;

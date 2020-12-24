@@ -282,7 +282,7 @@ void Client::setEmail(const std::string &email) {
 /**
  * @brief admin's constructor
  * */
-Admin::Admin() : Individual(), _affiliate() {};
+Admin::Admin() : Individual() {};
 
 
 /**
@@ -290,10 +290,8 @@ Admin::Admin() : Individual(), _affiliate() {};
  * @param name the name
  * @param affiliate the affiliate
  */
-Admin::Admin(const std::string &name, std::string affiliate) : Individual(name), _affiliate(std::move(affiliate)){}
-
-std::string Admin::getAffiliate() const {
-    return _affiliate;
+Admin::Admin(const std::string &name) : Individual(name) {
+    _id = _idSeqAdmins++;
 }
 
 /**

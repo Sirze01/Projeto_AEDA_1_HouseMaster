@@ -2,6 +2,7 @@
 
 #include <utility>
 
+// unsigned int HouseMasterAffiliate::_idSeqAffiliate = 0; ??
 
 /**
  * @brief compares two collaborators' score
@@ -118,7 +119,7 @@ void Collaborator::markInterventionAsComplete(Intervention *intervention) {
 /**
  * @brief housemaster constructor
  */
-HouseMasterAffiliate::HouseMasterAffiliate() : _availableServices(), _clients(), _usernameMap(), _collaborators(), _interventions(), _earnings(), _admin(){
+HouseMasterAffiliate::HouseMasterAffiliate() : _availableServices(), _clients(), _usernameMap(), _collaborators(), _interventions(), _earnings(), _responsible(){
 
 }
 
@@ -130,13 +131,13 @@ HouseMasterAffiliate::HouseMasterAffiliate() : _availableServices(), _clients(),
  * @param earnings earnings info
  */
 HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients, std::ifstream services,
-                         std::ifstream earnings, std::ifstream history, std::string location, std::string responsible)
-                         : _location(std::move(location)), _responsible(std::move(responsible)){
+                         std::ifstream earnings, std::ifstream history, std::string location, const std::string& responsible, const std::string& hmName)
+                         :  _name(hmName),_location(std::move(location)),  _responsible(Admin(responsible)) {
 
     // read services.txt
     for (std::string line; std::getline(services, line);) {
         std::stringstream lineStream(line);
-        // name
+        // hmName
         std::string name;
         std::getline(lineStream, name, ',');
         // pro
@@ -166,11 +167,11 @@ HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstrea
         std::stringstream lss(line);
 
         //check if a collaborator works for that affiliate
-        std::string affiliate_name{};
-        std::getline(lss, affiliate_name, ',');
-        if (affiliate_name == getAffiliateName())
+        std::string affiliateName{};
+        std::getline(lss, affiliateName, ',');
+        if (affiliateName == hmName)
         {
-            // name
+            // hmName
             std::string name{};
             std::getline(lss, name, ',');
             // pro
@@ -193,18 +194,18 @@ HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstrea
                 collabServices.push_back(serviceName);
             }
 
-            addCollaborator(collabServices, name, proStr == "yes", collabEarnings, score, affiliate_name);
+            addCollaborator(collabServices, name, proStr == "yes", collabEarnings, score, affiliateName);
         } else continue;
     }
+
 
     // read clients.txt
     for (std::string line; std::getline(clients, line);) {
         std::stringstream lss(line);
-
         //check if it is a affiliate's client
         std::string affiliate_name{};
         std::getline(lss, affiliate_name, ',');
-        if (affiliate_name == getAffiliateName())
+        if (affiliate_name == hmName)
         {
             std::string name;
             std::string nifStr{};
@@ -405,11 +406,12 @@ void HouseMasterAffiliate::removeCollaborator(const std::string &id) {
  * @param premium is premium
  */
 void HouseMasterAffiliate::addClient(unsigned long nif, const std::string &name, bool premium, std::string affiliate) {
+
     auto it = std::find_if(_clients.begin(), _clients.end(), [&nif](const std::pair<std::string, Client *> &pair) {
         return pair.second->getNif() == nif;
     });
     if (it == _clients.end()) {
-        auto client = new Client(nif, name, premium, affiliate);
+        auto client = new Client(nif, name, premium, std::move(affiliate));
         _clients.insert({client->getId(), client});
         _usernameMap.insert({client->getId(), client->getId()});
     } else {
@@ -447,7 +449,7 @@ void HouseMasterAffiliate::removeClient(const std::string &clientId) {
  * @brief getter
  * @return the clients
  */
-std::map<std::string, Client *> &HouseMasterAffiliate::getClients() {
+std::map<std::string, Client *> HouseMasterAffiliate::getClients() const {
     return _clients;
 }
 
@@ -738,27 +740,29 @@ std::unordered_set<Intervention *> HouseMasterAffiliate::getAllPastInterventions
  * @brief getter
  * @return affiliate's name
  */
-std::string HouseMasterAffiliate::getAffiliateName()
+std::string HouseMasterAffiliate::getAffiliateName() const
 {
-    return _name;
+    std::stringstream ss{};
+    ss << "affiliate" << _id;
+    return ss.str();
 }
 
 /**
  * @brief getter
  * @return admin
  */
-Admin HouseMasterAffiliate::getAdmin()
+Admin HouseMasterAffiliate::getAdmin() const
 {
-    return _admin;
+    return _responsible;
 }
 
 /**
  * @brief getter
  * @return locality
  */
-std::string HouseMasterAffiliate::getLocality()
+std::string HouseMasterAffiliate::getLocation() const
 {
-    return _locality;
+    return _location;
 }
 
 
@@ -824,13 +828,13 @@ HouseMasterAffiliate::NonexistentUsername::NonexistentUsername(const std::string
 HouseMasterAffiliate::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) : std::ifstream::failure(error_msg) {}
 
 
-bool HouseMasterAffiliate::operator<(HouseMasterAffiliate &hma)
+bool HouseMasterAffiliate::operator<(const HouseMasterAffiliate &hma) const
 {
-    if(_admin.getName() == hma.getAdmin().getName())
+    if(_responsible.getName() == hma.getAdmin().getName())
     {
         if (getClients().size() == hma.getClients().size())
         {
-            return (_locality < hma.getLocality());
+            return (_location < hma.getLocation());
         } else return (_clients.size() < hma.getClients().size());
-    } else return (_admin.getName() < hma.getAdmin().getName());
+    } else return (_responsible.getName() < hma.getAdmin().getName());
 }
