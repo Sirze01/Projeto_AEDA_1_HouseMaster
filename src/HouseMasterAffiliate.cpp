@@ -742,9 +742,7 @@ std::unordered_set<Intervention *> HouseMasterAffiliate::getAllPastInterventions
  */
 std::string HouseMasterAffiliate::getAffiliateName() const
 {
-    std::stringstream ss{};
-    ss << "affiliate" << _id;
-    return ss.str();
+    return _name;
 }
 
 /**
