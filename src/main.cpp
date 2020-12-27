@@ -2,6 +2,7 @@
 
 #include "Interface.h"
 #include "HouseMaster.h"
+#include "HousemasterInterface.h"
 
 
 int main() {
@@ -12,7 +13,11 @@ int main() {
         std::cout << current.retrieve().getAffiliateName() << ".." << current.retrieve().getAdmin().getName()
         << " " << current.retrieve().getLocation() << " " << current.retrieve().getClients().size()<< "\n";
     }
-
+    HousemasterInterface i = HousemasterInterface(hm);
+    bool running = true;
+    while (running) {
+        i.runAffiliateInterface(running);
+    }
     /*
     HouseMasterAffiliate h1 = hm.getAffiliates().findMin();
     Interface i1(h1);
