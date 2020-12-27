@@ -8,10 +8,17 @@ BST<HouseMasterAffiliate > &HouseMaster::getAffiliates() {
     return _affiliates;
 }
 
+/**
+ * @brief housemaster constructor
+ */
 HouseMaster::HouseMaster() : _affiliates(HouseMasterAffiliate()) {
 
 }
 
+/**
+ * @brief adds a new affiliate to the housemaster
+ * @param affiliate the affiliate
+ */
 void HouseMaster::registerAffiliate(const HouseMasterAffiliate& affiliate) {
     _affiliates.insert(affiliate);
     for (const auto &client : affiliate.getClients()) {
@@ -19,14 +26,26 @@ void HouseMaster::registerAffiliate(const HouseMasterAffiliate& affiliate) {
     }
 }
 
+/**
+ * @brief getter
+ * @return the clients' contacts
+ */
 clientHT HouseMaster::getContacts() const {
     return _clientContacts;
 }
 
+/**
+ * @brief adds a new client to the housemaster
+ * @param client the client
+ */
 void HouseMaster::registerClient(Client *client) {
     _clientContacts.insert(client);
 }
 
+/**
+ * @brief housemaster constructor from files
+ * @param affiliates affiliates' info
+ */
 HouseMaster::HouseMaster(std::ifstream affiliates) : _affiliates(HouseMasterAffiliate()) {
     for (std::string line; std::getline(affiliates, line);) {
         std::stringstream lss(line);
@@ -50,6 +69,9 @@ HouseMaster::HouseMaster(std::ifstream affiliates) : _affiliates(HouseMasterAffi
     }
 }
 
+/**
+ * @brief saves the affiliates' info
+ */
 void HouseMaster::writeAffiliatesInfo() {
     std::ofstream affiliatesFile("../data/affiliate.txt");
     if (affiliatesFile.is_open()) {
@@ -62,8 +84,10 @@ void HouseMaster::writeAffiliatesInfo() {
     } else throw HouseMasterAffiliate::UnableToWriteFile("Unable to write in affiliates file");  // TODO change?
 }
 
-
-
+/**
+ * @brief getter
+ * @return a vector with the affiliates from the given location
+ */
 vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(string location)
 {
     vector<HouseMasterAffiliate> affiliates_from_location;
@@ -77,8 +101,10 @@ vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(string locatio
     return affiliates_from_location;
 }
 
-
-
+/**
+ * @brief getter
+ * @return a vector with the affiliates from the given responsible name
+ */
 vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(string responsible)
 {
     vector<HouseMasterAffiliate> affiliates_from_responsible;
@@ -92,7 +118,10 @@ vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(string resp
     return affiliates_from_responsible;
 }
 
-
+/**
+ * @brief getter
+ * @return the total earnings
+ */
 float HouseMaster::getTotalFinances()
 {
     float total_finances;
