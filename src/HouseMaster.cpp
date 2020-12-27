@@ -26,6 +26,7 @@ void HouseMaster::registerAffiliate(const HouseMasterAffiliate& affiliate) {
     }
 }
 
+
 /**
  * @brief getter
  * @return the clients' contacts
@@ -34,13 +35,6 @@ clientHT HouseMaster::getContacts() const {
     return _clientContacts;
 }
 
-/**
- * @brief adds a new client to the housemaster
- * @param client the client
- */
-void HouseMaster::registerClient(Client *client) {
-    _clientContacts.insert(client);
-}
 
 /**
  * @brief housemaster constructor from files
@@ -88,7 +82,7 @@ void HouseMaster::writeAffiliatesInfo() {
  * @brief getter
  * @return a vector with the affiliates from the given location
  */
-vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(string location)
+vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(const string& location)
 {
     vector<HouseMasterAffiliate> affiliates_from_location;
     for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)
@@ -105,7 +99,7 @@ vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(string locatio
  * @brief getter
  * @return a vector with the affiliates from the given responsible name
  */
-vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(string responsible)
+vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(const string& responsible)
 {
     vector<HouseMasterAffiliate> affiliates_from_responsible;
     for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)
@@ -124,10 +118,19 @@ vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(string resp
  */
 float HouseMaster::getTotalFinances()
 {
-    float total_finances;
+    float totalFinances{};
     for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)
     {
-        total_finances += (*it).getEarnings();
+        totalFinances += (*it).getEarnings();
     }
-    return total_finances;
+    return totalFinances;
+}
+
+void HouseMaster::removeAffiliate(const HouseMasterAffiliate &affiliate) {
+    for (auto it = _clientContacts.begin(); it != _clientContacts.end(); ) {
+        if ((*it)->getAffiliate() == affiliate.getAffiliateName()) {
+            it = _clientContacts.erase(it);
+        } else it++;
+    }
+    _affiliates.remove(affiliate);
 }

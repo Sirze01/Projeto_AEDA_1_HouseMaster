@@ -34,15 +34,16 @@ public:
 
     void registerAffiliate(const HouseMasterAffiliate& affiliate);
 
-    void registerClient(Client * client);
+    void removeAffiliate(const HouseMasterAffiliate& affiliate);
+
 
     clientHT getContacts() const;
 
     void writeAffiliatesInfo();
 
-    vector<HouseMasterAffiliate> getAffiliatesByLocation(string location);
+    vector<HouseMasterAffiliate> getAffiliatesByLocation(const string& location);
 
-    vector<HouseMasterAffiliate> getAffiliatesByResponsible(string /*(ou outra coisa nsei)*/ responsible);
+    vector<HouseMasterAffiliate> getAffiliatesByResponsible(const string& /*(ou outra coisa nsei)*/ responsible);
 
     float getTotalFinances();
 
