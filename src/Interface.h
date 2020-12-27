@@ -3,6 +3,7 @@
 #define PROJETO_AEDA_1_HOUSEMASTER_INTERFACE_H
 
 #include "HouseMasterAffiliate.h"
+#include "HouseMaster.h"
 #include "Menu.h"
 
 enum Role {
@@ -73,7 +74,8 @@ private:
 
     void showSortedCollabs();
 
-    HouseMasterAffiliate _houseMaster;
+    HouseMaster _houseMaster;
+    HouseMasterAffiliate _houseMasterAffiliate;
     Individual *_user{};
     Role _role{};
 

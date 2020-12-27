@@ -7,9 +7,10 @@
 int main() {
 
     HouseMaster hm(std::ifstream("../data/affiliates.txt"));
-
-    for (const auto & i : hm.getContacts()) {
-        std::cout << i->getAffiliate() <<  " " << i->getName() << " " << i->getEmail() << "\n";
+    BSTItrIn<HouseMasterAffiliate> current(hm.getAffiliates());
+    for (; !current.isAtEnd(); current.advance()) {
+        std::cout << current.retrieve().getAffiliateName() << ".." << current.retrieve().getAdmin().getName()
+        << " " << current.retrieve().getLocation() << " " << current.retrieve().getClients().size()<< "\n";
     }
     /*
     Interface i1(h1);

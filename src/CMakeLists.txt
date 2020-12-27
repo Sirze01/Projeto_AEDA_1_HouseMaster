@@ -20,7 +20,7 @@ add_library(Projeto_AEDA_1_HouseMaster main.cpp HouseMaster.cpp HouseMaster.h In
             Services.cpp Services.h Date.h Date.cpp Menu.cpp Menu.h Interface.cpp Interface.h)
 
 add_executable(application main.cpp HouseMaster.cpp HouseMaster.h Individual.cpp Individual.h Services.cpp Services.h
-        Date.h Date.cpp Menu.cpp Menu.h Interface.cpp Interface.h bst.h HouseMasterAffiliate.h HouseMasterAffiliate.cpp)
+        Date.h Date.cpp Menu.cpp Menu.h Interface.cpp Interface.h bst.h HouseMasterAffiliate.h HouseMasterAffiliate.cpp HousemasterInterface.cpp HousemasterInterface.h)
 
 target_include_directories(Projeto_AEDA_1_HouseMaster PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

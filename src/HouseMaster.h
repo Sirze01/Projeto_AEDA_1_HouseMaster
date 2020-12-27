@@ -30,9 +30,9 @@ public:
 
     ~HouseMaster() = default;
 
-    BST<HouseMasterAffiliate *> &getAffiliates();
+    BST<HouseMasterAffiliate >& getAffiliates();
 
-    void registerAffiliate(HouseMasterAffiliate *affiliate);
+    void registerAffiliate(const HouseMasterAffiliate& affiliate);
 
     void registerClient(Client * client);
 
@@ -41,7 +41,7 @@ public:
     void writeAffiliatesInfo();
 
 private:
-    BST<HouseMasterAffiliate *> _affiliates;
+    BST<HouseMasterAffiliate> _affiliates;
     clientHT _clientContacts;
 };
 
