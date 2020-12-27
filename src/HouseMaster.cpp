@@ -62,3 +62,43 @@ void HouseMaster::writeAffiliatesInfo() {
     } else throw HouseMasterAffiliate::UnableToWriteFile("Unable to write in affiliates file");  // TODO change?
 }
 
+
+
+vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(string location)
+{
+    vector<HouseMasterAffiliate> affiliates_from_location;
+    for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)
+    {
+        if((*it).getLocation() == location)
+        {
+            affiliates_from_location.push_back(*it);
+        }
+    }
+    return affiliates_from_location;
+}
+
+
+
+vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(string responsible)
+{
+    vector<HouseMasterAffiliate> affiliates_from_responsible;
+    for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)
+    {
+        if((*it).getAdmin().getName() == responsible)
+        {
+            affiliates_from_responsible.push_back(*it);
+        }
+    }
+    return affiliates_from_responsible;
+}
+
+
+float HouseMaster::getTotalFinances()
+{
+    float total_finances;
+    for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)
+    {
+        total_finances += (*it).getEarnings();
+    }
+    return total_finances;
+}

@@ -40,6 +40,12 @@ public:
 
     void writeAffiliatesInfo();
 
+    vector<HouseMasterAffiliate> getAffiliatesByLocation(string location);
+
+    vector<HouseMasterAffiliate> getAffiliatesByResponsible(string /*(ou outra coisa nsei)*/ responsible);
+
+    float getTotalFinances();
+
 private:
     BST<HouseMasterAffiliate> _affiliates;
     clientHT _clientContacts;
