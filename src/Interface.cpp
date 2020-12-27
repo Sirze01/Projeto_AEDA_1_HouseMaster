@@ -383,8 +383,15 @@ void Interface::adminOperations(bool &running) {
         std::cin.ignore();
     }},{"Fire Collaborator", [&]() {
         std::string collabName = selectCollab(innerRunning);
-        if (!collabName.empty()) {
-            _houseMasterAffiliate.removeCollaborator(collabName);
+        try
+        {
+            if (!collabName.empty())
+            {
+                _houseMasterAffiliate.removeCollaborator(collabName);
+            }
+        } catch (HouseMasterAffiliate::AssignedCollab &e)
+        {
+            std::cout << e.what() << std::endl;
         }
     }},{"Show collaborators' performance", [&]() {
         showSortedCollabs();

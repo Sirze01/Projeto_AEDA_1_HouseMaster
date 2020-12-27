@@ -12,7 +12,9 @@ int main() {
         std::cout << current.retrieve().getAffiliateName() << ".." << current.retrieve().getAdmin().getName()
         << " " << current.retrieve().getLocation() << " " << current.retrieve().getClients().size()<< "\n";
     }
+
     /*
+    HouseMasterAffiliate h1 = hm.getAffiliates().findMin();
     Interface i1(h1);
     bool running = true;
     while (running) {
@@ -31,7 +33,6 @@ int main() {
     catch (const HouseMasterAffiliate::UnableToWriteFile &e)
     {
         std::cout << e.what();
-    }
+    }*/
     return 0;
-     */
 }
