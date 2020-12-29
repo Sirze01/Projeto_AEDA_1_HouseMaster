@@ -36,6 +36,9 @@ public:
 
     void removeAffiliate(const HouseMasterAffiliate& affiliate);
 
+    std::set<std::string> getLocations() {return _locations;}
+
+
 
     clientHT getContacts() const;
 
@@ -48,6 +51,7 @@ public:
     float getTotalFinances();
 
 private:
+    std::set<std::string> _locations;
     BST<HouseMasterAffiliate> _affiliates;
     clientHT _clientContacts;
 };

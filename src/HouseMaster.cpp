@@ -59,6 +59,7 @@ HouseMaster::HouseMaster(std::ifstream affiliates) : _affiliates(HouseMasterAffi
                                            std::ifstream("../data/finances.txt"),
                                            std::ifstream("../data/history.txt"),
                                             location, responsible, name);
+        _locations.insert(location);
         registerAffiliate(h1);
     }
 }
