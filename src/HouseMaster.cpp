@@ -52,13 +52,16 @@ HouseMaster::HouseMaster(std::ifstream affiliates) : _affiliates(HouseMasterAffi
         // location
         std::string location{};
         std::getline(lss, location, ',');
+        // finances
+        std::string finances{};
+        std::getline(lss, finances, ',');
+        float earnings = stof(finances);
         auto h1 = HouseMasterAffiliate(std::ifstream("../data/usernames.txt"),
                                            std::ifstream("../data/collabs.txt"),
                                            std::ifstream("../data/clients.txt"),
                                            std::ifstream("../data/services.txt"),
-                                           std::ifstream("../data/finances.txt"),
                                            std::ifstream("../data/history.txt"),
-                                            location, responsible, name);
+                                            location, responsible, name, earnings);
         _locations.insert(location);
         _responsibles.insert(responsible);
         registerAffiliate(h1);

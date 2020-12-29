@@ -27,9 +27,9 @@ public:
 
     HouseMasterAffiliate();
 
-    HouseMasterAffiliate(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients, std::ifstream services,
-                                               std::ifstream earnings, std::ifstream history, std::string location, const std::string& responsible,
-                         const std::string& hmName);
+    HouseMasterAffiliate(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients, std::ifstream services
+                         , std::ifstream history, std::string location, const std::string& responsible,
+                         const std::string& hmName, float finances);
 
     ~HouseMasterAffiliate() = default;
 

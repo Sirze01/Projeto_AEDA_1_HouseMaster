@@ -1,3 +1,3 @@
-affiliate1,gajo1,lamego
-affiliate2,gajo2,vila real vila real vila real
-affiliate3,gajo1,porto
+affiliate1,gajo1,lamego, 4.5
+affiliate2,gajo2,vila real vila real vila real, 32.5
+affiliate3,gajo1,porto, 100.25

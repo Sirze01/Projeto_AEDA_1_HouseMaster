@@ -134,10 +134,9 @@ HouseMasterAffiliate::HouseMasterAffiliate()
  * @param earnings earnings info
  */
 HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients,
-                                           std::ifstream services,
-                                           std::ifstream earnings, std::ifstream history, std::string location,
-                                           const std::string &responsible, const std::string &hmName)
-        : _name(hmName), _location(std::move(location)), _responsible(Admin(responsible)) {
+                                           std::ifstream services, std::ifstream history, std::string location,
+                                           const std::string &responsible, const std::string &hmName, float finances)
+        : _name(hmName), _location(std::move(location)), _responsible(Admin(responsible)), _earnings(finances) {
 
     // read services.txt
     for (std::string line; std::getline(services, line);) {
@@ -228,11 +227,6 @@ HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstrea
         std::getline(lss, username, ',');
         std::getline(lss, id, ',');
         _usernameMap.emplace(std::pair<std::string, std::string>(username, id));
-    }
-
-    // read earnings.txt
-    for (std::string line; std::getline(earnings, line);) {
-        _earnings = std::stof(line);
     }
 
     // read history.txt
@@ -688,16 +682,6 @@ void HouseMasterAffiliate::writeInterventionsInfo() {
     } else throw UnableToWriteFile("Unable to write in interventions' file");
 }
 
-/**
- * @brief saves the financial state of housemaster
- */
-void HouseMasterAffiliate::writeFinancialInfo() const {
-    std::ofstream finantialInfo("../data/finances.txt", std::ios_base::trunc);
-    if (finantialInfo.is_open()) {
-        finantialInfo << _earnings << std::endl;
-        finantialInfo.close();
-    } else throw UnableToWriteFile("Unable to write in finances' file");
-}
 
 /**
  * @brief marks an intervention as complete
