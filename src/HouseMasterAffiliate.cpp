@@ -763,6 +763,15 @@ std::string HouseMasterAffiliate::getLocation() const {
     return _location;
 }
 
+/**
+ * @brief getter
+ * @return responsible
+ */
+std::string HouseMasterAffiliate::getResponsible() const {
+    return _responsible.getName();
+}
+
+
 
 /**
  * @brief exception for an impossible appointment

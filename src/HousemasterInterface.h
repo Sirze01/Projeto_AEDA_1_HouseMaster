@@ -18,6 +18,7 @@ private:
     HouseMaster _houseMaster;
 
     string selectLocation(bool &running);
+    string selectResponsible(bool &running);
 
     void show(const HouseMasterAffiliate &affiliate);
 };

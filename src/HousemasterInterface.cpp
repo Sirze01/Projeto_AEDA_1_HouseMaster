@@ -67,7 +67,20 @@ void HousemasterInterface::showInterface(bool &running) {
         affiliates.execute(running);
         std::cin.ignore();
     }}, {"Filter by responsible", [&](){
-
+        std::string responsible = selectResponsible(running);
+        std::vector<HouseMasterAffiliate> hms = _houseMaster.getAffiliatesByResponsible(responsible);
+        HouseMasterAffiliate selection{};
+        std::map<std::string, std::function<void()>> options{};
+        for (const auto &i : hms) {
+            options.insert(std::pair<std::string, std::function<void()>>(i.getAffiliateName(), [&]() {
+                show(i);
+            }));
+        }
+        Menu affiliates("See details", options);
+        affiliates.show();
+        affiliates.select();
+        affiliates.execute(running);
+        std::cin.ignore();
     }}});
     start.show();
     start.select();
@@ -83,12 +96,29 @@ std::string HousemasterInterface::selectLocation(bool &running) {
             selection = i;
         }));
     }
-    Menu servicesMenu("Select a Locations", options);
+    Menu servicesMenu("Select a Location", options);
     servicesMenu.show();
     servicesMenu.select();
     servicesMenu.execute(running);
     return selection;
 }
+
+std::string HousemasterInterface::selectResponsible(bool &running) {
+    auto responsible = _houseMaster.getResponsibles();
+    std::string selection{};
+    std::map<std::string, std::function<void()>> options{};
+    for (const auto &i : responsible) {
+        options.insert(std::pair<std::string, std::function<void()>>(i, [&selection, &i]() {
+            selection = i;
+        }));
+    }
+    Menu servicesMenu("Select a Responsible", options);
+    servicesMenu.show();
+    servicesMenu.select();
+    servicesMenu.execute(running);
+    return selection;
+}
+
 
 void HousemasterInterface::show(const HouseMasterAffiliate& affiliate) {
     std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;

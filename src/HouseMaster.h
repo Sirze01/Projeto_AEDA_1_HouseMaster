@@ -38,7 +38,7 @@ public:
 
     std::set<std::string> getLocations() {return _locations;}
 
-
+    std::set<std::string> getResponsibles() {return _responsibles;}
 
     clientHT getContacts() const;
 
@@ -52,6 +52,7 @@ public:
 
 private:
     std::set<std::string> _locations;
+    std::set<std::string> _responsibles;
     BST<HouseMasterAffiliate> _affiliates;
     clientHT _clientContacts;
 };
