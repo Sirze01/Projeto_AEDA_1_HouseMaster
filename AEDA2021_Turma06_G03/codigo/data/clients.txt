@@ -1,5 +1,0 @@
-Sarah Wildes,207317925,no
-Elizabeth Proctor,283147881,yes
-Jonathan Corwin,216692199,no
-Sir William Phips,260456730,yes
-Cotton Mather,245722750,no
