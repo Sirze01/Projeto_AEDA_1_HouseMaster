@@ -10,6 +10,7 @@
 #include <set>
 #include <map>
 #include <unordered_map>
+#include <queue>
 #include <utility>
 #include <stdexcept>
 #include <iostream>
@@ -49,8 +50,9 @@ public:
 
     void removeCollaborator(const std::string &collId);
 
-    void addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro, float earnings = 0,
-                         Classification score = newHere, std::string affiliate = "");
+    void addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
+                         std::vector<Availability> availabilities, float earnings = 0,Classification score = newHere,
+                         std::string affiliate = "");
 
     void addClient(unsigned long nif, const std::string &name, bool premium, std::string affiliate);
 
@@ -132,10 +134,11 @@ public:
     static unsigned int _idSeqAffiliate;
 
 private:
-    std::unordered_map<std::string, Service *> _availableServices;
-    std::map<std::string, Client *> _clients;
     std::unordered_map<std::string, std::string> _usernameMap;
     std::map<std::string, Collaborator *> _collaborators;
+    std::priority_queue<Collaborator*, std::vector<Collaborator *>, Collaborator_pointer_compare> _collaborators_queue;
+    std::map<std::string, Client *> _clients;
+    std::unordered_map<std::string, Service *> _availableServices;
     std::unordered_set<Intervention *> _interventions;
     float _earnings;
     std::string _name;

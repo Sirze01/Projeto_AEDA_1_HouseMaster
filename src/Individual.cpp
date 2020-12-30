@@ -41,11 +41,15 @@ std::string Individual::getName() const {
  * @param score the score
  * @param affiliate the affiliate's name
  */
-Collaborator::Collaborator(std::vector<std::string> services, const std::string &name, bool pro, float earnings,
-                           Classification score, std::string affiliate) : Individual(name),
+Collaborator::Collaborator(std::vector<std::string> services, const std::string &name, bool pro,
+                           std::vector<Availability> &availability, float earnings, Classification score,
+                           std::string affiliate) : Individual(name),
                                                    _services(std::move(services)), _score(score), _pro(pro),
                                                    _earnings(earnings), _affiliate(std::move(affiliate)) {
     _id = _idSeqCol++;
+
+    std::sort(availability.begin(), availability.end());
+    _availability = availability;
 }
 
 /**
@@ -178,6 +182,12 @@ std::string Collaborator::getId() const {
     outStr << "collab" << _id;
     return outStr.str();
 }
+ /** @brief Availability getter
+  * @return availanylity vector
+  */
+const std::vector<Availability> &Collaborator::getAvailability() const {
+    return _availability;
+}
 
 /**
  * @brief checks if two collaborators are the same
@@ -208,7 +218,6 @@ void Collaborator::addService(Service *service) {
 }
 
 
-
 // Client associated methods
 
 /**
@@ -219,7 +228,7 @@ void Collaborator::addService(Service *service) {
  * @param premium is premium
  */
 Client::Client(unsigned int nif, const std::string &name, bool premium, std::string affiliate)
-        : Individual(name), _nif(nif), _premium(premium), _affiliate(affiliate) {
+        : Individual(name), _nif(nif), _premium(premium), _affiliate(std::move(affiliate)) {
     _id = _idSeqClt++;
     std::stringstream m{};
     m << "client" << _id << "@housemaster.pt";

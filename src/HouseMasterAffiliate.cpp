@@ -188,6 +188,15 @@ HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstrea
             std::string scoreStr{};
             std::getline(lss, scoreStr, ',');
             auto score = Classification(std::stoi(scoreStr));
+            // availability
+            std::string availabilitiesStr{};
+            std::string availabilityStr{};
+            std::vector<Availability> availabilities;
+            std::getline(lss, availabilitiesStr, ',');
+            std::stringstream availabilitiesStream(availabilitiesStr);
+            while(std::getline(availabilitiesStream, availabilityStr, ' ')){
+                availabilities.emplace_back(Availability(availabilityStr));
+            }
             // services
             std::string serviceName{};
             std::vector<std::string> collabServices;
@@ -196,7 +205,7 @@ HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstrea
                 collabServices.push_back(serviceName);
             }
 
-            addCollaborator(collabServices, name, proStr == "yes", collabEarnings, score, affiliateName);
+            addCollaborator(collabServices, name, proStr == "yes", availabilities, collabEarnings, score, affiliateName);
         } else continue;
     }
 
@@ -361,9 +370,9 @@ void HouseMasterAffiliate::usernameMapChanger(std::string id, std::string newUse
  * @param affiliate the affiliate's name
  */
 void HouseMasterAffiliate::addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
-                                           float earnings,
+                                           std::vector<Availability> availabilities, float earnings,
                                            Classification score, std::string affiliate) {
-    auto collab = new Collaborator(services, name, pro, earnings, score, std::move(affiliate));
+    auto collab = new Collaborator(services, name, pro, availabilities, earnings, score, std::move(affiliate));
     _collaborators.insert({collab->getId(), collab});
     _usernameMap.insert({collab->getId(), collab->getId()});
 }

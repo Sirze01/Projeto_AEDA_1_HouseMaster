@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_set>
 #include <vector>
+#include <queue>
 #include <cmath>
 #include <numeric>
 #include <utility>
@@ -53,7 +54,7 @@ enum Classification {
 
 class Collaborator : public Individual {
 public:
-    Collaborator(std::vector<std::string> services, const std::string &name, bool pro, float earnings = 0,
+    Collaborator(std::vector<std::string> services, const std::string &name, bool pro, std::vector<Availability> &availabylity, float earnings = 0,
                  Classification score = newHere, std::string affiliate = "");
 
     ~Collaborator() override = default;
@@ -92,6 +93,8 @@ public:
 
     std::string getId() const override;
 
+    const std::vector<Availability> &getAvailability() const;
+
     bool operator==(const Collaborator &ind2) const;
 
     bool operator<(const Collaborator &col2) const;
@@ -102,13 +105,20 @@ public:
 
 private:
 
-    std::vector<Classification> _classifications;
     std::vector<std::string> _services;
-    Classification _score;
     bool _pro;
+    std::vector<Availability> _availability;
+
+
+
+private:
     float _earnings;
+    Classification _score;
+    std::vector<Classification> _classifications;
     std::string _affiliate;
+
 };
+
 
 class Collaborator::AlreadyKnows: public std::logic_error
 {
@@ -120,6 +130,15 @@ class Collaborator::ServiceRequiresPro: public std::logic_error
 {
 public:
     explicit ServiceRequiresPro(const std::string &error_msg);
+};
+
+
+
+class Collaborator_pointer_compare{
+public:
+    bool operator() (Collaborator *col1, Collaborator *col2){
+        return col1->getAvailability().at(0) < col2->getAvailability().at(0);
+    }
 };
 
 

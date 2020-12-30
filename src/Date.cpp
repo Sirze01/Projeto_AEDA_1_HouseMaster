@@ -1,10 +1,15 @@
 #include "Date.h"
 #include <iostream>
+#include <algorithm>
 
 /**
  * @brief default date
  */
-Date::Date() = default;
+Date::Date() {
+    time_t timestamp;
+    time(&timestamp);
+    _date = *(localtime(&timestamp));
+}
 
 
 /**
@@ -106,6 +111,7 @@ int Date::getDaysInMonth( int day,  int month,  int year,  int hours,  int minut
  * @brief Converts the input date in a string. Useful to show during error throws.
  * @return A string with the date in DD/MM/YYYY HH:mm
  */
+
 std::string Date::getString_err( int &day,  int &month,  int &year,  int &hours,  int &minutes) {
     std::ostringstream stream;
     stream << std::setfill('0');
@@ -113,6 +119,7 @@ std::string Date::getString_err( int &day,  int &month,  int &year,  int &hours,
            << year << "  " << std::setw(2) << hours << ':' << minutes;
     return stream.str();
 }
+
 
 /**
  * @brief Constructor of the exception to be thrown when a date is invalid
@@ -174,7 +181,6 @@ bool Date::operator<(const Date &d1) const {
  * @return Whether the first date is after the second one
  */
 bool Date::operator>(const Date &d1) const {
-    //return (!this->operator<(d2)) && (!this->operator==(d2));
     return _date.tm_year > d1.getDate().tm_year &&
            _date.tm_mon > d1.getDate().tm_mon &&
            _date.tm_mday > d1.getDate().tm_mday &&
@@ -182,8 +188,9 @@ bool Date::operator>(const Date &d1) const {
            _date.tm_min > d1.getDate().tm_min;
 }
 
-
-
+std::vector<std::string> Date::getWeekdays() {
+    return _weekdays;
+}
 
 /**
  * @brief default duration
@@ -195,10 +202,7 @@ Duration::Duration() = default;
  * @param hours sets the hours
  * @param minutes sets the minutes
  */
-Duration::Duration( int hours,  int minutes) {
-    time_t timestamp;
-    time(&timestamp);
-    _date = *(localtime(&timestamp));
+Duration::Duration( int hours,  int minutes):Date() {
     _date.tm_hour = hours;
     _date.tm_min = minutes;
 
@@ -214,14 +218,11 @@ Duration::Duration( int hours,  int minutes) {
  * @brief Sets the duration with a given string
  * @param duration sets the duration
  */
-Duration::Duration(const std::string &duration) {
+Duration::Duration(const std::string &duration) : Date(){
     std::stringstream ss(duration); //HH:mm
     int hours, minutes;
     char sep{};
     ss >> hours >> sep >> minutes;
-    time_t timestamp;
-    time(&timestamp);
-    _date = *(localtime(&timestamp));
     _date.tm_hour = hours;
     _date.tm_min = minutes;
 
@@ -231,17 +232,6 @@ Duration::Duration(const std::string &duration) {
     _date.tm_sec = 0;
 
     mktime(&_date);
-}
-
-
-/**
- * @brief Uses the format: HHhmm. Useful to show during error outputs
- * @return A string with the corresponding duration
- */
-std::string Duration::getString_err(int &hours, int &minutes) {
-    std::ostringstream stream;
-    stream << std::setfill('0') << std::setw(2) << hours << "h" << minutes;
-    return stream.str();
 }
 
 /**
@@ -262,13 +252,50 @@ std::string Duration::getString() const {
     return stream.str();
 }
 
-/**
- * @brief Constructor of the exception to be thrown when a duration is invalid
- * @param error_msg the message to be shown
- */
-Duration::InvalidDuration::InvalidDuration(const std::string &error_msg) : std::invalid_argument(error_msg) {}
 
+Availability::Availability() = default;
 
+Availability::Availability(int weekday):Date(){
+    checkIfValid(weekday);
+    _date.tm_hour = 0;
+    _date.tm_min = 0;
 
+    _date.tm_mday = 0;
+    _date.tm_mon = 0;
+    _date.tm_year = 0;
+    _date.tm_sec = 0;
+    _date.tm_wday = weekday;
+}
 
+Availability::Availability(const std::string &weekday) : Date() {
+    std::vector<std::string> weekdays = getWeekdays();
+    auto it = std::find_if(weekdays.begin(), weekdays.end(), [weekday](const std::string &test){
+        return test == weekday;
+    });
+    checkIfValid((it - weekdays.begin()));
+    _date.tm_hour = 0;
+    _date.tm_min = 0;
+    _date.tm_mday = 0;
+    _date.tm_mon = 0;
+    _date.tm_year = 0;
+    _date.tm_sec = 0;
+    _date.tm_yday = 0;
+    _date.tm_wday = (it - weekdays.begin());
+}
 
+void Availability::checkIfValid(int day) {
+    if(day < 0 || day > 6)
+        throw InvalidDate(std::string(1,day)+ " isn't a valid weekday!");
+}
+
+std::string Availability::getString() const {
+    return _weekdays.at(_date.tm_wday);
+}
+
+int Availability::getWeekday() const {
+    return _date.tm_wday;
+}
+
+bool Availability::operator<(const Availability &d1) const {
+    return _date.tm_wday < d1.getDate().tm_wday;
+}

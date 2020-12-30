@@ -6,13 +6,12 @@
 #include <sstream>
 #include <iomanip>
 #include <ctime>
+#include <vector>
 
 /**
  * @brief A class to represent dates.
  */
 class Date {
-
-
 public:
     Date();
 
@@ -24,6 +23,8 @@ public:
 
     virtual std::string getString() const;
 
+    std::vector<std::string> getWeekdays();
+
     Date operator+(const Date &d1) const;
 
     bool operator==(const Date &d1) const;
@@ -34,10 +35,15 @@ public:
 
     class InvalidDate;
 
+
+
 protected:
     tm _date{};
+    std::vector<std::string> _weekdays {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
+
 
 private:
+
     static void checkIfValid(int &day, int &month, int &year, int &hours, int &minutes) ;
     static bool isLeapYear(int &year) ;
     static int getDaysInMonth(int day, int month, int year, int hours, int minutes);
@@ -70,20 +76,33 @@ public:
 
     std::string getString() const override;
 
-    class InvalidDuration;
-
-private:
-    static std::string getString_err(int &hours, int &minutes) ;
 };
 
+class Availability : public Date{
+public:
+    Availability();
 
+    Availability(int weekday);
+
+    explicit Availability(const std::string &weekday);
+
+    int getWeekday() const;
+
+    std::string getString() const override;
+
+    bool operator<(const Availability &d1) const;
+private:
+    static void checkIfValid(int day);
+};
 /**
  * @brief This class is used to throw exceptions related to invalid durations
  */
+ /*
 class Duration::InvalidDuration : public std::invalid_argument {
 public:
     explicit InvalidDuration(const std::string &error_msg);
 };
+  */
 
 
 #endif

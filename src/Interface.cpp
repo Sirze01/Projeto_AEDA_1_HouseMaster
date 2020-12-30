@@ -499,7 +499,7 @@ void Interface::readNewCollaboratorData(bool &running) {
     }
 
     bool innerRunning = true;
-    _houseMasterAffiliate.addCollaborator(services, name, pro == "yes", 0, classification, affiliate);
+    _houseMasterAffiliate.addCollaborator(services, name, pro == "yes", std::vector<Availability>{Availability("monday")}, 0, classification, affiliate);
     Collaborator* newCollab = (*_houseMasterAffiliate.getCollaborators().rbegin()).second;
 
     Menu pickServices("Pick your services", {{"Choose from the HouseMaster services", [&]() {
