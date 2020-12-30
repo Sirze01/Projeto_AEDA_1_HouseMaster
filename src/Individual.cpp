@@ -217,7 +217,6 @@ void Collaborator::addService(Service *service) {
     _services.push_back(service->getName());
 }
 
-
 // Client associated methods
 
 /**

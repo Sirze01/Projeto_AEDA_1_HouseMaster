@@ -27,6 +27,8 @@ public:
 
     Date operator+(const Date &d1) const;
 
+    Date operator-(const Date &d1) const;
+
     bool operator==(const Date &d1) const;
 
     bool operator<(const Date &d1) const;

@@ -150,6 +150,25 @@ Date Date::operator+(const Date &d1) const {
 }
 
 /**
+ * @brief subtracts two dates (or a date and a duration) together and returns the final value
+ * @param d1 the other operand
+ * @return A final date corresponding to the subtractions of two dates or a date and a duration
+ */
+Date Date::operator-(const Date &d1) const {
+    Date result_date;
+    tm temp{};
+    temp.tm_mday = _date.tm_mday - d1.getDate().tm_mday;
+    temp.tm_mon = _date.tm_mon - d1.getDate().tm_mon;
+    temp.tm_year = _date.tm_year - d1.getDate().tm_year;
+    temp.tm_hour = _date.tm_hour - d1.getDate().tm_hour;
+    temp.tm_min = _date.tm_min - d1.getDate().tm_min;
+    temp.tm_sec = 0;
+    mktime(&temp);
+    result_date._date = temp;
+    return result_date;
+}
+
+/**
  * @brief Checks whether the two dates are the same
  * @param d2 the other operand
  * @return Whether a date is equal to another
@@ -248,7 +267,7 @@ tm Duration::getDuration() const{
  */
 std::string Duration::getString() const {
     std::ostringstream stream;
-    stream << std::setfill('0') << std::setw(2) << _date.tm_hour << "h" << _date.tm_min;
+    stream << std::setfill('0') << std::setw(2) <<  _date.tm_mday * 24 + _date.tm_hour << "h" << _date.tm_min;
     return stream.str();
 }
 
@@ -299,3 +318,4 @@ int Availability::getWeekday() const {
 bool Availability::operator<(const Availability &d1) const {
     return _date.tm_wday < d1.getDate().tm_wday;
 }
+

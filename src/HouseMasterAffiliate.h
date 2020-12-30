@@ -84,8 +84,7 @@ public:
 
     std::string getResponsible() const;
 
-    void assignCollaborator(Intervention *intervention,
-                            const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs);
+    void assignCollaborator(Intervention *intervention);
 
     std::vector<std::pair<std::string, Collaborator *>> sortCollaboratorsByScore();
 
@@ -136,7 +135,7 @@ public:
 private:
     std::unordered_map<std::string, std::string> _usernameMap;
     std::map<std::string, Collaborator *> _collaborators;
-    std::priority_queue<Collaborator*, std::vector<Collaborator *>, Collaborator_pointer_compare> _collaborators_queue;
+    std::priority_queue<std::pair<Intervention*, std::pair<std::string, Collaborator*>>, std::vector<std::pair<Intervention*,std::pair<std::string, Collaborator*>>>, Collaborator_pointer_compare> _collaborators_queue;
     std::map<std::string, Client *> _clients;
     std::unordered_map<std::string, Service *> _availableServices;
     std::unordered_set<Intervention *> _interventions;

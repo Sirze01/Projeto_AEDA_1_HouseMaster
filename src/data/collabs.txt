@@ -1,4 +1,4 @@
-affiliate1,Giles Corey,yes,24.4,3,monday tuesday,Fix illumination system,Install central heating system
+affiliate1,Giles Corey,yes,24.4,3,monday tuesday,Fix illumination system,Install central heating system,Repair AC system
 affiliate1,Samuel Paris,no,3.36,2,thursday friday,Hang a picture,Assemble IKEA furniture,Change a lamp,Retouch painting job,Paint with invisible ink
 affiliate1,John Proctor,yes,13.2,3,wednesday,Paint a room,Paint and decorate walls,Retouch painting job
 affiliate2,Samuel Sewall,yes,0.8,1,sunday saturday,Unclog a pipe,Fix a water leak

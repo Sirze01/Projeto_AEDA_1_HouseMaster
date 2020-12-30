@@ -50,8 +50,7 @@ void Individual::changeUsername(HouseMasterAffiliate &hm, std::string newUsernam
  */
 void Client::requestIntervention(HouseMasterAffiliate &hm, const Date &date, const std::string &service, bool forcePro,
                                  unsigned int nrOfRooms) const {
-    hm.assignCollaborator(hm.addIntervention(date, service, forcePro, this->getId(), nrOfRooms),
-                          hm.sortCollaboratorsByScore());
+    hm.assignCollaborator(hm.addIntervention(date, service, forcePro, this->getId(), nrOfRooms));
 }
 
 /**
@@ -83,6 +82,21 @@ Client::classifyCollaborator(HouseMasterAffiliate &hm, const std::string &collab
  * @return true if available otherwise false
  */
 bool Collaborator::isAvailable(HouseMasterAffiliate &hm, const std::string &collabId, Date start, Duration duration) {
+    std::vector<Availability> availability = this->getAvailability();
+    auto fStart = std::find_if(availability.begin(), availability.end(), [&start](Availability availability1) {
+        return start.getDate().tm_wday == availability1.getWeekday();
+    });
+    if(fStart == availability.end())
+        return false;
+
+    auto fEnd = std::find_if(availability.begin(), availability.end(), [&start, &duration](Availability availability1){
+        Date temp;
+        temp = start + duration;
+        return temp.getDate().tm_wday == availability1.getWeekday();
+    });
+    if(fEnd == availability.end())
+        return false;
+
     auto interventions = hm.getAssociatedActiveInterventions(collabId);
     return std::all_of(interventions.begin(), interventions.end(), [&start, &duration](Intervention *intervention) {
         return !intervention->conflictsWith(start, duration);
@@ -102,7 +116,7 @@ bool Collaborator::canDo(HouseMasterAffiliate &hm, const std::string &collabId, 
     Date start = intervention->getStartingTime();
     Duration duration = service->getDuration();
     return isAvailable(hm, collabId, start, duration) && canPreform(service->getName()) &&
-           hasQualificationToPreform(intervention);
+            hasQualificationToPreform(intervention);
 }
 
 
@@ -571,15 +585,16 @@ Individual *HouseMasterAffiliate::findByUsername(const std::string &username) {
  * @param intervention the intervention
  * @param orderedCollabs the collaborators
  */
-void HouseMasterAffiliate::assignCollaborator(Intervention *intervention,
-                                              const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs) {
+void HouseMasterAffiliate::assignCollaborator(Intervention *intervention) {
     HouseMasterAffiliate *hm = this;
-    auto found = std::find_if(orderedCollabs.begin(), orderedCollabs.end(),
-                              [&intervention, &hm](std::pair<std::string, Collaborator *> collaborator) -> bool {
-                                  return collaborator.second->canDo(*hm, collaborator.second->getId(), intervention);
-                              });
 
-    if (found != orderedCollabs.end()) intervention->setCollabId(found->first);
+    for(const auto& collab : _collaborators){
+        if (collab.second->canDo(*hm, collab.second->getId(), intervention))
+           _collaborators_queue.emplace(std::pair<Intervention*, std::pair<std::string, Collaborator*>>(intervention, std::pair<std::string, Collaborator*>(collab)));
+    }
+
+    if (!_collaborators_queue.empty())
+        intervention->setCollabId(_collaborators_queue.top().second.first);
     else throw UnavailableAppointment("No collaborators available to the desired date!");
 }
 
@@ -610,6 +625,11 @@ void HouseMasterAffiliate::writeCollabsInfo() {
             collabFile << collab_it->second->getName();
             if (collab_it->second->isPro()) { collabFile << ",yes,"; } else { collabFile << ",no,"; }
             collabFile << collab_it->second->getEarnings() << ',' << collab_it->second->getScore() << ',';
+            for (size_t i = 0; i < collab_it->second->getAvailability().size(); i++) {
+                if (i == collab_it->second->getAvailability().size() - 1)
+                    collabFile << collab_it->second->getAvailability()[i].getString() << ' ';
+                else collabFile << collab_it->second->getAvailability()[i].getString() << ",";
+            }
             for (size_t i = 0; i < collab_it->second->getServices().size(); i++) {
                 if (i == collab_it->second->getServices().size() - 1)
                     collabFile << collab_it->second->getServices()[i];

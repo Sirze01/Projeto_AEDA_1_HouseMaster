@@ -65,7 +65,7 @@ public:
 
     bool canPreform(const std::string &service);
 
-    static bool isAvailable(HouseMasterAffiliate &hm, const std::string &collabId, Date start, Duration duration);
+    bool isAvailable(HouseMasterAffiliate &hm, const std::string &collabId, Date start, Duration duration);
 
     bool hasQualificationToPreform(Intervention *intervention) const;
 
@@ -136,8 +136,29 @@ public:
 
 class Collaborator_pointer_compare{
 public:
-    bool operator() (Collaborator *col1, Collaborator *col2){
-        return col1->getAvailability().at(0) < col2->getAvailability().at(0);
+    bool operator() (const std::pair<Intervention*, std::pair<std::string, Collaborator*>>& col1, const std::pair<Intervention*, std::pair<std::string, Collaborator*>>& col2){
+        int a = 10;
+        int b = 10;
+        for(const auto & availability : col1.second.second->getAvailability()){
+            if((col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday < 0) ?
+            (7 - (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday)) :
+               (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday) < a)
+                a = (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday < 0) ?
+                    (7 - (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday)) :
+                    (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday);
+
+        }
+
+        for(const auto & availability : col2.second.second->getAvailability()){
+            if((col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday < 0) ?
+               (7 - (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday)) :
+               (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday) < a)
+                b = (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday < 0) ?
+                    (7 - (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday)) :
+                    (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday);
+
+        }
+        return a < b;
     }
 };
 
