@@ -52,6 +52,7 @@ void HousemasterInterface::showInterface(bool &running) {
     Menu start("Welcome to Housemaster", {{"Show Finances", [&](){
         std::cout << _houseMaster.getTotalFinances() << "\n";
     }},{"Filter by location", [&](){
+        bool innerRunning = true;
         std::string location = selectLocation(running);
         std::vector<HouseMasterAffiliate> hms = _houseMaster.getAffiliatesByLocation(location);
         HouseMasterAffiliate selection{};
@@ -62,12 +63,15 @@ void HousemasterInterface::showInterface(bool &running) {
             }));
         }
         Menu affiliates("See details", options);
-        affiliates.show();
-        affiliates.select();
-        affiliates.execute(running);
-        std::cin.ignore();
+        while (innerRunning) {
+            affiliates.show();
+            affiliates.select();
+            affiliates.execute(innerRunning);
+            std::cin.ignore();
+        }
     }}, {"Filter by responsible", [&](){
-        std::string responsible = selectResponsible(running);
+        bool innerRunning = true;
+        std::string responsible = selectResponsible(innerRunning);
         std::vector<HouseMasterAffiliate> hms = _houseMaster.getAffiliatesByResponsible(responsible);
         HouseMasterAffiliate selection{};
         std::map<std::string, std::function<void()>> options{};
