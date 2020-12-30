@@ -16,7 +16,8 @@ int main() {
     HousemasterInterface i = HousemasterInterface(hm);
     bool running = true;
     while (running) {
-        i.showInterface(running);
+        //i.showInterface(running);
+        i.runAffiliateInterface(running);
     }
     /*
     HouseMasterAffiliate h1 = hm.getAffiliates().findMin();

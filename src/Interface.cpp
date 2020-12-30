@@ -307,7 +307,6 @@ Date Interface::readInterventionDate() {
             done = true;
             Date intDate(dateString);
             interventionDate = intDate;
-            interventionDate.checkIfValid();
         } catch (const Date::InvalidDate &e) {
             done = false;
             std::cout << e.what() << "\nInsert the desired intervention date in format DD/MM/YYYY HH:mm\n";

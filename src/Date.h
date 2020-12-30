@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <iomanip>
+#include <ctime>
 
 /**
  * @brief A class to represent dates.
@@ -15,34 +16,33 @@ class Date {
 public:
     Date();
 
-    Date(unsigned int day, unsigned int month, unsigned int year, unsigned int hours, unsigned int minutes);
+    Date(int day, int month, int year, int hours, int minutes);
 
     explicit Date(const std::string &date);
+
+    tm getDate() const;
 
     virtual std::string getString() const;
 
     Date operator+(const Date &d1) const;
 
-    bool operator==(const Date &d2) const;
+    bool operator==(const Date &d1) const;
 
-    bool operator<(const Date &d2) const;
+    bool operator<(const Date &d1) const;
 
-    bool operator>(const Date &d2) const;
-
-    virtual void checkIfValid() const;
+    bool operator>(const Date &d1) const;
 
     class InvalidDate;
 
-    unsigned int getDaysInMonth() const;
-
 protected:
-    unsigned int _hours{};
-    unsigned int _minutes{};
+    tm _date{};
+
 private:
-    bool isLeapYear() const;
-    unsigned int _day{};
-    unsigned int _month{};
-    unsigned int _year{};
+    static void checkIfValid(int &day, int &month, int &year, int &hours, int &minutes) ;
+    static bool isLeapYear(int &year) ;
+    static int getDaysInMonth(int day, int month, int year, int hours, int minutes);
+    static std::string getString_err( int &day,  int &month,  int &year,  int &hours,  int &minutes) ;
+
 };
 
 
@@ -62,18 +62,18 @@ class Duration : public Date {
 public:
     Duration();
 
-    Duration(unsigned int hours, unsigned int minutes);
+    Duration( int hours,  int minutes);
 
     explicit Duration(const std::string &duration);
 
-    std::string getString() const override;
+    tm getDuration() const;
 
-    void checkIfValid() const override;
+    std::string getString() const override;
 
     class InvalidDuration;
 
 private:
-
+    static std::string getString_err(int &hours, int &minutes) ;
 };
 
 
