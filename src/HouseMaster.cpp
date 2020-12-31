@@ -121,7 +121,7 @@ vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(const strin
  * @brief getter
  * @return the total earnings
  */
-float HouseMaster::getTotalFinances()
+float HouseMaster::getTotalFinances() const
 {
     float totalFinances{};
     for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)

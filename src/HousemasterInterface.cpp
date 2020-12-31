@@ -24,7 +24,6 @@ HouseMasterAffiliate HousemasterInterface::selectAffiliate(bool &running) {
     BSTItrIn<HouseMasterAffiliate> current(affiliates);
     std::set<HouseMasterAffiliate> hms{};
     for (; !current.isAtEnd(); current.advance()) {
-        std::cout << "Inserting " << current.retrieve().getAffiliateName() << "\n";
         hms.insert(current.retrieve());
     }
     for (const auto & i : hms) {
@@ -76,23 +75,17 @@ void HousemasterInterface::firstInterface(bool &running) {
                 newInterface.collaboratorOperations(innerRunning);
         }
     }}, { "Login Responsible", [&](){
-        std::string password{};
-        std::cout << "Password : ";
-        std::cin >> password;
-        for (int i = 0; i <= 1; i++) {
-            if (password == "responsible") {
-                std::cout << "success \n";
-                while (innerRunning) {
-                    newInterface.responsibleOperations(innerRunning);
-                }
-                return;
-            } else {
-                std::cout << "Wrong password. Try again:\n";
-                std::cin >> password;
-            }
+        std::cout << "Welcome to HouseMaster. You have RESPONSIBLE privilege.\n";
+        bool innerRunning2 = true;
+        HouseMasterAffiliate affiliate = selectAffiliate(innerRunning2);
+        responsibleLogin(affiliate);
+        newInterface.responsibleOperations(innerRunning);
+        while (innerRunning) {
+            start.show();
+            start.select();
+            start.execute(innerRunning);
+            std::cin.ignore();
         }
-        std::cout << "Too many tries! Logging out...\n";
-        exit(0);
       }}});
     start.show();
     start.select();
@@ -107,7 +100,7 @@ void HousemasterInterface::firstInterface(bool &running) {
 void HousemasterInterface::adminLogin() {
     std::string password{};
     std::cout << "Password : ";
-    std::cout << password << "\n";
+    std::cin >> password;
     for (int i = 0; i <= 1; i++) {
         if (password == "admin") {
             std::cout << "success \n";
@@ -120,6 +113,30 @@ void HousemasterInterface::adminLogin() {
     std::cout << "Too many tries! No admin for you. Logging out...\n";
     exit(0);
 }
+
+
+/**
+ * @brief responsible login
+ */
+void HousemasterInterface::responsibleLogin(const HouseMasterAffiliate &hma) {
+    std::string password{};
+    std::cout << "Password : ";
+    std::cin >> password;
+    for (int i = 0; i <= 1; i++) {
+        if (password == hma.getResponsible().getPassword()) {
+            std::cout << "success \n";
+            return;
+        } else {
+            std::cout << "Wrong password. Try again:\n";
+            std::cin >> password;
+        }
+    }
+    std::cout << "Too many tries! Logging out...\n";
+    exit(0);
+}
+
+
+
 
 /**
  * @brief collab login
@@ -173,9 +190,11 @@ void HousemasterInterface::clientLogin() {
 }
 
 
+
 void HousemasterInterface::showInterface(bool &running) {
     Menu start("Welcome to Housemaster", {{"Show Finances", [&](){
-        std::cout << _houseMaster.getTotalFinances() << "\n";
+        showTotalFinances(_houseMaster);
+        std::cin.ignore();
     }},{"Filter by location", [&](){
         bool innerRunning = true;
         std::string location = selectLocation(running);
@@ -260,6 +279,17 @@ void HousemasterInterface::show(const HouseMasterAffiliate& affiliate) {
               << std::endl;
     std::cout << "| [" << "Earnings" << "] " << std::setw(39) << std::right << affiliate.getEarnings() << " |"
               << std::endl;
+    std::cout << "|                                                    |" << std::endl;
+    std::cout << "| [Enter] Go Back                                    |" << std::endl;
+    std::cout << "|____________________________________________________|" << std::endl;
+    std::cin.ignore();
+}
+
+void HousemasterInterface::showTotalFinances(const HouseMaster &hm){
+    std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
+    std::cout << "|                                                    |" << std::endl;
+    std::cout << "|  " << "Total" << std::setw(46) << "|" << std::endl;
+    std::cout << "| " << " Finances"  << std::setw(41) << std::right << hm.getTotalFinances() << " |" << std::endl;
     std::cout << "|                                                    |" << std::endl;
     std::cout << "| [Enter] Go Back                                    |" << std::endl;
     std::cout << "|____________________________________________________|" << std::endl;

@@ -80,7 +80,7 @@ public:
 
     std::string getLocation() const;
 
-    std::string getResponsible() const;
+    Admin getResponsible() const;
 
     void assignCollaborator(Intervention *intervention,
                             const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs);

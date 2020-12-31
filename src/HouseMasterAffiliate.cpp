@@ -760,8 +760,8 @@ std::string HouseMasterAffiliate::getLocation() const {
  * @brief getter
  * @return responsible
  */
-std::string HouseMasterAffiliate::getResponsible() const {
-    return _responsible.getName();
+Admin HouseMasterAffiliate::getResponsible() const {
+    return _responsible;
 }
 
 

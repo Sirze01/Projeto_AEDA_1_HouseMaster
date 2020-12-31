@@ -359,7 +359,7 @@ void Interface::show(const Service &service) {
 }
 
 /**
- * @brief shows admin's operations
+ * @brief shows responsible's operations
  * @param running
  */
 void Interface::responsibleOperations(bool &running) {

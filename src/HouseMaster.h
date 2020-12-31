@@ -52,7 +52,7 @@ public:
 
     vector<HouseMasterAffiliate> getAffiliatesByResponsible(const string& /*(ou outra coisa nsei)*/ responsible);
 
-    float getTotalFinances();
+    float getTotalFinances() const;
 
 private:
     std::set<std::string> _locations;
