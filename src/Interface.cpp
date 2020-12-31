@@ -30,7 +30,7 @@ void Interface::selectRole(bool &running) {
         std::cout << "Welcome to HouseMaster. You have ADMIN privilege.\n";
         adminLogin();
         while (innerRunning) {
-            adminOperations(innerRunning);
+            responsibleOperations(innerRunning);
         }
     }}, {"Login User (Collab/Client)", [&]() {
         userLogin();
@@ -44,8 +44,6 @@ void Interface::selectRole(bool &running) {
                 collaboratorOperations(innerRunning);
             }
         }
-
-
     }},
     {"Register Client",            [&]() {
         readNewClientData();
@@ -364,7 +362,7 @@ void Interface::show(const Service &service) {
  * @brief shows admin's operations
  * @param running
  */
-void Interface::adminOperations(bool &running) {
+void Interface::responsibleOperations(bool &running) {
 
     bool innerRunning = true;
     Menu adminMenu("Welcome, ADMIN", {{"Register collaborator",           [&]() {

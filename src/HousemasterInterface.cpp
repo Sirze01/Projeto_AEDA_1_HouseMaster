@@ -1,12 +1,10 @@
-//
-// Created by ritam on 27/12/20.
-//
-
 #include "HousemasterInterface.h"
+
 
 HousemasterInterface::HousemasterInterface(const HouseMaster &housemaster) : _currentAffiliate(), _houseMaster(housemaster) {
 
 }
+
 
 void HousemasterInterface::showAffiliateInterface(HouseMasterAffiliate &affiliate) {
     bool running = true;
@@ -17,6 +15,7 @@ void HousemasterInterface::showAffiliateInterface(HouseMasterAffiliate &affiliat
     _houseMaster.removeAffiliate(affiliate);
     _houseMaster.registerAffiliate(affiliateInterface.getHouseMasterState());
 }
+
 
 HouseMasterAffiliate HousemasterInterface::selectAffiliate(bool &running) {
     std::map<std::string, std::function<void()> > options{};
@@ -40,6 +39,7 @@ HouseMasterAffiliate HousemasterInterface::selectAffiliate(bool &running) {
     return selection;
 }
 
+
 void HousemasterInterface::runAffiliateInterface(bool &running) {
     while (running) {
         HouseMasterAffiliate affiliate = selectAffiliate(running);
@@ -47,6 +47,133 @@ void HousemasterInterface::runAffiliateInterface(bool &running) {
         showAffiliateInterface(affiliate);
     }
 }
+
+
+void HousemasterInterface::firstInterface(bool &running) {
+    bool innerRunning = true;
+    Interface new_interface(_houseMaster.getAffiliates().findMin());
+    Menu start("Welcome to Housemaster", {{"HouseMaster Administration", [&](){
+        std::cout << "Welcome to HouseMaster. You have ADMIN privilege.\n";
+        adminLogin();
+        showInterface(running);
+        while (innerRunning) {
+            start.show();
+            start.select();
+            start.execute(innerRunning);
+            std::cin.ignore();
+        }
+    }},{"Login Client", [&](){
+        //clientLogin();
+        std::cout << "Login succeeded for " << _user->getName() << "\n";
+        /*TODO - Fazer a parte dos e-mails*/
+        /*Menu affiliates("See details", options);
+        while (innerRunning) {
+            affiliates.show();
+            affiliates.select();
+            affiliates.execute(innerRunning);
+            std::cin.ignore();
+        }*/
+    }}, {"Login Collaborator", [&](){
+        collabLogin();
+        std::cout << "Login succeeded for " << _user->getName() << "\n";
+        while (innerRunning) {
+                new_interface.collaboratorOperations(innerRunning);
+        }
+    }}, { "Login Responsible", [&](){
+        std::string password{};
+        std::cout << "Password : ";
+        std::cin >> password;
+        for (int i = 0; i <= 1; i++) {
+            if (password == "responsible") {
+                std::cout << "success \n";
+                while (innerRunning) {
+                    new_interface.responsibleOperations(innerRunning);
+                }
+                return;
+            } else {
+                std::cout << "Wrong password. Try again:\n";
+                std::cin >> password;
+            }
+        }
+        std::cout << "Too many tries! Logging out...\n";
+        exit(0);
+      }}});
+    start.show();
+    start.select();
+    start.execute(running);
+}
+
+
+
+/**
+ * @brief admin login
+ */
+void HousemasterInterface::adminLogin() {
+    std::string password{};
+    std::cout << "Password : ";
+    std::cin >> password;
+    for (int i = 0; i <= 1; i++) {
+        if (password == "admin") {
+            std::cout << "success \n";
+            return;
+        } else {
+            std::cout << "Wrong password. Try again:\n";
+            std::cin >> password;
+        }
+    }
+    std::cout << "Too many tries! No admin for you. Logging out...\n";
+    exit(0);
+}
+
+/**
+ * @brief collab login
+ */
+void HousemasterInterface::collabLogin() {
+    std::string username{};
+    std::cout << "Username: ";
+    std::cin.ignore();
+    std::getline(std::cin, username);
+    bool done = false;
+    while (!done) {
+        try{
+            done = true;
+            std::string id = _houseMasterAffiliate.findByUsername(username)->getId();
+            _user = _houseMasterAffiliate.findByUsername(username);
+        }
+        catch (const HouseMasterAffiliate::NonexistentUsername &e) {
+            done = false;
+            std::cout << e.what() << " Please try again\n";
+            std::cout << "Username : ";
+            std::cin >> username;
+        }
+    }
+}
+
+/**
+ * @brief client login
+ */
+ /*
+void HousemasterInterface::clientLogin() {
+    std::string email{};
+    std::cout << "E-mail: ";
+    std::cin.ignore();
+    std::getline(std::cin, email);
+    bool done = false;
+    while (!done) {
+        try {
+            done = true;
+            std::string id = _houseMasterAffiliate.findByEmail(email)->getId(); // TODO - findByEmail
+            _user = _houseMasterAffiliate.findByEmail(email);
+        }
+        catch (const HouseMasterAffiliate::NonexistentUsername &e) {
+            done = false;
+            std::cout << e.what() << " Please try again\n";
+            std::cout << "E-mail: ";
+            std::cin >> email;
+        }
+    }
+}
+*/
 
 void HousemasterInterface::showInterface(bool &running) {
     Menu start("Welcome to Housemaster", {{"Show Finances", [&](){
@@ -91,6 +218,7 @@ void HousemasterInterface::showInterface(bool &running) {
     start.execute(running);
 }
 
+
 std::string HousemasterInterface::selectLocation(bool &running) {
     auto location = _houseMaster.getLocations();
     std::string selection{};
@@ -106,6 +234,7 @@ std::string HousemasterInterface::selectLocation(bool &running) {
     servicesMenu.execute(running);
     return selection;
 }
+
 
 std::string HousemasterInterface::selectResponsible(bool &running) {
     auto responsible = _houseMaster.getResponsibles();

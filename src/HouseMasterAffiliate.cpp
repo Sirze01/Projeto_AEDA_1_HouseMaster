@@ -256,7 +256,7 @@ HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstrea
  * @brief getter
  * @return the collaborators
  */
-std::map<std::string, Collaborator *> &HouseMasterAffiliate::getCollaborators() {
+std::map<std::string, Collaborator *> HouseMasterAffiliate::getCollaborators() const {
     return _collaborators;
 }
 
