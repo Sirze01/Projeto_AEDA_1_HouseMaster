@@ -133,8 +133,13 @@ clientHT HouseMaster::getContacts() const {
     return _clientContacts;
 }
 
-void HouseMaster::addUsernamesMapEntry(std::pair<std::string, std::string> map){
-    _usernameMap.emplace(map);
+/**
+ * @brief Add An std::pair<username, Id> to the _usernames Map, used to save (And possibly login) Collaborators and
+ * administrators
+ * @param mapElem The element to add
+ */
+void HouseMaster::addUsernamesMapEntry(std::pair<std::string, std::string> mapElem){
+    _usernameMap.emplace(mapElem);
 }
 
 /**
@@ -163,7 +168,7 @@ void HouseMaster::addCollaborator(const std::vector<std::string> &services, cons
 }
 
 /**
- * @brief removes a collaborator from housemaster
+ * @brief removes a collaborator from housemaster (general)
  * @param id the id of the collaborator to remove
  */
 void HouseMaster::removeCollaborator(const std::string &id) {
@@ -184,7 +189,10 @@ void HouseMaster::removeCollaborator(const std::string &id) {
         throw NonexistentCollab("There's no such collab!");
     }
 }
-
+/**
+ * @brief Removes collaborator from housemaster, checking for its active interventions
+ * @param collId
+ */
 void HouseMasterAffiliate::removeCollaborator(const std::string &collId){
     if (getAssociatedActiveInterventions(collId).empty()) {
         _hm->removeCollaborator(collId);
@@ -193,6 +201,10 @@ void HouseMasterAffiliate::removeCollaborator(const std::string &collId){
     }
 }
 
+/**
+ * @brief Function to get all of the collaborators of one affiliate
+ * @return Vector with Collaborators
+ */
 std::vector<Collaborator *> HouseMasterAffiliate::getAffiliateCollabs() const{
     std::vector<Collaborator *> collabs;
     for(const auto& pair: _hm->getCollaborators()){
@@ -276,6 +288,10 @@ void HouseMaster::removeClient(const std::string &clientId) {
     }
 }
 
+/**
+ * @brief Function to get all of the clients of one affiliate
+ * @return Vector with clients
+ */
 std::vector<Client *> HouseMasterAffiliate::getAffiliateClients() const {
     std::vector<Client *> clients;
     for(const auto& pair: _hm->getClients()){
@@ -499,6 +515,11 @@ Individual *HouseMaster::findByUsername(const std::string &username) {
     else return nullptr;
 }
 
+/**
+ * @brief Function to get the collaborator knowing its id
+ * @param collabId
+ * @return Collaborator *
+ */
 Collaborator* HouseMaster::findCollabById(const std::string &collabId){
     return _collaborators[collabId];
 }

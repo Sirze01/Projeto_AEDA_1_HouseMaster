@@ -505,7 +505,11 @@ HouseMasterAffiliate::AssignedCollab::AssignedCollab(const std::string &error_ms
 HouseMasterAffiliate::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) : std::ifstream::failure(
         error_msg) {}
 
-
+/**
+ * @brief The < operator of the HouseMasterAffiliate Class, needed for the BST
+ * @param hma Another affiliate
+ * @return Returns true if this Hma is "smaller"(meets the chosen criteria) than hma, false otherwise
+ */
 bool HouseMasterAffiliate::operator<(const HouseMasterAffiliate &hma) const {
     if (_responsible.getName() == hma.getAdmin().getName()) {
         if (getAffiliateClients().size() == hma.getAffiliateClients().size()) {
