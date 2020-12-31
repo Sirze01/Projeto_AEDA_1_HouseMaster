@@ -871,3 +871,8 @@ void Interface::showSortedCollabs() {
     std::cout << "|____________________________________________________|" << std::endl;
     std::cin.ignore();
 }
+
+Interface::Interface(const HouseMasterAffiliate& housemaster, Individual* user, Role role) :
+    _houseMasterAffiliate(housemaster), _user(user), _role(role) {
+
+}

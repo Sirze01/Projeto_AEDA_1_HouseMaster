@@ -89,6 +89,8 @@ public:
 
     Individual *findByUsername(const std::string &name);
 
+    Individual* findById(std::string id) const;
+
     static void markAsComplete(Intervention *intervention);
 
     float getEarnings() const;
@@ -131,11 +133,10 @@ public:
 
     static unsigned int _idSeqAffiliate;
 
-    std::unordered_map<std::string, std::string> _usernameMap;
 private:
     std::unordered_map<std::string, Service *> _availableServices;
     std::map<std::string, Client *> _clients;
-
+    std::unordered_map<std::string, std::string> _usernameMap;
     std::map<std::string, Collaborator *> _collaborators;
     std::unordered_set<Intervention *> _interventions;
     float _earnings;

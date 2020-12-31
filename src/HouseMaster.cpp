@@ -139,3 +139,30 @@ void HouseMaster::removeAffiliate(const HouseMasterAffiliate &affiliate) {
     }
     _affiliates.remove(affiliate);
 }
+
+Client *HouseMaster::findClientByEmail(const string &email) const {
+    for (const auto & client : _clientContacts) {
+        if (client->getEmail() == email) {
+            return client;
+        }
+    }
+    throw HouseMasterAffiliate::NonexistentClient("Email not found in records");
+}
+
+HouseMasterAffiliate HouseMaster::findAffiliateByClient(const Client *client) const {
+    BSTItrIn<HouseMasterAffiliate> current(_affiliates);
+    for (; !current.isAtEnd(); current.advance()) {
+        auto found = std::find_if(_clientContacts.begin(), _clientContacts.end(), [&](const Client* client1){
+            try {
+                return current.retrieve().findById(client->getId()) == client1;
+            }
+            catch (const HouseMasterAffiliate::NonexistentClient &e) {
+                return false;
+            }
+        });
+        if (found != _clientContacts.end()) {
+            return current.retrieve();
+        }
+    }
+    return HouseMasterAffiliate();
+}

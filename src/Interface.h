@@ -19,6 +19,8 @@ public:
 
     explicit Interface(const HouseMasterAffiliate &houseMaster);
 
+    Interface(const HouseMasterAffiliate& housemaster, Individual* user, Role role);
+
     void selectRole(bool &running);
 
     HouseMasterAffiliate getHouseMasterState() const;
@@ -27,14 +29,14 @@ public:
 
     void responsibleOperations(bool &running);
 
+    void clientOperations(bool &running);
+
 private:
     void userLogin();
 
     void readRole(const std::string &username);
 
     void adminLogin();
-
-    void clientOperations(bool &running);
 
     static Date readInterventionDate();
 

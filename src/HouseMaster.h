@@ -40,6 +40,10 @@ public:
 
     std::set<std::string> getResponsibles() {return _responsibles;}
 
+    Client* findClientByEmail(const std::string &email) const;
+
+    HouseMasterAffiliate findAffiliateByClient(const Client* client) const;
+
     clientHT getContacts() const;
 
     void writeAffiliatesInfo();
