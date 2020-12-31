@@ -34,7 +34,7 @@ public:
 
     ~HouseMasterAffiliate() = default;
 
-    std::map<std::string, Collaborator *> &getCollaborators();
+    std::map<std::string, Collaborator *> getCollaborators() const;
 
     std::map<std::string, Client *> getClients() const;
 
@@ -132,19 +132,19 @@ public:
 
     static unsigned int _idSeqAffiliate;
 
-private:
     std::unordered_map<std::string, std::string> _usernameMap;
+private:
+
+    std::unordered_map<std::string, Service *> _availableServices;
+    std::map<std::string, Client *> _clients;
     std::map<std::string, Collaborator *> _collaborators;
     std::priority_queue<std::pair<Intervention*, std::pair<std::string, Collaborator*>>, std::vector<std::pair<Intervention*,std::pair<std::string, Collaborator*>>>, Collaborator_pointer_compare> _collaborators_queue;
-    std::map<std::string, Client *> _clients;
-    std::unordered_map<std::string, Service *> _availableServices;
     std::unordered_set<Intervention *> _interventions;
     float _earnings;
     std::string _name;
     std::string _location;
     unsigned int _id{};
-    Admin _responsible;  // TODO discuss if need admin class
-    // std::string _responsible;  // TODO: make this a Admin
+    Admin _responsible;
 };
 
 // Must add in the cpp also the definition of the Client::requestIntervention method to complete the forward declaration

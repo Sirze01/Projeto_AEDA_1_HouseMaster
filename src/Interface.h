@@ -23,6 +23,10 @@ public:
 
     HouseMasterAffiliate getHouseMasterState() const;
 
+    void collaboratorOperations(bool &running);
+
+    void responsibleOperations(bool &running);
+
 private:
     void userLogin();
 
@@ -31,8 +35,6 @@ private:
     void adminLogin();
 
     void clientOperations(bool &running);
-
-    void collaboratorOperations(bool &running);
 
     static Date readInterventionDate();
 
@@ -47,8 +49,6 @@ private:
     void showPayment(Intervention *intervention);
 
     static Classification readClassification(bool &running, std::string &collabName);
-
-    void adminOperations(bool &running);
 
     std::string selectCollab(bool &running);
 
