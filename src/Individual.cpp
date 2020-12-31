@@ -290,7 +290,7 @@ void Client::setEmail(const std::string &email) {
 /**
  * @brief admin's constructor
  * */
-Admin::Admin() : Individual() {};
+Admin::Admin() : Individual() {}
 
 
 /**

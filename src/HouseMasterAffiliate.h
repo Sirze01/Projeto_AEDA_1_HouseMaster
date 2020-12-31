@@ -20,51 +20,56 @@
 
 bool scoreComparer(std::pair<std::string, Collaborator *> &a, std::pair<std::string, Collaborator *> &b);
 
+class HouseMaster;
+
 /**
  * @brief This class manages the services, collaborators, clients and finances of HouseMaster
  */
 class HouseMasterAffiliate {
 public:
+    // Constructors and destructor
+    explicit HouseMasterAffiliate(HouseMaster* hm);
 
-    HouseMasterAffiliate();
-
-    HouseMasterAffiliate(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients, std::ifstream services
-                         , std::ifstream history, std::string location, const std::string& responsible,
-                         const std::string& hmName, float finances);
+    HouseMasterAffiliate(HouseMaster* hm, std::ifstream usernames, std::ifstream collaborators, std::ifstream clients,
+                         std::ifstream services, std::ifstream history, std::string location,
+                         const std::string& responsible, const std::string& hmName, float finances);
 
     ~HouseMasterAffiliate() = default;
 
-    std::map<std::string, Collaborator *> getCollaborators() const;
 
-    std::map<std::string, Client *> getClients() const;
+    // Users Manip
+    void removeCollaborator(const std::string &collId);
 
-    std::unordered_set<Intervention *> & getInterventions();
+    std::vector<Collaborator *> sortCollaboratorsByScore() const;
 
-    void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration);
+    std::vector<Collaborator*> getAffiliateCollabs() const;
 
-    void removeAvailableService(const std::string &service);
+    void writeCollabsInfo();
+
+    std::vector<Client*> getAffiliateClients() const;
+
+    void writeClientsInfo();
+
+
+    // Interventions and Services Manip
 
     std::unordered_map<std::string, Service *> &getAvailableServices();
 
-    void usernameMapChanger(std::string id, std::string newUsername);
+    void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration);
 
-    void removeCollaborator(const std::string &collId);
+    void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration);
 
-    void addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
-                         std::vector<Availability> availabilities, float earnings = 0,Classification score = newHere,
-                         std::string affiliate = "");
+    void removeAvailableService(const std::string &service);
 
-    void addClient(unsigned long nif, const std::string &name, bool premium, std::string affiliate);
+    void writeServicesInfo();
 
-    void removeClient(const std::string &clientId);
+    std::unordered_set<Intervention *> & getInterventions();
 
     Intervention *
     addIntervention(const Date &start, const std::string &service, bool forcePro, const std::string &clientId,
                     unsigned int nrOfRooms = 0);
 
-    static void changeInterventionState(Intervention *intervention, processState state);
-
-    void processTransaction(Intervention *intervention);
+    void assignCollaborator(Intervention *intervention);
 
     std::unordered_set<Intervention *> getAssociatedInterventions(const std::string &id);
 
@@ -76,75 +81,61 @@ public:
 
     std::unordered_set<Intervention *> getAllActiveInterventions();
 
-    std::string getAffiliateName() const;
+    static void changeInterventionState(Intervention *intervention, processState state);
 
-    Admin getAdmin() const;
-
-    std::string getLocation() const;
-
-    std::string getResponsible() const;
-
-    void assignCollaborator(Intervention *intervention);
-
-    std::vector<std::pair<std::string, Collaborator *>> sortCollaboratorsByScore();
-
-    Individual *findByUsername(const std::string &name);
+    void processTransaction(Intervention *intervention);
 
     static void markAsComplete(Intervention *intervention);
 
+    void writeInterventionsInfo();
+
+
+    // Administration
+
+    std::string getAffiliateName() const;
+
+    std::string getLocation() const;
+
+    Admin getAdmin() const;
+
+    std::string getAdmin_str() const;
+
     float getEarnings() const;
 
+    void writeFinancialInfo() const;
+
+
+    // General
+    bool operator<(const HouseMasterAffiliate &hma) const;
+
+    static unsigned int _idSeqAffiliate;
+
+
+    // Exceptions
     class UnavailableAppointment;
 
     class NonexistentService;
 
     class ExistentService;
 
-    class UsernameAlreadyInUse;
-
-    class NonexistentCollab;
-
     class AssignedCollab;
-
-    class NonexistentClient;
-
-    class ExistentClient;
-
-    class NonexistentUsername;
 
     class UnableToWriteFile;
 
-    void writeUsernameMap();
-
-    void writeCollabsInfo();
-
-    void writeClientsInfo();
-
-    void writeServicesInfo();
-
-    void writeInterventionsInfo();
-
-    void writeFinancialInfo() const;
-
-    void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration);
-
-    bool operator<(const HouseMasterAffiliate &hma) const;
-
-    static unsigned int _idSeqAffiliate;
-
-    std::unordered_map<std::string, std::string> _usernameMap;
 private:
-
+    HouseMaster* _hm;
     std::unordered_map<std::string, Service *> _availableServices;
-    std::map<std::string, Client *> _clients;
-    std::map<std::string, Collaborator *> _collaborators;
-    std::priority_queue<std::pair<Intervention*, std::pair<std::string, Collaborator*>>, std::vector<std::pair<Intervention*,std::pair<std::string, Collaborator*>>>, Collaborator_pointer_compare> _collaborators_queue;
+    std::priority_queue<std::pair<Intervention*, Collaborator*>,
+        std::vector<std::pair<Intervention*, Collaborator*>>,
+        Collaborator_pointer_compare> _collaborators_queue;
     std::unordered_set<Intervention *> _interventions;
-    float _earnings;
     std::string _name;
     std::string _location;
-    unsigned int _id{};
+    float _earnings;
     Admin _responsible;
+
+    unsigned int _id{};
+
 };
 
 // Must add in the cpp also the definition of the Client::requestIntervention method to complete the forward declaration
@@ -164,35 +155,9 @@ public:
     explicit ExistentService(const std::string &error_msg);
 };
 
-class HouseMasterAffiliate::UsernameAlreadyInUse : public std::logic_error{
-public:
-    explicit UsernameAlreadyInUse(const std::string &error_msg);
-};
-
-class HouseMasterAffiliate::NonexistentCollab : public std::out_of_range {
-public:
-    explicit NonexistentCollab(const std::string &error_msg);
-};
-
 class HouseMasterAffiliate::AssignedCollab : public std::logic_error {
 public:
     explicit AssignedCollab(const std::string &error_msg);
-};
-
-class HouseMasterAffiliate::NonexistentClient : public std::out_of_range {
-public:
-    explicit NonexistentClient(const std::string &error_msg);
-};
-
-class HouseMasterAffiliate::ExistentClient : public std::out_of_range {
-public:
-    explicit ExistentClient(const std::string &error_msg);
-};
-
-
-class HouseMasterAffiliate::NonexistentUsername : public std::out_of_range {
-public:
-    explicit NonexistentUsername(const std::string &error_msg);
 };
 
 class HouseMasterAffiliate::UnableToWriteFile : public std::ios_base::failure {

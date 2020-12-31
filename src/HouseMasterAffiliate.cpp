@@ -32,13 +32,7 @@ std::unordered_set<Intervention *> Individual::getAssociatedActiveInterventions(
     return hm.getAssociatedActiveInterventions(this->getId());
 }
 
-/**
- * @brief Changes username in username map
- * @param hm, the instance of housemaster
- */
-void Individual::changeUsername(HouseMasterAffiliate &hm, std::string newUsername) const {
-    hm.usernameMapChanger(this->getId(), std::move(newUsername));
-}
+
 
 /**
  * @brief requests and processes an intervention according to the client's requirements
@@ -61,16 +55,7 @@ void Client::cancelIntervention(Intervention *intervention) {
     HouseMasterAffiliate::changeInterventionState(intervention, Canceled);
 }
 
-/**
- * @brief adds a new classification to a collaborator
- * @param hm the instance of housemaster
- * @param collabId the collaborator to classify
- * @param classification the classification to give the collab
- */
-void
-Client::classifyCollaborator(HouseMasterAffiliate &hm, const std::string &collabId, Classification classification) {
-    hm.getCollaborators()[collabId]->addClassification(classification);
-}
+
 
 
 /**
@@ -81,15 +66,15 @@ Client::classifyCollaborator(HouseMasterAffiliate &hm, const std::string &collab
  * @param duration of intervention
  * @return true if available otherwise false
  */
-bool Collaborator::isAvailable(HouseMasterAffiliate &hm, const std::string &collabId, Date start, Duration duration) {
+bool Collaborator::isAvailable(HouseMasterAffiliate &hm, const std::string &collabId, Date start, Duration duration) const {
     std::vector<Availability> availability = this->getAvailability();
-    auto fStart = std::find_if(availability.begin(), availability.end(), [&start](Availability availability1) {
+    auto fStart = std::find_if(availability.begin(), availability.end(), [&start](const Availability& availability1) {
         return start.getDate().tm_wday == availability1.getWeekday();
     });
     if(fStart == availability.end())
         return false;
 
-    auto fEnd = std::find_if(availability.begin(), availability.end(), [&start, &duration](Availability availability1){
+    auto fEnd = std::find_if(availability.begin(), availability.end(), [&start, &duration](const Availability& availability1){
         Date temp;
         temp = start + duration;
         return temp.getDate().tm_wday == availability1.getWeekday();
@@ -130,158 +115,19 @@ void Collaborator::markInterventionAsComplete(Intervention *intervention) {
 
 
 // HouseMaster Methods
-
+// Contructor and Destructor
 /**
  * @brief housemaster constructor
  */
-HouseMasterAffiliate::HouseMasterAffiliate()
-        : _availableServices(), _clients(), _usernameMap(), _collaborators(), _interventions(), _earnings(),
-          _responsible() {
+HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster* hm): _hm(hm), _availableServices(), _interventions(), _earnings(), _responsible() {
 
 }
 
-/**
- * @brief housemaster constructor from files
- * @param collaborators collabs info
- * @param clients clients info
- * @param services services info
- * @param earnings earnings info
- */
-HouseMasterAffiliate::HouseMasterAffiliate(std::ifstream usernames, std::ifstream collaborators, std::ifstream clients,
-                                           std::ifstream services, std::ifstream history, std::string location,
-                                           const std::string &responsible, const std::string &hmName, float finances)
-        : _name(hmName), _location(std::move(location)), _responsible(Admin(responsible)), _earnings(finances) {
-
-    // read services.txt
-    for (std::string line; std::getline(services, line);) {
-        std::stringstream lineStream(line);
-        // hmName
-        std::string name;
-        std::getline(lineStream, name, ',');
-        // pro
-        std::string proStr;
-        std::getline(lineStream, proStr, ',');
-        bool pro = proStr == "yes";
-        // price
-        std::string priceStr;
-        std::getline(lineStream, priceStr, ',');
-        float price = std::stof(priceStr);
-        // duration
-        std::string durationStr;
-        std::getline(lineStream, durationStr, ',');
-        Duration duration(durationStr);
-        // category
-        std::string category{};
-        std::getline(lineStream, category, ',');
-        if (category == "default") {
-            addAvailableService(name, pro, price, duration);
-        } else if (category == "painting") {
-            addAvailablePaintService(name, pro, price, duration);
-        }
-    }
-
-    // read collaborators.txt
-    for (std::string line; std::getline(collaborators, line);) {
-        std::stringstream lss(line);
-
-        //check if a collaborator works for that affiliate
-        std::string affiliateName{};
-        std::getline(lss, affiliateName, ',');
-        if (affiliateName == hmName) {
-            // hmName
-            std::string name{};
-            std::getline(lss, name, ',');
-            // pro
-            std::string proStr{};
-            std::getline(lss, proStr, ',');
-            // earnings
-            std::string earnStr{};
-            std::getline(lss, earnStr, ',');
-            float collabEarnings = std::stof(earnStr);
-            // score
-            std::string scoreStr{};
-            std::getline(lss, scoreStr, ',');
-            auto score = Classification(std::stoi(scoreStr));
-            // availability
-            std::string availabilitiesStr{};
-            std::string availabilityStr{};
-            std::vector<Availability> availabilities;
-            std::getline(lss, availabilitiesStr, ',');
-            std::stringstream availabilitiesStream(availabilitiesStr);
-            while(std::getline(availabilitiesStream, availabilityStr, ' ')){
-                availabilities.emplace_back(Availability(availabilityStr));
-            }
-            // services
-            std::string serviceName{};
-            std::vector<std::string> collabServices;
-
-            while (std::getline(lss, serviceName, ',')) {
-                collabServices.push_back(serviceName);
-            }
-
-            addCollaborator(collabServices, name, proStr == "yes", availabilities, collabEarnings, score, affiliateName);
-        } else continue;
-    }
 
 
-    // read clients.txt
-    for (std::string line; std::getline(clients, line);) {
-        std::stringstream lss(line);
-        //check if it is a affiliate's client
-        std::string affiliate_name{};
-        std::getline(lss, affiliate_name, ',');
-        if (affiliate_name == hmName) {
-            std::string name;
-            std::string nifStr{};
-            std::string premiumStr{};
-            std::getline(lss, name, ',');
-            std::getline(lss, nifStr, ',');
-            std::getline(lss, premiumStr, ',');
 
-            addClient(std::stoul(nifStr), name, premiumStr == "yes", affiliate_name);
-        } else continue;
-    }
+// Users Manip
 
-    // read usernames.txt
-    for (std::string line; std::getline(usernames, line);) {
-        std::stringstream lss(line);
-        std::string username;
-        std::string id;
-        std::getline(lss, username, ',');
-        std::getline(lss, id, ',');
-        _usernameMap.emplace(std::pair<std::string, std::string>(username, id));
-    }
-
-    // read history.txt
-    for (std::string line; std::getline(history, line);) {
-        if (line.front() == '@') continue;
-        else if (line.front() == ' ') break;
-        std::stringstream lineStream(line);
-        std::string serviceStr{}, clientId{}, collabId{}, start{}, forcePro{}, state{}, cost{}, nrRooms{};
-        std::getline(lineStream, serviceStr, ',');
-        Service *service = _availableServices[serviceStr];
-        std::getline(lineStream, clientId, ',');
-        std::getline(lineStream, collabId, ',');
-        std::getline(lineStream, start, ',');
-        std::getline(lineStream, forcePro, ',');
-        std::getline(lineStream, state, ',');
-        std::getline(lineStream, cost, ',');
-        std::getline(lineStream, nrRooms, ',');
-        auto *intervention = new Intervention(Date(start), service, forcePro == "1", std::stoi(nrRooms),
-                                              processState(std::stoi(state)), std::stof(cost),
-                                              collabId, clientId);
-        _interventions.insert(intervention);
-    }
-
-}
-
-/**
- * @brief getter
- * @return the collaborators
- */
-std::map<std::string, Collaborator *> HouseMasterAffiliate::getCollaborators() const {
-    return _collaborators;
-}
 
 /**
  * @brief getter
@@ -350,129 +196,6 @@ std::unordered_map<std::string, Service *> &HouseMasterAffiliate::getAvailableSe
 }
 
 /**
- * @brief Manipulates the username map
- * @param string with the user id
- */
-void HouseMasterAffiliate::usernameMapChanger(std::string id, std::string newUsername) {
-    auto user = std::find_if(_usernameMap.begin(), _usernameMap.end(),
-                             [&id](const std::pair<std::string, std::string> &mapElem) {
-                                 return mapElem.second == id;
-                             });
-
-    if (user != _usernameMap.end()) {
-        auto alreadyInUse = std::find_if_not(_usernameMap.begin(), _usernameMap.end(),
-                                             [&newUsername](const std::pair<std::string, std::string> &username) {
-                                                 return newUsername != username.first;
-                                             });
-
-        if (alreadyInUse == _usernameMap.end()) {
-            _usernameMap.erase(user);
-            _usernameMap.emplace(std::pair<std::string, std::string>(newUsername, id));
-        } else {
-            throw UsernameAlreadyInUse("Username in use, choose another!");
-        }
-    } else {}
-}
-
-/**
- * @brief adds a new collaborator to the housemaster
- * @param services services that the collaborator can preform
- * @param name name of the collaborator
- * @param pro is professional
- * @param earnings the earnings
- * @param score the score
- * @param affiliate the affiliate's name
- */
-void HouseMasterAffiliate::addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
-                                           std::vector<Availability> availabilities, float earnings,
-                                           Classification score, std::string affiliate) {
-    auto collab = new Collaborator(services, name, pro, availabilities, earnings, score, std::move(affiliate));
-    _collaborators.insert({collab->getId(), collab});
-    _usernameMap.insert({collab->getId(), collab->getId()});
-}
-
-
-/**
- * @brief removes a collaborator from housemaster
- * @param id the id of the collaborator to remove
- */
-void HouseMasterAffiliate::removeCollaborator(const std::string &id) {
-    auto it = _collaborators.find(id);
-    auto usernameIt = std::find_if(_usernameMap.begin(), _usernameMap.end(),
-                                   [&id](const std::pair<std::string, std::string> &mapped) {
-                                       return mapped.second == id;
-                                   });
-    if (it != _collaborators.end()) {
-        if (usernameIt != _usernameMap.end()) {
-            if (getAssociatedActiveInterventions(id).empty()) {
-                _collaborators.erase(it);
-                _usernameMap.erase(usernameIt);
-            } else {
-                throw AssignedCollab("Collaborator still has incomplete Interventions!");
-            }
-        } else {
-            throw NonexistentUsername("This username does not exist!");
-        }
-    } else {
-        throw NonexistentCollab("There's no such collab!");
-    }
-}
-
-/**
- * @brief adds a new client to the housemaster
- * @param nif tax id
- * @param name name
- * @param premium is premium
- */
-void HouseMasterAffiliate::addClient(unsigned long nif, const std::string &name, bool premium, std::string affiliate) {
-
-    auto it = std::find_if(_clients.begin(), _clients.end(), [&nif](const std::pair<std::string, Client *> &pair) {
-        return pair.second->getNif() == nif;
-    });
-    if (it == _clients.end()) {
-        auto client = new Client(nif, name, premium, std::move(affiliate));
-        _clients.insert({client->getId(), client});
-        _usernameMap.insert({client->getId(), client->getId()});
-    } else {
-        throw HouseMasterAffiliate::ExistentClient("Client already registred!");
-    }
-}
-
-
-/**
- * @brief removes a client from housemaster
- * @param clientId the client to be removed
- */
-void HouseMasterAffiliate::removeClient(const std::string &clientId) {
-
-    auto ClientIt = _clients.find(clientId);
-    auto UsernameIt = std::find_if(_usernameMap.begin(), _usernameMap.end(),
-                                   [&clientId](const std::pair<std::string, std::string> &mapped) {
-                                       return mapped.second == clientId;
-                                   });
-    if (ClientIt != _clients.end()) {
-        if (UsernameIt != _usernameMap.end()) {
-            delete ClientIt->second;
-            _clients.erase(ClientIt);
-            _usernameMap.erase(UsernameIt);
-        } else {
-            throw NonexistentUsername("This username does not exist!");
-        }
-
-    } else {
-        throw NonexistentClient("Theres no such client!");
-    }
-}
-
-/**
- * @brief getter
- * @return the clients
- */
-std::map<std::string, Client *> HouseMasterAffiliate::getClients() const {
-    return _clients;
-}
-
-/**
  * @brief adds an intervention
  * @param start start of the intervention
  * @param service the service
@@ -500,16 +223,7 @@ void HouseMasterAffiliate::changeInterventionState(Intervention *intervention, p
     intervention->setProcessState(state);
 }
 
-/**
- * @brief processes the payment of an intervention
- * @param intervention the intervention
- */
-void HouseMasterAffiliate::processTransaction(Intervention *intervention) {
-    float hmEarnings;
-    hmEarnings = intervention->getCost() - (intervention->getCost() / float(1 + HouseMasterTax));
-    getCollaborators()[intervention->getCollabId()]->calculateEarnings(hmEarnings);
-    _earnings += hmEarnings;
-}
+
 
 /**
  * @brief gets the interventions associated to an individual
@@ -558,27 +272,16 @@ std::unordered_set<Intervention *> HouseMasterAffiliate::getAssociatedPastInterv
  * @brief sorts the collaborators based on their performance
  * @return the sorted collaborators
  */
-std::vector<std::pair<std::string, Collaborator *>> HouseMasterAffiliate::sortCollaboratorsByScore() {
-    std::vector<std::pair<std::string, Collaborator *>> temp;
-    for (const auto &elem : _collaborators) {
+std::vector<Collaborator *> HouseMasterAffiliate::sortCollaboratorsByScore() const{
+    std::vector<Collaborator *> temp;
+    for (const auto &elem : getAffiliateCollabs()) {
         temp.emplace_back(elem);
     }
     std::sort(temp.begin(), temp.end(), scoreComparer);
     return temp;
 }
 
-/**
- * @brief finds an individual by their username
- * @param username the username
- * @return the individual
- */
-Individual *HouseMasterAffiliate::findByUsername(const std::string &username) {
-    auto it = _usernameMap.find(username);
-    if (it == _usernameMap.end()) throw NonexistentUsername("This username does not exist!");
-    if (it->second.substr(0, 6) == "collab") return _collaborators[it->second];
-    else if (it->second.substr(0, 6) == "client") return _clients[it->second];
-    else return nullptr;
-}
+
 
 /**
  * @brief assigns a collaborator to an intervention
@@ -588,30 +291,17 @@ Individual *HouseMasterAffiliate::findByUsername(const std::string &username) {
 void HouseMasterAffiliate::assignCollaborator(Intervention *intervention) {
     HouseMasterAffiliate *hm = this;
 
-    for(const auto& collab : _collaborators){
-        if (collab.second->canDo(*hm, collab.second->getId(), intervention))
-           _collaborators_queue.emplace(std::pair<Intervention*, std::pair<std::string, Collaborator*>>(intervention, std::pair<std::string, Collaborator*>(collab)));
+    for(const auto& collab : getAffiliateCollabs()){
+        if (collab->canDo(*hm, collab->getId(), intervention))
+           _collaborators_queue.emplace(std::pair<Intervention*, Collaborator*>(intervention, collab));
     }
 
     if (!_collaborators_queue.empty())
-        intervention->setCollabId(_collaborators_queue.top().second.first);
+        intervention->setCollabId(_collaborators_queue.top().second->getId());
     else throw UnavailableAppointment("No collaborators available to the desired date!");
 }
 
-/**
- * @brief Saves usernameMap
- */
-void HouseMasterAffiliate::writeUsernameMap() {
-    std::ofstream usernameMapFile("../data/usernames.txt");
-    if (usernameMapFile.is_open()) {
-        auto usernameIt = _usernameMap.begin();
-        while (usernameIt != _usernameMap.end()) {
-            usernameMapFile << usernameIt->first << ',' << usernameIt->second << std::endl;
-            usernameIt++;
-        }
-        usernameMapFile.close();
-    } else throw UnableToWriteFile("Unable to write in usernames' file");
-}
+
 
 /**
  * @brief saves the collaborators' info
@@ -620,23 +310,22 @@ void HouseMasterAffiliate::writeCollabsInfo() {
     std::ofstream collabFile;
     collabFile.open("../data/collabs.txt");
     if (collabFile.is_open()) {
-        auto collab_it = _collaborators.begin();
-        while (collab_it != _collaborators.end()) {
-            collabFile << collab_it->second->getName();
-            if (collab_it->second->isPro()) { collabFile << ",yes,"; } else { collabFile << ",no,"; }
-            collabFile << collab_it->second->getEarnings() << ',' << collab_it->second->getScore() << ',';
-            for (size_t i = 0; i < collab_it->second->getAvailability().size(); i++) {
-                if (i == collab_it->second->getAvailability().size() - 1)
-                    collabFile << collab_it->second->getAvailability()[i].getString() << ' ';
-                else collabFile << collab_it->second->getAvailability()[i].getString() << ",";
+        std::vector<Collaborator*> collabs = getAffiliateCollabs();
+        for(const auto& collab : collabs){
+            collabFile << collab->getName();
+            if (collab->isPro()) { collabFile << ",yes,"; } else { collabFile << ",no,"; }
+            collabFile << collab->getEarnings() << ',' << collab->getScore() << ',';
+            for (size_t i = 0; i < collab->getAvailability().size(); i++) {
+                if (i == collab->getAvailability().size() - 1)
+                    collabFile << collab->getAvailability()[i].getString() << ' ';
+                else collabFile << collab->getAvailability()[i].getString() << ",";
             }
-            for (size_t i = 0; i < collab_it->second->getServices().size(); i++) {
-                if (i == collab_it->second->getServices().size() - 1)
-                    collabFile << collab_it->second->getServices()[i];
-                else collabFile << collab_it->second->getServices()[i] << ",";
+            for (size_t i = 0; i < collab->getServices().size(); i++) {
+                if (i == collab->getServices().size() - 1)
+                    collabFile << collab->getServices()[i];
+                else collabFile << collab->getServices()[i] << ",";
             }
             collabFile << '\n';
-            collab_it++;
         }
         collabFile.close();
     } else throw UnableToWriteFile("Unable to write in collabs' file");
@@ -648,12 +337,11 @@ void HouseMasterAffiliate::writeCollabsInfo() {
 void HouseMasterAffiliate::writeClientsInfo() {
     std::ofstream clientsFile("../data/clients.txt");
     if (clientsFile.is_open()) {
-        auto client_it = _clients.begin();
-        while (client_it != _clients.end()) {
-            clientsFile << client_it->second->getName() << "," << client_it->second->getNif();
-            if (client_it->second->isPremium()) { clientsFile << ",yes"; } else { clientsFile << ",no"; }
+        auto clients = getAffiliateClients();
+        for(const auto & client : clients){
+            clientsFile << client->getName() << "," << client->getNif();
+            if (client->isPremium()) { clientsFile << ",yes"; } else { clientsFile << ",no"; }
             clientsFile << '\n';
-            client_it++;
         }
         clientsFile.close();
     } else throw UnableToWriteFile("Unable to write in clients' file");
@@ -780,11 +468,9 @@ std::string HouseMasterAffiliate::getLocation() const {
  * @brief getter
  * @return responsible
  */
-std::string HouseMasterAffiliate::getResponsible() const {
+std::string HouseMasterAffiliate::getAdmin_str() const {
     return _responsible.getName();
 }
-
-
 
 /**
  * @brief exception for an impossible appointment
@@ -807,44 +493,10 @@ HouseMasterAffiliate::NonexistentService::NonexistentService(const std::string &
 HouseMasterAffiliate::ExistentService::ExistentService(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
 /**
- * @brirf Exception thrown when trying to change username to another already in use
- * @param error_msg to show
- */
-HouseMasterAffiliate::UsernameAlreadyInUse::UsernameAlreadyInUse(const std::string &error_msg) : std::logic_error(
-        error_msg) {};
-
-/**
- * @brief the exception for a nonexistent collaborator
- * @param error_msg to show
- */
-HouseMasterAffiliate::NonexistentCollab::NonexistentCollab(const std::string &error_msg) : std::out_of_range(
-        error_msg) {}
-
-/**
  * @brief the exception for when trying to fire a collaborator with active interventions
  * @param error_msg to show
  */
 HouseMasterAffiliate::AssignedCollab::AssignedCollab(const std::string &error_msg) : std::logic_error(error_msg) {}
-
-/**
- * @brief the exception for nonexistent clients
- * @param error_msg to show
- */
-HouseMasterAffiliate::NonexistentClient::NonexistentClient(const std::string &error_msg) : std::out_of_range(
-        error_msg) {}
-
-/**
- * @brief the exception for when a client already exists
- * @param error_msg to show
- */
-HouseMasterAffiliate::ExistentClient::ExistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
-
-/**
- * @brief the exception for nonexistent username
- * @param error_msg to show
- */
-HouseMasterAffiliate::NonexistentUsername::NonexistentUsername(const std::string &error_msg) : out_of_range(
-        error_msg) {}
 
 /**
  * @brief the exception for writing to file failures
@@ -856,8 +508,8 @@ HouseMasterAffiliate::UnableToWriteFile::UnableToWriteFile(const std::string &er
 
 bool HouseMasterAffiliate::operator<(const HouseMasterAffiliate &hma) const {
     if (_responsible.getName() == hma.getAdmin().getName()) {
-        if (getClients().size() == hma.getClients().size()) {
+        if (getAffiliateClients().size() == hma.getAffiliateClients().size()) {
             return (_location < hma.getLocation());
-        } else return (_clients.size() < hma.getClients().size());
+        } else return (getAffiliateClients().size() < hma.getAffiliateClients().size());
     } else return (_responsible.getName() < hma.getAdmin().getName());
 }

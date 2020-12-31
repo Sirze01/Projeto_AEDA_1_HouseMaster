@@ -12,6 +12,7 @@
 #include <sstream>
 #include "Services.h"
 
+class HouseMaster;
 class HouseMasterAffiliate;
 
 class Individual {
@@ -25,7 +26,7 @@ public:
 
     virtual std::string getId() const = 0;
 
-    void changeUsername(HouseMasterAffiliate &hm, std::string newUsername) const;
+    void changeUsername(HouseMaster &hm, std::string newUsername) const;
 
     std::unordered_set<Intervention *> getAssociatedInterventions(HouseMasterAffiliate &hm) const;
 
@@ -65,7 +66,7 @@ public:
 
     bool canPreform(const std::string &service);
 
-    bool isAvailable(HouseMasterAffiliate &hm, const std::string &collabId, Date start, Duration duration);
+    bool isAvailable(HouseMasterAffiliate &hm, const std::string &collabId, Date start, Duration duration) const;
 
     bool hasQualificationToPreform(Intervention *intervention) const;
 
@@ -136,10 +137,10 @@ public:
 
 class Collaborator_pointer_compare{
 public:
-    bool operator() (const std::pair<Intervention*, std::pair<std::string, Collaborator*>>& col1, const std::pair<Intervention*, std::pair<std::string, Collaborator*>>& col2){
+    bool operator() (const std::pair<Intervention*, Collaborator*>& col1, const std::pair<Intervention*, Collaborator*>& col2){
         int a = 10;
         int b = 10;
-        for(const auto & availability : col1.second.second->getAvailability()){
+        for(const auto & availability : col1.second->getAvailability()){
             if((col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday < 0) ?
             (7 - (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday)) :
                (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday) < a)
@@ -149,7 +150,7 @@ public:
 
         }
 
-        for(const auto & availability : col2.second.second->getAvailability()){
+        for(const auto & availability : col2.second->getAvailability()){
             if((col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday < 0) ?
                (7 - (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday)) :
                (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday) < a)
@@ -185,7 +186,7 @@ public:
 
     static void cancelIntervention(Intervention *intervention);
 
-    static void classifyCollaborator(HouseMasterAffiliate &hm, const std::string &collabId, Classification classification);
+    static void classifyCollaborator(HouseMaster* hm, const std::string &collabId, Classification classification);
 
     bool operator==(const Client &ind2) const;
 
@@ -210,7 +211,7 @@ public:
     Admin();
     Admin(const std::string &name, std::string affiliate);
 
-    Admin(const std::string &name);
+    explicit Admin(const std::string &name);
 
     ~Admin() override = default;
     std::string getAffiliate() const;
