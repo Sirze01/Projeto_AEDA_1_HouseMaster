@@ -217,9 +217,12 @@ public:
     std::string getAffiliate() const;
     static unsigned int _idSeqAdmins;
     std::string getId() const override;
+    std::string getPassword() const;
+    void setPassword(const std::string& password);
 
 private:
     std::string _affiliate;
+    std::string _password;
 };
 
 

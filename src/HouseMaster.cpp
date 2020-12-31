@@ -492,7 +492,7 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernam
  * @brief getter
  * @return the total earnings
  */
-float HouseMaster::getTotalFinances()
+float HouseMaster::getTotalFinances() const
 {
     float totalFinances{};
     for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)
@@ -561,3 +561,29 @@ HouseMaster::NonexistentClient::NonexistentClient(const std::string &error_msg) 
  * @param error_msg to show
  */
 HouseMaster::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) : std::ifstream::failure(error_msg) {}
+Client *HouseMaster::findClientByEmail(const string &email) const {
+    for (const auto & client : _clientContacts) {
+        if (client->getEmail() == email) {
+            return client;
+        }
+    }
+    throw HouseMasterAffiliate::NonexistentClient("Email not found in records");
+}
+
+HouseMasterAffiliate HouseMaster::findAffiliateByClient(const Client *client) const {
+    BSTItrIn<HouseMasterAffiliate> current(_affiliates);
+    for (; !current.isAtEnd(); current.advance()) {
+        auto found = std::find_if(_clientContacts.begin(), _clientContacts.end(), [&](const Client* client1){
+            try {
+                return current.retrieve().findById(client->getId()) == client1;
+            }
+            catch (const HouseMasterAffiliate::NonexistentClient &e) {
+                return false;
+            }
+        });
+        if (found != _clientContacts.end()) {
+            return current.retrieve();
+        }
+    }
+    return HouseMasterAffiliate();
+}

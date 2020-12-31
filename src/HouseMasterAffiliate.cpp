@@ -283,6 +283,15 @@ std::vector<Collaborator *> HouseMasterAffiliate::sortCollaboratorsByScore() con
 
 
 
+Individual *HouseMasterAffiliate::findById(std::string id) const {
+    for (const auto & client : _clients) {
+        if (client.first == id) {
+            return client.second;
+        }
+    }
+    throw HouseMasterAffiliate::NonexistentClient("Can't find that client");
+}
+
 /**
  * @brief assigns a collaborator to an intervention
  * @param intervention the intervention

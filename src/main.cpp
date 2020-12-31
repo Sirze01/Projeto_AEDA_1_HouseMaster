@@ -9,10 +9,6 @@ int main() {
 
     HouseMaster hm(std::ifstream("../data/affiliates.txt"));
     BSTItrIn<HouseMasterAffiliate> current(hm.getAffiliates());
-    for (; !current.isAtEnd(); current.advance()) {
-        std::cout << current.retrieve().getAffiliateName() << ".." << current.retrieve().getAdmin().getName()
-        << " " << current.retrieve().getLocation() << " " << current.retrieve().getAdmin().getName()<< "\n";
-    }
     HousemasterInterface i = HousemasterInterface(hm);
     bool running = true;
     while (running) {

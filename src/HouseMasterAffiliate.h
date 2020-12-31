@@ -82,8 +82,22 @@ public:
     std::unordered_set<Intervention *> getAllActiveInterventions();
 
     static void changeInterventionState(Intervention *intervention, processState state);
+    std::string getAffiliateName() const;
+
+    Admin getAdmin() const;
+
+    std::string getLocation() const;
+
+    Admin getResponsible() const;
+
+    void assignCollaborator(Intervention *intervention,
+                            const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs);
+
+    std::vector<std::pair<std::string, Collaborator *>> sortCollaboratorsByScore();
 
     void processTransaction(Intervention *intervention);
+
+    Individual* findById(std::string id) const;
 
     static void markAsComplete(Intervention *intervention);
 
@@ -128,6 +142,9 @@ private:
     std::priority_queue<std::pair<Intervention*, Collaborator*>,
         std::vector<std::pair<Intervention*, Collaborator*>>,
         Collaborator_pointer_compare> _collaborators_queue;
+    /*std::map<std::string, Client *> _clients;
+    std::unordered_map<std::string, std::string> _usernameMap;
+    std::map<std::string, Collaborator *> _collaborators;*/
     std::unordered_set<Intervention *> _interventions;
     std::string _name;
     std::string _location;

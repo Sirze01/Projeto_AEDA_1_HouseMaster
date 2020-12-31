@@ -14,6 +14,7 @@ public:
     void firstInterface(bool &running);
     //void collaboratorOperations(bool &running);
     void adminLogin();
+    void responsibleLogin(const HouseMasterAffiliate &hma);
     void collabLogin();
     void clientLogin();
 private:
@@ -25,8 +26,8 @@ private:
     Individual* _user{};
     string selectLocation(bool &running);
     string selectResponsible(bool &running);
-
     void show(const HouseMasterAffiliate &affiliate);
+    void showTotalFinances(const HouseMaster &hm);
 };
 
 

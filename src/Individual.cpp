@@ -292,15 +292,20 @@ void Client::setEmail(const std::string &email) {
  * */
 Admin::Admin() : Individual() {}
 
+/**
+ * @brief admin's constructor
+ * @param name the name
+ */
+Admin::Admin(const std::string &name) : Individual(name) {
+    _id = _idSeqAdmins++;
+}
 
 /**
  * @brief admin's constructor
  * @param name the name
  * @param affiliate the affiliate
  */
-Admin::Admin(const std::string &name) : Individual(name) {
-    _id = _idSeqAdmins++;
-}
+Admin::Admin(const std::string &name, std::string affiliate) : Individual(name), _affiliate(std::move(affiliate)){}
 
 /**
  * @brief getter
@@ -310,4 +315,28 @@ std::string Admin::getId() const {
     std::stringstream outStr;
     outStr << "admin" << _id;
     return outStr.str();
+}
+
+/**
+ * @brief getter
+ * @return affiliate
+ */
+std::string Admin::getAffiliate() const {
+    return _affiliate;
+}
+
+/**
+ * @brief getter
+ * @return password
+ */
+std::string Admin::getPassword() const {
+    return _password;
+}
+
+/**
+ * @brief setter
+ * @return password
+ */
+void Admin::setPassword(const std::string& password){
+    _password = password;
 }

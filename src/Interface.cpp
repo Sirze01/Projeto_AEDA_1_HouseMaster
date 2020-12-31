@@ -358,7 +358,7 @@ void Interface::show(const Service &service) {
 }
 
 /**
- * @brief shows admin's operations
+ * @brief shows responsible's operations
  * @param running
  */
 void Interface::responsibleOperations(bool &running) {
@@ -869,4 +869,9 @@ void Interface::showSortedCollabs() {
               << "] BACK  |" << std::endl;
     std::cout << "|____________________________________________________|" << std::endl;
     std::cin.ignore();
+}
+
+Interface::Interface(const HouseMasterAffiliate& housemaster, Individual* user, Role role) :
+    _houseMasterAffiliate(housemaster), _user(user), _role(role) {
+
 }

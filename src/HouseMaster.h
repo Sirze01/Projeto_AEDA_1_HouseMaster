@@ -50,6 +50,10 @@ public:
 
 
     // Users Manip
+    Client* findClientByEmail(const std::string &email) const;
+
+    HouseMasterAffiliate findAffiliateByClient(const Client* client) const;
+
     clientHT getContacts() const;
 
     void addUsernamesMapEntry(std::pair<std::string, std::string> map);
