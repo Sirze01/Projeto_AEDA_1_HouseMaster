@@ -245,8 +245,7 @@ void HouseMaster::addClient(unsigned long nif, const std::string &name, bool pre
     });
     if (it == _clients.end()) {
         auto client = new Client(nif, name, premium, std::move(affiliate));
-        _clients.insert({client->getId(), client});
-        _usernameMap.insert({client->getEmail(), client->getId()});
+        _clients.insert({client->getEmail(), client});
     } else {
         throw HouseMaster::ExistentClient("Client already registred!");
     }
