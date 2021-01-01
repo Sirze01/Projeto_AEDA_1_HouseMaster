@@ -96,6 +96,8 @@ public:
 
     HouseMasterAffiliate findAffiliateByClient(const Client *client) const;
 
+    HouseMasterAffiliate findAffiliateByCollab(const Collaborator *collab) const;
+
 private:
     std::unordered_map<std::string, std::string> _usernameMap;
     std::map<std::string, Client *> _clients;

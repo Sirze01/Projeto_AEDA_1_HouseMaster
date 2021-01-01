@@ -51,7 +51,6 @@ void HousemasterInterface::runAffiliateInterface(bool &running) {
 
 void HousemasterInterface::firstInterface(bool &running) {
     bool innerRunning = true;
-    Interface newInterface(_houseMaster.getAffiliates().findMin());
     Menu start("Welcome to Housemaster", {{"HouseMaster Administration", [&](){
         std::cout << "Welcome to HouseMaster. You have ADMIN privilege.\n";
         adminLogin();
@@ -66,21 +65,23 @@ void HousemasterInterface::firstInterface(bool &running) {
         clientLogin();
         bool innerRunning = true;
         Interface clientInterface(_currentAffiliate, _user, client);
-        while (running) {
+        while (innerRunning) {
             clientInterface.clientOperations(innerRunning);
         }
     }}, {"Login Collaborator", [&](){
         collabLogin();
+        bool innerRunning = true;
+        Interface collabInterface(_currentAffiliate, _user, collaborator);
         std::cout << "Login succeeded for " << _user->getName() << "\n";
         while (innerRunning) {
-                newInterface.collaboratorOperations(innerRunning);
+            collabInterface.collaboratorOperations(innerRunning);
         }
     }}, { "Login Responsible", [&](){
         std::cout << "Welcome to HouseMaster. You have RESPONSIBLE privilege.\n";
         bool innerRunning2 = true;
         HouseMasterAffiliate affiliate = selectAffiliate(innerRunning2);
         responsibleLogin(affiliate);
-        newInterface.responsibleOperations(innerRunning);
+        //newInterface.responsibleOperations(innerRunning);
         while (innerRunning) {
             start.show();
             start.select();
@@ -151,8 +152,8 @@ void HousemasterInterface::collabLogin() {
     while (!done) {
         try{
             done = true;
-            //std::string id = _houseMasterAffiliate.findByUsername(username)->getId();
-            //_user = _houseMasterAffiliate.findByUsername(username);
+            _user = _houseMaster.findByUsername(username);
+            _houseMasterAffiliate = _houseMaster.findAffiliateByCollab(dynamic_cast<Collaborator*>(_user));
         }
         catch (const HouseMaster::NonexistentUsername &e) {
             done = false;

@@ -571,12 +571,24 @@ Client *HouseMaster::findClientByEmail(const string &email) const {
 }
 
 HouseMasterAffiliate HouseMaster::findAffiliateByClient(const Client *client) const {
-    std::string id = client->getId();
     BSTItrIn<HouseMasterAffiliate> current(_affiliates);
     for (; !current.isAtEnd(); current.advance()) {
         auto affiliate = current.retrieve();
         for (const auto & i : affiliate.getAffiliateClients()) {
             if (i->getId() == client->getId()) {
+                return affiliate;
+            }
+        }
+    }
+    return HouseMasterAffiliate();
+}
+
+HouseMasterAffiliate HouseMaster::findAffiliateByCollab(const Collaborator *collab) const {
+    BSTItrIn<HouseMasterAffiliate> current(_affiliates);
+    for (; !current.isAtEnd(); current.advance()) {
+        auto affiliate = current.retrieve();
+        for (const auto & i : affiliate.getAffiliateCollabs()) {
+            if (i->getId() == collab->getId()) {
                 return affiliate;
             }
         }
