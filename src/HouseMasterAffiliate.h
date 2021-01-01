@@ -27,7 +27,11 @@ class HouseMaster;
  */
 class HouseMasterAffiliate {
 public:
+
     // Constructors and destructor
+
+    HouseMasterAffiliate() = default;
+
     explicit HouseMasterAffiliate(HouseMaster* hm);
 
     HouseMasterAffiliate(HouseMaster* hm, std::ifstream usernames, std::ifstream collaborators, std::ifstream clients,
@@ -37,7 +41,7 @@ public:
     ~HouseMasterAffiliate() = default;
 
 
-    // Users Manip
+    // Users manipulation
     void removeCollaborator(const std::string &collId);
 
     std::vector<Collaborator *> sortCollaboratorsByScore() const;
@@ -82,22 +86,8 @@ public:
     std::unordered_set<Intervention *> getAllActiveInterventions();
 
     static void changeInterventionState(Intervention *intervention, processState state);
-    std::string getAffiliateName() const;
-
-    Admin getAdmin() const;
-
-    std::string getLocation() const;
-
-    Admin getResponsible() const;
-
-    void assignCollaborator(Intervention *intervention,
-                            const std::vector<std::pair<std::string, Collaborator *>> &orderedCollabs);
-
-    std::vector<std::pair<std::string, Collaborator *>> sortCollaboratorsByScore();
 
     void processTransaction(Intervention *intervention);
-
-    Individual* findById(std::string id) const;
 
     static void markAsComplete(Intervention *intervention);
 
@@ -115,8 +105,6 @@ public:
     std::string getAdmin_str() const;
 
     float getEarnings() const;
-
-    void writeFinancialInfo() const;
 
 
     // General
@@ -137,7 +125,7 @@ public:
     class UnableToWriteFile;
 
 private:
-    HouseMaster* _hm;
+    HouseMaster* _hm{};
     std::unordered_map<std::string, Service *> _availableServices;
     std::priority_queue<std::pair<Intervention*, Collaborator*>,
         std::vector<std::pair<Intervention*, Collaborator*>>,
@@ -148,7 +136,7 @@ private:
     std::unordered_set<Intervention *> _interventions;
     std::string _name;
     std::string _location;
-    float _earnings;
+    float _earnings{};
     Admin _responsible;
 
     unsigned int _id{};

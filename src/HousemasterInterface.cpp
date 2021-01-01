@@ -9,9 +9,10 @@ HousemasterInterface::HousemasterInterface(const HouseMaster &housemaster) : _cu
 void HousemasterInterface::showAffiliateInterface(HouseMasterAffiliate &affiliate) {
     bool running = true;
     Interface affiliateInterface(affiliate);
+    /*
     while (running) {
         affiliateInterface.selectRole(running);
-    }
+    }*/
     _houseMaster.removeAffiliate(affiliate);
     _houseMaster.registerAffiliate(affiliateInterface.getHouseMasterState());
 }
@@ -123,7 +124,7 @@ void HousemasterInterface::responsibleLogin(const HouseMasterAffiliate &hma) {
     std::cout << "Password : ";
     std::cin >> password;
     for (int i = 0; i <= 1; i++) {
-        if (password == hma.getResponsible().getPassword()) {
+        if (password == hma.getAdmin().getPassword()) {
             std::cout << "success \n";
             return;
         } else {
@@ -150,10 +151,10 @@ void HousemasterInterface::collabLogin() {
     while (!done) {
         try{
             done = true;
-            std::string id = _houseMasterAffiliate.findByUsername(username)->getId();
-            _user = _houseMasterAffiliate.findByUsername(username);
+            //std::string id = _houseMasterAffiliate.findByUsername(username)->getId();
+            //_user = _houseMasterAffiliate.findByUsername(username);
         }
-        catch (const HouseMasterAffiliate::NonexistentUsername &e) {
+        catch (const HouseMaster::NonexistentUsername &e) {
             done = false;
             std::cout << e.what() << " Please try again\n";
             std::cout << "Username : ";
@@ -180,7 +181,7 @@ void HousemasterInterface::clientLogin() {
             _user = client;
             std::cout << "Logged " << client->getName() << " to " << _currentAffiliate.getAffiliateName() << '\n';
         }
-        catch (const HouseMasterAffiliate::NonexistentClient &e) {
+        catch (const HouseMaster::NonexistentClient &e) {
             done = false;
             std::cout << e.what() << " Please try again\n";
             std::cout << "E-mail: ";

@@ -13,7 +13,8 @@ int main() {
     bool running = true;
     while (running) {
         //i.showInterface(running);
-        i.runAffiliateInterface(running);
+        //i.runAffiliateInterface(running);
+        i.firstInterface(running);
     }
     /*
     HouseMasterAffiliate h1 = hm.getAffiliates().findMin();

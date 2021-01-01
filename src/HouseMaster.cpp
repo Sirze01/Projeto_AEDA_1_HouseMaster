@@ -567,22 +567,18 @@ Client *HouseMaster::findClientByEmail(const string &email) const {
             return client;
         }
     }
-    throw HouseMasterAffiliate::NonexistentClient("Email not found in records");
+    throw HouseMaster::NonexistentClient("Email not found in records");
 }
 
 HouseMasterAffiliate HouseMaster::findAffiliateByClient(const Client *client) const {
+    std::string id = client->getId();
     BSTItrIn<HouseMasterAffiliate> current(_affiliates);
     for (; !current.isAtEnd(); current.advance()) {
-        auto found = std::find_if(_clientContacts.begin(), _clientContacts.end(), [&](const Client* client1){
-            try {
-                return current.retrieve().findById(client->getId()) == client1;
+        auto affiliate = current.retrieve();
+        for (const auto & i : affiliate.getAffiliateClients()) {
+            if (i->getId() == client->getId()) {
+                return affiliate;
             }
-            catch (const HouseMasterAffiliate::NonexistentClient &e) {
-                return false;
-            }
-        });
-        if (found != _clientContacts.end()) {
-            return current.retrieve();
         }
     }
     return HouseMasterAffiliate();

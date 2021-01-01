@@ -10,8 +10,8 @@
  * @param b second collaborator
  * @return true first has better score false otherwise
  */
-bool scoreComparer(std::pair<std::string, Collaborator *> &a, std::pair<std::string, Collaborator *> &b) {
-    return a.second->getScore() > b.second->getScore();
+bool scoreComparer(Collaborator * a, Collaborator * b) {
+    return a->getScore() > b->getScore();
 }
 
 /**
@@ -277,20 +277,12 @@ std::vector<Collaborator *> HouseMasterAffiliate::sortCollaboratorsByScore() con
     for (const auto &elem : getAffiliateCollabs()) {
         temp.emplace_back(elem);
     }
-    std::sort(temp.begin(), temp.end(), scoreComparer);
+    std::sort(temp.begin(), temp.end(), [](const Collaborator* c1, const Collaborator* c2) {
+        return c1->getScore() > c2->getScore();
+    });
     return temp;
 }
 
-
-
-Individual *HouseMasterAffiliate::findById(std::string id) const {
-    for (const auto & client : _clients) {
-        if (client.first == id) {
-            return client.second;
-        }
-    }
-    throw HouseMasterAffiliate::NonexistentClient("Can't find that client");
-}
 
 /**
  * @brief assigns a collaborator to an intervention

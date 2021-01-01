@@ -31,7 +31,7 @@ public:
     ~HouseMaster() = default;
 
 
-    // Affiliates manip
+    // Affiliates manipulation
     BST<HouseMasterAffiliate >& getAffiliates();
 
     void registerAffiliate(const HouseMasterAffiliate& affiliate);
@@ -49,10 +49,8 @@ public:
     void writeAffiliatesInfo();
 
 
-    // Users Manip
+    // Users Manipulation
     Client* findClientByEmail(const std::string &email) const;
-
-    HouseMasterAffiliate findAffiliateByClient(const Client* client) const;
 
     clientHT getContacts() const;
 
@@ -77,7 +75,7 @@ public:
     void writeUsernameMap();
 
     // General
-    float getTotalFinances();
+    float getTotalFinances() const;
 
     Individual *findByUsername(const std::string &name);
 
@@ -96,6 +94,8 @@ public:
 
     class UnableToWriteFile;
 
+    HouseMasterAffiliate findAffiliateByClient(const Client *client) const;
+
 private:
     std::unordered_map<std::string, std::string> _usernameMap;
     std::map<std::string, Client *> _clients;
@@ -104,6 +104,7 @@ private:
     std::set<std::string> _responsibles;
     BST<HouseMasterAffiliate> _affiliates;
     clientHT _clientContacts;
+
 };
 
 // Exceptions

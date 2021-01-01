@@ -20,10 +20,13 @@ Interface::Interface(const HouseMasterAffiliate &houseMaster) : _houseMasterAffi
 
 }
 
+
 /**
  * @brief selects a role to interact with
  * @param running
  */
+
+/*
 void Interface::selectRole(bool &running) {
     bool innerRunning = true;
     Menu roles("Choose your role", {{"Login Admin", [&]() {
@@ -55,7 +58,7 @@ void Interface::selectRole(bool &running) {
     roles.select();
     roles.execute(running);
 
-}
+}*/
 
 /**
  * @brief let's the admin login
@@ -76,38 +79,6 @@ void Interface::adminLogin() {
     }
     std::cout << "Too many tries! No admin for you. Logging out...\n";
     exit(0);
-}
-
-/**
- * @brief let's a user login
- */
-void Interface::userLogin() {
-    std::string username{};
-    std::cout << "Username : ";
-    std::cin.ignore();
-    std::getline(std::cin, username);
-    bool done = false;
-    while (!done) {
-        try {
-            done = true;
-            std::string id = _houseMasterAffiliate.findByUsername(username)->getId();
-            readRole(id);
-            _user = _houseMasterAffiliate.findByUsername(username);
-        }
-        catch (const NonexistentRole &e) {
-            done = false;
-            std::cout << e.what() << " Please try again\n";
-            std::cout << "Username : ";
-            std::cin >> username;
-        }
-        catch (const HouseMasterAffiliate::NonexistentUsername &e) {
-            done = false;
-            std::cout << e.what() << " Please try again\n";
-            std::cout << "Username : ";
-            std::cin >> username;
-        }
-    }
-
 }
 
 /**
@@ -169,10 +140,10 @@ void Interface::clientOperations(bool &running) {
                     std::cin.ignore();
                     _houseMasterAffiliate.processTransaction(intervention);
                     std::string collabName{};
-                    collabName = _houseMasterAffiliate.getCollaborators()[intervention->getCollabId()]->getName();
-                    Classification classification = readClassification(innerRunning, collabName);
+                    //collabName = _houseMasterAffiliate.getCollaborators()[intervention->getCollabId()]->getName();
+                    //Classification classification = readClassification(innerRunning, collabName);
                     if (innerRunning) {
-                        _houseMasterAffiliate.getCollaborators()[intervention->getCollabId()]->addClassification(classification);
+                        //_houseMasterAffiliate.getCollaborators()[intervention->getCollabId()]->addClassification(classification);
                         HouseMasterAffiliate::markAsComplete(intervention);
                     }
                 }},{"Cancel Intervention", [&]() {
@@ -196,9 +167,9 @@ void Interface::clientOperations(bool &running) {
     }},{"Change username", [&](){
         bool done = true;
         do{
-            try{_user->changeUsername(_houseMasterAffiliate, readNewUsername());
+            try{_user->changeUsername(_houseMaster, readNewUsername());
             done = true;}
-            catch (const HouseMasterAffiliate::UsernameAlreadyInUse &e) {
+            catch (const HouseMaster::UsernameAlreadyInUse &e) {
                 done = false;
                 std::cout << e.what() << std::endl;
             }
@@ -275,10 +246,10 @@ void Interface::collaboratorOperations(bool &running) {
         bool done = true;
         do{
             try{
-                _user->changeUsername(_houseMasterAffiliate, readNewUsername());
+                _user->changeUsername(_houseMaster, readNewUsername());
                 done = true;
             }
-            catch (const HouseMasterAffiliate::UsernameAlreadyInUse &e) {
+            catch (const HouseMaster::UsernameAlreadyInUse &e) {
                 done = false;
                 std::cout << e.what() << std::endl;
             }
@@ -370,8 +341,8 @@ void Interface::responsibleOperations(bool &running) {
         while (innerRunning) {
             std::string collabName = selectCollab(innerRunning);
             if (!collabName.empty()) {
-                Collaborator *collab = _houseMasterAffiliate.getCollaborators()[collabName];
-                if (collab) show(*collab);
+                //Collaborator *collab = _houseMasterAffiliate.getCollaborators()[collabName];
+                //if (collab) show(*collab);
                 std::cin.ignore();
             }
         }
@@ -470,7 +441,7 @@ void Interface::readNewClientData() {
         }
     } while (!done);
 
-    _houseMasterAffiliate.addClient(nif, name, premium, affiliate);
+    //_houseMasterAffiliate.addClient(nif, name, premium, affiliate);
 
 
 }
@@ -497,8 +468,8 @@ void Interface::readNewCollaboratorData(bool &running) {
     }
 
     bool innerRunning = true;
-    _houseMasterAffiliate.addCollaborator(services, name, pro == "yes", std::vector<Availability>{Availability("monday")}, 0, classification, affiliate);
-    Collaborator* newCollab = (*_houseMasterAffiliate.getCollaborators().rbegin()).second;
+    //_houseMasterAffiliate.addCollaborator(services, name, pro == "yes", std::vector<Availability>{Availability("monday")}, 0, classification, affiliate);
+    //Collaborator* newCollab = (*_houseMasterAffiliate.getCollaborators().rbegin()).second;
 
     Menu pickServices("Pick your services", {{"Choose from the HouseMaster services", [&]() {
         while (running) {
@@ -506,7 +477,7 @@ void Interface::readNewCollaboratorData(bool &running) {
             Service* service = _houseMasterAffiliate.getAvailableServices()[serviceName];
             if (!serviceName.empty()) {
                 try {
-                    newCollab->addService(service);
+                    //newCollab->addService(service);
                 } catch (const Collaborator::ServiceRequiresPro &e) {
                     std::cout << e.what() << std::endl;
                     std::cin.ignore();
@@ -521,7 +492,7 @@ void Interface::readNewCollaboratorData(bool &running) {
         Service* service = _houseMasterAffiliate.getAvailableServices()[serviceName];
         if (!serviceName.empty()) {
             try {
-                newCollab->addService(service);
+                //newCollab->addService(service);
             } catch (const Collaborator::ServiceRequiresPro &e) {
                 std::cout << e.what() << std::endl;
                 std::cin.ignore();
@@ -538,8 +509,8 @@ void Interface::readNewCollaboratorData(bool &running) {
         pickServices.execute(innerRunning);
     }
 
-    std::string username = (*_houseMasterAffiliate.getCollaborators().rbegin()).first;
-    std::cout << "Welcome, " << name << " you can now login with the username " << username << "\n";
+    //std::string username = (*_houseMasterAffiliate.getCollaborators().rbegin()).first;
+    //std::cout << "Welcome, " << name << " you can now login with the username " << username << "\n";
     std::cin.ignore();
 
 }
@@ -616,15 +587,15 @@ std::string Interface::readNewServiceData() {
  * @return the collab's id
  */
 std::string Interface::selectCollab(bool &running) {
-    auto collabs = _houseMasterAffiliate.getCollaborators();
+    //auto collabs = _houseMasterAffiliate.getCollaborators();
     std::string selection{};
     std::map<std::string, std::function<void()>> options{};
-    for (const auto &i : collabs) {
+    /*for (const auto &i : collabs) {
         options.insert(
                 std::pair<std::string, std::function<void()>>(_houseMasterAffiliate.getCollaborators()[i.first]->getName(), [&selection, &i]() {
                     selection = i.first;
                 }));
-    }
+    }*/
     Menu collabsMenu("Select a collaborator", options);
     collabsMenu.show();
     collabsMenu.select();
@@ -735,12 +706,12 @@ void Interface::show(Intervention &intervention) {
               << " |" << std::endl;
     std::cout << "| [" << "Cost" << "] " << std::setw(43) << std::right << intervention.getCost() << " |" << std::endl;
     if (_role != collaborator) {
-        std::cout << "| [" << "Collaborator" << "] " << std::setw(35) << std::right
-                  << _houseMasterAffiliate.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;
+        /*std::cout << "| [" << "Collaborator" << "] " << std::setw(35) << std::right
+                  << _houseMasterAffiliate.getCollaborators()[intervention.getCollabId()]->getName() << " |" << std::endl;*/
     }
     if (_role != client) {
-        std::cout << "| [" << "Client" << "] " << std::setw(41) << std::right
-                  << _houseMasterAffiliate.getClients()[intervention.getClientId()]->getName() << " |" << std::endl;
+        /*std::cout << "| [" << "Client" << "] " << std::setw(41) << std::right
+                  << _houseMasterAffiliate.getClients()[intervention.getClientId()]->getName() << " |" << std::endl;*/
     }
     std::cout << "| [" << "Status" << "] " << std::setw(41) << std::right
               << statusName << " |" << std::endl;
@@ -854,15 +825,15 @@ unsigned Interface::readNumberOfRooms() {
  * @brief shows collaborator's rankings
  */
 void Interface::showSortedCollabs() {
-    std::vector<std::pair<std::string, Collaborator *>> sorted = _houseMasterAffiliate.sortCollaboratorsByScore();
+    std::vector<Collaborator* > sorted = _houseMasterAffiliate.sortCollaboratorsByScore();
     unsigned long back = sorted.size() + 1;
 
     std::cout << " ____________________HOUSE MASTER____________________ " << std::endl;
     std::cout << "| " << std::setw(50) << std::right << "Collaborators" << " |" << std::endl;
     std::cout << "|                                                    |" << std::endl;
     for (const auto &collab: sorted) {
-        std::cout << "| " << std::left << std::setw(48) << collab.second->getName() << std::setw(2)
-                  << collab.second->getScore() << " |" << std::endl;
+        std::cout << "| " << std::left << std::setw(48) << collab->getName() << std::setw(2)
+                  << collab->getScore() << " |" << std::endl;
     }
     std::cout << "|                                                    |" << std::endl;
     std::cout << "| [0] EXIT (no save)" << "                      [" << std::setw(2) << std::right << back
