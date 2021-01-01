@@ -44,6 +44,8 @@ public:
     // Users manipulation
     void removeCollaborator(const std::string &collId);
 
+    Collaborator* findCollaboratorById(const std::string& id);
+
     std::vector<Collaborator *> sortCollaboratorsByScore() const;
 
     std::vector<Collaborator*> getAffiliateCollabs() const;
@@ -130,9 +132,6 @@ private:
     std::priority_queue<std::pair<Intervention*, Collaborator*>,
         std::vector<std::pair<Intervention*, Collaborator*>>,
         Collaborator_pointer_compare> _collaborators_queue;
-    /*std::map<std::string, Client *> _clients;
-    std::unordered_map<std::string, std::string> _usernameMap;
-    std::map<std::string, Collaborator *> _collaborators;*/
     std::unordered_set<Intervention *> _interventions;
     std::string _name;
     std::string _location;

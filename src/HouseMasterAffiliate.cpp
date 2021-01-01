@@ -518,3 +518,4 @@ bool HouseMasterAffiliate::operator<(const HouseMasterAffiliate &hma) const {
         } else return (getAffiliateClients().size() < hma.getAffiliateClients().size());
     } else return (_responsible.getName() < hma.getAdmin().getName());
 }
+
