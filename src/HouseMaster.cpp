@@ -542,6 +542,7 @@ Individual *HouseMaster::findByUsername(const std::string &username) {
     if (it == _usernameMap.end()) throw NonexistentUsername("This username does not exist!");
     if (it->second.substr(0, 6) == "collab") return _collaborators[it->second];
     else if (it->second.substr(0, 6) == "client") return _clients[it->second];
+    else if (it->second.substr(0, 5) == "admin") return _responsibles[it->second];
     else return nullptr;
 }
 
@@ -575,6 +576,13 @@ HouseMaster::NonexistentUsername::NonexistentUsername(const std::string &error_m
 HouseMaster::NonexistentCollab::NonexistentCollab(const std::string &error_msg) : std::out_of_range(error_msg) {}
 
 /**
+* @brief the exception for nonexistent responsible
+* @param error_msg to show
+*/
+HouseMaster::NonexistentResponsible::NonexistentResponsible(const std::string &error_msg) : out_of_range(error_msg) {}
+
+
+/**
  * @brief the exception for when a client already exists
  * @param error_msg to show
  */
@@ -598,6 +606,16 @@ Client *HouseMaster::findClientByEmail(const string &email) const {
         }
     }
     throw HouseMaster::NonexistentClient("Email not found in records");
+}
+
+
+Admin *HouseMaster::findAdminByName(const std::string &name) const {
+    for (auto it = _responsibles.begin(); it != _responsibles.end(); it++) {
+        if ((*it).second->getName() == name) {
+            return ((*it).second);
+        }
+    }
+    throw HouseMaster::NonexistentResponsible("This responsible does not exist!");
 }
 
 HouseMasterAffiliate HouseMaster::findAffiliateByClient(const Client *client) const {

@@ -39,6 +39,38 @@ HouseMasterAffiliate HousemasterInterface::selectAffiliate(bool &running) {
     return selection;
 }
 
+HouseMasterAffiliate HousemasterInterface::selectResponsibleAffiliate(bool &running) {
+    std::map<std::string, std::function<void()> > options{};
+    auto affiliates = _houseMaster.getAffiliates();
+    HouseMasterAffiliate selection{};
+    BSTItrIn<HouseMasterAffiliate> current(affiliates);
+    std::set<HouseMasterAffiliate> hms{};
+    auto admin = dynamic_cast<Admin*>(_user);
+    for (auto it = affiliates.begin(); it != affiliates.end(); it++)
+    {
+        std::cout << "Here" << admin->getName() << std::endl;
+        if (admin->getName() == (*it).getAdmin().getName()) {
+            for (const auto & i : admin->getAffiliates()) {
+                if (i == (*it).getLocation()) {
+                    hms.insert(current.retrieve());
+                }
+            }
+        }
+    }
+    for (const auto & i : hms) {
+        options.insert(std::pair<std::string, std::function<void()>>(i.getAffiliateName(),[&](){
+            cout << i.getLocation() << endl;
+            selection = i;
+        }));
+    }
+    Menu affiliateSelection("Select your affiliate", options);
+    affiliateSelection.show();
+    affiliateSelection.select();
+    affiliateSelection.execute(running);
+    return selection;
+}
+
+
 
 void HousemasterInterface::runAffiliateInterface(bool &running) {
     while (running) {
@@ -79,7 +111,9 @@ void HousemasterInterface::firstInterface(bool &running) {
     }}, { "Login Responsible", [&](){
         std::cout << "Welcome to HouseMaster. You have RESPONSIBLE privilege.\n";
         //bool innerRunning2 = true;
-        responsibleLogin(selectResponsible(innerRunning));
+        std::string responsible = selectResponsible(innerRunning);
+        responsibleLogin(responsible);
+        _currentAffiliate = selectResponsibleAffiliate(innerRunning);
         Interface adminInterface(_currentAffiliate, _user, admin);
         adminInterface.responsibleOperations(innerRunning);
         while (innerRunning) {
@@ -128,6 +162,7 @@ void HousemasterInterface::responsibleLogin(std::string responsible) {
         if (password == _houseMaster.getAdmins().find(responsible)->second->getPassword())
         {
             std::cout << "success \n";
+            _user = _houseMaster.findAdminByName(responsible);
             return;
         } else {
             std::cout << "Wrong password. Try again:\n";

@@ -32,11 +32,6 @@ public:
     void clientOperations(bool &running);
 
 private:
-    void userLogin();
-
-    void readRole(const std::string &username);
-
-    void adminLogin();
 
     static Date readInterventionDate();
 

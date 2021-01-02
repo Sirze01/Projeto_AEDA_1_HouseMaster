@@ -19,6 +19,7 @@ public:
     void clientLogin();
 private:
     HouseMasterAffiliate selectAffiliate(bool &running);
+    HouseMasterAffiliate selectResponsibleAffiliate(bool &running);
     void showAffiliateInterface(HouseMasterAffiliate &affiliate);
     HouseMasterAffiliate _currentAffiliate;
     HouseMaster _houseMaster;

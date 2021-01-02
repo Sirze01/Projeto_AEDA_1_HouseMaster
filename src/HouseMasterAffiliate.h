@@ -57,7 +57,7 @@ public:
 
     // Interventions and Services Manip
 
-    std::unordered_map<std::string, Service *> &getAvailableServices();
+    std::unordered_map<std::string, Service *> &getAvailableServices(); 
 
     void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration);
 

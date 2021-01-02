@@ -52,6 +52,8 @@ public:
     // Users Manipulation
     Client* findClientByEmail(const std::string &email) const;
 
+    Admin* findAdminByName(const std::string &name) const;
+
     clientHT getContacts() const;
 
     void addUsernamesMapEntry(std::pair<std::string, std::string> map);
@@ -96,6 +98,8 @@ public:
 
     class NonexistentClient;
 
+    class NonexistentResponsible;
+
     class UnableToWriteFile;
 
     HouseMasterAffiliate findAffiliateByClient(const Client *client) const;
@@ -127,6 +131,11 @@ public:
 class HouseMaster::NonexistentCollab : public std::out_of_range {
 public:
     explicit NonexistentCollab(const std::string &error_msg);
+};
+
+class HouseMaster::NonexistentResponsible : public std::out_of_range {
+public:
+    explicit NonexistentResponsible(const std::string &error_msg);
 };
 
 class HouseMaster::ExistentClient : public std::out_of_range {
