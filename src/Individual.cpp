@@ -305,7 +305,9 @@ Admin::Admin(const std::string &name) : Individual(name) {
  * @param name the name
  * @param affiliate the affiliate
  */
-Admin::Admin(const std::string &name, std::string affiliate) : Individual(name), _affiliate(std::move(affiliate)){}
+Admin::Admin(const std::string &name, std::string password, std::vector<std::string> affiliates) : Individual(name), _password(password), _affiliates(affiliates){
+    _id = _idSeqAdmins++;
+}
 
 /**
  * @brief getter
@@ -321,8 +323,8 @@ std::string Admin::getId() const {
  * @brief getter
  * @return affiliate
  */
-std::string Admin::getAffiliate() const {
-    return _affiliate;
+std::vector<std::string> Admin::getAffiliates() const {
+    return _affiliates;
 }
 
 /**

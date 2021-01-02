@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <sstream>
 #include "Services.h"
+#include <vector>
 
 class HouseMaster;
 class HouseMasterAffiliate;
@@ -107,17 +108,12 @@ public:
 private:
 
     std::vector<std::string> _services;
-    bool _pro;
-    std::vector<Availability> _availability;
-
-
-
-private:
-    float _earnings;
     Classification _score;
+    bool _pro;
+    float _earnings;
+    std::vector<Availability> _availability;
     std::vector<Classification> _classifications;
     std::string _affiliate;
-
 };
 
 
@@ -209,20 +205,20 @@ private:
 class Admin : public Individual {
 public:
     Admin();
-    Admin(const std::string &name, std::string affiliate);
+    Admin(const std::string &name, std::string password, std::vector<std::string> affiliates);
 
     explicit Admin(const std::string &name);
 
     ~Admin() override = default;
-    std::string getAffiliate() const;
+    std::vector<std::string> getAffiliates() const;
     static unsigned int _idSeqAdmins;
     std::string getId() const override;
     std::string getPassword() const;
     void setPassword(const std::string& password);
 
 private:
-    std::string _affiliate;
     std::string _password;
+    std::vector<std::string> _affiliates;
 };
 
 

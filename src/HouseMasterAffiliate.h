@@ -35,16 +35,14 @@ public:
     explicit HouseMasterAffiliate(HouseMaster* hm);
 
     HouseMasterAffiliate(HouseMaster* hm, std::ifstream usernames, std::ifstream collaborators, std::ifstream clients,
-                         std::ifstream services, std::ifstream history, std::string location,
-                         const std::string& responsible, const std::string& hmName, float finances);
+                         std::ifstream services, std::ifstream history, std::ifstream responsibles,
+                         std::string location, const std::string& hmName, float finances);
 
     ~HouseMasterAffiliate() = default;
 
 
     // Users manipulation
     void removeCollaborator(const std::string &collId);
-
-    Collaborator* findCollaboratorById(const std::string& id);
 
     std::vector<Collaborator *> sortCollaboratorsByScore() const;
 

@@ -33,9 +33,9 @@ HouseMaster::HouseMaster(std::ifstream affiliates) : _affiliates(HouseMasterAffi
                                        std::ifstream("../data/clients.txt"),
                                        std::ifstream("../data/services.txt"),
                                        std::ifstream("../data/history.txt"),
-                                       location, responsible, name, earnings);
+                                       std::ifstream("../data/responsibles.txt"),
+                                       location, name, earnings);
         _locations.insert(location);
-        _responsibles.insert(responsible);
         registerAffiliate(h1);
     }
 }
@@ -165,6 +165,18 @@ void HouseMaster::addCollaborator(const std::vector<std::string> &services, cons
     auto collab = new Collaborator(services, name, pro, availabilities, earnings, score, std::move(affiliate));
     _collaborators.insert({collab->getId(), collab});
     _usernameMap.insert({collab->getId(), collab->getId()});
+}
+
+/**
+ * @brief adds a new admin to the housemaster
+ * @param name name of the collaborator
+ * @param password the admins' password
+ * @param affiliates the affiliates
+ */
+void HouseMaster::addAdmin(std::string name, std::string password, std::vector<std::string> affiliates) {
+    auto admin = new Admin(name,password, affiliates);
+    _responsibles.insert({admin->getId(), admin});
+    _usernameMap.insert({admin->getId(), admin->getId()});
 }
 
 /**
@@ -357,10 +369,9 @@ void HouseMaster::writeUsernameMap() {
  * @param earnings earnings info
  */
 HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernames, std::ifstream collaborators,
-                                           std::ifstream clients, std::ifstream services, std::ifstream history,
-                                           std::string location, const std::string &responsible,
-                                           const std::string &hmName, float finances)
-        : _hm(hm), _name(hmName), _location(std::move(location)), _responsible(Admin(responsible)), _earnings(finances) {
+                                           std::ifstream clients, std::ifstream services, std::ifstream history, std::ifstream responsibles,
+                                           std::string location, const std::string &hmName, float finances)
+        : _hm(hm), _name(hmName), _location(std::move(location)), _earnings(finances) {
 
     // read services.txt
     for (std::string line; std::getline(services, line);) {
@@ -481,9 +492,28 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernam
         auto *intervention = new Intervention(Date(start), service, forcePro == "1", std::stoi(nrRooms),
                                               processState(std::stoi(state)), std::stof(cost),
                                               collabId, clientId);
-        _interventions.insert(intervention);
     }
 
+
+
+    // read responsibles
+    for (std::string line; std::getline(responsibles, line);)
+    {
+        std::stringstream lineStream(line);
+        // name
+        std::string name;
+        std::getline(lineStream, name, ',');
+        // password
+        std::string password;
+        std::getline(lineStream, password, ',');
+        // affiliates
+        std::string affiliate{};
+        std::vector<std::string> affiliates;
+        while (std::getline(lineStream, affiliate, ',')) {
+            affiliates.push_back(affiliate);
+        }
+        _hm->addAdmin(name, password, affiliates);
+    }
 }
 
 

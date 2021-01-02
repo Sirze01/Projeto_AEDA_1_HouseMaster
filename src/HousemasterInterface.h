@@ -14,7 +14,7 @@ public:
     void firstInterface(bool &running);
     //void collaboratorOperations(bool &running);
     void adminLogin();
-    void responsibleLogin(const HouseMasterAffiliate &hma);
+    void responsibleLogin(std::string responsible);
     void collabLogin();
     void clientLogin();
 private:

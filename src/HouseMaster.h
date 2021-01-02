@@ -44,7 +44,7 @@ public:
 
     std::set<std::string> getLocations() {return _locations;}
 
-    std::set<std::string> getResponsibles() {return _responsibles;}
+    std::map<std::string, Admin *> getResponsibles(){return _responsibles;};
 
     void writeAffiliatesInfo();
 
@@ -62,6 +62,8 @@ public:
                          std::vector<Availability> availabilities, float earnings,
                          Classification score, std::string affiliate);
 
+    void addAdmin(std::string name, std::string password, std::vector<std::string> affiliates);
+
     void removeCollaborator(const std::string &id); // Don't use, use affiliate instead
 
     void addClient(unsigned long nif, const std::string &name, bool premium, std::string affiliate);
@@ -69,6 +71,8 @@ public:
     void removeClient(const std::string &clientId);
 
     std::map<std::string, Client *> getClients() const;
+
+    std::map<std::string, Admin *> getAdmins() const {return _responsibles;};
 
     void usernameMapChanger(std::string id, std::string newUsername);
 
@@ -103,7 +107,7 @@ private:
     std::map<std::string, Client *> _clients;
     std::map<std::string, Collaborator *> _collaborators;
     std::set<std::string> _locations;
-    std::set<std::string> _responsibles;
+    std::map<std::string, Admin *> _responsibles;
     BST<HouseMasterAffiliate> _affiliates;
     clientHT _clientContacts;
 

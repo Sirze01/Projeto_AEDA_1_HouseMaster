@@ -7,7 +7,7 @@ HousemasterInterface::HousemasterInterface(const HouseMaster &housemaster) : _cu
 
 
 void HousemasterInterface::showAffiliateInterface(HouseMasterAffiliate &affiliate) {
-    bool running = true;
+    //bool running = true;
     Interface affiliateInterface(affiliate);
     /*
     while (running) {
@@ -78,10 +78,10 @@ void HousemasterInterface::firstInterface(bool &running) {
         }
     }}, { "Login Responsible", [&](){
         std::cout << "Welcome to HouseMaster. You have RESPONSIBLE privilege.\n";
-        bool innerRunning2 = true;
-        HouseMasterAffiliate affiliate = selectAffiliate(innerRunning2);
-        responsibleLogin(affiliate);
-        //newInterface.responsibleOperations(innerRunning);
+        //bool innerRunning2 = true;
+        responsibleLogin(selectResponsible(innerRunning));
+        Interface adminInterface(_currentAffiliate, _user, admin);
+        adminInterface.responsibleOperations(innerRunning);
         while (innerRunning) {
             start.show();
             start.select();
@@ -120,12 +120,13 @@ void HousemasterInterface::adminLogin() {
 /**
  * @brief responsible login
  */
-void HousemasterInterface::responsibleLogin(const HouseMasterAffiliate &hma) {
+void HousemasterInterface::responsibleLogin(std::string responsible) {
     std::string password{};
     std::cout << "Password : ";
     std::cin >> password;
     for (int i = 0; i <= 1; i++) {
-        if (password == hma.getAdmin().getPassword()) {
+        if (password == _houseMaster.getAdmins().find(responsible)->second->getPassword())
+        {
             std::cout << "success \n";
             return;
         } else {
@@ -260,8 +261,8 @@ std::string HousemasterInterface::selectResponsible(bool &running) {
     std::string selection{};
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : responsible) {
-        options.insert(std::pair<std::string, std::function<void()>>(i, [&selection, &i]() {
-            selection = i;
+        options.insert(std::pair<std::string, std::function<void()>>(i.second->getName(), [&selection, &i]() {
+            selection = i.first;
         }));
     }
     Menu servicesMenu("Select a Responsible", options);
