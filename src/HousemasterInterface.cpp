@@ -38,7 +38,7 @@ HouseMasterAffiliate HousemasterInterface::selectResponsibleAffiliate(bool &runn
         std::string adminId = current.retrieve().getAdmin().getId();
         if (adminId == admin->getId()) {
             for (const auto &i : admin->getAffiliates()) {
-                hms.insert(current.retrieve());
+                if (i == location) hms.insert(current.retrieve());
             }
         }
     }

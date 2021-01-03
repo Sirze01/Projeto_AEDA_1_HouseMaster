@@ -59,7 +59,7 @@ HouseMaster::HouseMaster(std::ifstream affiliates) : _affiliates(HouseMasterAffi
  * @brief getter
  * @return the affiliates
  */
-BST<HouseMasterAffiliate > &HouseMaster::getAffiliates() {
+BST<HouseMasterAffiliate> &HouseMaster::getAffiliates() {
     return _affiliates;
 }
 
@@ -67,7 +67,7 @@ BST<HouseMasterAffiliate > &HouseMaster::getAffiliates() {
  * @brief adds a new affiliate to the housemaster
  * @param affiliate the affiliate
  */
-void HouseMaster::registerAffiliate(const HouseMasterAffiliate& affiliate) {
+void HouseMaster::registerAffiliate(const HouseMasterAffiliate &affiliate) {
     _affiliates.insert(affiliate);
     for (const auto &client : getClients()) {
         _clientContacts.insert(client.second);
@@ -79,7 +79,7 @@ void HouseMaster::registerAffiliate(const HouseMasterAffiliate& affiliate) {
  * @param affiliate affiliate to remove
  */
 void HouseMaster::removeAffiliate(const HouseMasterAffiliate &affiliate) {
-    for (auto it = _clientContacts.begin(); it != _clientContacts.end(); ) {
+    for (auto it = _clientContacts.begin(); it != _clientContacts.end();) {
         if ((*it)->getAffiliate() == affiliate.getAffiliateName()) {
             it = _clientContacts.erase(it);
         } else it++;
@@ -91,13 +91,10 @@ void HouseMaster::removeAffiliate(const HouseMasterAffiliate &affiliate) {
  * @brief getter
  * @return a vector with the affiliates from the given location
  */
-vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(const string& location)
-{
+vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(const string &location) {
     vector<HouseMasterAffiliate> affiliates_from_location;
-    for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)
-    {
-        if((*it).getLocation() == location)
-        {
+    for (auto it = _affiliates.begin(); it != _affiliates.end(); it++) {
+        if ((*it).getLocation() == location) {
             affiliates_from_location.push_back(*it);
         }
     }
@@ -108,13 +105,10 @@ vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(const string& 
  * @brief getter
  * @return a vector with the affiliates from the given responsible name
  */
-vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(const string& responsible)
-{
+vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(const string &responsible) {
     vector<HouseMasterAffiliate> affiliates_from_responsible;
-    for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)
-    {
-        if((*it).getAdmin().getName() == responsible)
-        {
+    for (auto it = _affiliates.begin(); it != _affiliates.end(); it++) {
+        if ((*it).getAdmin().getName() == responsible) {
             affiliates_from_responsible.push_back(*it);
         }
     }
@@ -130,7 +124,8 @@ void HouseMaster::writeAffiliatesInfo() {
         BSTItrIn<HouseMasterAffiliate> current(_affiliates);
         for (; !current.isAtEnd(); current.advance()) {
             affiliatesFile << current.retrieve().getAffiliateName()
-                           << ',' << current.retrieve().getLocation() << ',' << current.retrieve().getAdmin().getName() << '\n';
+                           << ',' << current.retrieve().getLocation() << ',' << current.retrieve().getAdmin().getName()
+                           << '\n';
         }
         affiliatesFile.close();
     } else throw HouseMasterAffiliate::UnableToWriteFile("Unable to write in affiliates file");  // TODO change?
@@ -151,7 +146,7 @@ clientHT HouseMaster::getContacts() const {
  * administrators
  * @param mapElem The element to add
  */
-void HouseMaster::addUsernamesMapEntry(std::pair<std::string, std::string> mapElem){
+void HouseMaster::addUsernamesMapEntry(std::pair<std::string, std::string> mapElem) {
     _usernameMap.emplace(mapElem);
 }
 
@@ -173,8 +168,8 @@ std::map<std::string, Collaborator *> HouseMaster::getCollaborators() const {
  * @param affiliate the affiliate's name
  */
 void HouseMaster::addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
-                                           std::vector<Availability> availabilities, float earnings,
-                                           Classification score, std::string affiliate) {
+                                  std::vector<Availability> availabilities, float earnings,
+                                  Classification score, std::string affiliate) {
     auto collab = new Collaborator(services, name, pro, availabilities, earnings, score, std::move(affiliate));
     _collaborators.insert({collab->getId(), collab});
     _usernameMap.insert({collab->getId(), collab->getId()});
@@ -187,7 +182,7 @@ void HouseMaster::addCollaborator(const std::vector<std::string> &services, cons
  * @param affiliates the affiliates
  */
 void HouseMaster::addAdmin(const std::string &name, std::string password, const std::vector<std::string> &affiliates) {
-    auto admin = new Admin(name,password, affiliates);
+    auto admin = new Admin(name, password, affiliates);
     for (const auto &i : _responsibles) {
         if (i.second->getName() == admin->getName()) {
             return;
@@ -211,19 +206,19 @@ void HouseMaster::removeCollaborator(const std::string &id) {
         if (usernameIt != _usernameMap.end()) {
             _collaborators.erase(it);
             _usernameMap.erase(usernameIt);
-        }
-        else {
+        } else {
             throw NonexistentUsername("This username does not exist!");
         }
     } else {
         throw NonexistentCollab("There's no such collab!");
     }
 }
+
 /**
  * @brief Removes collaborator from housemaster, checking for its active interventions
  * @param collId
  */
-void HouseMasterAffiliate::removeCollaborator(const std::string &collId){
+void HouseMasterAffiliate::removeCollaborator(const std::string &collId) {
     if (getAssociatedActiveInterventions(collId).empty()) {
         _hm->removeCollaborator(collId);
     } else {
@@ -235,10 +230,10 @@ void HouseMasterAffiliate::removeCollaborator(const std::string &collId){
  * @brief Function to get all of the collaborators of one affiliate
  * @return Vector with Collaborators
  */
-std::vector<Collaborator *> HouseMasterAffiliate::getAffiliateCollabs() const{
+std::vector<Collaborator *> HouseMasterAffiliate::getAffiliateCollabs() const {
     std::vector<Collaborator *> collabs;
-    for(const auto& pair: _hm->getCollaborators()){
-        if(pair.second->getAffiliate() == getAffiliateName())
+    for (const auto &pair: _hm->getCollaborators()) {
+        if (pair.second->getAffiliate() == getAffiliateName())
             collabs.emplace_back(pair.second);
     }
     return collabs;
@@ -251,7 +246,7 @@ std::vector<Collaborator *> HouseMasterAffiliate::getAffiliateCollabs() const{
 * @param classification the classification to give the collab
 */
 void
-Client::classifyCollaborator(HouseMaster* hm, const std::string &collabId, Classification classification) {
+Client::classifyCollaborator(HouseMaster *hm, const std::string &collabId, Classification classification) {
     hm->findCollabById(collabId)->addClassification(classification);
 }
 
@@ -324,8 +319,8 @@ void HouseMaster::removeClient(const std::string &clientId) {
  */
 std::vector<Client *> HouseMasterAffiliate::getAffiliateClients() const {
     std::vector<Client *> clients;
-    for(const auto& pair: _hm->getClients()){
-        if(pair.second->getAffiliate() == getAffiliateName())
+    for (const auto &pair: _hm->getClients()) {
+        if (pair.second->getAffiliate() == getAffiliateName())
             clients.emplace_back(pair.second);
     }
     return clients;
@@ -391,8 +386,9 @@ void HouseMaster::writeUsernameMap() {
  * @param services services info
  * @param earnings earnings info
  */
-HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernames, std::ifstream collaborators,
-                                           std::ifstream clients, std::ifstream services, std::ifstream history, std::ifstream responsibles,
+HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream usernames, std::ifstream collaborators,
+                                           std::ifstream clients, std::ifstream services, std::ifstream history,
+                                           std::ifstream responsibles,
                                            std::string location, const std::string &hmName, float finances)
         : _hm(hm), _name(hmName), _location(std::move(location)), _earnings(finances) {
 
@@ -452,7 +448,7 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernam
             std::vector<Availability> availabilities;
             std::getline(lss, availabilitiesStr, ',');
             std::stringstream availabilitiesStream(availabilitiesStr);
-            while(std::getline(availabilitiesStream, availabilityStr, ' ')){
+            while (std::getline(availabilitiesStream, availabilityStr, ' ')) {
                 availabilities.emplace_back(Availability(availabilityStr));
             }
             // services
@@ -463,7 +459,8 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernam
                 collabServices.push_back(serviceName);
             }
 
-            _hm->addCollaborator(collabServices, name, proStr == "yes", availabilities, collabEarnings, score, affiliateName);
+            _hm->addCollaborator(collabServices, name, proStr == "yes", availabilities, collabEarnings, score,
+                                 affiliateName);
         } else continue;
     }
 
@@ -520,8 +517,7 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernam
 
 
     // read responsibles
-    for (std::string line; std::getline(responsibles, line);)
-    {
+    for (std::string line; std::getline(responsibles, line);) {
         std::stringstream lineStream(line);
         // name
         std::string name;
@@ -549,11 +545,9 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernam
  * @brief getter
  * @return the total earnings
  */
-float HouseMaster::getTotalFinances() const
-{
+float HouseMaster::getTotalFinances() const {
     float totalFinances{};
-    for(auto it = _affiliates.begin(); it != _affiliates.end(); it++)
-    {
+    for (auto it = _affiliates.begin(); it != _affiliates.end(); it++) {
         totalFinances += (*it).getEarnings();
     }
     return totalFinances;
@@ -578,7 +572,7 @@ Individual *HouseMaster::findByUsername(const std::string &username) {
  * @param collabId
  * @return Collaborator *
  */
-Collaborator* HouseMaster::findCollabById(const std::string &collabId){
+Collaborator *HouseMaster::findCollabById(const std::string &collabId) {
     return _collaborators[collabId];
 }
 
@@ -626,8 +620,9 @@ HouseMaster::NonexistentClient::NonexistentClient(const std::string &error_msg) 
  * @param error_msg to show
  */
 HouseMaster::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) : std::ifstream::failure(error_msg) {}
+
 Client * HouseMaster::findClientByEmail(const string &email) const {
-    for (const auto & client : _clientContacts) {
+    for (const auto &client : _clientContacts) {
         if (client->getEmail() == email) {
             return client;
         }
@@ -640,7 +635,7 @@ HouseMasterAffiliate HouseMaster::findAffiliateByClient(const Client *client) co
     BSTItrIn<HouseMasterAffiliate> current(_affiliates);
     for (; !current.isAtEnd(); current.advance()) {
         auto affiliate = current.retrieve();
-        for (const auto & i : affiliate.getAffiliateClients()) {
+        for (const auto &i : affiliate.getAffiliateClients()) {
             if (i->getId() == client->getId()) {
                 return affiliate;
             }
@@ -653,7 +648,7 @@ HouseMasterAffiliate HouseMaster::findAffiliateByCollab(const Collaborator *coll
     BSTItrIn<HouseMasterAffiliate> current(_affiliates);
     for (; !current.isAtEnd(); current.advance()) {
         auto affiliate = current.retrieve();
-        for (const auto & i : affiliate.getAffiliateCollabs()) {
+        for (const auto &i : affiliate.getAffiliateCollabs()) {
             if (i->getId() == collab->getId()) {
                 return affiliate;
             }
@@ -663,7 +658,7 @@ HouseMasterAffiliate HouseMaster::findAffiliateByCollab(const Collaborator *coll
 }
 
 void HouseMaster::changeClientEmail(const string &oldEmail, const string &newEmail) {
-    Client* toChange = findClientByEmail(oldEmail);
+    Client *toChange = findClientByEmail(oldEmail);
     _clientContacts.erase(findClientByEmail(oldEmail));
     toChange->setEmail(newEmail);
     _clientContacts.insert(toChange);
