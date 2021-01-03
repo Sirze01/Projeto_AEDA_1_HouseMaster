@@ -44,7 +44,6 @@ HouseMasterAffiliate HousemasterInterface::selectResponsibleAffiliate(bool &runn
     }
     for (const auto & i : hms) {
         options.insert(std::pair<std::string, std::function<void()>>(i.getAffiliateName(),[&](){
-            cout << i.getLocation() << endl;
             selection = i;
         }));
     }
@@ -105,8 +104,10 @@ void HousemasterInterface::firstInterface(bool &running) {
             adminInterface.responsibleOperations(innerRunning);
         }
         _houseMaster = adminInterface.getHousemasterState();
-        _houseMaster.removeAffiliate(_currentAffiliate);
-        _houseMaster.registerAffiliate(adminInterface.getHousemasterAffiliateState());
+        if (!_currentAffiliate.getAffiliateName().empty()) {
+            _houseMaster.removeAffiliate(_currentAffiliate);
+            _houseMaster.registerAffiliate(adminInterface.getHousemasterAffiliateState());
+        }
       }}});
     start.show();
     start.select();
@@ -137,7 +138,7 @@ void HousemasterInterface::adminLogin() {
 
 
 /**
- * @brief responsibleId login
+ * @brief responsible login
  */
 void HousemasterInterface::responsibleLogin(const std::string& responsibleId) {
     std::string password{};

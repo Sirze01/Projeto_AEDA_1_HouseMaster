@@ -184,7 +184,7 @@ void HouseMaster::addCollaborator(const std::vector<std::string> &services, cons
 void HouseMaster::addAdmin(const std::string &name, std::string password, const std::vector<std::string> &affiliates) {
     auto admin = new Admin(name, password, affiliates);
     for (const auto &i : _responsibles) {
-        if (i.second->getName() == admin->getName()) {
+        if (i.second->getName() == admin->getName() && i.second->getAffiliates() == admin->getAffiliates()) {
             return;
         }
     }
