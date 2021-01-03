@@ -352,7 +352,7 @@ void Interface::readNewClientData() {
         }
     } while (!done);
 
-    _houseMaster.addClient(nif, name, email, premium, affiliate);
+    _houseMaster->addClient(nif, name, email, premium, affiliate);
 }
 
 /**
