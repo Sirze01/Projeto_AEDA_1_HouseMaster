@@ -351,8 +351,13 @@ void Interface::readNewClientData() {
             std::cin >> nif;
         }
     } while (!done);
-
-    _houseMaster->addClient(nif, name, email, premium, affiliate);
+    try
+    {
+        _houseMaster->addClient(nif, name, email, premium, affiliate);
+    } catch (HouseMaster::ExistentClient &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 }
 
 /**

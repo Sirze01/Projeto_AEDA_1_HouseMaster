@@ -35,6 +35,8 @@ public:
 
     void clientOperations(bool &running);
 
+    void readNewClientData();
+
 private:
 
     static Date readInterventionDate();
@@ -68,8 +70,6 @@ private:
     class InvalidNif;
 
     void showFinances() const;
-
-    void readNewClientData();
 
     static unsigned readNumberOfRooms();
 

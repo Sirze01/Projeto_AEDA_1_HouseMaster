@@ -108,7 +108,14 @@ void HousemasterInterface::firstInterface(bool &running) {
             _houseMaster.removeAffiliate(_currentAffiliate);
             _houseMaster.registerAffiliate(adminInterface.getHousemasterAffiliateState());
         }
-      }}});
+      }},{
+        "Register Client",            [&]() {
+            Interface newInterface(&_houseMaster, _currentAffiliate, _user, client);
+            newInterface.readNewClientData();
+            std::cout << "Press ENTER to continue\n";
+            std::cin.ignore();
+        }
+    }});
     start.show();
     start.select();
     start.execute(running);
