@@ -46,35 +46,43 @@ public:
 
     std::map<std::string, Admin *> getResponsibles(){return _responsibles;};
 
+    HouseMasterAffiliate findAffiliateByClient(const Client *client) const;
+
+    HouseMasterAffiliate findAffiliateByCollab(const Collaborator *collab) const;
+
     void writeAffiliatesInfo();
 
 
     // Users Manipulation
-    Client * findClientByEmail(const std::string &email) const;
+    Individual *findByUsername(const std::string &name);
 
-    clientHT getContacts() const;
-
-    void changeClientEmail(const std::string& oldEmail, const std::string& newEmail);
-
-    void addUsernamesMapEntry(std::pair<std::string, std::string> map);
-
-    std::map<std::string, Collaborator *> getCollaborators() const;
-
-    void addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
-                         std::vector<Availability> availabilities, float earnings,
-                         Classification score, std::string affiliate);
-
-    void addAdmin(const std::string &name, std::string password, const std::vector<std::string> &affiliates);
-
-    void removeCollaborator(const std::string &id); // Don't use, use affiliate instead
+    std::map<std::string, Client *> getClients() const;
 
     void addClient(unsigned long nif, const std::string &name, std::string email, bool premium, std::string affiliate);
 
     void removeClient(const std::string &clientId);
 
-    std::map<std::string, Client *> getClients() const;
+    Client * findClientByEmail(const std::string &email) const;
+
+    void changeClientEmail(const std::string& oldEmail, const std::string& newEmail);
+
+    clientHT getContacts() const;
+
+    void addUsernamesMapEntry(std::pair<std::string, std::string> map);
+
+    std::map<std::string, Collaborator *> getCollaborators() const;
+
+    void removeCollaborator(const std::string &id); // Don't use, use affiliate instead
+
+    void addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
+                         std::vector<Availability> availabilities, float earnings,
+                         Classification score, std::string affiliate);
+
+    Collaborator* findCollabById(const std::string &collabId);
 
     std::map<std::string, Admin *> getAdmins() const {return _responsibles;};
+
+    void addAdmin(const std::string &name, std::string password, const std::vector<std::string> &affiliates);
 
     void usernameMapChanger(std::string id, std::string newUsername);
 
@@ -82,10 +90,6 @@ public:
 
     // General
     float getTotalFinances() const;
-
-    Individual *findByUsername(const std::string &name);
-
-    Collaborator* findCollabById(const std::string &collabId);
 
     // Exceptions
     class UsernameAlreadyInUse;
@@ -101,10 +105,6 @@ public:
     class NonexistentResponsible;
 
     class UnableToWriteFile;
-
-    HouseMasterAffiliate findAffiliateByClient(const Client *client) const;
-
-    HouseMasterAffiliate findAffiliateByCollab(const Collaborator *collab) const;
 
 private:
     std::unordered_map<std::string, std::string> _usernameMap;

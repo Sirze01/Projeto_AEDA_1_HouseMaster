@@ -116,6 +116,42 @@ vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(const strin
 }
 
 /**
+ * @brief Finds an affiliate by client
+ * @param client the client
+ * @return the affiliate
+ */
+HouseMasterAffiliate HouseMaster::findAffiliateByClient(const Client *client) const {
+    BSTItrIn<HouseMasterAffiliate> current(_affiliates);
+    for (; !current.isAtEnd(); current.advance()) {
+        auto affiliate = current.retrieve();
+        for (const auto &i : affiliate.getAffiliateClients()) {
+            if (i->getId() == client->getId()) {
+                return affiliate;
+            }
+        }
+    }
+    return HouseMasterAffiliate();
+}
+
+/**
+ * @brief Finds an affiliate by collaborator
+ * @param collab the collaborator
+ * @return the affiliate
+ */
+HouseMasterAffiliate HouseMaster::findAffiliateByCollab(const Collaborator *collab) const {
+    BSTItrIn<HouseMasterAffiliate> current(_affiliates);
+    for (; !current.isAtEnd(); current.advance()) {
+        auto affiliate = current.retrieve();
+        for (const auto &i : affiliate.getAffiliateCollabs()) {
+            if (i->getId() == collab->getId()) {
+                return affiliate;
+            }
+        }
+    }
+    return HouseMasterAffiliate();
+}
+
+/**
  * @brief saves the affiliates' info
  */
 void HouseMaster::writeAffiliatesInfo() {
@@ -134,133 +170,17 @@ void HouseMaster::writeAffiliatesInfo() {
 
 // Users Manip
 /**
- * @brief getter
- * @return the clients' contacts
+ * @brief finds an individual by their username
+ * @param username the username
+ * @return the individual
  */
-clientHT HouseMaster::getContacts() const {
-    return _clientContacts;
-}
-
-/**
- * @brief Add An std::pair<username, Id> to the _usernames Map, used to save (And possibly login) Collaborators and
- * administrators
- * @param mapElem The element to add
- */
-void HouseMaster::addUsernamesMapEntry(std::pair<std::string, std::string> mapElem) {
-    _usernameMap.emplace(mapElem);
-}
-
-/**
- * @brief getter
- * @return the collaborators
- */
-std::map<std::string, Collaborator *> HouseMaster::getCollaborators() const {
-    return _collaborators;
-}
-
-/**
- * @brief adds a new collaborator to the housemaster
- * @param services services that the collaborator can preform
- * @param name name of the collaborator
- * @param pro is professional
- * @param earnings the earnings
- * @param score the score
- * @param affiliate the affiliate's name
- */
-void HouseMaster::addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
-                                  std::vector<Availability> availabilities, float earnings,
-                                  Classification score, std::string affiliate) {
-    auto collab = new Collaborator(services, name, pro, availabilities, earnings, score, std::move(affiliate));
-    _collaborators.insert({collab->getId(), collab});
-    _usernameMap.insert({collab->getId(), collab->getId()});
-}
-
-/**
- * @brief adds a new admin to the housemaster
- * @param name name of the collaborator
- * @param password the admins' password
- * @param affiliates the affiliates
- */
-void HouseMaster::addAdmin(const std::string &name, std::string password, const std::vector<std::string> &affiliates) {
-    auto admin = new Admin(name, password, affiliates);
-    for (const auto &i : _responsibles) {
-        if (i.second->getName() == admin->getName() && i.second->getAffiliates() == admin->getAffiliates()) {
-            return;
-        }
-    }
-    _responsibles.insert({admin->getId(), admin});
-    _usernameMap.insert({admin->getId(), admin->getId()});
-}
-
-/**
- * @brief removes a collaborator from housemaster (general)
- * @param id the id of the collaborator to remove
- */
-void HouseMaster::removeCollaborator(const std::string &id) {
-    auto it = this->_collaborators.find(id);
-    auto usernameIt = std::find_if(_usernameMap.begin(), _usernameMap.end(),
-                                   [&id](const std::pair<std::string, std::string> &mapped) {
-                                       return mapped.second == id;
-                                   });
-    if (it != _collaborators.end()) {
-        if (usernameIt != _usernameMap.end()) {
-            _collaborators.erase(it);
-            _usernameMap.erase(usernameIt);
-        } else {
-            throw NonexistentUsername("This username does not exist!");
-        }
-    } else {
-        throw NonexistentCollab("There's no such collab!");
-    }
-}
-
-/**
- * @brief Removes collaborator from housemaster, checking for its active interventions
- * @param collId
- */
-void HouseMasterAffiliate::removeCollaborator(const std::string &collId) {
-    if (getAssociatedActiveInterventions(collId).empty()) {
-        _hm->removeCollaborator(collId);
-    } else {
-        throw AssignedCollab("Collaborator still has incomplete Interventions!");
-    }
-}
-
-/**
- * @brief Function to get all of the collaborators of one affiliate
- * @return Vector with Collaborators
- */
-std::vector<Collaborator *> HouseMasterAffiliate::getAffiliateCollabs() const {
-    std::vector<Collaborator *> collabs;
-    for (const auto &pair: _hm->getCollaborators()) {
-        std::cout << "Collaborator " << pair.second->getName() << " " << pair.second->getAffiliate()
-        << getAffiliateName() << "\n";
-        if (pair.second->getAffiliate() == getAffiliateName())
-            collabs.emplace_back(pair.second);
-    }
-    return collabs;
-}
-
-/**
-* @brief adds a new classification to a collaborator
-* @param hm the instance of housemaster
-* @param collabId the collaborator to classify
-* @param classification the classification to give the collab
-*/
-void
-Client::classifyCollaborator(HouseMaster *hm, const std::string &collabId, Classification classification) {
-    hm->findCollabById(collabId)->addClassification(classification);
-}
-
-/**
- * @brief processes the payment of an intervention
- * @param intervention the intervention
- */
-void HouseMasterAffiliate::processTransaction(Intervention *intervention) {
-    float hmEarnings;
-    hmEarnings = intervention->getCost() - (intervention->getCost() / float(1 + HouseMasterTax));
-    _hm->findCollabById(intervention->getCollabId())->calculateEarnings(hmEarnings);
-    _earnings += hmEarnings;
+Individual *HouseMaster::findByUsername(const std::string &username) {
+    auto it = _usernameMap.find(username);
+    if (it == _usernameMap.end()) throw NonexistentUsername("This username does not exist!");
+    if (it->second.substr(0, 6) == "collab") return _collaborators[it->second];
+    else if (it->second.substr(0, 6) == "client") return _clients[it->second];
+    else if (it->second.substr(0, 5) == "admin") return _responsibles[it->second];
+    else return nullptr;
 }
 
 /**
@@ -316,25 +236,119 @@ void HouseMaster::removeClient(const std::string &clientId) {
 }
 
 /**
- * @brief Function to get all of the clients of one affiliate
- * @return Vector with clients
+ * @brief Finds a client by it's email
+ * @param email the email
+ * @return the client
  */
-std::vector<Client *> HouseMasterAffiliate::getAffiliateClients() const {
-    std::vector<Client *> clients;
-    for (const auto &pair: _hm->getClients()) {
-        if (pair.second->getAffiliate() == getAffiliateName())
-            clients.emplace_back(pair.second);
+Client * HouseMaster::findClientByEmail(const string &email) const {
+    for (const auto &client : _clientContacts) {
+        if (client->getEmail() == email) {
+            return client;
+        }
     }
-    return clients;
+    throw HouseMaster::NonexistentClient("Email not found in records");
 }
 
 /**
- * @brief Changes username in username map
- * @param hm, the instance of housemaster
+ * @brief Changes client's email
+ * @param oldEmail the previous email
+ * @param newEmail the new email
  */
-void Individual::changeUsername(HouseMaster &hm, std::string newUsername) const {
-    std::cout << "Changing " << this->getId() << " to be " << newUsername << "\n";
-    hm.usernameMapChanger(this->getId(), std::move(newUsername));
+void HouseMaster::changeClientEmail(const string &oldEmail, const string &newEmail) {
+    Client *toChange = findClientByEmail(oldEmail);
+    _clientContacts.erase(findClientByEmail(oldEmail));
+    toChange->setEmail(newEmail);
+    _clientContacts.insert(toChange);
+}
+
+/**
+ * @brief getter
+ * @return the clients' contacts
+ */
+clientHT HouseMaster::getContacts() const {
+    return _clientContacts;
+}
+
+/**
+ * @brief Add An std::pair<username, Id> to the _usernames Map, used to save (And possibly login) Collaborators and
+ * administrators
+ * @param mapElem The element to add
+ */
+void HouseMaster::addUsernamesMapEntry(std::pair<std::string, std::string> mapElem) {
+    _usernameMap.emplace(mapElem);
+}
+
+/**
+ * @brief getter
+ * @return the collaborators
+ */
+std::map<std::string, Collaborator *> HouseMaster::getCollaborators() const {
+    return _collaborators;
+}
+
+/**
+ * @brief removes a collaborator from housemaster (general)
+ * @param id the id of the collaborator to remove
+ */
+void HouseMaster::removeCollaborator(const std::string &id) {
+    auto it = this->_collaborators.find(id);
+    auto usernameIt = std::find_if(_usernameMap.begin(), _usernameMap.end(),
+                                   [&id](const std::pair<std::string, std::string> &mapped) {
+                                       return mapped.second == id;
+                                   });
+    if (it != _collaborators.end()) {
+        if (usernameIt != _usernameMap.end()) {
+            _collaborators.erase(it);
+            _usernameMap.erase(usernameIt);
+        } else {
+            throw NonexistentUsername("This username does not exist!");
+        }
+    } else {
+        throw NonexistentCollab("There's no such collab!");
+    }
+}
+
+/**
+ * @brief adds a new collaborator to the housemaster
+ * @param services services that the collaborator can preform
+ * @param name name of the collaborator
+ * @param pro is professional
+ * @param earnings the earnings
+ * @param score the score
+ * @param affiliate the affiliate's name
+ */
+void HouseMaster::addCollaborator(const std::vector<std::string> &services, const std::string &name, bool pro,
+                                  std::vector<Availability> availabilities, float earnings,
+                                  Classification score, std::string affiliate) {
+    auto collab = new Collaborator(services, name, pro, availabilities, earnings, score, std::move(affiliate));
+    _collaborators.insert({collab->getId(), collab});
+    _usernameMap.insert({collab->getId(), collab->getId()});
+}
+
+/**
+ * @brief Function to get the collaborator knowing its id
+ * @param collabId
+ * @return Collaborator *
+ */
+Collaborator *HouseMaster::findCollabById(const std::string &collabId) {
+    return _collaborators[collabId];
+}
+
+/**
+ * @brief adds a new admin to the housemaster
+ * @param name name of the collaborator
+ * @param password the admins' password
+ * @param affiliates the affiliates
+ */
+void HouseMaster::addAdmin(const std::string &name, std::string password, const std::vector<std::string> &affiliates) {
+    auto admin = new Admin(name, password, affiliates);
+    for (const auto &i : _responsibles) {
+        if (i.second->getName() == admin->getName() && i.second->getAffiliates() == admin->getAffiliates()) {
+            return;
+        }
+    }
+    _responsibles.insert({admin->getId(), admin});
+    _usernameMap.insert({admin->getId(), admin->getId()});
 }
 
 /**
@@ -381,6 +395,93 @@ void HouseMaster::writeUsernameMap() {
     } else throw UnableToWriteFile("Unable to write in usernames' file");
 }
 
+// General
+/**
+ * @brief getter
+ * @return the total earnings
+ */
+float HouseMaster::getTotalFinances() const {
+    float totalFinances{};
+    for (auto it = _affiliates.begin(); it != _affiliates.end(); it++) {
+        totalFinances += (*it).getEarnings();
+    }
+    return totalFinances;
+}
+
+// Exceptions
+/**
+ * @brief Exception thrown when trying to change username to another already in use
+ * @param error_msg to show
+ */
+HouseMaster::UsernameAlreadyInUse::UsernameAlreadyInUse(const std::string &error_msg) : std::logic_error(error_msg) {}
+
+/**
+ * @brief the exception for nonexistent username
+ * @param error_msg to show
+ */
+HouseMaster::NonexistentUsername::NonexistentUsername(const std::string &error_msg) : out_of_range(error_msg) {}
+
+/**
+ * @brief the exception for a nonexistent collaborator
+ * @param error_msg to show
+ */
+HouseMaster::NonexistentCollab::NonexistentCollab(const std::string &error_msg) : std::out_of_range(error_msg) {}
+
+/**
+* @brief the exception for nonexistent responsible
+* @param error_msg to show
+*/
+HouseMaster::NonexistentResponsible::NonexistentResponsible(const std::string &error_msg) : out_of_range(error_msg) {}
+
+
+/**
+ * @brief the exception for when a client already exists
+ * @param error_msg to show
+ */
+HouseMaster::ExistentClient::ExistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
+
+/**
+ * @brief the exception for nonexistent clients
+ * @param error_msg to show
+ */
+HouseMaster::NonexistentClient::NonexistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
+
+/**
+ * @brief the exception for writing to file failures
+ * @param error_msg to show
+ */
+HouseMaster::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) : std::ifstream::failure(error_msg) {}
+
+
+
+
+
+
+
+// Individual related code
+/**
+ * @brief Changes username in username map
+ * @param hm, the instance of housemaster
+ */
+void Individual::changeUsername(HouseMaster &hm, std::string newUsername) const {
+    std::cout << "Changing " << this->getId() << " to be " << newUsername << "\n";
+    hm.usernameMapChanger(this->getId(), std::move(newUsername));
+}
+
+/**
+* @brief adds a new classification to a collaborator
+* @param hm the instance of housemaster
+* @param collabId the collaborator to classify
+* @param classification the classification to give the collab
+*/
+void
+Client::classifyCollaborator(HouseMaster *hm, const std::string &collabId, Classification classification) {
+    hm->findCollabById(collabId)->addClassification(classification);
+}
+
+
+
+// HouseMasterAffiliate related code
 /**
  * @brief housemaster constructor from files
  * @param collaborators collabs info
@@ -518,8 +619,6 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
                                               collabId, clientId);*/
     }
 
-
-
     // read responsibles
     for (std::string line; std::getline(responsibles, line);) {
         std::stringstream lineStream(line);
@@ -543,127 +642,52 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
     }
 }
 
-
-// General
 /**
- * @brief getter
- * @return the total earnings
+ * @brief Removes collaborator from housemaster, checking for its active interventions
+ * @param collId
  */
-float HouseMaster::getTotalFinances() const {
-    float totalFinances{};
-    for (auto it = _affiliates.begin(); it != _affiliates.end(); it++) {
-        totalFinances += (*it).getEarnings();
+void HouseMasterAffiliate::removeCollaborator(const std::string &collId) {
+    if (getAssociatedActiveInterventions(collId).empty()) {
+        _hm->removeCollaborator(collId);
+    } else {
+        throw AssignedCollab("Collaborator still has incomplete Interventions!");
     }
-    return totalFinances;
 }
-
 /**
- * @brief finds an individual by their username
- * @param username the username
- * @return the individual
+ * @brief Function to get all of the clients of one affiliate
+ * @return Vector with clients
  */
-Individual *HouseMaster::findByUsername(const std::string &username) {
-    auto it = _usernameMap.find(username);
-    if (it == _usernameMap.end()) throw NonexistentUsername("This username does not exist!");
-    if (it->second.substr(0, 6) == "collab") return _collaborators[it->second];
-    else if (it->second.substr(0, 6) == "client") return _clients[it->second];
-    else if (it->second.substr(0, 5) == "admin") return _responsibles[it->second];
-    else return nullptr;
-}
-
-/**
- * @brief Function to get the collaborator knowing its id
- * @param collabId
- * @return Collaborator *
- */
-Collaborator *HouseMaster::findCollabById(const std::string &collabId) {
-    return _collaborators[collabId];
-}
-
-
-// Exceptions
-/**
- * @brief Exception thrown when trying to change username to another already in use
- * @param error_msg to show
- */
-HouseMaster::UsernameAlreadyInUse::UsernameAlreadyInUse(const std::string &error_msg) : std::logic_error(error_msg) {}
-
-/**
- * @brief the exception for nonexistent username
- * @param error_msg to show
- */
-HouseMaster::NonexistentUsername::NonexistentUsername(const std::string &error_msg) : out_of_range(error_msg) {}
-
-/**
- * @brief the exception for a nonexistent collaborator
- * @param error_msg to show
- */
-HouseMaster::NonexistentCollab::NonexistentCollab(const std::string &error_msg) : std::out_of_range(error_msg) {}
-
-/**
-* @brief the exception for nonexistent responsible
-* @param error_msg to show
-*/
-HouseMaster::NonexistentResponsible::NonexistentResponsible(const std::string &error_msg) : out_of_range(error_msg) {}
-
-
-/**
- * @brief the exception for when a client already exists
- * @param error_msg to show
- */
-HouseMaster::ExistentClient::ExistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
-
-/**
- * @brief the exception for nonexistent clients
- * @param error_msg to show
- */
-HouseMaster::NonexistentClient::NonexistentClient(const std::string &error_msg) : std::out_of_range(error_msg) {}
-
-/**
- * @brief the exception for writing to file failures
- * @param error_msg to show
- */
-HouseMaster::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) : std::ifstream::failure(error_msg) {}
-
-Client * HouseMaster::findClientByEmail(const string &email) const {
-    for (const auto &client : _clientContacts) {
-        if (client->getEmail() == email) {
-            return client;
-        }
+std::vector<Client *> HouseMasterAffiliate::getAffiliateClients() const {
+    std::vector<Client *> clients;
+    for (const auto &pair: _hm->getClients()) {
+        if (pair.second->getAffiliate() == getAffiliateName())
+            clients.emplace_back(pair.second);
     }
-    throw HouseMaster::NonexistentClient("Email not found in records");
+    return clients;
 }
 
-
-HouseMasterAffiliate HouseMaster::findAffiliateByClient(const Client *client) const {
-    BSTItrIn<HouseMasterAffiliate> current(_affiliates);
-    for (; !current.isAtEnd(); current.advance()) {
-        auto affiliate = current.retrieve();
-        for (const auto &i : affiliate.getAffiliateClients()) {
-            if (i->getId() == client->getId()) {
-                return affiliate;
-            }
-        }
+/**
+ * @brief Function to get all of the collaborators of one affiliate
+ * @return Vector with Collaborators
+ */
+std::vector<Collaborator *> HouseMasterAffiliate::getAffiliateCollabs() const {
+    std::vector<Collaborator *> collabs;
+    for (const auto &pair: _hm->getCollaborators()) {
+        std::cout << "Collaborator " << pair.second->getName() << " " << pair.second->getAffiliate()
+                  << getAffiliateName() << "\n";
+        if (pair.second->getAffiliate() == getAffiliateName())
+            collabs.emplace_back(pair.second);
     }
-    return HouseMasterAffiliate();
+    return collabs;
 }
 
-HouseMasterAffiliate HouseMaster::findAffiliateByCollab(const Collaborator *collab) const {
-    BSTItrIn<HouseMasterAffiliate> current(_affiliates);
-    for (; !current.isAtEnd(); current.advance()) {
-        auto affiliate = current.retrieve();
-        for (const auto &i : affiliate.getAffiliateCollabs()) {
-            if (i->getId() == collab->getId()) {
-                return affiliate;
-            }
-        }
-    }
-    return HouseMasterAffiliate();
-}
-
-void HouseMaster::changeClientEmail(const string &oldEmail, const string &newEmail) {
-    Client *toChange = findClientByEmail(oldEmail);
-    _clientContacts.erase(findClientByEmail(oldEmail));
-    toChange->setEmail(newEmail);
-    _clientContacts.insert(toChange);
+/**
+ * @brief processes the payment of an intervention
+ * @param intervention the intervention
+ */
+void HouseMasterAffiliate::processTransaction(Intervention *intervention) {
+    float hmEarnings;
+    hmEarnings = intervention->getCost() - (intervention->getCost() / float(1 + HouseMasterTax));
+    _hm->findCollabById(intervention->getCollabId())->calculateEarnings(hmEarnings);
+    _earnings += hmEarnings;
 }
