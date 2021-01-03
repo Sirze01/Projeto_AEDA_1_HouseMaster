@@ -68,7 +68,7 @@ public:
 
     void removeCollaborator(const std::string &id); // Don't use, use affiliate instead
 
-    void addClient(unsigned long nif, const std::string &name, bool premium, std::string affiliate);
+    void addClient(unsigned long nif, const std::string &name, std::string email, bool premium, std::string affiliate);
 
     void removeClient(const std::string &clientId);
 

@@ -226,12 +226,9 @@ void Collaborator::addService(Service *service) {
  * @param affiliate the affiliate's name
  * @param premium is premium
  */
-Client::Client(unsigned int nif, const std::string &name, bool premium, std::string affiliate)
-        : Individual(name), _nif(nif), _premium(premium), _affiliate(std::move(affiliate)) {
+Client::Client(unsigned int nif, const std::string &name, std::string email, bool premium, std::string affiliate)
+        : Individual(name), _nif(nif), _email(std::move(email)), _premium(premium), _affiliate(std::move(affiliate)) {
     _id = _idSeqClt++;
-    std::stringstream m{};
-    m << "client" << _id << "@housemaster.pt";
-    _email = m.str();
 }
 
 /**

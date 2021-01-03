@@ -165,7 +165,7 @@ class Client : public Individual {
 public:
     static unsigned int _idSeqClt;
 
-    Client(unsigned int nif, const std::string &name, bool premium, std::string affiliate = "");
+    Client(unsigned int nif, const std::string &name, std::string email, bool premium, std::string affiliate = "");
 
     ~Client() override = default;
 
@@ -192,9 +192,9 @@ public:
 
 private:
     unsigned int _nif;
+    std::string _email;
     bool _premium;
     std::string _affiliate;
-    std::string _email;
 
 
 };

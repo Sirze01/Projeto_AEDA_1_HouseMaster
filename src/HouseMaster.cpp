@@ -280,13 +280,13 @@ std::map<std::string, Client *> HouseMaster::getClients() const {
  * @param name name
  * @param premium is premium
  */
-void HouseMaster::addClient(unsigned long nif, const std::string &name, bool premium, std::string affiliate) {
+void HouseMaster::addClient(unsigned long nif, const std::string &name, std::string email, bool premium, std::string affiliate) {
 
     auto it = std::find_if(_clients.begin(), _clients.end(), [&nif](const std::pair<std::string, Client *> &pair) {
         return pair.second->getNif() == nif;
     });
     if (it == _clients.end()) {
-        auto client = new Client(nif, name, premium, std::move(affiliate));
+        auto client = new Client(nif, name, email, premium, std::move(affiliate));
         _clients.insert({client->getEmail(), client});
     } else {
         throw HouseMaster::ExistentClient("Client already registred!");
@@ -476,13 +476,15 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernam
         std::getline(lss, affiliate_name, ',');
         if (affiliate_name == hmName) {
             std::string name;
+            std::string email;
             std::string nifStr{};
             std::string premiumStr{};
             std::getline(lss, name, ',');
+            std::getline(lss, email, ',');
             std::getline(lss, nifStr, ',');
             std::getline(lss, premiumStr, ',');
 
-            _hm->addClient(std::stoul(nifStr), name, premiumStr == "yes", affiliate_name);
+            _hm->addClient(std::stoul(nifStr), name, email, premiumStr == "yes", affiliate_name);
         } else continue;
     }
 
@@ -512,9 +514,9 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernam
         std::getline(lineStream, state, ',');
         std::getline(lineStream, cost, ',');
         std::getline(lineStream, nrRooms, ',');
-        auto *intervention = new Intervention(Date(start), service, forcePro == "1", std::stoi(nrRooms),
+        /*auto *intervention = new Intervention(Date(start), service, forcePro == "1", std::stoi(nrRooms),
                                               processState(std::stoi(state)), std::stof(cost),
-                                              collabId, clientId);
+                                              collabId, clientId);*/
     }
 
 

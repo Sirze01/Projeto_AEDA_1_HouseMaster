@@ -311,12 +311,16 @@ bool Interface::isValidNif(unsigned nif) {
  * @brief reads a new client's data
  */
 void Interface::readNewClientData() {
-    std::string name{}, premiumStr{}, affiliate{};
+    std::string name{}, email{}, premiumStr{}, affiliate{};
     unsigned nif{};
 
     std::cout << "Name ? ";
     std::cin.ignore(9999, '\n');
     std::getline(std::cin, name, '\n');
+
+    std::cout << "E-mail ? ";
+    std::cin.ignore(9999, '\n');
+    std::getline(std::cin, email, '\n');
 
     std::cout << "Premium ? [yes/no] ";
     std::cin >> premiumStr;
@@ -348,7 +352,7 @@ void Interface::readNewClientData() {
         }
     } while (!done);
 
-    _houseMaster.addClient(nif, name, premium, affiliate);
+    _houseMaster.addClient(nif, name, email, premium, affiliate);
 }
 
 /**
