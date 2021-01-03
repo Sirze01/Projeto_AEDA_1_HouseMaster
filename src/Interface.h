@@ -21,7 +21,7 @@ public:
 
     Interface(const HouseMasterAffiliate& housemaster, Individual* user, Role role);
 
-    Interface(const HouseMaster& houseMaster, const HouseMasterAffiliate& houseMasterAffiliate, Individual* user, Role role);
+    Interface(HouseMaster* houseMaster, const HouseMasterAffiliate& houseMasterAffiliate, Individual* user, Role role);
 
     void selectRole(bool &running);
 
@@ -75,7 +75,7 @@ private:
 
     void showSortedCollabs();
 
-    HouseMaster _houseMaster;
+    HouseMaster *_houseMaster;
     HouseMasterAffiliate _houseMasterAffiliate;
     Individual *_user{};
     Role _role{};
@@ -83,6 +83,7 @@ private:
     Intervention *selectPastIntervention(bool &running);
 
     string readNewEmail();
+
 };
 
 class Interface::NonexistentRole : public std::logic_error {

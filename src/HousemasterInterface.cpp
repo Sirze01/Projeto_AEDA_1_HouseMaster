@@ -38,13 +38,12 @@ HouseMasterAffiliate HousemasterInterface::selectResponsibleAffiliate(bool &runn
         std::string adminId = current.retrieve().getAdmin().getId();
         if (adminId == admin->getId()) {
             for (const auto &i : admin->getAffiliates()) {
-                hms.insert(current.retrieve());
+                if (i == location) hms.insert(current.retrieve());
             }
         }
     }
     for (const auto & i : hms) {
         options.insert(std::pair<std::string, std::function<void()>>(i.getAffiliateName(),[&](){
-            cout << i.getLocation() << endl;
             selection = i;
         }));
     }
@@ -75,7 +74,7 @@ void HousemasterInterface::firstInterface(bool &running) {
         _houseMaster.registerAffiliate(_currentAffiliate);
     }},{"Login Client", [&](){
         clientLogin();
-        Interface clientInterface(_houseMaster, _currentAffiliate, _user, client);
+        Interface clientInterface(&_houseMaster, _currentAffiliate, _user, client);
         while (innerRunning) {
             clientInterface.clientOperations(innerRunning);
         }
@@ -84,7 +83,7 @@ void HousemasterInterface::firstInterface(bool &running) {
         _houseMaster.registerAffiliate(clientInterface.getHousemasterAffiliateState());
     }}, {"Login Collaborator", [&](){
         collabLogin();
-        Interface collabInterface(_houseMaster, _currentAffiliate, _user, collaborator);
+        Interface collabInterface(&_houseMaster, _currentAffiliate, _user, collaborator);
         std::cout << "Login succeeded for " << _user->getName() << "\n";
         while (innerRunning) {
             collabInterface.collaboratorOperations(innerRunning);
@@ -100,13 +99,15 @@ void HousemasterInterface::firstInterface(bool &running) {
         responsibleLogin(responsibleId);
         _currentAffiliate = selectResponsibleAffiliate(innerRunning);
         std::cout << "Affiliate " << _currentAffiliate.getAffiliateName() << "\n";
-        Interface adminInterface(_houseMaster, _currentAffiliate, _user, admin);
+        Interface adminInterface(&_houseMaster, _currentAffiliate, _user, admin);
         while (innerRunning) {
             adminInterface.responsibleOperations(innerRunning);
         }
         _houseMaster = adminInterface.getHousemasterState();
-        _houseMaster.removeAffiliate(_currentAffiliate);
-        _houseMaster.registerAffiliate(adminInterface.getHousemasterAffiliateState());
+        if (!_currentAffiliate.getAffiliateName().empty()) {
+            _houseMaster.removeAffiliate(_currentAffiliate);
+            _houseMaster.registerAffiliate(adminInterface.getHousemasterAffiliateState());
+        }
       }}});
     start.show();
     start.select();
@@ -137,7 +138,7 @@ void HousemasterInterface::adminLogin() {
 
 
 /**
- * @brief responsibleId login
+ * @brief responsible login
  */
 void HousemasterInterface::responsibleLogin(const std::string& responsibleId) {
     std::string password{};

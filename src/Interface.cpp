@@ -58,10 +58,10 @@ void Interface::clientOperations(bool &running) {
                     showPayment(intervention);
                     std::cin.ignore();
                     _houseMasterAffiliate.processTransaction(intervention);
-                    std::string collabName = _houseMaster.findCollabById(intervention->getCollabId())->getName();
+                    std::string collabName = _houseMaster->findCollabById(intervention->getCollabId())->getName();
                     Classification classification = readClassification(innerRunning, collabName);
                     if (innerRunning) {
-                        _houseMaster.findCollabById(intervention->getCollabId())->addClassification(classification);
+                        _houseMaster->findCollabById(intervention->getCollabId())->addClassification(classification);
                         HouseMasterAffiliate::markAsComplete(intervention);
                     }
                 }},{"Cancel Intervention", [&]() {
@@ -83,7 +83,7 @@ void Interface::clientOperations(bool &running) {
             std::cin.ignore();
         }
     }},{"Change email", [&](){
-        _houseMaster.changeClientEmail(client->getEmail(), readNewEmail());
+        _houseMaster->changeClientEmail(client->getEmail(), readNewEmail());
     }}});
     clientMenu.show();
     clientMenu.select();
@@ -156,7 +156,7 @@ void Interface::collaboratorOperations(bool &running) {
         bool done = true;
         do{
             try{
-                _user->changeUsername(_houseMaster, readNewUsername());
+                _user->changeUsername(*_houseMaster, readNewUsername());
                 done = true;
             }
             catch (const HouseMaster::UsernameAlreadyInUse &e) {
@@ -251,7 +251,7 @@ void Interface::responsibleOperations(bool &running) {
         while (innerRunning) {
             std::string collabName = selectCollab(innerRunning);
             if (!collabName.empty()) {
-                Collaborator *collab = _houseMaster.findCollabById(collabName);
+                Collaborator *collab = _houseMaster->findCollabById(collabName);
                 if (collab) show(*collab);
                 std::cin.ignore();
             }
@@ -361,7 +361,7 @@ void Interface::readNewClientData() {
  */
 void Interface::readNewCollaboratorData(bool &running) {
 
-    std::string name{}, pro{}, affiliate{};
+    std::string name{}, pro{}, affiliate = _houseMasterAffiliate.getAffiliateName();
     std::vector<std::string> services{};
     Classification classification{};
 
@@ -376,8 +376,32 @@ void Interface::readNewCollaboratorData(bool &running) {
         std::cin >> pro;
     }
 
+    bool innerRunning2 = true;
+    std::vector<Availability> days{};
+    Menu pickAvailability("Choose your availability", {{"Monday", [&](){
+        days.emplace_back("monday");
+    }}, {"Tuesday", [&](){
+        days.emplace_back("tuesday");
+    }}, {"Wednesday", [&](){
+        days.emplace_back("wednesday");
+    }}, {"Thursday", [&](){
+        days.emplace_back("thursday");
+    }}, {"Friday", [&](){
+        days.emplace_back("friday");
+    }}, {"Saturday", [&](){
+        days.emplace_back("saturday");
+    }}, {"Sunday", [&](){
+        days.emplace_back("sunday");
+    }}});
+
+    while (innerRunning2) {
+        pickAvailability.show();
+        pickAvailability.select();
+        pickAvailability.execute(innerRunning2);
+    }
+
     bool innerRunning = true;
-    _houseMaster.addCollaborator(services, name, pro == "yes", std::vector<Availability>{Availability("monday")}, 0, classification, affiliate);
+    _houseMaster->addCollaborator(services, name, pro == "yes", days, 0, classification, affiliate);
     Collaborator* newCollab = (*_houseMasterAffiliate.getAffiliateCollabs().rbegin());
 
     Menu pickServices("Pick your services", {{"Choose from the HouseMaster services", [&]() {
@@ -418,7 +442,8 @@ void Interface::readNewCollaboratorData(bool &running) {
         pickServices.execute(innerRunning);
     }
 
-    std::string username = (*_houseMasterAffiliate.getAffiliateCollabs().rbegin())->getId();
+
+    std::string username = (*_houseMaster->getCollaborators().rbegin()).second->getId();
     std::cout << "Welcome, " << name << " you can now login with the username " << username << "\n";
     std::cin.ignore();
 
@@ -491,7 +516,7 @@ std::string Interface::readNewServiceData() {
 }
 
 /**
- * @brief sellects a collab from housemaster
+ * @brief selects a collab from housemaster
  * @param running
  * @return the collab's id
  */
@@ -595,6 +620,11 @@ void Interface::show(const Collaborator &collaborator) {
     std::cout << "| [" << "Professional" << "] " << std::setw(35) << std::right << pro << " |" << std::endl;
     std::cout << "| [" << "Earnings" << "] " << std::setw(39) << std::right << collaborator.getEarnings() << " |"
               << std::endl;
+    std::cout << "| [" << "Available" << "] " << std::setw(37) << std::right;
+    for (const auto &i : collaborator.getAvailability()) {
+        std::cout << i.getWeekday() << " ";
+    }
+    std::cout  << " |" << std::endl;
     std::cout << "|                                                    |" << std::endl;
     std::cout << "| [Enter] Go Back                                    |" << std::endl;
     std::cout << "|____________________________________________________|" << std::endl;
@@ -628,11 +658,11 @@ void Interface::show(Intervention &intervention) {
     std::cout << "| [" << "Cost" << "] " << std::setw(43) << std::right << intervention.getCost() << " |" << std::endl;
     if (_role != collaborator) {
         std::cout << "| [" << "Collaborator" << "] " << std::setw(35) << std::right
-                  << _houseMaster.findCollabById(intervention.getCollabId())->getName() << " |" << std::endl;
+                  << _houseMaster->findCollabById(intervention.getCollabId())->getName() << " |" << std::endl;
     }
     if (_role != client) {
         std::cout << "| [" << "Client" << "] " << std::setw(41) << std::right
-                  << _houseMaster.findCollabById(intervention.getClientId())->getName() << " |" << std::endl;
+                  << _houseMaster->findCollabById(intervention.getClientId())->getName() << " |" << std::endl;
     }
     std::cout << "| [" << "Status" << "] " << std::setw(41) << std::right
               << statusName << " |" << std::endl;
@@ -768,11 +798,11 @@ Interface::Interface(const HouseMasterAffiliate& housemaster, Individual* user, 
 
 }
 
-Interface::Interface(const HouseMaster& houseMaster, const HouseMasterAffiliate& houseMasterAffiliate, Individual* user, Role role)
+Interface::Interface(HouseMaster* houseMaster, const HouseMasterAffiliate& houseMasterAffiliate, Individual* user, Role role)
     : _houseMaster(houseMaster), _houseMasterAffiliate(houseMasterAffiliate), _user(user), _role(role) {
-
+    _houseMasterAffiliate.setHousemaster(_houseMaster);
 }
 
 HouseMaster Interface::getHousemasterState() const {
-    return _houseMaster;
+    return *_houseMaster;
 }
