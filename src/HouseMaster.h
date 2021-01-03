@@ -52,8 +52,6 @@ public:
     // Users Manipulation
     Client* findClientByEmail(const std::string &email) const;
 
-    Admin* findAdminByName(const std::string &name) const;
-
     clientHT getContacts() const;
 
     void addUsernamesMapEntry(std::pair<std::string, std::string> map);
@@ -64,7 +62,7 @@ public:
                          std::vector<Availability> availabilities, float earnings,
                          Classification score, std::string affiliate);
 
-    void addAdmin(std::string name, std::string password, std::vector<std::string> affiliates);
+    void addAdmin(const std::string &name, std::string password, const std::vector<std::string> &affiliates);
 
     void removeCollaborator(const std::string &id); // Don't use, use affiliate instead
 

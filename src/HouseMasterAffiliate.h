@@ -106,6 +106,8 @@ public:
 
     float getEarnings() const;
 
+    void setAdmin(const Admin& admin);
+
 
     // General
     bool operator<(const HouseMasterAffiliate &hma) const;

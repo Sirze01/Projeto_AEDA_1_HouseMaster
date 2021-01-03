@@ -41,19 +41,17 @@ HouseMasterAffiliate HousemasterInterface::selectAffiliate(bool &running) {
 
 HouseMasterAffiliate HousemasterInterface::selectResponsibleAffiliate(bool &running) {
     std::map<std::string, std::function<void()> > options{};
-    auto affiliates = _houseMaster.getAffiliates();
+    BST<HouseMasterAffiliate> affiliates = _houseMaster.getAffiliates();
     HouseMasterAffiliate selection{};
     BSTItrIn<HouseMasterAffiliate> current(affiliates);
     std::set<HouseMasterAffiliate> hms{};
     auto admin = dynamic_cast<Admin*>(_user);
-    for (auto it = affiliates.begin(); it != affiliates.end(); it++)
-    {
-        std::cout << "Here" << admin->getName() << std::endl;
-        if (admin->getName() == (*it).getAdmin().getName()) {
-            for (const auto & i : admin->getAffiliates()) {
-                if (i == (*it).getLocation()) {
-                    hms.insert(current.retrieve());
-                }
+    for (; !current.isAtEnd(); current.advance()) {
+        std::string location = current.retrieve().getLocation();
+        std::string adminId = current.retrieve().getAdmin().getId();
+        if (adminId == admin->getId()) {
+            for (const auto &i : admin->getAffiliates()) {
+                hms.insert(current.retrieve());
             }
         }
     }
@@ -95,14 +93,12 @@ void HousemasterInterface::firstInterface(bool &running) {
         }
     }},{"Login Client", [&](){
         clientLogin();
-        bool innerRunning = true;
         Interface clientInterface(_currentAffiliate, _user, client);
         while (innerRunning) {
             clientInterface.clientOperations(innerRunning);
         }
     }}, {"Login Collaborator", [&](){
         collabLogin();
-        bool innerRunning = true;
         Interface collabInterface(_currentAffiliate, _user, collaborator);
         std::cout << "Login succeeded for " << _user->getName() << "\n";
         while (innerRunning) {
@@ -110,17 +106,12 @@ void HousemasterInterface::firstInterface(bool &running) {
         }
     }}, { "Login Responsible", [&](){
         std::cout << "Welcome to HouseMaster. You have RESPONSIBLE privilege.\n";
-        //bool innerRunning2 = true;
-        std::string responsible = selectResponsible(innerRunning);
-        responsibleLogin(responsible);
+        std::string responsibleId = selectResponsible(innerRunning);
+        responsibleLogin(responsibleId);
         _currentAffiliate = selectResponsibleAffiliate(innerRunning);
         Interface adminInterface(_currentAffiliate, _user, admin);
-        adminInterface.responsibleOperations(innerRunning);
         while (innerRunning) {
-            start.show();
-            start.select();
-            start.execute(innerRunning);
-            std::cin.ignore();
+            adminInterface.responsibleOperations(innerRunning);
         }
       }}});
     start.show();
@@ -152,22 +143,17 @@ void HousemasterInterface::adminLogin() {
 
 
 /**
- * @brief responsible login
+ * @brief responsibleId login
  */
-void HousemasterInterface::responsibleLogin(std::string responsible) {
+void HousemasterInterface::responsibleLogin(const std::string& responsibleId) {
     std::string password{};
     std::cout << "Password : ";
     std::cin >> password;
+    _user = _houseMaster.getAdmins().find(responsibleId)->second;
     for (int i = 0; i <= 1; i++) {
-        if (password == _houseMaster.getAdmins().find(responsible)->second->getPassword())
-        {
-            std::cout << "success \n";
-            _user = _houseMaster.findAdminByName(responsible);
-            return;
-        } else {
-            std::cout << "Wrong password. Try again:\n";
-            std::cin >> password;
-        }
+        if (password == dynamic_cast<Admin*>(_user)->getPassword()) return;
+        std::cout << "Wrong password. Try again:\n";
+        std::cin >> password;
     }
     std::cout << "Too many tries! Logging out...\n";
     exit(0);

@@ -38,6 +38,19 @@ HouseMaster::HouseMaster(std::ifstream affiliates) : _affiliates(HouseMasterAffi
         _locations.insert(location);
         registerAffiliate(h1);
     }
+    BSTItrIn<HouseMasterAffiliate> current(_affiliates);
+    for (; !current.isAtEnd(); current.advance()) {
+        for (const auto &i : _responsibles) {
+            for (const auto &loc : i.second->getAffiliates()) {
+                if (loc == current.retrieve().getLocation()) {
+                    auto toChange = current.retrieve();
+                    toChange.setAdmin(*(i.second));
+                    _affiliates.remove(current.retrieve());
+                    _affiliates.insert(toChange);
+                }
+            }
+        }
+    }
 }
 
 
@@ -173,8 +186,14 @@ void HouseMaster::addCollaborator(const std::vector<std::string> &services, cons
  * @param password the admins' password
  * @param affiliates the affiliates
  */
-void HouseMaster::addAdmin(std::string name, std::string password, std::vector<std::string> affiliates) {
+void HouseMaster::addAdmin(const std::string &name, std::string password, const std::vector<std::string> &affiliates) {
     auto admin = new Admin(name,password, affiliates);
+    std::cout << "Adding admin " << admin->getName() << " with id " << admin->getId() << "\n";
+    for (const auto &i : _responsibles) {
+        if (i.second->getName() == admin->getName()) {
+            return;
+        }
+    }
     _responsibles.insert({admin->getId(), admin});
     _usernameMap.insert({admin->getId(), admin->getId()});
 }
@@ -512,7 +531,12 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernam
         while (std::getline(lineStream, affiliate, ',')) {
             affiliates.push_back(affiliate);
         }
-        _hm->addAdmin(name, password, affiliates);
+        std::cout << "Reading admin " << name << "\n";
+        for (const auto &i : affiliates) {
+            if (_location == i) {
+                _hm->addAdmin(name, password, affiliates);
+            }
+        }
     }
 }
 
@@ -608,15 +632,6 @@ Client *HouseMaster::findClientByEmail(const string &email) const {
     throw HouseMaster::NonexistentClient("Email not found in records");
 }
 
-
-Admin *HouseMaster::findAdminByName(const std::string &name) const {
-    for (auto it = _responsibles.begin(); it != _responsibles.end(); it++) {
-        if ((*it).second->getName() == name) {
-            return ((*it).second);
-        }
-    }
-    throw HouseMaster::NonexistentResponsible("This responsible does not exist!");
-}
 
 HouseMasterAffiliate HouseMaster::findAffiliateByClient(const Client *client) const {
     BSTItrIn<HouseMasterAffiliate> current(_affiliates);

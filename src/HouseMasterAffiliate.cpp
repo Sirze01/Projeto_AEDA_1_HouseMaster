@@ -519,3 +519,7 @@ bool HouseMasterAffiliate::operator<(const HouseMasterAffiliate &hma) const {
     } else return (_responsible.getName() < hma.getAdmin().getName());
 }
 
+void HouseMasterAffiliate::setAdmin(const Admin& admin) {
+    _responsible = admin;
+}
+
