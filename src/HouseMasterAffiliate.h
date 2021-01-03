@@ -108,6 +108,8 @@ public:
 
     void setAdmin(const Admin& admin);
 
+    void setHousemaster(HouseMaster* hm);
+
 
     // General
     bool operator<(const HouseMasterAffiliate &hma) const;

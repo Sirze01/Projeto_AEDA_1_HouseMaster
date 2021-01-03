@@ -523,3 +523,7 @@ void HouseMasterAffiliate::setAdmin(const Admin& admin) {
     _responsible = admin;
 }
 
+void HouseMasterAffiliate::setHousemaster(HouseMaster *hm) {
+    _hm = hm;
+}
+

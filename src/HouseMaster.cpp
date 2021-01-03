@@ -233,6 +233,8 @@ void HouseMasterAffiliate::removeCollaborator(const std::string &collId) {
 std::vector<Collaborator *> HouseMasterAffiliate::getAffiliateCollabs() const {
     std::vector<Collaborator *> collabs;
     for (const auto &pair: _hm->getCollaborators()) {
+        std::cout << "Collaborator " << pair.second->getName() << " " << pair.second->getAffiliate()
+        << getAffiliateName() << "\n";
         if (pair.second->getAffiliate() == getAffiliateName())
             collabs.emplace_back(pair.second);
     }

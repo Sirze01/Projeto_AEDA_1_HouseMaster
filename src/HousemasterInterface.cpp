@@ -74,7 +74,7 @@ void HousemasterInterface::firstInterface(bool &running) {
         _houseMaster.registerAffiliate(_currentAffiliate);
     }},{"Login Client", [&](){
         clientLogin();
-        Interface clientInterface(_houseMaster, _currentAffiliate, _user, client);
+        Interface clientInterface(&_houseMaster, _currentAffiliate, _user, client);
         while (innerRunning) {
             clientInterface.clientOperations(innerRunning);
         }
@@ -83,7 +83,7 @@ void HousemasterInterface::firstInterface(bool &running) {
         _houseMaster.registerAffiliate(clientInterface.getHousemasterAffiliateState());
     }}, {"Login Collaborator", [&](){
         collabLogin();
-        Interface collabInterface(_houseMaster, _currentAffiliate, _user, collaborator);
+        Interface collabInterface(&_houseMaster, _currentAffiliate, _user, collaborator);
         std::cout << "Login succeeded for " << _user->getName() << "\n";
         while (innerRunning) {
             collabInterface.collaboratorOperations(innerRunning);
@@ -99,7 +99,7 @@ void HousemasterInterface::firstInterface(bool &running) {
         responsibleLogin(responsibleId);
         _currentAffiliate = selectResponsibleAffiliate(innerRunning);
         std::cout << "Affiliate " << _currentAffiliate.getAffiliateName() << "\n";
-        Interface adminInterface(_houseMaster, _currentAffiliate, _user, admin);
+        Interface adminInterface(&_houseMaster, _currentAffiliate, _user, admin);
         while (innerRunning) {
             adminInterface.responsibleOperations(innerRunning);
         }
