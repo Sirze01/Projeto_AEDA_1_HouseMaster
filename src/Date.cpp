@@ -207,6 +207,10 @@ bool Date::operator>(const Date &d1) const {
            _date.tm_min > d1.getDate().tm_min;
 }
 
+/**
+ * @brief getter
+ * @return weekdays
+ */
 std::vector<std::string> Date::getWeekdays() {
     return _weekdays;
 }
@@ -255,7 +259,7 @@ Duration::Duration(const std::string &duration) : Date(){
 
 /**
  * @brief Function to retrieve the tm structure with the duration
- * @return
+ * @return duration
  */
 tm Duration::getDuration() const{
     return _date;
@@ -271,9 +275,15 @@ std::string Duration::getString() const {
     return stream.str();
 }
 
-
+/**
+ * @brief default availability
+ */
 Availability::Availability() = default;
 
+/**
+ * @brief Sets the availability with the weekday provided
+ * @param weekday sets the weekday
+ */
 Availability::Availability(int weekday):Date(){
     checkIfValid(weekday);
     _date.tm_hour = 0;
@@ -286,6 +296,10 @@ Availability::Availability(int weekday):Date(){
     _date.tm_wday = weekday;
 }
 
+/**
+ * @brief Sets the availability with a given string
+ * @param weekday sets the weekday
+ */
 Availability::Availability(const std::string &weekday) : Date() {
     std::vector<std::string> weekdays = getWeekdays();
     auto it = std::find_if(weekdays.begin(), weekdays.end(), [weekday](const std::string &test){
@@ -302,19 +316,35 @@ Availability::Availability(const std::string &weekday) : Date() {
     _date.tm_wday = (it - weekdays.begin());
 }
 
+/**
+ * @brief Sees if a availability is valid or not (weekday in correct range), throwing adequate exception if not
+ */
 void Availability::checkIfValid(int day) {
     if(day < 0 || day > 6)
         throw InvalidDate(std::string(1,day)+ " isn't a valid weekday!");
 }
 
+/**
+ * @brief Converts the saved availability in a string. Useful to show during output operations.
+ * @return A string with the weekday
+ */
 std::string Availability::getString() const {
     return _weekdays.at(_date.tm_wday);
 }
 
+/**
+ * @brief getter
+ * @return weekday
+ */
 int Availability::getWeekday() const {
     return _date.tm_wday;
 }
 
+/**
+ * @brief Checks whether the first weekday is before the second
+ * @param d1 the other operand
+ * @return Whether the first weekday is before the second one
+ */
 bool Availability::operator<(const Availability &d1) const {
     return _date.tm_wday < d1.getDate().tm_wday;
 }
