@@ -246,8 +246,7 @@ unsigned int Client::getNif() {
  * @brief getter
  * @return affiliate
  */
-std::string Client::getAffiliate()
-{
+std::string Client::getAffiliate() const {
     return _affiliate;
 }
 

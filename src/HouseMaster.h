@@ -50,9 +50,11 @@ public:
 
 
     // Users Manipulation
-    Client* findClientByEmail(const std::string &email) const;
+    Client * findClientByEmail(const std::string &email) const;
 
     clientHT getContacts() const;
+
+    void changeClientEmail(const std::string& oldEmail, const std::string& newEmail);
 
     void addUsernamesMapEntry(std::pair<std::string, std::string> map);
 
@@ -150,5 +152,8 @@ class HouseMaster::UnableToWriteFile : public std::ios_base::failure {
 public:
     explicit UnableToWriteFile(const std::string &error_msg);
 };
+
+
+
 
 #endif //SRC_HOUSEMASTER_H

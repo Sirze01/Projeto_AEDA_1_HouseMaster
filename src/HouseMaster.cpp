@@ -188,7 +188,6 @@ void HouseMaster::addCollaborator(const std::vector<std::string> &services, cons
  */
 void HouseMaster::addAdmin(const std::string &name, std::string password, const std::vector<std::string> &affiliates) {
     auto admin = new Admin(name,password, affiliates);
-    std::cout << "Adding admin " << admin->getName() << " with id " << admin->getId() << "\n";
     for (const auto &i : _responsibles) {
         if (i.second->getName() == admin->getName()) {
             return;
@@ -337,6 +336,7 @@ std::vector<Client *> HouseMasterAffiliate::getAffiliateClients() const {
  * @param hm, the instance of housemaster
  */
 void Individual::changeUsername(HouseMaster &hm, std::string newUsername) const {
+    std::cout << "Changing " << this->getId() << " to be " << newUsername << "\n";
     hm.usernameMapChanger(this->getId(), std::move(newUsername));
 }
 
@@ -345,8 +345,11 @@ void Individual::changeUsername(HouseMaster &hm, std::string newUsername) const 
  * @param string with the user id
  */
 void HouseMaster::usernameMapChanger(std::string id, std::string newUsername) {
+    std::cout << "id is " << id << "\n";
+
     auto user = std::find_if(_usernameMap.begin(), _usernameMap.end(),
                              [&id](const std::pair<std::string, std::string> &mapElem) {
+                                 std::cout << mapElem.second << "..\n";
                                  return mapElem.second == id;
                              });
 
@@ -357,6 +360,7 @@ void HouseMaster::usernameMapChanger(std::string id, std::string newUsername) {
                                              });
 
         if (alreadyInUse == _usernameMap.end()) {
+            std::cout << "changing username......\n";
             _usernameMap.erase(user);
             _usernameMap.emplace(std::pair<std::string, std::string>(newUsername, id));
         } else {
@@ -531,7 +535,6 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster*hm, std::ifstream usernam
         while (std::getline(lineStream, affiliate, ',')) {
             affiliates.push_back(affiliate);
         }
-        std::cout << "Reading admin " << name << "\n";
         for (const auto &i : affiliates) {
             if (_location == i) {
                 _hm->addAdmin(name, password, affiliates);
@@ -623,7 +626,7 @@ HouseMaster::NonexistentClient::NonexistentClient(const std::string &error_msg) 
  * @param error_msg to show
  */
 HouseMaster::UnableToWriteFile::UnableToWriteFile(const std::string &error_msg) : std::ifstream::failure(error_msg) {}
-Client *HouseMaster::findClientByEmail(const string &email) const {
+Client * HouseMaster::findClientByEmail(const string &email) const {
     for (const auto & client : _clientContacts) {
         if (client->getEmail() == email) {
             return client;
@@ -657,4 +660,11 @@ HouseMasterAffiliate HouseMaster::findAffiliateByCollab(const Collaborator *coll
         }
     }
     return HouseMasterAffiliate();
+}
+
+void HouseMaster::changeClientEmail(const string &oldEmail, const string &newEmail) {
+    Client* toChange = findClientByEmail(oldEmail);
+    _clientContacts.erase(findClientByEmail(oldEmail));
+    toChange->setEmail(newEmail);
+    _clientContacts.insert(toChange);
 }

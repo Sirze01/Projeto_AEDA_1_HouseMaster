@@ -171,7 +171,7 @@ public:
 
     unsigned int getNif();
 
-    std::string getAffiliate();
+    std::string getAffiliate() const;
 
     bool isPremium() const;
 

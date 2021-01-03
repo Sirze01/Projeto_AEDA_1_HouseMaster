@@ -5,19 +5,6 @@ HousemasterInterface::HousemasterInterface(const HouseMaster &housemaster) : _cu
 
 }
 
-
-void HousemasterInterface::showAffiliateInterface(HouseMasterAffiliate &affiliate) {
-    //bool running = true;
-    Interface affiliateInterface(affiliate);
-    /*
-    while (running) {
-        affiliateInterface.selectRole(running);
-    }*/
-    _houseMaster.removeAffiliate(affiliate);
-    _houseMaster.registerAffiliate(affiliateInterface.getHouseMasterState());
-}
-
-
 HouseMasterAffiliate HousemasterInterface::selectAffiliate(bool &running) {
     std::map<std::string, std::function<void()> > options{};
     auto affiliates = _houseMaster.getAffiliates();
@@ -70,49 +57,56 @@ HouseMasterAffiliate HousemasterInterface::selectResponsibleAffiliate(bool &runn
 
 
 
-void HousemasterInterface::runAffiliateInterface(bool &running) {
-    while (running) {
-        HouseMasterAffiliate affiliate = selectAffiliate(running);
-        std::cout << "Showing " << affiliate.getAffiliateName() << "\n";
-        showAffiliateInterface(affiliate);
-    }
-}
-
 
 void HousemasterInterface::firstInterface(bool &running) {
     bool innerRunning = true;
     Menu start("Welcome to Housemaster", {{"HouseMaster Administration", [&](){
         std::cout << "Welcome to HouseMaster. You have ADMIN privilege.\n";
         adminLogin();
-        showInterface(running);
+        auto toChange = _currentAffiliate;
+        housemasterOperations(running);
         while (innerRunning) {
             start.show();
             start.select();
             start.execute(innerRunning);
             std::cin.ignore();
         }
+        _houseMaster.removeAffiliate(toChange);
+        _houseMaster.registerAffiliate(_currentAffiliate);
     }},{"Login Client", [&](){
         clientLogin();
-        Interface clientInterface(_currentAffiliate, _user, client);
+        Interface clientInterface(_houseMaster, _currentAffiliate, _user, client);
         while (innerRunning) {
             clientInterface.clientOperations(innerRunning);
         }
+        _houseMaster = clientInterface.getHousemasterState();
+        _houseMaster.removeAffiliate(_currentAffiliate);
+        _houseMaster.registerAffiliate(clientInterface.getHousemasterAffiliateState());
     }}, {"Login Collaborator", [&](){
         collabLogin();
-        Interface collabInterface(_currentAffiliate, _user, collaborator);
+        Interface collabInterface(_houseMaster, _currentAffiliate, _user, collaborator);
         std::cout << "Login succeeded for " << _user->getName() << "\n";
         while (innerRunning) {
             collabInterface.collaboratorOperations(innerRunning);
         }
+        _houseMaster = collabInterface.getHousemasterState();
+        _houseMaster.removeAffiliate(_currentAffiliate);
+        _houseMaster.registerAffiliate(collabInterface.getHousemasterAffiliateState());
+
+        std::cout << ".....\n";
     }}, { "Login Responsible", [&](){
         std::cout << "Welcome to HouseMaster. You have RESPONSIBLE privilege.\n";
         std::string responsibleId = selectResponsible(innerRunning);
         responsibleLogin(responsibleId);
         _currentAffiliate = selectResponsibleAffiliate(innerRunning);
-        Interface adminInterface(_currentAffiliate, _user, admin);
+        std::cout << "Affiliate " << _currentAffiliate.getAffiliateName() << "\n";
+        Interface adminInterface(_houseMaster, _currentAffiliate, _user, admin);
         while (innerRunning) {
             adminInterface.responsibleOperations(innerRunning);
         }
+        _houseMaster = adminInterface.getHousemasterState();
+        _houseMaster.removeAffiliate(_currentAffiliate);
+        _houseMaster.registerAffiliate(adminInterface.getHousemasterAffiliateState());
       }}});
     start.show();
     start.select();
@@ -175,7 +169,7 @@ void HousemasterInterface::collabLogin() {
         try{
             done = true;
             _user = _houseMaster.findByUsername(username);
-            _houseMasterAffiliate = _houseMaster.findAffiliateByCollab(dynamic_cast<Collaborator*>(_user));
+            _currentAffiliate = _houseMaster.findAffiliateByCollab(dynamic_cast<Collaborator*>(_user));
         }
         catch (const HouseMaster::NonexistentUsername &e) {
             done = false;
@@ -200,6 +194,7 @@ void HousemasterInterface::clientLogin() {
         try {
             done = true;
             Client* client = _houseMaster.findClientByEmail(email);
+            std::cout << "found " << client->getName() << "\n";
             _currentAffiliate = _houseMaster.findAffiliateByClient(client);
             _user = client;
             std::cout << "Logged " << client->getName() << " to " << _currentAffiliate.getAffiliateName() << '\n';
@@ -215,7 +210,7 @@ void HousemasterInterface::clientLogin() {
 
 
 
-void HousemasterInterface::showInterface(bool &running) {
+void HousemasterInterface::housemasterOperations(bool &running) {
     Menu start("Welcome to Housemaster", {{"Show Finances", [&](){
         showTotalFinances(_houseMaster);
         std::cin.ignore();

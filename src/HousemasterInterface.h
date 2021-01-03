@@ -9,10 +9,8 @@ class HousemasterInterface {
 public:
     HousemasterInterface() = default;
     explicit HousemasterInterface(const HouseMaster &housemaster);
-    void runAffiliateInterface(bool &running);
-    void showInterface(bool &running);
+    void housemasterOperations(bool &running);
     void firstInterface(bool &running);
-    //void collaboratorOperations(bool &running);
     void adminLogin();
     void responsibleLogin(const std::string& responsibleId);
     void collabLogin();
@@ -23,7 +21,6 @@ private:
     void showAffiliateInterface(HouseMasterAffiliate &affiliate);
     HouseMasterAffiliate _currentAffiliate;
     HouseMaster _houseMaster;
-    HouseMasterAffiliate _houseMasterAffiliate;
     Individual* _user{};
     string selectLocation(bool &running);
     string selectResponsible(bool &running);

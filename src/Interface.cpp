@@ -82,16 +82,8 @@ void Interface::clientOperations(bool &running) {
             if (intervention) show(*intervention);
             std::cin.ignore();
         }
-    }},{"Change username", [&](){
-        bool done = true;
-        do{
-            try{_user->changeUsername(_houseMaster, readNewUsername());
-            done = true;}
-            catch (const HouseMaster::UsernameAlreadyInUse &e) {
-                done = false;
-                std::cout << e.what() << std::endl;
-            }
-        }while(!done);
+    }},{"Change email", [&](){
+        _houseMaster.changeClientEmail(client->getEmail(), readNewEmail());
     }}});
     clientMenu.show();
     clientMenu.select();
@@ -529,6 +521,18 @@ std::string Interface::readNewUsername() {
 }
 
 /**
+ * @brief Reads a new email
+ * @return The new successfully read username
+ */
+std::string Interface::readNewEmail() {
+    std::string newEmail{};
+    std::cout << "New Email: ";
+    std::cin.ignore();
+    std::getline(std::cin, newEmail, '\n');
+    return newEmail;
+}
+
+/**
  * @brief shows and selects an active intervention for a user
  * @param running
  * @return the intervention
@@ -684,7 +688,7 @@ Classification Interface::readClassification(bool &running, std::string &collabN
  * @brief getter
  * @return housemaster
  */
-HouseMasterAffiliate Interface::getHouseMasterState() const {
+HouseMasterAffiliate Interface::getHousemasterAffiliateState() const {
     return _houseMasterAffiliate;
 }
 
@@ -758,4 +762,13 @@ void Interface::showSortedCollabs() {
 Interface::Interface(const HouseMasterAffiliate& housemaster, Individual* user, Role role) :
     _houseMasterAffiliate(housemaster), _user(user), _role(role) {
 
+}
+
+Interface::Interface(const HouseMaster& houseMaster, const HouseMasterAffiliate& houseMasterAffiliate, Individual* user, Role role)
+    : _houseMaster(houseMaster), _houseMasterAffiliate(houseMasterAffiliate), _user(user), _role(role) {
+
+}
+
+HouseMaster Interface::getHousemasterState() const {
+    return _houseMaster;
 }

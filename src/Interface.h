@@ -21,9 +21,13 @@ public:
 
     Interface(const HouseMasterAffiliate& housemaster, Individual* user, Role role);
 
+    Interface(const HouseMaster& houseMaster, const HouseMasterAffiliate& houseMasterAffiliate, Individual* user, Role role);
+
     void selectRole(bool &running);
 
-    HouseMasterAffiliate getHouseMasterState() const;
+    HouseMasterAffiliate getHousemasterAffiliateState() const;
+
+    HouseMaster getHousemasterState() const;
 
     void collaboratorOperations(bool &running);
 
@@ -77,6 +81,8 @@ private:
     Role _role{};
 
     Intervention *selectPastIntervention(bool &running);
+
+    string readNewEmail();
 };
 
 class Interface::NonexistentRole : public std::logic_error {
