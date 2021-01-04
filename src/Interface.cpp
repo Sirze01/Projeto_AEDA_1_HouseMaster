@@ -1,4 +1,5 @@
 #include "Interface.h"
+#include "HousemasterInterface.h"
 
 /**
  * @brief exception for an Nonexistent Role
@@ -305,59 +306,6 @@ bool Interface::isValidNif(unsigned nif) {
     else if (nif / 100000000 != 1 && nif / 100000000 != 2 && nif / 100000000 != 5 && nif / 100000000 != 6 &&
              nif / 100000000 != 8 && nif / 100000000 != 9) { throw InvalidNif("This is an invalid NIF!"); }
     return true;
-}
-
-/**
- * @brief reads a new client's data
- */
-void Interface::readNewClientData() {
-    std::string name{}, email{}, premiumStr{}, affiliate{};
-    unsigned nif{};
-
-    std::cout << "Name ? ";
-    std::cin.ignore(9999, '\n');
-    std::getline(std::cin, name, '\n');
-
-    std::cout << "E-mail ? ";
-    std::cin.ignore(9999, '\n');
-    std::getline(std::cin, email, '\n');
-
-    std::cout << "Premium ? [yes/no] ";
-    std::cin >> premiumStr;
-    while (premiumStr != "yes" && premiumStr != "no") {
-        std::cout << R"(Invalid choice. Make sure you chose one of "yes" or "no" )" << std::endl;
-        std::cin >> premiumStr;
-    }
-
-    bool premium = premiumStr == "yes";
-
-    std::cout << "NIF ? ";
-    std::cin >> nif;
-    while (std::cin.fail())
-    {
-        std::cin.clear();
-        std::cin.ignore();
-        std::cout << "This is an invalid NIF! Please try again:\nNIF ? ";
-        std::cin >> nif;
-    }
-    bool done;
-    do {
-        try {
-            done = true;
-            isValidNif(nif);
-        } catch (const InvalidNif &e) {
-            done = false;
-            std::cout << e.what() << "\nNIF ? ";
-            std::cin >> nif;
-        }
-    } while (!done);
-    try
-    {
-        _houseMaster->addClient(nif, name, email, premium, affiliate);
-    } catch (HouseMaster::ExistentClient &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
 }
 
 /**

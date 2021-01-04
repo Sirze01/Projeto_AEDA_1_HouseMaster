@@ -35,8 +35,9 @@ public:
 
     void clientOperations(bool &running);
 
-    void readNewClientData();
+    static bool isValidNif(unsigned nif);
 
+    class InvalidNif;
 private:
 
     static Date readInterventionDate();
@@ -64,10 +65,6 @@ private:
     Intervention *selectActiveIntervention(bool &running);
 
     class NonexistentRole;
-
-    static bool isValidNif(unsigned nif);
-
-    class InvalidNif;
 
     void showFinances() const;
 

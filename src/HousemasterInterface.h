@@ -16,6 +16,8 @@ public:
     void collabLogin();
     void clientLogin();
     void readNewAffiliateData();
+    string selectLocation(bool &running);
+    void readNewClientData();
 private:
     HouseMasterAffiliate selectAffiliate(bool &running);
     HouseMasterAffiliate selectResponsibleAffiliate(bool &running);
@@ -23,7 +25,6 @@ private:
     HouseMasterAffiliate _currentAffiliate;
     HouseMaster _houseMaster;
     Individual* _user{};
-    string selectLocation(bool &running);
     string selectResponsible(bool &running);
     void show(const HouseMasterAffiliate &affiliate);
     void showTotalFinances(const HouseMaster &hm);

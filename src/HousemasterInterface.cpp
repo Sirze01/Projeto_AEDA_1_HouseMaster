@@ -109,14 +109,67 @@ void HousemasterInterface::firstInterface(bool &running) {
             _houseMaster.registerAffiliate(adminInterface.getHousemasterAffiliateState());
         }
       }},{"Register Client", [&]() {
-        Interface newInterface(&_houseMaster, _currentAffiliate, _user, client);
-        newInterface.readNewClientData();
+        readNewClientData();
       }}});
     start.show();
     start.select();
     start.execute(running);
 }
 
+/**
+ * @brief reads a new client's data
+ */
+void HousemasterInterface::readNewClientData() {
+    std::string name{}, email{}, premiumStr{}, affiliate{};
+    unsigned nif{};
+
+    std::cout << "Name ? ";
+    std::cin.ignore(9999, '\n');
+    std::getline(std::cin, name, '\n');
+
+    std::cout << "E-mail ? ";
+    std::cin.ignore(9999, '\n');
+    std::getline(std::cin, email, '\n');
+
+    std::cout << "Premium ? [yes/no] ";
+    std::cin >> premiumStr;
+    while (premiumStr != "yes" && premiumStr != "no") {
+        std::cout << R"(Invalid choice. Make sure you chose one of "yes" or "no" )" << std::endl;
+        std::cin >> premiumStr;
+    }
+
+    bool premium = premiumStr == "yes";
+
+    std::cout << "NIF ? ";
+    std::cin >> nif;
+    while (std::cin.fail())
+    {
+        std::cin.clear();
+        std::cin.ignore();
+        std::cout << "This is an invalid NIF! Please try again:\nNIF ? ";
+        std::cin >> nif;
+    }
+    bool done;
+    do {
+        try {
+            done = true;
+            Interface::isValidNif(nif);
+        } catch (const Interface::InvalidNif &e) {
+            done = false;
+            std::cout << e.what() << "\nNIF ? ";
+            std::cin >> nif;
+        }
+    } while (!done);
+    bool running = true;
+    selectLocation(running);
+    try
+    {
+        _houseMaster.addClient(nif, name, email, premium, affiliate);
+    } catch (HouseMaster::ExistentClient &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+}
 
 
 /**
@@ -331,7 +384,6 @@ void HousemasterInterface::showTotalFinances(const HouseMaster &hm){
  */
 void HousemasterInterface::readNewAffiliateData() {
     std::string name{}, location{};
-    unsigned nif{};
 
     std::cout << "Affiliate's Name? ";
     std::cin.ignore(9999, '\n');
