@@ -18,6 +18,7 @@ public:
     void readNewAffiliateData();
     string selectLocation(bool &running);
     void readNewClientData();
+    HouseMaster getHousemasterState() const {return *_houseMaster;}
 private:
     HouseMasterAffiliate selectAffiliate(bool &running);
     HouseMasterAffiliate selectResponsibleAffiliate(bool &running);

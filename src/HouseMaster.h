@@ -90,6 +90,16 @@ public:
 
     void writeUsernameMap();
 
+    void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration);
+
+    void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration);
+
+    void removeAvailableService(const std::string &service);
+
+    void writeServicesInfo();
+
+    const unordered_map<std::string, Service *> &getAvailableServices() const;
+
     // General
     float getTotalFinances() const;
 
@@ -108,10 +118,15 @@ public:
 
     class UnableToWriteFile;
 
+    void writeClientsInfo();
+
+    void writeCollabsInfo();
+
 private:
     std::unordered_map<std::string, std::string> _usernameMap;
     std::map<std::string, Client *> _clients;
     std::map<std::string, Collaborator *> _collaborators;
+    std::unordered_map<std::string, Service *> _availableServices;
     std::set<std::string> _locations;
     std::map<std::string, Admin *> _responsibles;
     BST<HouseMasterAffiliate> _affiliates;
@@ -154,7 +169,5 @@ class HouseMaster::UnableToWriteFile : public std::ios_base::failure {
 public:
     explicit UnableToWriteFile(const std::string &error_msg);
 };
-
-
 
 #endif //SRC_HOUSEMASTER_H

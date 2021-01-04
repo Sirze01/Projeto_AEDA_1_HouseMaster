@@ -234,7 +234,7 @@ Duration::Duration( int hours,  int minutes):Date() {
     _date.tm_year = 0;
     _date.tm_sec = 0;
 
-    mktime(&_date);
+    //mktime(&_date);
 }
 
 /**
@@ -254,7 +254,7 @@ Duration::Duration(const std::string &duration) : Date(){
     _date.tm_year = 0;
     _date.tm_sec = 0;
 
-    mktime(&_date);
+    //mktime(&_date);
 }
 
 /**

@@ -1,5 +1,6 @@
-affiliate1,Sarah Wildes,client0@gmail.com,207317925,no
-affiliate1,Elizabeth Proctor,client1@gmail.com,283147881,yes
-affiliate3,Jonathan Corwin,client2@gmail.com,216692199,no
-affiliate3,Sir William Phips,client3@gmail.com,260456730,yes
-affiliate2,Cotton Mather,client4@gmail.com,245722750,no
+affiliate1,Cotton Mather,client4@gmail.com,245722750,no
+affiliate1,Sir William Phips,client3@gmail.com,260456730,yes
+affiliate2,Elizabeth Proctor,client1@gmail.com,283147881,yes
+affiliate2,Jonathan Corwin,client2@gmail.com,216692199,no
+affiliate3,Sarah Wildes,client0@gmail.com,207317925,no
+affiliate3,josé,jose@foguinho.pt,123123123,no

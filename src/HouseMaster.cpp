@@ -523,9 +523,9 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
 
         try {
             if (category == "default") {
-                addAvailableService(name, pro, price, duration);
+                _hm->addAvailableService(name, pro, price, duration);
             } else if (category == "painting") {
-                addAvailablePaintService(name, pro, price, duration);
+                _hm->addAvailablePaintService(name, pro, price, duration);
             }
         }
         catch (const HouseMasterAffiliate::ExistentService &e) {
@@ -616,7 +616,7 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
         std::stringstream lineStream(line);
         std::string serviceStr{}, clientId{}, collabId{}, start{}, forcePro{}, state{}, cost{}, nrRooms{};
         std::getline(lineStream, serviceStr, ',');
-        Service *service = _availableServices[serviceStr];
+        Service *service = _hm->getAvailableServices().at(serviceStr);
         std::getline(lineStream, clientId, ',');
         std::getline(lineStream, collabId, ',');
         std::getline(lineStream, start, ',');
@@ -708,4 +708,151 @@ void HouseMasterAffiliate::processTransaction(Intervention *intervention) {
     hmEarnings = intervention->getCost() - (intervention->getCost() / float(1 + HouseMasterTax));
     _hm->findCollabById(intervention->getCollabId())->calculateEarnings(hmEarnings);
     _earnings += hmEarnings;
+}
+
+
+/**
+ * @brief adds a service to the housemaster's catalogue
+ * @param name name of the service
+ * @param pro requires professional
+ * @param basePrice base price
+ * @param duration duration
+ */
+void HouseMaster::addAvailableService(const std::string &name, bool pro, float basePrice,
+                                               const Duration &duration) {
+    if (_availableServices.find(name) != _availableServices.end())
+        throw HouseMasterAffiliate::ExistentService("A service with the same name already exists!");
+    else {
+        auto service = new Service(name, pro, basePrice, duration);
+        _availableServices.insert({name, service});
+    }
+}
+
+/**
+ * @brief adds a painting service to the housemaster's catalogue
+ * @param name name of the service
+ * @param pro requires professional
+ * @param basePrice base price
+ * @param duration duration
+ */
+void HouseMaster::addAvailablePaintService(const std::string &name, bool pro, float basePrice,
+                                                    const Duration &duration) {
+    if (_availableServices.find(name) != _availableServices.end())
+        throw HouseMasterAffiliate::ExistentService("A service with the same name already exists!");
+    else {
+        auto service = new Painting(name, pro, basePrice, duration);
+        _availableServices.insert({name, service});
+    }
+}
+
+/**
+ * @brief removes a service from housemaster's catalogue
+ * @param service name of the service
+ */
+void HouseMaster::removeAvailableService(const std::string &service) {
+
+    auto it = _availableServices.find(service);
+    if (it != _availableServices.end()) {
+        delete it->second;
+        _availableServices.erase(it);
+    } else {
+        throw HouseMasterAffiliate::NonexistentService("There's no such service!");
+    }
+}
+
+/**
+ * @brief adds an intervention
+ * @param start start of the intervention
+ * @param service the service
+ * @param forcePro
+ * @param clientId the clients id
+ * @param nrOfRooms number of rooms in case of painting
+ * @return the intervention
+ */
+Intervention *HouseMasterAffiliate::addIntervention(const Date &start, const std::string &service, bool forcePro,
+                                                    const std::string &clientId, unsigned int nrOfRooms) {
+    auto it = std::find(getAvailableServices().begin(), getAvailableServices().end(), service);
+    if (it == getAvailableServices().end()) throw NonexistentService("There's no such service!");
+    auto newIntervention = new Intervention(start, _hm->getAvailableServices().at(service), forcePro, nrOfRooms, Active, 0, "",
+                                            clientId);
+    _interventions.insert(newIntervention);
+    return newIntervention;
+}
+
+/**
+ * @brief saves the clients' info
+ */
+void HouseMaster::writeClientsInfo() {
+    std::ofstream clientsFile("../data/clients.txt");
+    if (clientsFile.is_open()) {
+        auto clients = _clients;
+        for(const auto & client : clients){
+            clientsFile << client.second->getAffiliate() << "," << client.second->getName() << ","
+            << client.second->getEmail() << "," << client.second->getNif();
+            if (client.second->isPremium()) { clientsFile << ",yes"; } else { clientsFile << ",no"; }
+            clientsFile << '\n';
+        }
+        clientsFile.close();
+    } else throw UnableToWriteFile("Unable to write in clients' file");
+}
+
+/**
+ * @brief saves the services' info
+ */
+void HouseMaster::writeServicesInfo() {
+    std::ofstream servicesFile("../data/services.txt");
+    if (servicesFile.is_open()) {
+        auto service_it = _availableServices.begin();
+        while (service_it != _availableServices.end()) {
+
+            Service *sv = (*service_it).second;
+            auto pt = dynamic_cast<Painting *>(sv);
+            servicesFile << service_it->second->getName() << ",";
+            if (service_it->second->getPro()) { servicesFile << "yes"; } else { servicesFile << "no"; }
+            servicesFile << "," << service_it->second->getBasePrice() << ","
+                         << service_it->second->getDuration().getString();
+            if (pt) {
+                servicesFile << ",painting";
+            } else {
+                servicesFile << ",default";
+            }
+            servicesFile << '\n';
+            service_it++;
+        }
+        servicesFile.close();
+    } else throw UnableToWriteFile("Unable to write in services' file");
+}
+
+const unordered_map<std::string, Service *> &HouseMaster::getAvailableServices() const {
+    return _availableServices;
+}
+
+
+/**
+ * @brief saves the collaborators' info
+ */
+void HouseMaster::writeCollabsInfo() {
+    std::ofstream collabFile;
+    collabFile.open("../data/collabs.txt");
+    if (collabFile.is_open()) {
+        auto collabs = _collaborators;
+        for(const auto& collab : collabs){
+            collabFile << collab.second->getAffiliate() << ",";
+            collabFile << collab.second->getName();
+            if (collab.second->isPro()) { collabFile << ",yes,"; } else { collabFile << ",no,"; }
+            collabFile << collab.second->getEarnings() << ',' << collab.second->getScore() << ',';
+            for (size_t i = 0; i < collab.second->getAvailability().size(); i++) {
+                if (i == collab.second->getAvailability().size() - 1)
+                    collabFile << collab.second->getAvailability()[i].getString() << ',';
+                else collabFile << collab.second->getAvailability()[i].getString() << " ";
+            }
+            for (size_t i = 0; i < collab.second->getServices().size(); i++) {
+                if (i == collab.second->getServices().size() - 1)
+                    collabFile << collab.second->getServices()[i];
+                else collabFile << collab.second->getServices()[i] << ",";
+            }
+            collabFile << '\n';
+        }
+        collabFile.close();
+    } else throw UnableToWriteFile("Unable to write in collabs' file");
 }

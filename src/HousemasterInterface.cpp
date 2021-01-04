@@ -54,7 +54,22 @@ HouseMasterAffiliate HousemasterInterface::selectResponsibleAffiliate(bool &runn
     return selection;
 }
 
-
+/**
+ * @brief getter
+ * @return available services
+ */
+std::vector<std::string> HouseMasterAffiliate::getAvailableServices() {
+    std::vector<std::string> availableServices;
+    for (const auto &pair: getAffiliateCollabs()) {
+        for(const auto &service : pair->getServices()) {
+            auto it = std::find(availableServices.begin(), availableServices.end(), service);
+            if(it == availableServices.end()){
+                availableServices.emplace_back(service);
+            }
+        }
+    }
+    return availableServices;
+}
 
 
 void HousemasterInterface::firstInterface(bool &running) {
@@ -163,11 +178,9 @@ void HousemasterInterface::readNewClientData() {
     } while (!done);
     bool running = true;
     HouseMasterAffiliate affiliate = selectAffiliate(running);
-    try
-    {
+    try {
         _houseMaster->addClient(nif, name, email, premium, affiliate.getAffiliateName());
-    } catch (HouseMaster::ExistentClient &e)
-    {
+    } catch (HouseMaster::ExistentClient &e) {
         std::cout << e.what() << std::endl;
     }
 }
