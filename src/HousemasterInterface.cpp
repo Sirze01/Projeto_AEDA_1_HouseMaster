@@ -1,13 +1,13 @@
 #include "HousemasterInterface.h"
 
 
-HousemasterInterface::HousemasterInterface(const HouseMaster &housemaster) : _currentAffiliate(), _houseMaster(housemaster) {
+HousemasterInterface::HousemasterInterface(HouseMaster *housemaster) : _currentAffiliate(), _houseMaster(housemaster) {
 
 }
 
 HouseMasterAffiliate HousemasterInterface::selectAffiliate(bool &running) {
     std::map<std::string, std::function<void()> > options{};
-    auto affiliates = _houseMaster.getAffiliates();
+    auto affiliates = _houseMaster->getAffiliates();
     HouseMasterAffiliate selection{};
     BSTItrIn<HouseMasterAffiliate> current(affiliates);
     std::set<HouseMasterAffiliate> hms{};
@@ -15,7 +15,7 @@ HouseMasterAffiliate HousemasterInterface::selectAffiliate(bool &running) {
         hms.insert(current.retrieve());
     }
     for (const auto & i : hms) {
-        options.insert(std::pair<std::string, std::function<void()>>(i.getAffiliateName(),[&](){
+        options.insert(std::pair<std::string, std::function<void()>>(i.getLocation(),[&](){
             selection = i;
         }));
     }
@@ -28,7 +28,7 @@ HouseMasterAffiliate HousemasterInterface::selectAffiliate(bool &running) {
 
 HouseMasterAffiliate HousemasterInterface::selectResponsibleAffiliate(bool &running) {
     std::map<std::string, std::function<void()> > options{};
-    BST<HouseMasterAffiliate> affiliates = _houseMaster.getAffiliates();
+    BST<HouseMasterAffiliate> affiliates = _houseMaster->getAffiliates();
     HouseMasterAffiliate selection{};
     BSTItrIn<HouseMasterAffiliate> current(affiliates);
     std::set<HouseMasterAffiliate> hms{};
@@ -70,27 +70,27 @@ void HousemasterInterface::firstInterface(bool &running) {
             start.execute(innerRunning);
             std::cin.ignore();
         }
-        _houseMaster.removeAffiliate(toChange);
-        _houseMaster.registerAffiliate(_currentAffiliate);
+        _houseMaster->removeAffiliate(toChange);
+        _houseMaster->registerAffiliate(_currentAffiliate);
     }},{"Login Client", [&](){
         clientLogin();
-        Interface clientInterface(&_houseMaster, _currentAffiliate, _user, client);
+        Interface clientInterface(_houseMaster, _currentAffiliate, _user, client);
         while (innerRunning) {
             clientInterface.clientOperations(innerRunning);
         }
-        _houseMaster = clientInterface.getHousemasterState();
-        _houseMaster.removeAffiliate(_currentAffiliate);
-        _houseMaster.registerAffiliate(clientInterface.getHousemasterAffiliateState());
+        *_houseMaster = clientInterface.getHousemasterState();
+        _houseMaster->removeAffiliate(_currentAffiliate);
+        _houseMaster->registerAffiliate(clientInterface.getHousemasterAffiliateState());
     }}, {"Login Collaborator", [&](){
         collabLogin();
-        Interface collabInterface(&_houseMaster, _currentAffiliate, _user, collaborator);
+        Interface collabInterface(_houseMaster, _currentAffiliate, _user, collaborator);
         std::cout << "Login succeeded for " << _user->getName() << "\n";
         while (innerRunning) {
             collabInterface.collaboratorOperations(innerRunning);
         }
-        _houseMaster = collabInterface.getHousemasterState();
-        _houseMaster.removeAffiliate(_currentAffiliate);
-        _houseMaster.registerAffiliate(collabInterface.getHousemasterAffiliateState());
+        *_houseMaster = collabInterface.getHousemasterState();
+        _houseMaster->removeAffiliate(_currentAffiliate);
+        _houseMaster->registerAffiliate(collabInterface.getHousemasterAffiliateState());
 
         std::cout << ".....\n";
     }}, { "Login Responsible", [&](){
@@ -98,15 +98,16 @@ void HousemasterInterface::firstInterface(bool &running) {
         std::string responsibleId = selectResponsible(innerRunning);
         responsibleLogin(responsibleId);
         _currentAffiliate = selectResponsibleAffiliate(innerRunning);
+        _currentAffiliate.setHousemaster(_houseMaster);
         std::cout << "Affiliate " << _currentAffiliate.getAffiliateName() << "\n";
-        Interface adminInterface(&_houseMaster, _currentAffiliate, _user, admin);
+        Interface adminInterface(_houseMaster, _currentAffiliate, _user, admin);
         while (innerRunning) {
             adminInterface.responsibleOperations(innerRunning);
         }
-        _houseMaster = adminInterface.getHousemasterState();
+        *_houseMaster = adminInterface.getHousemasterState();
         if (!_currentAffiliate.getAffiliateName().empty()) {
-            _houseMaster.removeAffiliate(_currentAffiliate);
-            _houseMaster.registerAffiliate(adminInterface.getHousemasterAffiliateState());
+            _houseMaster->removeAffiliate(_currentAffiliate);
+            _houseMaster->registerAffiliate(adminInterface.getHousemasterAffiliateState());
         }
       }},{"Register Client", [&]() {
         readNewClientData();
@@ -120,15 +121,15 @@ void HousemasterInterface::firstInterface(bool &running) {
  * @brief reads a new client's data
  */
 void HousemasterInterface::readNewClientData() {
-    std::string name{}, email{}, premiumStr{}, affiliate{};
+    std::string name{}, email{}, premiumStr{};
     unsigned nif{};
 
-    std::cout << "Name ? ";
     std::cin.ignore(9999, '\n');
+
+    std::cout << "Name ? ";
     std::getline(std::cin, name, '\n');
 
     std::cout << "E-mail ? ";
-    std::cin.ignore(9999, '\n');
     std::getline(std::cin, email, '\n');
 
     std::cout << "Premium ? [yes/no] ";
@@ -161,10 +162,10 @@ void HousemasterInterface::readNewClientData() {
         }
     } while (!done);
     bool running = true;
-    selectLocation(running);
+    HouseMasterAffiliate affiliate = selectAffiliate(running);
     try
     {
-        _houseMaster.addClient(nif, name, email, premium, affiliate);
+        _houseMaster->addClient(nif, name, email, premium, affiliate.getAffiliateName());
     } catch (HouseMaster::ExistentClient &e)
     {
         std::cout << e.what() << std::endl;
@@ -200,7 +201,7 @@ void HousemasterInterface::responsibleLogin(const std::string& responsibleId) {
     std::string password{};
     std::cout << "Password : ";
     std::cin >> password;
-    _user = _houseMaster.getAdmins().find(responsibleId)->second;
+    _user = _houseMaster->getAdmins().find(responsibleId)->second;
     for (int i = 0; i <= 1; i++) {
         if (password == dynamic_cast<Admin*>(_user)->getPassword()) return;
         std::cout << "Wrong password. Try again:\n";
@@ -225,8 +226,8 @@ void HousemasterInterface::collabLogin() {
     while (!done) {
         try{
             done = true;
-            _user = _houseMaster.findByUsername(username);
-            _currentAffiliate = _houseMaster.findAffiliateByCollab(dynamic_cast<Collaborator*>(_user));
+            _user = _houseMaster->findByUsername(username);
+            _currentAffiliate = _houseMaster->findAffiliateByCollab(dynamic_cast<Collaborator*>(_user));
         }
         catch (const HouseMaster::NonexistentUsername &e) {
             done = false;
@@ -250,11 +251,10 @@ void HousemasterInterface::clientLogin() {
     while (!done) {
         try {
             done = true;
-            Client* client = _houseMaster.findClientByEmail(email);
-            std::cout << "found " << client->getName() << "\n";
-            _currentAffiliate = _houseMaster.findAffiliateByClient(client);
+            Client* client = _houseMaster->findClientByEmail(email);
+            _currentAffiliate = _houseMaster->findAffiliateByClient(client);
+            _currentAffiliate.setHousemaster(_houseMaster);
             _user = client;
-            std::cout << "Logged " << client->getName() << " to " << _currentAffiliate.getAffiliateName() << '\n';
         }
         catch (const HouseMaster::NonexistentClient &e) {
             done = false;
@@ -269,12 +269,12 @@ void HousemasterInterface::clientLogin() {
 
 void HousemasterInterface::housemasterOperations(bool &running) {
     Menu start("Welcome to Housemaster", {{"Show Finances", [&](){
-        showTotalFinances(_houseMaster);
+        showTotalFinances(*_houseMaster);
         std::cin.ignore();
     }},{"Filter by location", [&](){
         bool innerRunning = true;
         std::string location = selectLocation(running);
-        std::vector<HouseMasterAffiliate> hms = _houseMaster.getAffiliatesByLocation(location);
+        std::vector<HouseMasterAffiliate> hms = _houseMaster->getAffiliatesByLocation(location);
         HouseMasterAffiliate selection{};
         std::map<std::string, std::function<void()>> options{};
         for (const auto &i : hms) {
@@ -292,7 +292,7 @@ void HousemasterInterface::housemasterOperations(bool &running) {
     }}, {"Filter by responsible", [&](){
         bool innerRunning = true;
         std::string responsible = selectResponsible(innerRunning);
-        std::vector<HouseMasterAffiliate> hms = _houseMaster.getAffiliatesByResponsible(responsible);
+        std::vector<HouseMasterAffiliate> hms = _houseMaster->getAffiliatesByResponsible(responsible);
         HouseMasterAffiliate selection{};
         std::map<std::string, std::function<void()>> options{};
         for (const auto &i : hms) {
@@ -310,7 +310,7 @@ void HousemasterInterface::housemasterOperations(bool &running) {
     }},{"Remove affiliate", [&](){
         bool innerRunning = true;
         HouseMasterAffiliate affiliate = selectAffiliate(innerRunning);
-        _houseMaster.removeAffiliate(affiliate);
+        _houseMaster->removeAffiliate(affiliate);
     }}});
     start.show();
     start.select();
@@ -319,7 +319,7 @@ void HousemasterInterface::housemasterOperations(bool &running) {
 
 
 std::string HousemasterInterface::selectLocation(bool &running) {
-    auto location = _houseMaster.getLocations();
+    auto location = _houseMaster->getLocations();
     std::string selection{};
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : location) {
@@ -336,7 +336,7 @@ std::string HousemasterInterface::selectLocation(bool &running) {
 
 
 std::string HousemasterInterface::selectResponsible(bool &running) {
-    auto responsible = _houseMaster.getResponsibles();
+    auto responsible = _houseMaster->getResponsibles();
     std::string selection{};
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : responsible) {
@@ -395,7 +395,7 @@ void HousemasterInterface::readNewAffiliateData() {
 
     /*try
     {*/
-    _houseMaster.registerAffiliate(HouseMasterAffiliate(&_houseMaster,location, name));
+    _houseMaster->registerAffiliate(HouseMasterAffiliate(_houseMaster,location, name));
     /*} catch (HouseMasterAffiliate::ExistentAffiliate &e) //TODO ExistentAffiliate
     {
         std::cout << e.what() << std::endl;
