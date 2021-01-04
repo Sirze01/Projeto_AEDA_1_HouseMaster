@@ -90,17 +90,6 @@ public:
 
     void writeUsernameMap();
 
-    // Services manip
-
-    void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration);
-
-    void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration);
-
-    void removeAvailableService(const std::string &service);
-
-    std::unordered_map<std::string, Service *> getServices() const;
-
-
     // General
     float getTotalFinances() const;
 
@@ -117,17 +106,12 @@ public:
 
     class NonexistentResponsible;
 
-    class ExistentService;
-
-    class NonexistentService;
-
     class UnableToWriteFile;
 
 private:
     std::unordered_map<std::string, std::string> _usernameMap;
     std::map<std::string, Client *> _clients;
     std::map<std::string, Collaborator *> _collaborators;
-    std::unordered_map<std::string, Service *> _availableServices;
     std::set<std::string> _locations;
     std::map<std::string, Admin *> _responsibles;
     BST<HouseMasterAffiliate> _affiliates;
@@ -164,16 +148,6 @@ public:
 class HouseMaster::NonexistentClient : public std::out_of_range {
 public:
     explicit NonexistentClient(const std::string &error_msg);
-};
-
-class HouseMaster::ExistentService : public std::out_of_range {
-public:
-    explicit ExistentService(const std::string &error_msg);
-};
-
-class HouseMaster::NonexistentService : public std::out_of_range {
-public:
-    explicit NonexistentService(const std::string &error_msg);
 };
 
 class HouseMaster::UnableToWriteFile : public std::ios_base::failure {

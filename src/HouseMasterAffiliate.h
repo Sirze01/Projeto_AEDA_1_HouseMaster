@@ -57,9 +57,15 @@ public:
     void writeClientsInfo();
 
 
-    // Services and Interventions Manip
+    // Interventions and Services Manip
 
-    std::vector<std::string> getAffiliateAvailableServices() const;
+    std::unordered_map<std::string, Service *> &getAvailableServices(); 
+
+    void addAvailableService(const std::string &name, bool pro, float basePrice, const Duration &duration);
+
+    void addAvailablePaintService(const std::string &name, bool pro, float basePrice, const Duration &duration);
+
+    void removeAvailableService(const std::string &service);
 
     void writeServicesInfo();
 
@@ -116,14 +122,17 @@ public:
     // Exceptions
     class UnavailableAppointment;
 
-    class AssignedCollab;
-
     class NonexistentService;
+
+    class ExistentService;
+
+    class AssignedCollab;
 
     class UnableToWriteFile;
 
 private:
     HouseMaster* _hm{};
+    std::unordered_map<std::string, Service *> _availableServices;
     std::priority_queue<std::pair<Intervention*, Collaborator*>,
         std::vector<std::pair<Intervention*, Collaborator*>>,
         Collaborator_pointer_compare> _collaborators_queue;
@@ -144,14 +153,19 @@ public:
     explicit UnavailableAppointment(const std::string &error_msg);
 };
 
-class HouseMasterAffiliate::AssignedCollab : public std::logic_error {
-public:
-    explicit AssignedCollab(const std::string &error_msg);
-};
-
 class HouseMasterAffiliate::NonexistentService : public std::out_of_range {
 public:
     explicit NonexistentService(const std::string &error_msg);
+};
+
+class HouseMasterAffiliate::ExistentService : public std::out_of_range {
+public:
+    explicit ExistentService(const std::string &error_msg);
+};
+
+class HouseMasterAffiliate::AssignedCollab : public std::logic_error {
+public:
+    explicit AssignedCollab(const std::string &error_msg);
 };
 
 class HouseMasterAffiliate::UnableToWriteFile : public std::ios_base::failure {

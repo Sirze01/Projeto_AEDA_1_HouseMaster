@@ -274,18 +274,10 @@ bool Client::operator==(const Client &ind2) const {
     return _id == ind2._id;
 }
 
-/**
- * @brief Client email getter
- * @return String containing the client's email
- */
 std::string Client::getEmail() const {
     return _email;
 }
 
-/**
- * @brief Client email setter
- * @param email
- */
 void Client::setEmail(const std::string &email) {
     _email = email;
 }
