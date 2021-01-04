@@ -8,7 +8,7 @@ int main() {
 
     HouseMaster hm(std::ifstream("../data/affiliates.txt"));
     BSTItrIn<HouseMasterAffiliate> current(hm.getAffiliates());
-    HousemasterInterface i = HousemasterInterface(&hm);
+    HousemasterInterface i = HousemasterInterface(hm);
     bool running = true;
     while (running) {
         //i.showInterface(running);

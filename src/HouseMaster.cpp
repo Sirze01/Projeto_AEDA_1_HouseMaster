@@ -128,7 +128,6 @@ HouseMasterAffiliate HouseMaster::findAffiliateByClient(const Client *client) co
         auto affiliate = current.retrieve();
         for (const auto &i : affiliate.getAffiliateClients()) {
             if (i->getId() == client->getId()) {
-                std::cout << "Found client in " << affiliate.getAffiliateName() << "\n";
                 return affiliate;
             }
         }
@@ -207,8 +206,7 @@ void HouseMaster::addClient(unsigned long nif, const std::string &name, std::str
     });
     if (it == _clients.end()) {
         auto client = new Client(nif, name, email, premium, std::move(affiliate));
-        _clients.insert({client->getId(), client});
-        _clientContacts.insert(client);
+        _clients.insert({client->getEmail(), client});
     } else {
         throw HouseMaster::ExistentClient("Client already registred!");
     }

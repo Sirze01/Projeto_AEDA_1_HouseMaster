@@ -8,7 +8,7 @@
 class HousemasterInterface {
 public:
     HousemasterInterface() = default;
-    explicit HousemasterInterface(HouseMaster *housemaster);
+    explicit HousemasterInterface(const HouseMaster &housemaster);
     void housemasterOperations(bool &running);
     void firstInterface(bool &running);
     void adminLogin();
@@ -23,7 +23,7 @@ private:
     HouseMasterAffiliate selectResponsibleAffiliate(bool &running);
     void showAffiliateInterface(HouseMasterAffiliate &affiliate);
     HouseMasterAffiliate _currentAffiliate;
-    HouseMaster* _houseMaster;
+    HouseMaster _houseMaster;
     Individual* _user{};
     string selectResponsible(bool &running);
     void show(const HouseMasterAffiliate &affiliate);
