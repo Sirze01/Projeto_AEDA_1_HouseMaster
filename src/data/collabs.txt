@@ -3,4 +3,4 @@ affiliate1,Samuel Sewall,yes,0.8,1,sunday saturday,Unclog a pipe,Fix a water lea
 affiliate1,John Hathorne,no,0,0,tuesday,Hang a picture,Retouch painting job
 affiliate2,Giles Corey,yes,24.4,3,monday tuesday,Fix illumination system,Install central heating system,Repair AC system
 affiliate3,John Proctor,yes,13.2,3,wednesday,Paint a room,Paint and decorate walls,Retouch painting job
-affiliate3,Dorothy Good,yes,1.6,2,monday,Repair AC system,Pest Control
+affiliate3,Dorothy Good,yes,4,1,monday,Repair AC system,Pest Control

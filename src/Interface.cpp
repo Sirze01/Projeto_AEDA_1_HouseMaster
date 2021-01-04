@@ -34,11 +34,15 @@ void Interface::clientOperations(bool &running) {
             if (!service.empty()) {
                 Date interventionDate = readInterventionDate();
                 Service *sv = _houseMaster->getAvailableServices().at(service);
-                if (dynamic_cast<Painting *>(sv)) {
-                    unsigned numberOfRooms = readNumberOfRooms();
-                    client->requestIntervention(_houseMasterAffiliate, interventionDate, service, false, numberOfRooms);
-                } else {
-                    client->requestIntervention(_houseMasterAffiliate, interventionDate, service, false);
+                try {
+                    if (dynamic_cast<Painting *>(sv)) {
+                        unsigned numberOfRooms = readNumberOfRooms();
+                        client->requestIntervention(_houseMasterAffiliate, interventionDate, service, false, numberOfRooms);
+                    } else {
+                        client->requestIntervention(_houseMasterAffiliate, interventionDate, service, false);
+                    }
+                } catch (const HouseMasterAffiliate::UnavailableAppointment &e) {
+                    std::cout << e.what() << "\n";
                 }
             }
         }

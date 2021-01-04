@@ -771,8 +771,9 @@ void HouseMaster::removeAvailableService(const std::string &service) {
  */
 Intervention *HouseMasterAffiliate::addIntervention(const Date &start, const std::string &service, bool forcePro,
                                                     const std::string &clientId, unsigned int nrOfRooms) {
-    auto it = std::find(getAvailableServices().begin(), getAvailableServices().end(), service);
-    if (it == getAvailableServices().end()) throw NonexistentService("There's no such service!");
+    auto services = getAvailableServices();
+    auto it = std::find(services.begin(), services.end(), service);
+    if (it == services.end()) throw NonexistentService("There's no such service!");
     auto newIntervention = new Intervention(start, _hm->getAvailableServices().at(service), forcePro, nrOfRooms, Active, 0, "",
                                             clientId);
     _interventions.insert(newIntervention);
