@@ -597,7 +597,7 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
                 _hm->addAvailablePaintService(name, pro, price, duration);
             }
         } catch (const HouseMaster::ExistentService &e) {
-            std::cout << e.what() << std::endl;
+            //std::cout << e.what() << std::endl;
         }
     }
 
@@ -761,8 +761,6 @@ std::vector<Client *> HouseMasterAffiliate::getAffiliateClients() const {
 std::vector<Collaborator *> HouseMasterAffiliate::getAffiliateCollabs() const {
     std::vector<Collaborator *> collabs;
     for (const auto &pair: _hm->getCollaborators()) {
-        std::cout << "Collaborator " << pair.second->getName() << " " << pair.second->getAffiliate()
-                  << getAffiliateName() << "\n";
         if (pair.second->getAffiliate() == getAffiliateName())
             collabs.emplace_back(pair.second);
     }
