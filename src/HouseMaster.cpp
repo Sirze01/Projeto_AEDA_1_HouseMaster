@@ -592,10 +592,14 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
         // category
         std::string category{};
         std::getline(lineStream, category, ',');
-        if (category == "default") {
-            _hm->addAvailableService(name, pro, price, duration);
-        } else if (category == "painting") {
-            _hm->addAvailablePaintService(name, pro, price, duration);
+        try {
+            if (category == "default") {
+                _hm->addAvailableService(name, pro, price, duration);
+            } else if (category == "painting") {
+                _hm->addAvailablePaintService(name, pro, price, duration);
+            }
+        } catch (const HouseMaster::ExistentService &e) {
+
         }
     }
 

@@ -33,7 +33,7 @@ void Interface::clientOperations(bool &running) {
             std::string service = selectService(innerRunning);
             if (!service.empty()) {
                 Date interventionDate = readInterventionDate();
-                Service *sv = _houseMasterAffiliate.getAvailableServices()[service];
+                Service *sv = _houseMaster->getServices().at(service);
                 if (dynamic_cast<Painting *>(sv)) {
                     unsigned numberOfRooms = readNumberOfRooms();
                     client->requestIntervention(_houseMasterAffiliate, interventionDate, service, false, numberOfRooms);
@@ -46,7 +46,7 @@ void Interface::clientOperations(bool &running) {
         while (innerRunning) {
             std::string serviceName = selectService(innerRunning);
             if (!serviceName.empty()) {
-                Service *service = _houseMasterAffiliate.getAvailableServices()[serviceName];
+                Service *service = _houseMaster->getServices().at(serviceName);
                 show(*service);
                 std::cin.ignore();
             }
@@ -117,7 +117,7 @@ void Interface::collaboratorOperations(bool &running) {
             while (running) {
                 std::string serviceName = selectService(running);
                 if (!serviceName.empty()) {
-                    Service* service = _houseMasterAffiliate.getAvailableServices()[serviceName];
+                    Service* service = _houseMaster->getServices().at(serviceName);
                     try {
                         collab->addService(service);
                     } catch (const Collaborator::AlreadyKnows &e) {
@@ -131,7 +131,7 @@ void Interface::collaboratorOperations(bool &running) {
             }
         }}, {"Add a new one", [&]() {
             std::string serviceName = readNewServiceData();
-            Service* service = _houseMasterAffiliate.getAvailableServices()[serviceName];
+            Service* service = _houseMaster->getServices().at(serviceName);
             try {
                 collab->addService(service);
             } catch (const Collaborator::AlreadyKnows &e) {
@@ -204,12 +204,12 @@ Date Interface::readInterventionDate() {
  * @return the service
  */
 std::string Interface::selectService(bool &running) {
-    auto services = _houseMasterAffiliate.getAvailableServices();
+    auto services = _houseMasterAffiliate.getAffiliateAvailableServices();
     std::string selection{};
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : services) {
-        options.insert(std::pair<std::string, std::function<void()>>(i.first, [&selection, &i]() {
-            selection = i.first;
+        options.insert(std::pair<std::string, std::function<void()>>(i, [&selection, &i]() {
+            selection = i;
         }));
     }
     Menu servicesMenu("Select a service", options);
@@ -360,7 +360,7 @@ void Interface::readNewCollaboratorData(bool &running) {
     Menu pickServices("Pick your services", {{"Choose from the HouseMaster services", [&]() {
         while (running) {
             std::string serviceName = selectService(running);
-            Service* service = _houseMasterAffiliate.getAvailableServices()[serviceName];
+            Service* service = _houseMaster->getServices()[serviceName];
             if (!serviceName.empty()) {
                 try {
                     newCollab->addService(service);
@@ -375,7 +375,7 @@ void Interface::readNewCollaboratorData(bool &running) {
         }
     }},{"Add a new one", [&]() {
         std::string serviceName = selectService(running);
-        Service* service = _houseMasterAffiliate.getAvailableServices()[serviceName];
+        Service* service = _houseMaster->getServices()[serviceName];
         if (!serviceName.empty()) {
             try {
                 newCollab->addService(service);
@@ -459,9 +459,9 @@ std::string Interface::readNewServiceData() {
     }
 
     if (paintingStr == "yes") {
-        _houseMasterAffiliate.addAvailablePaintService(name, pro, basePrice, duration);
+        _houseMaster->addAvailablePaintService(name, pro, basePrice, duration);
     } else {
-        _houseMasterAffiliate.addAvailableService(name, pro, basePrice, duration);
+        _houseMaster->addAvailableService(name, pro, basePrice, duration);
     }
 
     return name;
