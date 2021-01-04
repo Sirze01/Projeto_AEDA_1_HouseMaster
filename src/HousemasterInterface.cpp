@@ -110,7 +110,7 @@ void HousemasterInterface::firstInterface(bool &running) {
         std::cout << ".....\n";
     }}, { "Login Responsible", [&](){
         std::cout << "Welcome to HouseMaster. You have RESPONSIBLE privilege.\n";
-        std::string responsibleId = selectResponsible(innerRunning);
+        std::string responsibleId = selectResponsible(innerRunning).getId();
         responsibleLogin(responsibleId);
         _currentAffiliate = selectResponsibleAffiliate(innerRunning);
         _currentAffiliate.setHousemaster(_houseMaster);
@@ -304,7 +304,7 @@ void HousemasterInterface::housemasterOperations(bool &running) {
         }
     }}, {"Filter by responsible", [&](){
         bool innerRunning = true;
-        std::string responsible = selectResponsible(innerRunning);
+        std::string responsible = selectResponsible(innerRunning).getId();
         std::vector<HouseMasterAffiliate> hms = _houseMaster->getAffiliatesByResponsible(responsible);
         HouseMasterAffiliate selection{};
         std::map<std::string, std::function<void()>> options{};
@@ -348,13 +348,13 @@ std::string HousemasterInterface::selectLocation(bool &running) {
 }
 
 
-std::string HousemasterInterface::selectResponsible(bool &running) {
+Admin HousemasterInterface::selectResponsible(bool &running) {
     auto responsible = _houseMaster->getResponsibles();
-    std::string selection{};
+    Admin selection{};
     std::map<std::string, std::function<void()>> options{};
     for (const auto &i : responsible) {
         options.insert(std::pair<std::string, std::function<void()>>(i.second->getName(), [&selection, &i]() {
-            selection = i.first;
+            selection = (*i.second);
         }));
     }
     Menu servicesMenu("Select a Responsible", options);
@@ -370,7 +370,7 @@ void HousemasterInterface::show(const HouseMasterAffiliate& affiliate) {
     std::cout << "| " << std::setw(50) << std::right << affiliate.getAffiliateName() << " |" << std::endl;
     std::cout << "|                                                    |" << std::endl;
     std::cout << "| [" << "Location" << "] " << std::setw(39) << std::right << affiliate.getLocation() << " |" << std::endl;
-    std::cout << "| [" << "Responsible" << "] " << std::setw(36) << std::right << affiliate.getAdmin().getName() << " |"
+    std::cout << "| [" << "Responsible" << "] " << std::setw(36) << std::right << affiliate.getAdmin_str() << " |"
               << std::endl;
     std::cout << "| [" << "Earnings" << "] " << std::setw(39) << std::right << affiliate.getEarnings() << " |"
               << std::endl;
@@ -397,18 +397,19 @@ void HousemasterInterface::showTotalFinances(const HouseMaster &hm){
  */
 void HousemasterInterface::readNewAffiliateData() {
     std::string name{}, location{};
+    std::cin.ignore(9999, '\n');
 
     std::cout << "Affiliate's Name? ";
-    std::cin.ignore(9999, '\n');
     std::getline(std::cin, name, '\n');
-
     std::cout << "Affiliate's Location? ";
-    std::cin.ignore(9999, '\n');
     std::getline(std::cin, location, '\n');
+
+    bool running = true;
+    Admin responsible = selectResponsible(running);
 
     /*try
     {*/
-    _houseMaster->registerAffiliate(HouseMasterAffiliate(_houseMaster,location, name));
+    _houseMaster->registerAffiliate(HouseMasterAffiliate(_houseMaster, location, name, responsible));
     /*} catch (HouseMasterAffiliate::ExistentAffiliate &e) //TODO ExistentAffiliate
     {
         std::cout << e.what() << std::endl;

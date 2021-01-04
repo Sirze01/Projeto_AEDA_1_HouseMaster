@@ -95,9 +95,10 @@ void HouseMaster::removeAffiliate(const HouseMasterAffiliate &affiliate) {
  */
 vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(const string &location) {
     vector<HouseMasterAffiliate> affiliates_from_location;
-    for (auto it = _affiliates.begin(); it != _affiliates.end(); it++) {
-        if ((*it).getLocation() == location) {
-            affiliates_from_location.push_back(*it);
+    BSTItrIn<HouseMasterAffiliate> current(_affiliates);
+    for (; !current.isAtEnd(); current.advance()) {
+        if ((current.retrieve()).getLocation() == location) {
+            affiliates_from_location.push_back(current.retrieve());
         }
     }
     return affiliates_from_location;
@@ -109,9 +110,10 @@ vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByLocation(const string &
  */
 vector<HouseMasterAffiliate> HouseMaster::getAffiliatesByResponsible(const string &responsible) {
     vector<HouseMasterAffiliate> affiliates_from_responsible;
-    for (auto it = _affiliates.begin(); it != _affiliates.end(); it++) {
-        if ((*it).getAdmin().getName() == responsible) {
-            affiliates_from_responsible.push_back(*it);
+    BSTItrIn<HouseMasterAffiliate> current(_affiliates);
+    for (; !current.isAtEnd(); current.advance()) {
+        if ((current.retrieve()).getAdmin().getId() == responsible) {
+            affiliates_from_responsible.push_back(current.retrieve());
         }
     }
     return affiliates_from_responsible;
@@ -347,7 +349,7 @@ Collaborator *HouseMaster::findCollabById(const std::string &collabId) {
 void HouseMaster::addAdmin(const std::string &name, std::string password, const std::vector<std::string> &affiliates) {
     auto admin = new Admin(name, password, affiliates);
     for (const auto &i : _responsibles) {
-        if (i.second->getName() == admin->getName() && i.second->getAffiliates() == admin->getAffiliates()) {
+        if (i.second->getName() == admin->getName()) {
             return;
         }
     }
@@ -631,6 +633,7 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
 
     // read responsibles
     for (std::string line; std::getline(responsibles, line);) {
+        std::getline(responsibles, line);
         std::stringstream lineStream(line);
         // name
         std::string name;
@@ -657,7 +660,8 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
  * @param location the location
  * @param hmName the affiliate's name
  */
-HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::string location, std::string hmName)
+HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::string location, std::string hmName,
+                                           Admin responsible)
         : _hm(hm), _name(std::move(hmName)), _location(std::move(location)){
     _earnings = 0.0;
 }

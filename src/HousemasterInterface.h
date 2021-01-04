@@ -26,7 +26,7 @@ private:
     HouseMasterAffiliate _currentAffiliate;
     HouseMaster* _houseMaster;
     Individual* _user{};
-    string selectResponsible(bool &running);
+    Admin selectResponsible(bool &running);
     void show(const HouseMasterAffiliate &affiliate);
     void showTotalFinances(const HouseMaster &hm);
 };

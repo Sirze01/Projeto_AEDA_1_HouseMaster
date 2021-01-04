@@ -38,7 +38,8 @@ public:
                          std::ifstream services, std::ifstream history, std::ifstream responsibles,
                          std::string location, const std::string& hmName, float finances);
 
-    HouseMasterAffiliate(HouseMaster* hm,std::string location, std::string  hmName);
+    HouseMasterAffiliate(HouseMaster *hm, std::string location, std::string hmName,
+                         Admin responsible);
 
     ~HouseMasterAffiliate() = default;
 
