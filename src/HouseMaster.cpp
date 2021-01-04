@@ -633,7 +633,6 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
 
     // read responsibles
     for (std::string line; std::getline(responsibles, line);) {
-        std::getline(responsibles, line);
         std::stringstream lineStream(line);
         // name
         std::string name;
@@ -663,6 +662,7 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
 HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::string location, std::string hmName,
                                            Admin responsible)
         : _hm(hm), _name(std::move(hmName)), _location(std::move(location)){
+    _responsible = responsible;
     _earnings = 0.0;
 }
 
