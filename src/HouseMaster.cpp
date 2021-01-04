@@ -599,7 +599,7 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
                 _hm->addAvailablePaintService(name, pro, price, duration);
             }
         } catch (const HouseMaster::ExistentService &e) {
-
+            std::cout << e.what() << std::endl;
         }
     }
 

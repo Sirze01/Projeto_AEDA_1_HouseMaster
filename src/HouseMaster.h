@@ -6,11 +6,13 @@
 #include "bst.h"
 #include "HouseMasterAffiliate.h"
 
-
+/** @brief auxiliary struct to hash clients based on their email address */
 struct ClientHash {
+    /** @brief client hash function based on the client email*/
     int operator()(const Client *client) const {
         return std::hash<std::string>()(client->getEmail());
     }
+    /** @brief client equality operator to detect collisions*/
     bool operator()(const Client *c1, const Client *c2) const {
         return c1->getEmail() == c2->getEmail();
     }

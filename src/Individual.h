@@ -130,9 +130,15 @@ public:
 };
 
 
-
+/**
+ * @brief class used to compare collaborators' availability
+ */
 class Collaborator_pointer_compare{
 public:
+    /**
+     * @brief operator used to compare collaborators' availability
+     * @return whether the first collaborator (@param col 1) has availability earlier than the second one (@param col2)
+     */
     bool operator() (const std::pair<Intervention*, Collaborator*>& col1, const std::pair<Intervention*, Collaborator*>& col2){
         int a = 10;
         int b = 10;
@@ -143,9 +149,7 @@ public:
                 a = (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday < 0) ?
                     (7 - (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday)) :
                     (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday);
-
         }
-
         for(const auto & availability : col2.second->getAvailability()){
             if((col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday < 0) ?
                (7 - (col1.first->getStartingTime().getDate().tm_wday - availability.getDate().tm_wday)) :
