@@ -1,0 +1,222 @@
+\hypertarget{class_date}{}\doxysection{Date Class Reference}
+\label{class_date}\index{Date@{Date}}
+
+
+A class to represent dates.  
+
+
+
+
+{\ttfamily \#include $<$Date.\+h$>$}
+
+Inheritance diagram for Date\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_date}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_date_1_1_invalid_date}{Invalid\+Date}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_date_a4e59ed4ba66eec61c27460c5d09fa1bd}\label{class_date_a4e59ed4ba66eec61c27460c5d09fa1bd}} 
+\mbox{\hyperlink{class_date_a4e59ed4ba66eec61c27460c5d09fa1bd}{Date}} ()
+\begin{DoxyCompactList}\small\item\em default date \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_date_a82bd27ff750869162d06762a1c89e0fc}{Date}} (int day, int month, int year, int hours, int minutes)
+\begin{DoxyCompactList}\small\item\em Sets the date with the integer numbers provided. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_date_ad1b070aee91d2b29b0972992414f65a5}{Date}} (const std\+::string \&date)
+\begin{DoxyCompactList}\small\item\em Sets the date with a given string. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_date_a371b83cef0b9e64781d92909c945fb71}\label{class_date_a371b83cef0b9e64781d92909c945fb71}} 
+tm {\bfseries get\+Date} () const
+\item 
+virtual std\+::string \mbox{\hyperlink{class_date_ada44562cf72ca67017af0446ce189e91}{get\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the saved date in a string. Useful to show during output operations. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_date_ae954163b9cb9e15e0d7bdcfd6c54c8e0}{get\+Weekdays}} ()
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_date}{Date}} \mbox{\hyperlink{class_date_a1dea6bd3c0f517f7661be1a0f5e321d0}{operator+}} (const \mbox{\hyperlink{class_date}{Date}} \&d1) const
+\begin{DoxyCompactList}\small\item\em Adds two dates (or a date and a duration) together and returns the final value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_date}{Date}} \mbox{\hyperlink{class_date_a9fafb8ecc14afb8d9fff6141fa569ad2}{operator-\/}} (const \mbox{\hyperlink{class_date}{Date}} \&d1) const
+\begin{DoxyCompactList}\small\item\em subtracts two dates (or a date and a duration) together and returns the final value \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_date_ac906e253d7d1343e3e161fb9e1aee707}{operator==}} (const \mbox{\hyperlink{class_date}{Date}} \&d1) const
+\begin{DoxyCompactList}\small\item\em Checks whether the two dates are the same. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_date_a352ad2bec798ce5802231d49bf0a16e8}{operator$<$}} (const \mbox{\hyperlink{class_date}{Date}} \&d1) const
+\item 
+bool \mbox{\hyperlink{class_date_aa4c0f619e51dca5ef53284e548d4d0af}{operator$>$}} (const \mbox{\hyperlink{class_date}{Date}} \&d1) const
+\begin{DoxyCompactList}\small\item\em Checks whether the first date is after the second. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_date_ac18b808c81cf74410952d4357e70f92e}\label{class_date_ac18b808c81cf74410952d4357e70f92e}} 
+tm {\bfseries \+\_\+date} \{\}
+\item 
+\mbox{\Hypertarget{class_date_ad80347d8255536f832afbb033020fd24}\label{class_date_ad80347d8255536f832afbb033020fd24}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries \+\_\+weekdays} \{\char`\"{}sunday\char`\"{}, \char`\"{}monday\char`\"{}, \char`\"{}tuesday\char`\"{}, \char`\"{}wednesday\char`\"{}, \char`\"{}thursday\char`\"{}, \char`\"{}friday\char`\"{}, \char`\"{}saturday\char`\"{}\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to represent dates. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_date_a82bd27ff750869162d06762a1c89e0fc}\label{class_date_a82bd27ff750869162d06762a1c89e0fc}} 
+\index{Date@{Date}!Date@{Date}}
+\index{Date@{Date}!Date@{Date}}
+\doxysubsubsection{\texorpdfstring{Date()}{Date()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Date\+::\+Date (\begin{DoxyParamCaption}\item[{int}]{day,  }\item[{int}]{month,  }\item[{int}]{year,  }\item[{int}]{hours,  }\item[{int}]{minutes }\end{DoxyParamCaption})}
+
+
+
+Sets the date with the integer numbers provided. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em day} & sets the day \\
+\hline
+{\em month} & sets the month \\
+\hline
+{\em year} & sets the year \\
+\hline
+{\em hours} & sets the hours \\
+\hline
+{\em minutes} & sets the minutes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_date_ad1b070aee91d2b29b0972992414f65a5}\label{class_date_ad1b070aee91d2b29b0972992414f65a5}} 
+\index{Date@{Date}!Date@{Date}}
+\index{Date@{Date}!Date@{Date}}
+\doxysubsubsection{\texorpdfstring{Date()}{Date()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Date\+::\+Date (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{date }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Sets the date with a given string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em date} & the date in the form of a string \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_date_ada44562cf72ca67017af0446ce189e91}\label{class_date_ada44562cf72ca67017af0446ce189e91}} 
+\index{Date@{Date}!getString@{getString}}
+\index{getString@{getString}!Date@{Date}}
+\doxysubsubsection{\texorpdfstring{getString()}{getString()}}
+{\footnotesize\ttfamily std\+::string Date\+::get\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Converts the saved date in a string. Useful to show during output operations. 
+
+\begin{DoxyReturn}{Returns}
+A string with the date in D\+D/\+M\+M/\+Y\+Y\+YY HH\+:mm 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_availability_aba0bdcef8c11dd87a1ecc02ccdf61bf8}{Availability}}, and \mbox{\hyperlink{class_duration_a89a23d6ea88ee54051e716a75b3ba299}{Duration}}.
+
+\mbox{\Hypertarget{class_date_ae954163b9cb9e15e0d7bdcfd6c54c8e0}\label{class_date_ae954163b9cb9e15e0d7bdcfd6c54c8e0}} 
+\index{Date@{Date}!getWeekdays@{getWeekdays}}
+\index{getWeekdays@{getWeekdays}!Date@{Date}}
+\doxysubsubsection{\texorpdfstring{getWeekdays()}{getWeekdays()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ Date\+::get\+Weekdays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+weekdays 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_date_a1dea6bd3c0f517f7661be1a0f5e321d0}\label{class_date_a1dea6bd3c0f517f7661be1a0f5e321d0}} 
+\index{Date@{Date}!operator+@{operator+}}
+\index{operator+@{operator+}!Date@{Date}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_date}{Date}} Date\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_date}{Date}} \&}]{d1 }\end{DoxyParamCaption}) const}
+
+
+
+Adds two dates (or a date and a duration) together and returns the final value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d1} & the other operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A final date corresponding to the addition of two dates or a date and a duration 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_date_a9fafb8ecc14afb8d9fff6141fa569ad2}\label{class_date_a9fafb8ecc14afb8d9fff6141fa569ad2}} 
+\index{Date@{Date}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Date@{Date}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_date}{Date}} Date\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_date}{Date}} \&}]{d1 }\end{DoxyParamCaption}) const}
+
+
+
+subtracts two dates (or a date and a duration) together and returns the final value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d1} & the other operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A final date corresponding to the subtractions of two dates or a date and a duration 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_date_a352ad2bec798ce5802231d49bf0a16e8}\label{class_date_a352ad2bec798ce5802231d49bf0a16e8}} 
+\index{Date@{Date}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Date@{Date}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Date\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_date}{Date}} \&}]{d1 }\end{DoxyParamCaption}) const}
+
+Checks whether the first date is before the second Compares two dates and checks if the first one is before de second. \begin{DoxyReturn}{Returns}
+Whether the first date is before the second one 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_date_ac906e253d7d1343e3e161fb9e1aee707}\label{class_date_ac906e253d7d1343e3e161fb9e1aee707}} 
+\index{Date@{Date}!operator==@{operator==}}
+\index{operator==@{operator==}!Date@{Date}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Date\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_date}{Date}} \&}]{d1 }\end{DoxyParamCaption}) const}
+
+
+
+Checks whether the two dates are the same. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d2} & the other operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether a date is equal to another 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_date_aa4c0f619e51dca5ef53284e548d4d0af}\label{class_date_aa4c0f619e51dca5ef53284e548d4d0af}} 
+\index{Date@{Date}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Date@{Date}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool Date\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_date}{Date}} \&}]{d1 }\end{DoxyParamCaption}) const}
+
+
+
+Checks whether the first date is after the second. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d2} & the other operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the first date is after the second one 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Date.\+h\item 
+src/Date.\+cpp\end{DoxyCompactItemize}

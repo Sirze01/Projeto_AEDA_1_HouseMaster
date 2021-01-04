@@ -1,0 +1,28 @@
+\hypertarget{struct_client_hash}{}\doxysection{Client\+Hash Struct Reference}
+\label{struct_client_hash}\index{ClientHash@{ClientHash}}
+
+
+auxiliary struct to hash clients based on their email address  
+
+
+
+
+{\ttfamily \#include $<$House\+Master.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_client_hash_a01a6240128f5bbb5ba24230170891ecd}\label{struct_client_hash_a01a6240128f5bbb5ba24230170891ecd}} 
+int \mbox{\hyperlink{struct_client_hash_a01a6240128f5bbb5ba24230170891ecd}{operator()}} (const \mbox{\hyperlink{class_client}{Client}} $\ast$client) const
+\begin{DoxyCompactList}\small\item\em client hash function based on the client email \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_client_hash_abde98082e60ac18eb90889a3874a2b79}\label{struct_client_hash_abde98082e60ac18eb90889a3874a2b79}} 
+bool \mbox{\hyperlink{struct_client_hash_abde98082e60ac18eb90889a3874a2b79}{operator()}} (const \mbox{\hyperlink{class_client}{Client}} $\ast$c1, const \mbox{\hyperlink{class_client}{Client}} $\ast$c2) const
+\begin{DoxyCompactList}\small\item\em client equality operator to detect collisions \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+auxiliary struct to hash clients based on their email address 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/House\+Master.\+h\end{DoxyCompactItemize}

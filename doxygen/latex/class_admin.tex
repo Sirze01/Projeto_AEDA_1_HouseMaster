@@ -1,0 +1,133 @@
+\hypertarget{class_admin}{}\doxysection{Admin Class Reference}
+\label{class_admin}\index{Admin@{Admin}}
+Inheritance diagram for Admin\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_admin}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_admin_a7b21d01e6b55b0d9afb7d44e8e6e2738}\label{class_admin_a7b21d01e6b55b0d9afb7d44e8e6e2738}} 
+\mbox{\hyperlink{class_admin_a7b21d01e6b55b0d9afb7d44e8e6e2738}{Admin}} ()
+\begin{DoxyCompactList}\small\item\em admin\textquotesingle{}s constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_admin_ad475ddf413ef914e2d18b931fa9b2b35}{Admin}} (const std\+::string \&name, std\+::string password, std\+::vector$<$ std\+::string $>$ affiliates)
+\begin{DoxyCompactList}\small\item\em admin\textquotesingle{}s constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_admin_a0f61e821343806d7c810db463ac2a84b}{Admin}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em admin\textquotesingle{}s constructor \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_admin_af4a4373ee3a36135f75df9622d1d2766}{get\+Affiliates}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_admin_a9bcbc767ad44365a5d3a957c6c693092}{get\+Id}} () const override
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_admin_a5be2f03a78143d0040324b287d76c620}{get\+Password}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_admin_ae1ce25f4c86d0d67370402823b2a7271}{set\+Password}} (const std\+::string \&password)
+\begin{DoxyCompactList}\small\item\em setter \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_admin_a4905073c05eadf13265036d2b4b508ae}\label{class_admin_a4905073c05eadf13265036d2b4b508ae}} 
+static unsigned int {\bfseries \+\_\+id\+Seq\+Admins} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_admin_ad475ddf413ef914e2d18b931fa9b2b35}\label{class_admin_ad475ddf413ef914e2d18b931fa9b2b35}} 
+\index{Admin@{Admin}!Admin@{Admin}}
+\index{Admin@{Admin}!Admin@{Admin}}
+\doxysubsubsection{\texorpdfstring{Admin()}{Admin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Admin\+::\+Admin (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{std\+::string}]{password,  }\item[{std\+::vector$<$ std\+::string $>$}]{affiliates }\end{DoxyParamCaption})}
+
+
+
+admin\textquotesingle{}s constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name \\
+\hline
+{\em affiliate} & the affiliate \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_admin_a0f61e821343806d7c810db463ac2a84b}\label{class_admin_a0f61e821343806d7c810db463ac2a84b}} 
+\index{Admin@{Admin}!Admin@{Admin}}
+\index{Admin@{Admin}!Admin@{Admin}}
+\doxysubsubsection{\texorpdfstring{Admin()}{Admin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Admin\+::\+Admin (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+admin\textquotesingle{}s constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_admin_af4a4373ee3a36135f75df9622d1d2766}\label{class_admin_af4a4373ee3a36135f75df9622d1d2766}} 
+\index{Admin@{Admin}!getAffiliates@{getAffiliates}}
+\index{getAffiliates@{getAffiliates}!Admin@{Admin}}
+\doxysubsubsection{\texorpdfstring{getAffiliates()}{getAffiliates()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ Admin\+::get\+Affiliates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+affiliate 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_admin_a9bcbc767ad44365a5d3a957c6c693092}\label{class_admin_a9bcbc767ad44365a5d3a957c6c693092}} 
+\index{Admin@{Admin}!getId@{getId}}
+\index{getId@{getId}!Admin@{Admin}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily std\+::string Admin\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+id 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_individual}{Individual}}.
+
+\mbox{\Hypertarget{class_admin_a5be2f03a78143d0040324b287d76c620}\label{class_admin_a5be2f03a78143d0040324b287d76c620}} 
+\index{Admin@{Admin}!getPassword@{getPassword}}
+\index{getPassword@{getPassword}!Admin@{Admin}}
+\doxysubsubsection{\texorpdfstring{getPassword()}{getPassword()}}
+{\footnotesize\ttfamily std\+::string Admin\+::get\+Password (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+password 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_admin_ae1ce25f4c86d0d67370402823b2a7271}\label{class_admin_ae1ce25f4c86d0d67370402823b2a7271}} 
+\index{Admin@{Admin}!setPassword@{setPassword}}
+\index{setPassword@{setPassword}!Admin@{Admin}}
+\doxysubsubsection{\texorpdfstring{setPassword()}{setPassword()}}
+{\footnotesize\ttfamily void Admin\+::set\+Password (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{password }\end{DoxyParamCaption})}
+
+
+
+setter 
+
+\begin{DoxyReturn}{Returns}
+password 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Individual.\+h\item 
+src/Individual.\+cpp\end{DoxyCompactItemize}

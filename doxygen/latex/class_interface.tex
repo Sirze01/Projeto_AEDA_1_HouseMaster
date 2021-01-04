@@ -1,0 +1,142 @@
+\hypertarget{class_interface}{}\doxysection{Interface Class Reference}
+\label{class_interface}\index{Interface@{Interface}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_interface_1_1_invalid_nif}{Invalid\+Nif}}
+\item 
+class \mbox{\hyperlink{class_interface_1_1_nonexistent_role}{Nonexistent\+Role}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_interface_a76b107f31590d941e90658b5ca0deaf9}{Interface}} (const \mbox{\hyperlink{class_house_master_affiliate}{House\+Master\+Affiliate}} \&house\+Master)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_interface}{Interface}} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_interface_a30184d7f3475ae01e4f1b364a466ea47}\label{class_interface_a30184d7f3475ae01e4f1b364a466ea47}} 
+{\bfseries Interface} (const \mbox{\hyperlink{class_house_master_affiliate}{House\+Master\+Affiliate}} \&housemaster, \mbox{\hyperlink{class_individual}{Individual}} $\ast$user, Role role)
+\item 
+\mbox{\Hypertarget{class_interface_a82606aa5779d71d32bc9a0af0d6e90dd}\label{class_interface_a82606aa5779d71d32bc9a0af0d6e90dd}} 
+{\bfseries Interface} (\mbox{\hyperlink{class_house_master}{House\+Master}} $\ast$house\+Master, const \mbox{\hyperlink{class_house_master_affiliate}{House\+Master\+Affiliate}} \&house\+Master\+Affiliate, \mbox{\hyperlink{class_individual}{Individual}} $\ast$user, Role role)
+\item 
+\mbox{\Hypertarget{class_interface_a76e2782f2e571b171dba8e37946695a4}\label{class_interface_a76e2782f2e571b171dba8e37946695a4}} 
+void {\bfseries select\+Role} (bool \&running)
+\item 
+\mbox{\hyperlink{class_house_master_affiliate}{House\+Master\+Affiliate}} \mbox{\hyperlink{class_interface_ae92b17612d459c62e3968fae14c7cd1b}{get\+Housemaster\+Affiliate\+State}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_interface_a2699eaa4ce426acb355c244bac7171d1}\label{class_interface_a2699eaa4ce426acb355c244bac7171d1}} 
+\mbox{\hyperlink{class_house_master}{House\+Master}} {\bfseries get\+Housemaster\+State} () const
+\item 
+void \mbox{\hyperlink{class_interface_ae22b26ef36c247d7f6f9c1532944a1cb}{collaborator\+Operations}} (bool \&running)
+\begin{DoxyCompactList}\small\item\em shows the collaborator\textquotesingle{}s operations \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_interface_a69ada64a851f056883e6398d6ba79b34}{responsible\+Operations}} (bool \&running)
+\begin{DoxyCompactList}\small\item\em shows responsible\textquotesingle{}s operations \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_interface_a0bec0515d783c95b1655b27e1b42c51b}{client\+Operations}} (bool \&running)
+\begin{DoxyCompactList}\small\item\em shows the client\textquotesingle{}s operations \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{class_interface_a8763b772ef75cee5f4b383459f12b988}{is\+Valid\+Nif}} (unsigned nif)
+\begin{DoxyCompactList}\small\item\em validates a nif \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_interface_a76b107f31590d941e90658b5ca0deaf9}\label{class_interface_a76b107f31590d941e90658b5ca0deaf9}} 
+\index{Interface@{Interface}!Interface@{Interface}}
+\index{Interface@{Interface}!Interface@{Interface}}
+\doxysubsubsection{\texorpdfstring{Interface()}{Interface()}}
+{\footnotesize\ttfamily Interface\+::\+Interface (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_house_master_affiliate}{House\+Master\+Affiliate}} \&}]{house\+Master }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\mbox{\hyperlink{class_interface}{Interface}} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em house\+Master} & the housemaster to interact with \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_interface_a0bec0515d783c95b1655b27e1b42c51b}\label{class_interface_a0bec0515d783c95b1655b27e1b42c51b}} 
+\index{Interface@{Interface}!clientOperations@{clientOperations}}
+\index{clientOperations@{clientOperations}!Interface@{Interface}}
+\doxysubsubsection{\texorpdfstring{clientOperations()}{clientOperations()}}
+{\footnotesize\ttfamily void Interface\+::client\+Operations (\begin{DoxyParamCaption}\item[{bool \&}]{running }\end{DoxyParamCaption})}
+
+
+
+shows the client\textquotesingle{}s operations 
+
+
+\begin{DoxyParams}{Parameters}
+{\em running} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_interface_ae22b26ef36c247d7f6f9c1532944a1cb}\label{class_interface_ae22b26ef36c247d7f6f9c1532944a1cb}} 
+\index{Interface@{Interface}!collaboratorOperations@{collaboratorOperations}}
+\index{collaboratorOperations@{collaboratorOperations}!Interface@{Interface}}
+\doxysubsubsection{\texorpdfstring{collaboratorOperations()}{collaboratorOperations()}}
+{\footnotesize\ttfamily void Interface\+::collaborator\+Operations (\begin{DoxyParamCaption}\item[{bool \&}]{running }\end{DoxyParamCaption})}
+
+
+
+shows the collaborator\textquotesingle{}s operations 
+
+
+\begin{DoxyParams}{Parameters}
+{\em running} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_interface_ae92b17612d459c62e3968fae14c7cd1b}\label{class_interface_ae92b17612d459c62e3968fae14c7cd1b}} 
+\index{Interface@{Interface}!getHousemasterAffiliateState@{getHousemasterAffiliateState}}
+\index{getHousemasterAffiliateState@{getHousemasterAffiliateState}!Interface@{Interface}}
+\doxysubsubsection{\texorpdfstring{getHousemasterAffiliateState()}{getHousemasterAffiliateState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_house_master_affiliate}{House\+Master\+Affiliate}} Interface\+::get\+Housemaster\+Affiliate\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+housemaster 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_interface_a8763b772ef75cee5f4b383459f12b988}\label{class_interface_a8763b772ef75cee5f4b383459f12b988}} 
+\index{Interface@{Interface}!isValidNif@{isValidNif}}
+\index{isValidNif@{isValidNif}!Interface@{Interface}}
+\doxysubsubsection{\texorpdfstring{isValidNif()}{isValidNif()}}
+{\footnotesize\ttfamily bool Interface\+::is\+Valid\+Nif (\begin{DoxyParamCaption}\item[{unsigned}]{nif }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+validates a nif 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nif} & the nif \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if valid false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_interface_a69ada64a851f056883e6398d6ba79b34}\label{class_interface_a69ada64a851f056883e6398d6ba79b34}} 
+\index{Interface@{Interface}!responsibleOperations@{responsibleOperations}}
+\index{responsibleOperations@{responsibleOperations}!Interface@{Interface}}
+\doxysubsubsection{\texorpdfstring{responsibleOperations()}{responsibleOperations()}}
+{\footnotesize\ttfamily void Interface\+::responsible\+Operations (\begin{DoxyParamCaption}\item[{bool \&}]{running }\end{DoxyParamCaption})}
+
+
+
+shows responsible\textquotesingle{}s operations 
+
+
+\begin{DoxyParams}{Parameters}
+{\em running} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Interface.\+h\item 
+src/Interface.\+cpp\end{DoxyCompactItemize}

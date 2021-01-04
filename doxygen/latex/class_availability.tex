@@ -1,0 +1,115 @@
+\hypertarget{class_availability}{}\doxysection{Availability Class Reference}
+\label{class_availability}\index{Availability@{Availability}}
+Inheritance diagram for Availability\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_availability}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_availability_a1a5bf2b987e656d796ed63b773b7d94f}\label{class_availability_a1a5bf2b987e656d796ed63b773b7d94f}} 
+\mbox{\hyperlink{class_availability_a1a5bf2b987e656d796ed63b773b7d94f}{Availability}} ()
+\begin{DoxyCompactList}\small\item\em default availability \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_availability_ae74327c3c9f295f53a75b7e0bfd27ac9}{Availability}} (int weekday)
+\begin{DoxyCompactList}\small\item\em Sets the availability with the weekday provided. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_availability_a1dcbb89cbef268a65e1840adffc01831}{Availability}} (const std\+::string \&weekday)
+\begin{DoxyCompactList}\small\item\em Sets the availability with a given string. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_availability_a4c9407f80a1c7ed4c2fdf61781291833}{get\+Weekday}} () const
+\begin{DoxyCompactList}\small\item\em getter \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_availability_aba0bdcef8c11dd87a1ecc02ccdf61bf8}{get\+String}} () const override
+\begin{DoxyCompactList}\small\item\em Converts the saved availability in a string. Useful to show during output operations. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_availability_ad0492107daf6c531d92edbed8dea3a63}{operator$<$}} (const \mbox{\hyperlink{class_availability}{Availability}} \&d1) const
+\begin{DoxyCompactList}\small\item\em Checks whether the first weekday is before the second. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_availability_ae74327c3c9f295f53a75b7e0bfd27ac9}\label{class_availability_ae74327c3c9f295f53a75b7e0bfd27ac9}} 
+\index{Availability@{Availability}!Availability@{Availability}}
+\index{Availability@{Availability}!Availability@{Availability}}
+\doxysubsubsection{\texorpdfstring{Availability()}{Availability()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Availability\+::\+Availability (\begin{DoxyParamCaption}\item[{int}]{weekday }\end{DoxyParamCaption})}
+
+
+
+Sets the availability with the weekday provided. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em weekday} & sets the weekday \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_availability_a1dcbb89cbef268a65e1840adffc01831}\label{class_availability_a1dcbb89cbef268a65e1840adffc01831}} 
+\index{Availability@{Availability}!Availability@{Availability}}
+\index{Availability@{Availability}!Availability@{Availability}}
+\doxysubsubsection{\texorpdfstring{Availability()}{Availability()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Availability\+::\+Availability (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{weekday }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Sets the availability with a given string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em weekday} & sets the weekday \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_availability_aba0bdcef8c11dd87a1ecc02ccdf61bf8}\label{class_availability_aba0bdcef8c11dd87a1ecc02ccdf61bf8}} 
+\index{Availability@{Availability}!getString@{getString}}
+\index{getString@{getString}!Availability@{Availability}}
+\doxysubsubsection{\texorpdfstring{getString()}{getString()}}
+{\footnotesize\ttfamily std\+::string Availability\+::get\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Converts the saved availability in a string. Useful to show during output operations. 
+
+\begin{DoxyReturn}{Returns}
+A string with the weekday 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_date_ada44562cf72ca67017af0446ce189e91}{Date}}.
+
+\mbox{\Hypertarget{class_availability_a4c9407f80a1c7ed4c2fdf61781291833}\label{class_availability_a4c9407f80a1c7ed4c2fdf61781291833}} 
+\index{Availability@{Availability}!getWeekday@{getWeekday}}
+\index{getWeekday@{getWeekday}!Availability@{Availability}}
+\doxysubsubsection{\texorpdfstring{getWeekday()}{getWeekday()}}
+{\footnotesize\ttfamily int Availability\+::get\+Weekday (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+getter 
+
+\begin{DoxyReturn}{Returns}
+weekday 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_availability_ad0492107daf6c531d92edbed8dea3a63}\label{class_availability_ad0492107daf6c531d92edbed8dea3a63}} 
+\index{Availability@{Availability}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Availability@{Availability}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Availability\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_availability}{Availability}} \&}]{d1 }\end{DoxyParamCaption}) const}
+
+
+
+Checks whether the first weekday is before the second. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d1} & the other operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the first weekday is before the second one 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Date.\+h\item 
+src/Date.\+cpp\end{DoxyCompactItemize}
