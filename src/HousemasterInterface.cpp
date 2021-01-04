@@ -108,14 +108,10 @@ void HousemasterInterface::firstInterface(bool &running) {
             _houseMaster.removeAffiliate(_currentAffiliate);
             _houseMaster.registerAffiliate(adminInterface.getHousemasterAffiliateState());
         }
-      }},{
-        "Register Client",            [&]() {
-            Interface newInterface(&_houseMaster, _currentAffiliate, _user, client);
-            newInterface.readNewClientData();
-            std::cout << "Press ENTER to continue\n";
-            std::cin.ignore();
-        }
-    }});
+      }},{"Register Client", [&]() {
+        Interface newInterface(&_houseMaster, _currentAffiliate, _user, client);
+        newInterface.readNewClientData();
+      }}});
     start.show();
     start.select();
     start.execute(running);
@@ -256,6 +252,12 @@ void HousemasterInterface::housemasterOperations(bool &running) {
         affiliates.select();
         affiliates.execute(running);
         std::cin.ignore();
+    }},{ "Register affiliate",[&](){
+     readNewAffiliateData();
+    }},{"Remove affiliate", [&](){
+        bool innerRunning = true;
+        HouseMasterAffiliate affiliate = selectAffiliate(innerRunning);
+        _houseMaster.removeAffiliate(affiliate);
     }}});
     start.show();
     start.select();
@@ -321,4 +323,29 @@ void HousemasterInterface::showTotalFinances(const HouseMaster &hm){
     std::cout << "| [Enter] Go Back                                    |" << std::endl;
     std::cout << "|____________________________________________________|" << std::endl;
     std::cin.ignore();
+}
+
+
+/**
+ * @brief reads a new client's data
+ */
+void HousemasterInterface::readNewAffiliateData() {
+    std::string name{}, location{};
+    unsigned nif{};
+
+    std::cout << "Affiliate's Name? ";
+    std::cin.ignore(9999, '\n');
+    std::getline(std::cin, name, '\n');
+
+    std::cout << "Affiliate's Location? ";
+    std::cin.ignore(9999, '\n');
+    std::getline(std::cin, location, '\n');
+
+    /*try
+    {*/
+    _houseMaster.registerAffiliate(HouseMasterAffiliate(&_houseMaster,location, name));
+    /*} catch (HouseMasterAffiliate::ExistentAffiliate &e) //TODO ExistentAffiliate
+    {
+        std::cout << e.what() << std::endl;
+    }*/
 }

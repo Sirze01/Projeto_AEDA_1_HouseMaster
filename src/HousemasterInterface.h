@@ -15,6 +15,7 @@ public:
     void responsibleLogin(const std::string& responsibleId);
     void collabLogin();
     void clientLogin();
+    void readNewAffiliateData();
 private:
     HouseMasterAffiliate selectAffiliate(bool &running);
     HouseMasterAffiliate selectResponsibleAffiliate(bool &running);

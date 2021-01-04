@@ -1,5 +1,7 @@
 #include "HouseMaster.h"
 
+#include <utility>
+
 // Constructors and Destructor
 /**
  * @brief housemaster constructor
@@ -640,6 +642,16 @@ HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::ifstream userna
             }
         }
     }
+}
+
+/**
+ * @brief housemaster constructor
+ * @param location the location
+ * @param hmName the affiliate's name
+ */
+HouseMasterAffiliate::HouseMasterAffiliate(HouseMaster *hm, std::string location, std::string hmName)
+        : _hm(hm), _name(std::move(hmName)), _location(std::move(location)){
+    _earnings = 0.0;
 }
 
 /**
