@@ -204,8 +204,8 @@ std::map<std::string, Client *> HouseMaster::getClients() const {
  */
 void HouseMaster::addClient(unsigned long nif, const std::string &name, std::string email, bool premium, std::string affiliate) {
 
-    auto it = std::find_if(_clients.begin(), _clients.end(), [&nif](const std::pair<std::string, Client *> &pair) {
-        return pair.second->getNif() == nif;
+    auto it = std::find_if(_clients.begin(), _clients.end(), [&email](const std::pair<std::string, Client *> &pair) {
+        return pair.second->getEmail() == email;
     });
     if (it == _clients.end()) {
         auto client = new Client(nif, name, email, premium, std::move(affiliate));
